@@ -10,6 +10,28 @@ En el paso de revisión se puede pedir una **propuesta de lectura fácil**. En e
 
 **Para activar la IA:** subí los archivos estáticos a GitHub Pages y actualizá el Worker `bermejochat` con `backend/chat-worker.js`. La versión anterior del Worker solo responde al chat; las nuevas funciones usan `POST /adaptar` y `POST /actividad`. Mantené `GEMINI_API_KEY` como secreto y `ALLOWED_ORIGIN` como origen exacto; revisá cuotas y condiciones del proveedor antes del uso escolar. Una subida del ZIP a GitHub Pages por sí sola no activa las nuevas funciones de IA.
 
+## Laboratorio de adaptaciones accesibles con IA (etapas 1 y 2)
+
+En el paso 3 de `material.html`, debajo de «Trabajar con mi material», hay una sección nueva. No reemplaza nada de lo anterior.
+
+1. **Formulario:** materia, grado o año (1.º–7.º de primaria, 1.º–6.º de secundaria), objetivos pedagógicos, apoyos (pictogramas, vocabulario, anticipación, esquema, ejemplos, repaso), niveles de apoyo en las actividades (autónomo, con pistas, con paso a paso), cantidad de apoyos visuales (pocos, moderados, muchos; por defecto «pocos» desde 5.º grado) y hasta cuatro formatos de actividad.
+2. **Propuesta de IA:** ruta nueva `POST /laboratorio` del Worker. Es independiente de `/`, `/adaptar` y `/actividad`. Valida y recorta toda la salida de la IA. El texto del material se trata como dato no confiable. Hay que **volver a publicar `backend/chat-worker.js`** en Cloudflare; la clave sigue siendo un secreto del Worker.
+3. **Pictogramas:** `js/pictogramas-arasaac.js` usa la API oficial de ARASAAC (`/v1/pictograms/es/search/{palabra}`). Tras la propuesta se muestran las palabras que se enviarán y recién al pulsar «Buscar pictogramas en ARASAAC» se consultan, una por una. Cada pictograma se puede cambiar eligiendo entre opciones con su significado, buscar otra palabra, agregar o dejar solo texto. Los pictogramas con contenido sexual o violento no se eligen solos; se pueden incluir a mano (ESI, Historia).
+4. **Revisión docente:** todo es editable (títulos, textos, vocabulario, actividades, pistas). Para descargar o imprimir hay que marcar la aprobación docente. Se puede ver una vista previa y elegir si se incluyen pistas, paso a paso y la página de respuestas.
+5. **Apoyos visuales:** pictogramas de ARASAAC o, como alternativa, fotos reales de Wikimedia Commons (solo licencias libres: CC BY, CC BY-SA, CC0, dominio público). Cada foto lleva su crédito en el archivo. Las consultas a ARASAAC y a Wikimedia se hacen solo cuando la docente pulsa el botón.
+6. **Distribución:** tamaño de los apoyos visuales (pequeño, mediano, grande), tamaño de letra, cada actividad en página nueva y botones Subir/Bajar para reordenar partes y actividades.
+7. **Salida:** Word editable (`.docx`, con texto alternativo en las imágenes), archivo `.html` autónomo e impresión o «Guardar como PDF» desde el navegador. Se habilita solo tras la aprobación docente.
+
+Límite de uso: el Worker acepta 10 pedidos por IP cada 10 minutos en `/laboratorio` (variable opcional `LAB_LIMITE`). Es un límite aproximado por instancia; para uno estricto, sumá una regla de Rate Limiting en Cloudflare.
+
+Nota: la búsqueda de fotos en Wikimedia Commons se probó con respuestas simuladas; conviene verificarla en vivo una vez publicado. El archivo `js/vendor/docx.umd.js` es la librería docx 8.5.0 (MIT).
+
+Archivos nuevos: `js/laboratorio.js`, `js/laboratorio-exportar.js`, `js/pictogramas-arasaac.js`, `css/laboratorio.css`.
+
+**Privacidad:** el texto y las opciones se envían al Worker y al proveedor de IA solo después de marcar la confirmación. A ARASAAC solo van palabras sueltas, tras otra acción explícita. No se guarda nada en el navegador.
+
+**Probado (Chromium + Playwright, noviembre de 2026):** 12 pruebas del Worker con IA simulada; 44 del recorrido completo con la API real de ARASAAC; 29 de accesibilidad (axe-core WCAG 2.2 AA, teclado, alto contraste, 320/375/640 px, texto al 200 %). **Pendiente:** IA real con la clave configurada y lectores de pantalla reales (NVDA, TalkBack, VoiceOver).
+
 ## Chat intercultural con IA (requiere conectar un servicio)
 
 `qom.html` es una conversación presencial en un solo dispositivo. El estudiante puede escribir en qom, wichí, pilagá, nivaclé o guaraní; el docente escribe en español. La IA intenta traducir **cualquier frase nueva**, no usa un repertorio cerrado. Conserva hasta seis turnos de contexto para interpretar respuestas cortas; ambos textos se ven juntos. Cada traducción se identifica como automática y puede corregirse en la página. No es una conversación entre celulares. Los mensajes no se guardan al recargar.

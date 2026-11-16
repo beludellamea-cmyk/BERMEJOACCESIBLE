@@ -11,6 +11,7 @@
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
   <link rel="stylesheet" href="css/renovacion.css">
+  <link rel="stylesheet" href="css/laboratorio.css">
   <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
@@ -19,6 +20,10 @@
   <script src="js/descargar-material.js" defer></script>
   <script src="js/chat-config.js"></script>
   <script src="js/ia-material.js" defer></script>
+  <script src="js/pictogramas-arasaac.js" defer></script>
+  <script src="js/laboratorio-exportar.js" defer></script>
+  <script src="js/laboratorio-word.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
 </head>
 <body>
   <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -404,6 +409,108 @@
             <div class="fila-botones"><button type="button" class="boton boton--principal" id="actividad-comprobar">Comprobar respuesta</button><button type="button" class="boton" id="actividad-descargar">Descargar actividad (.html)</button><button type="button" class="boton" id="actividad-imprimir">Imprimir actividad</button></div>
             <p id="actividad-devolucion" role="status" aria-live="polite"></p>
           </div>
+        </section>
+
+        <section class="laboratorio" id="laboratorio" aria-labelledby="lab-titulo">
+          <h3 id="lab-titulo">Laboratorio de adaptaciones accesibles con IA</h3>
+          <p>Preparás una adaptación completa del texto revisado: explicación en lenguaje claro, pictogramas y actividades con distintos niveles de apoyo. La IA propone un borrador; vos lo revisás, lo corregís y lo aprobás. El contenido de aprendizaje se conserva: se adapta el acceso, no lo que se enseña.</p>
+          <details class="lab-principios">
+            <summary>Principios que guían las propuestas</summary>
+            <ul>
+              <li><strong>DUA 3.0:</strong> varias formas de representar la información, de responder y de involucrarse con el tema.</li>
+              <li><strong>Accesibilidad (WCAG):</strong> oraciones cortas, términos definidos, consignas que no dependen del color ni de la posición, y archivos con títulos, idioma y texto alternativo.</li>
+              <li><strong>Modelo social de la discapacidad:</strong> las barreras están en los materiales y el entorno, no en los estudiantes. Los apoyos son para todo el grupo y no se asumen diagnósticos.</li>
+              <li><strong>Edad:</strong> el tono y la cantidad de pictogramas se ajustan al grado; en los últimos grados de primaria y en secundaria se usa un estilo respetuoso, sin infantilizar.</li>
+            </ul>
+          </details>
+          <div id="lab-errores" class="lab-errores" role="alert" tabindex="-1" hidden></div>
+          <form id="lab-form" novalidate>
+            <fieldset class="lab-grupo">
+              <legend>1. Para quién y para qué materia</legend>
+              <div class="lab-fila">
+                <div><label class="etiqueta" for="lab-materia">Materia o área</label>
+                  <select id="lab-materia">
+                    <option value="">Elegí una materia</option>
+                    <option>Lengua y Literatura</option><option>Matemática</option><option>Ciencias Naturales</option><option>Ciencias Sociales</option>
+                    <option>Biología</option><option>Física</option><option>Química</option><option>Historia</option><option>Geografía</option>
+                    <option>Formación Ética y Ciudadana</option><option>Educación Tecnológica</option><option>Educación Artística</option><option>Educación Física</option>
+                    <option>Lengua extranjera</option><option value="otra">Otra (escribirla)</option>
+                  </select></div>
+                <div id="lab-materia-otra-caja" hidden><label class="etiqueta" for="lab-materia-otra">Nombre de la materia</label>
+                  <input id="lab-materia-otra" type="text" maxlength="80"></div>
+                <div><label class="etiqueta" for="lab-grado">Grado o año</label>
+                  <select id="lab-grado">
+                    <option value="">Elegí el grado o año</option>
+                    <optgroup label="Primaria">
+                      <option value="primaria-1">1.º grado</option><option value="primaria-2">2.º grado</option><option value="primaria-3">3.º grado</option>
+                      <option value="primaria-4">4.º grado</option><option value="primaria-5">5.º grado</option><option value="primaria-6">6.º grado</option><option value="primaria-7">7.º grado</option>
+                    </optgroup>
+                    <optgroup label="Secundaria">
+                      <option value="secundaria-1">1.er año</option><option value="secundaria-2">2.º año</option><option value="secundaria-3">3.er año</option>
+                      <option value="secundaria-4">4.º año</option><option value="secundaria-5">5.º año</option><option value="secundaria-6">6.º año</option>
+                    </optgroup>
+                  </select></div>
+              </div>
+            </fieldset>
+
+            <fieldset class="lab-grupo" id="lab-objetivos-grupo" tabindex="-1">
+              <legend>2. Objetivos pedagógicos</legend>
+              <p class="ayuda">Marcá los que correspondan. Las actividades y la explicación se arman a partir de ellos.</p>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Comprender la idea principal del texto"> Comprender la idea principal del texto</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Aprender el vocabulario clave"> Aprender el vocabulario clave</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Reconocer causas y consecuencias"> Reconocer causas y consecuencias</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Ordenar secuencias o procesos"> Ordenar secuencias o procesos</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Relacionar conceptos entre sí"> Relacionar conceptos entre sí</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Explicar lo aprendido con palabras propias"> Explicar lo aprendido con palabras propias</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-objetivo" value="Aplicar lo aprendido a situaciones cercanas"> Aplicar lo aprendido a situaciones cercanas</label>
+              <label class="etiqueta" for="lab-objetivos-libres">Otros objetivos (opcional)</label>
+              <textarea id="lab-objetivos-libres" rows="2" maxlength="400"></textarea>
+            </fieldset>
+
+            <fieldset class="lab-grupo">
+              <legend>3. Apoyos</legend>
+              <p class="ayuda">Los apoyos están pensados para todo el grupo; cada estudiante usa los que le sirven.</p>
+              <label class="lab-opcion"><input type="checkbox" name="lab-apoyo" value="pictogramas" checked> Pictogramas de ARASAAC en las palabras clave</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-apoyo" value="glosario" checked> Vocabulario con definiciones simples</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-apoyo" value="anticipacion" checked> «Qué vamos a aprender» al comienzo</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-apoyo" value="esquema"> Esquema o secuencia de pasos</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-apoyo" value="ejemplos"> Ejemplos cercanos a la vida cotidiana</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-apoyo" value="repaso"> Preguntas de repaso para autoevaluarse</label>
+              <fieldset class="lab-subgrupo">
+                <legend>Niveles de apoyo en las actividades</legend>
+                <p class="ayuda">La consigna sola es la versión autónoma y siempre se incluye. Podés sumar:</p>
+                <label class="lab-opcion"><input type="checkbox" name="lab-nivel" value="pistas" checked> Pistas graduales</label>
+                <label class="lab-opcion"><input type="checkbox" name="lab-nivel" value="acompanado" checked> Paso a paso con ayuda y un ejemplo resuelto</label>
+              </fieldset>
+              <fieldset class="lab-subgrupo" id="lab-cantidad">
+                <legend>Cantidad de apoyos visuales</legend>
+                <p class="ayuda" id="lab-cantidad-ayuda"></p>
+                <label class="lab-opcion"><input type="radio" name="lab-cantidad" value="pocos" checked> Pocos: 1 por parte del texto</label>
+                <label class="lab-opcion"><input type="radio" name="lab-cantidad" value="moderados"> Moderados: hasta 2 por parte</label>
+                <label class="lab-opcion"><input type="radio" name="lab-cantidad" value="muchos"> Muchos: hasta 3 por parte</label>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="lab-grupo" id="lab-formatos-grupo" tabindex="-1">
+              <legend>4. Formato de las actividades</legend>
+              <p class="ayuda">Elegí hasta cuatro. Se crea una actividad por cada formato, para que haya varias formas de responder.</p>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="opciones" checked> Elegir la respuesta correcta</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="unir"> Unir conceptos</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="completar"> Completar con palabras</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="ordenar"> Ordenar una secuencia</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="vf"> Verdadero o falso</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="breve"> Responder con pocas palabras</label>
+              <label class="lab-opcion"><input type="checkbox" name="lab-formato" value="expresar"> Mostrar lo aprendido de otra forma (dibujo, audio, explicación oral)</label>
+            </fieldset>
+
+            <div class="aviso">
+              <p><strong>Antes de enviar:</strong> el texto del paso 2 y las opciones que elegiste se envían al servicio de IA del proyecto (el Worker y el proveedor de IA) para preparar la propuesta. No se guardan en tu navegador. Los pictogramas se piden después, aparte, y solo con palabras sueltas.</p>
+            </div>
+            <label class="ia-consentimiento"><input type="checkbox" id="lab-consentimiento"> Quité nombres y datos personales del texto. Entiendo que el texto y las opciones se enviarán al servicio de IA.</label>
+            <div class="fila-botones"><button type="submit" class="boton boton--principal" id="lab-generar">Crear propuesta con IA</button></div>
+          </form>
+          <p id="lab-estado" class="lab-estado" role="status" aria-live="polite"></p>
+          <div id="lab-resultado" class="lab-resultado" hidden></div>
         </section>
 
         <div class="fila-botones">

@@ -1,0 +1,113 @@
+/* Laboratorio de adaptaciones accesibles. Usa las variables de estilos.css para que el alto contraste
+   y el tamaño de texto funcionen igual que en el resto del sitio. Todo en rem; sin anchos fijos. */
+.laboratorio { margin: 1.6rem 0; padding: clamp(1rem, 3vw, 1.6rem); border: 2px solid var(--borde); border-radius: 1.1rem; background: var(--superficie); color: var(--tinta); }
+.laboratorio h3 { margin-top: 0; }
+.laboratorio fieldset { min-width: 0; }
+.laboratorio legend { font-weight: 800; padding-inline: .3rem; }
+
+.lab-principios { margin: 1rem 0; padding: .6rem 1rem; border: 1px solid var(--linea); border-radius: .8rem; }
+.lab-principios > summary { cursor: pointer; font-weight: 700; color: var(--enlace); min-height: 2.75rem; display: flex; align-items: center; }
+.lab-principios ul { margin: .5rem 0; padding-left: 1.2rem; }
+
+.lab-errores { margin: 1rem 0; padding: .8rem 1rem; border: 2px solid var(--error); border-left-width: .5rem; border-radius: .6rem; background: var(--error-fondo); color: var(--tinta); }
+.lab-errores h4 { margin: 0 0 .4rem; color: var(--error); }
+.lab-errores ul { margin: 0; padding-left: 1.2rem; }
+.lab-errores a { color: inherit; font-weight: 700; }
+
+.lab-grupo { margin: 1.2rem 0; padding: 1rem; border: 2px solid var(--linea); border-radius: .9rem; }
+.lab-subgrupo { margin: 1rem 0 0; padding: .8rem 1rem; border: 1px solid var(--linea); border-radius: .7rem; }
+.lab-fila { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; }
+.lab-fila > div { min-width: 0; }
+
+/* Casillas y botones de opción: el área clicable ocupa toda la fila (mínimo 44 px de alto). */
+.lab-opcion { display: flex; align-items: flex-start; gap: .6rem; padding: .55rem .6rem; min-height: 2.75rem; border-radius: .5rem; cursor: pointer; }
+.lab-opcion:hover { background: var(--rio-claro); }
+.lab-opcion input { flex: none; width: 1.4rem; height: 1.4rem; margin-top: .15rem; accent-color: var(--rio); }
+.lab-subgrupo:disabled, fieldset:disabled .lab-opcion { opacity: .6; cursor: not-allowed; }
+
+.lab-estado { margin: 1rem 0; min-height: 1.5rem; font-weight: 700; }
+
+/* Resultado */
+.lab-resultado { margin-top: 1.5rem; padding-top: 1rem; border-top: 3px solid var(--rio); }
+.lab-resultado > h4 { font-size: 1.4rem; margin-top: 0; }
+.lab-seccion { margin: 1.6rem 0; }
+.lab-seccion > h4 { font-size: 1.2rem; margin-bottom: .5rem; }
+.lab-campo { margin: .7rem 0; }
+.lab-campo textarea, .lab-campo input { max-width: 100%; }
+.lab-bloque, .lab-actividad { margin: 1.2rem 0; padding: 1rem; border: 2px solid var(--linea); border-radius: .9rem; min-width: 0; }
+.lab-lista { list-style: none; padding: 0; margin: 0 0 1rem; }
+.lab-vocab { padding: .8rem 1rem; margin: .8rem 0; border: 1px solid var(--linea); border-radius: .7rem; }
+.lab-palabras { font-weight: 700; overflow-wrap: anywhere; margin-bottom: 0; }
+
+.lab-conceptos { list-style: none; padding: 0; margin: .5rem 0 1rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .9rem; }
+.lab-concepto { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; align-items: start; padding: .8rem; border: 1px solid var(--linea); border-radius: .7rem; }
+.lab-concepto__datos { min-width: 0; }
+.lab-picto { margin: 0; }
+.lab-picto img { display: block; width: 100%; height: auto; border: 2px solid var(--borde); border-radius: .5rem; background: #fff; }
+.lab-picto__vacio { display: grid; place-items: center; aspect-ratio: 1; padding: .5rem; text-align: center; font-size: .95rem; border: 2px dashed var(--borde); border-radius: .5rem; }
+
+.lab-picto__credito { margin-top: .3rem; font-size: .85rem; overflow-wrap: anywhere; }
+.lab-picto img[src^="http"]:not([width]) { aspect-ratio: 4 / 3; object-fit: cover; }
+.lab-mover { min-width: 5.5rem; }
+.picto-sel__tipo { margin: 0 0 1rem; padding: .5rem .8rem; border: 1px solid var(--linea); border-radius: .7rem; }
+.lab-incluir { margin: 1rem 0; border: 1px solid var(--linea); border-radius: .7rem; }
+.lab-vista { margin-top: 1rem; }
+.lab-vista iframe { display: block; width: 100%; height: 36rem; max-height: 80vh; border: 2px solid var(--borde); border-radius: .6rem; background: #fff; }
+
+/* Selector de pictogramas */
+.picto-selector { width: min(56rem, calc(100vw - 1.5rem)); max-height: calc(100vh - 1.5rem); padding: 1.2rem; border: 3px solid var(--borde); border-radius: 1rem; background: var(--superficie); color: var(--tinta); overflow: auto; }
+.picto-selector::backdrop { background: rgb(0 0 0 / .65); }
+.picto-selector h2 { margin-top: 0; font-size: 1.4rem; overflow-wrap: anywhere; }
+.picto-sel__busqueda { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .75rem; align-items: end; }
+.picto-sel__sensible { margin: .75rem 0; }
+.picto-sel__estado { min-height: 1.5rem; font-weight: 700; }
+.picto-sel__lista { margin: 0 0 1rem; padding: .6rem; border: 1px solid var(--linea); border-radius: .7rem; }
+.picto-sel__grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); gap: .75rem; }
+.picto-op { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "radio img" "texto texto"; gap: .4rem .6rem; align-items: start; padding: .6rem; border: 2px solid var(--linea); border-radius: .7rem; cursor: pointer; min-width: 0; }
+.picto-op input { grid-area: radio; width: 1.5rem; height: 1.5rem; accent-color: var(--rio); }
+.picto-op img { grid-area: img; display: block; width: min(5rem, 100%); height: auto; justify-self: end; background: #fff; border-radius: .4rem; }
+.picto-op__texto { grid-area: texto; display: grid; gap: .2rem; font-size: .95rem; min-width: 0; overflow-wrap: anywhere; }
+.picto-op__marca { font-weight: 700; color: var(--error); }
+.picto-op:focus-within { outline: 3px solid var(--foco); outline-offset: 2px; }
+.picto-op--elegido { border-color: var(--rio); background: var(--rio-claro); box-shadow: inset 0 0 0 2px var(--rio); }
+
+/* Las casillas con textos largos pasan de renglón aunque el texto esté muy ampliado. */
+.lab-opcion, label.ia-consentimiento { min-width: 0; overflow-wrap: anywhere; }
+.lab-opcion > span, label.ia-consentimiento > span { min-width: 0; }
+
+/* Con texto muy ampliado en pantallas angostas, los botones y campos pasan de renglón en vez de salirse. */
+.laboratorio .boton, .picto-selector .boton { max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-align: center; }
+.laboratorio input, .laboratorio select, .laboratorio textarea { min-width: 0; max-width: 100%; }
+
+@media (max-width: 45rem) {
+  /* «Trabajar con mi material»: sus tres campos se salían de la pantalla con texto al 200 % en 320 px. */
+  .actividad__datos { grid-template-columns: minmax(0, 1fr); }
+  .actividad__datos input, .actividad__datos select { min-width: 0; max-width: 100%; }
+}
+@media (max-width: 40rem) {
+  .laboratorio { padding: .6rem; }
+  .lab-grupo, .lab-bloque, .lab-actividad, .lab-vocab, .lab-concepto { padding: .5rem; }
+  .lab-concepto { grid-template-columns: minmax(0, 1fr); }
+  .lab-picto { max-width: 9rem; }
+  .picto-sel__busqueda { grid-template-columns: 1fr; }
+  .picto-selector { padding: .8rem; }
+  .lab-vista iframe { height: 28rem; }
+}
+
+/* Alto contraste: el sitio redefine las variables; solo hace falta fijar los colores sueltos. */
+html[data-contraste="alto"] .laboratorio,
+html[data-contraste="alto"] .lab-bloque,
+html[data-contraste="alto"] .lab-actividad,
+html[data-contraste="alto"] .lab-vocab,
+html[data-contraste="alto"] .lab-concepto { background: #000; color: #fff; border-color: #ffe14d; }
+html[data-contraste="alto"] .lab-opcion:hover { background: #000; outline: 2px solid #ffe14d; }
+html[data-contraste="alto"] .picto-op--elegido { background: #000; border-color: #ffe14d; box-shadow: inset 0 0 0 3px #ffe14d; }
+html[data-contraste="alto"] .picto-selector { border-color: #ffe14d; }
+html[data-contraste="alto"] .lab-picto img, html[data-contraste="alto"] .picto-op img { background: #fff; }
+
+@media (forced-colors: active) {
+  .laboratorio, .lab-bloque, .lab-actividad, .picto-op, .picto-selector { border-color: CanvasText; }
+  .picto-op--elegido { outline: 3px solid Highlight; }
+}
+@media (prefers-reduced-motion: reduce) { .laboratorio * { transition: none !important; } }
+@media print { .laboratorio { display: none; } }
