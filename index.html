@@ -1,16 +1,192 @@
 <!doctype html>
 <html lang="es-AR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,follow">
-<meta http-equiv="refresh" content="0;url=https://beludellamea-cmyk.github.io/Bermejo-accesible./">
-<link rel="canonical" href="https://beludellamea-cmyk.github.io/Bermejo-accesible./">
-<title>Bermejo Accesible — Nueva versión</title>
-<style>body{min-height:100vh;display:grid;place-content:center;text-align:center;margin:0;padding:1.5rem;font:1.1rem/1.6 system-ui,Arial,sans-serif;background:#f1faf5;color:#103640}main{max-width:34rem;margin:auto;background:white;border:1px solid #d0e6df;padding:2.5rem;border-radius:24px;box-shadow:0 12px 32px #0a586113}a{display:inline-block;margin-top:1rem;background:#096474;color:white;padding:.85rem 1.4rem;border-radius:999px;font-weight:700}a:focus-visible{outline:4px solid #c55330;outline-offset:4px}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bermejo Accesible: la información a tu manera</title>
+  <meta name="description" content="Convertí tu material en un texto accesible: letra ajustable, alto contraste, lectura en voz alta, partes, imágenes y pictogramas. Con un espacio para docentes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/renovacion.css">
+  <script src="js/navegacion.js" defer></script>
+  <script src="js/preferencias.js"></script>
+  <script src="js/asistente-global.js" defer></script>
 </head>
-<body>
-<main><h1>Bermejo Accesible</h1><p>Esta dirección tiene una versión anterior. Te estamos llevando a la nueva página, con diseño renovado y todas las herramientas.</p><p><a href="https://beludellamea-cmyk.github.io/Bermejo-accesible./">Entrar a Bermejo Accesible</a></p></main>
-<script>window.location.replace("https://beludellamea-cmyk.github.io/Bermejo-accesible./");</script>
+<body class="pagina-inicio">
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html">
+        <img class="marca__logo" src="img/simbolo-bermejo.svg" alt="" width="112" height="112">
+        <span class="marca__textos">
+          <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
+          <span class="marca__lema">La información a tu manera</span>
+        </span>
+      </a>
+      <div class="cabecera__acciones">
+        <button class="boton menu-abrir" type="button" aria-controls="menu-principal" aria-expanded="false">☰ Menú</button>
+        <details class="ajustes" id="ajustes">
+          <summary class="boton">⚙ Ajustes de accesibilidad</summary>
+          <div class="ajustes__fila">
+            <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+            <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+              <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+              <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="false">Imprenta mayúscula</button>
+              <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="true">Texto habitual</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+              <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+              <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+              <span class="ajustes__valor" id="tam-valor">100 %</span>
+              <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+              <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+              <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+              <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+            </div>
+            <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+            <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
+  <div class="sitio-grid">
+      <nav class="nav-principal" id="menu-principal" aria-label="Secciones principales">
+        <p class="nav-principal__titulo">Secciones</p>
+        <ul>
+          <li><a href="index.html" aria-current="page"><span aria-hidden="true">⌂</span> Inicio</a></li>
+          <li><a href="material.html"><span aria-hidden="true">▤</span> Mi material</a></li>
+          <li><a href="docente.html"><span aria-hidden="true">✎</span> Espacio docente</a></li>
+          <li><a href="qom.html"><span aria-hidden="true">▢</span> Chat intercultural</a></li>
+        </ul>
+        <div class="nav-principal__atajos">
+          <button type="button" class="boton" data-abrir-ajustes>⚙ Ajustes de accesibilidad</button>
+          <button type="button" class="boton" data-abrir-ayuda>❓ Necesito ayuda</button>
+        </div>
+      </nav>
+
+  <dialog id="bienvenida" class="bienvenida" aria-labelledby="bienvenida-titulo" aria-describedby="bienvenida-descripcion">
+    <div class="bienvenida__contenido">
+      <p class="bienvenida__simbolo" aria-hidden="true">◖)))</p>
+      <h2 id="bienvenida-titulo">Bienvenido a Bermejo Accesible</h2>
+      <p id="bienvenida-descripcion">¿Cómo querés recorrer la página? Elegí una opción. Podés cambiarla después.</p>
+      <div class="bienvenida__opciones">
+        <button type="button" class="boton boton--principal" id="bienvenida-guiada">🔊 Escuchar y recibir ayuda</button>
+        <button type="button" class="boton" id="bienvenida-manual">✋ Explorar por mi cuenta</button>
+      </div>
+      <p class="ayuda">La voz comienza solo si elegís escuchar. Las indicaciones también aparecen escritas.</p>
+    </div>
+  </dialog>
+  <main id="contenido" tabindex="-1" class="portada">
+    <div class="contenedor">
+      <div class="portada__hero">
+        <div class="hero__texto">
+          <p class="portada__ceja">DESDE FORMOSA · MÁS FORMAS DE APRENDER</p>
+          <h1>Tu material, en la forma en que mejor <em>lo leés.</em></h1>
+          <p class="intro">Un texto, un PDF o una foto pueden convertirse en una experiencia de lectura más clara: escuchá, leé por partes o explorá con imágenes y pictogramas.</p>
+          <div class="hero__acciones">
+            <a class="boton boton--principal" href="material.html">📂 Acceder a mi material →</a>
+            <a class="boton" href="docente.html">Explorar espacio docente →</a>
+          </div>
+          <p class="hero__nota">Sin crear una cuenta. Conservás tu material original y elegís los apoyos que te sirven.</p>
+        </div>
+        <div class="hero__visual">
+          <img src="img/hero-inclusion.svg" alt="Ilustración de lectura accesible con un libro, audio, imágenes y distintas formas de ver el texto" width="760" height="590">
+        </div>
+      </div>
+      <section aria-labelledby="beneficios-titulo" class="seccion-beneficios">
+        <div class="feature-intro">
+          <h2 id="beneficios-titulo">La misma información, más caminos para comprenderla</h2>
+          <p>Herramientas claras y fáciles de usar, a tu ritmo y a tu manera.</p>
+        </div>
+        <ul class="beneficios">
+          <li><span class="beneficio__icono" aria-hidden="true">📄</span><strong>Texto, PDF o foto</strong><p>Cargá un archivo o sacá una foto y revisá el texto.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">🎧</span><strong>Escuchá la lectura</strong><p>Activá la voz y seguí el contenido.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">📖</span><strong>Leé por partes</strong><p>Avanzá paso a paso, sin apurarte.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">🖼️</span><strong>Apoyos visuales</strong><p>Combiná texto con imágenes y pictogramas.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">✨</span><strong>Más opciones</strong><p>Ajustá la letra, el contraste y las opciones de lectura.</p></li>
+        </ul>
+      </section>
+      <div class="caminos-encabezado"><h2>¿Por dónde querés empezar?</h2><p>Elegí el recorrido que más se adapte a lo que necesitás.</p></div>
+      <ul class="caminos caminos--inicio">
+        <li><section class="camino" aria-labelledby="camino-material">
+          <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M24 11c-6-3-12-3-18-1v27c6-2 12-2 18 1 6-3 12-3 18-1V10c-6-2-12-2-18 1Z"/><path d="M24 11v27M11 17c3-.7 6-.4 9 .7M28 17c3-1.1 6-1.4 9-.7M11 23c3-.7 6-.4 9 .7"/></svg></p>
+          <h2 id="camino-material"><a href="material.html">Trabajar con mi material</a></h2>
+          <p>Cargá un texto, PDF o foto. Elegí cómo acceder y hacé una actividad relacionada.</p>
+          <span class="camino__accion" aria-hidden="true">Empezar →</span>
+        </section></li>
+        <li><section class="camino camino--docente" aria-labelledby="camino-docente">
+          <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><rect x="7" y="7" width="34" height="25" rx="3"/><path d="M15 39h18M24 32v7M13 15h17M13 21h11M33 20l5 5"/></svg></p>
+          <h2 id="camino-docente"><a href="docente.html">Soy docente</a></h2>
+          <p>Encontrá orientaciones para crear y revisar materiales accesibles.</p>
+          <span class="camino__accion" aria-hidden="true">Entrar →</span>
+        </section></li>
+        <li><section class="camino camino--chat" aria-labelledby="camino-chat">
+          <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M6 9h25a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H17l-8 6v-6H6a3 3 0 0 1-3-3V12a3 3 0 0 1 3-3Z"/><path d="M18 17h12M12 24h18"/></svg></p>
+          <h2 id="camino-chat"><a href="qom.html">Quiero comunicarme</a></h2>
+          <p>Usá el chat intercultural. Revisá las traducciones automáticas.</p>
+          <span class="camino__accion" aria-hidden="true">Abrir chat →</span>
+        </section></li>
+      </ul>
+      <p class="inicio-ayuda">¿No sabés qué elegir? <button type="button" class="boton" data-abrir-ayuda>Estoy perdido</button></p>
+      <details class="inicio-informacion" id="informacion">
+        <summary>Más información sobre el sitio y las opciones de lectura</summary>
+        <div class="inicio-informacion__contenido">
+      <section class="lector-ayuda" aria-labelledby="lector-titulo">
+        <h2 id="lector-titulo">¿Usás un lector de pantalla?</h2>
+        <p>Podés usar el lector que ya trae tu dispositivo. No hace falta instalar nada ni activarlo desde esta web.</p>
+        <ul>
+          <li><strong>Computadora con Windows:</strong> Narrador viene incluido y se activa con la tecla de Windows + Ctrl + Enter. También funciona con NVDA, que es gratuito.</li>
+          <li><strong>Celular Android:</strong> TalkBack, en Ajustes › Accesibilidad.</li>
+          <li><strong>iPhone:</strong> VoiceOver, en Ajustes › Accesibilidad.</li>
+        </ul>
+        <p>Cada página empieza con el enlace «Ir al contenido» y está ordenada con títulos. Con NVDA o Narrador, la tecla H salta de título en título; con TalkBack o VoiceOver, elegí «Encabezados» en el menú de lectura o en el rotor.</p>
+        <p>La opción «Imprenta mayúscula» solo cambia cómo se ven las letras: tu lector recibe el texto tal como está escrito. La «Lectura en voz alta» de Acceder a mi material es para quien no usa lector de pantalla; si ya usás uno, leé el texto directamente con él.</p>
+      </section>
+
+      <section aria-labelledby="formas-titulo">
+        <h2 id="formas-titulo">Seis formas de leer el mismo texto</h2>
+        <ul class="formas">
+          <li><h3>Lectura ajustable</h3><p>Cambiá el tamaño de la letra, el espacio entre líneas, letras y palabras.</p></li>
+          <li><h3>Alto contraste</h3><p>Elegí colores de fondo y de letra que te cansen menos la vista.</p></li>
+          <li><h3>Lectura en voz alta</h3><p>Escuchá el texto cuando quieras, con botones para pausar, volver o avanzar.</p></li>
+          <li><h3>Por partes</h3><p>El texto dividido en partes cortas, con un índice y marcas de lo que ya leíste.</p></li>
+          <li><h3>Texto con imágenes</h3><p>Dibujos simples junto a las ideas principales, siempre con el texto escrito.</p></li>
+          <li><h3>Texto con pictogramas</h3><p>Pictogramas de ARASAAC acompañando las palabras clave de cada parte.</p></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="como-titulo">
+        <h2 id="como-titulo">Cómo funciona</h2>
+        <ol class="pasos-lista">
+          <li><h3>Cargá tu material</h3><p>Texto pegado, archivo PDF o foto. También podés probar con ejemplos.</p></li>
+          <li><h3>Revisá el texto</h3><p>La lectura automática puede equivocarse. Corregí lo necesario. El original sigue disponible.</p></li>
+          <li><h3>Elegí cómo leer</h3><p>Cambiá de forma cuando quieras. Tus ajustes se mantienen.</p></li>
+        </ol>
+      </section>
+
+      <section class="nota-privacidad" aria-labelledby="privacidad-titulo">
+        <h2 id="privacidad-titulo">Tus archivos se quedan en tu dispositivo</h2>
+        <p>El texto de tus fotos y PDF se lee dentro de tu navegador. No hace falta crear una cuenta y la web no guarda tus materiales: al cerrar la pestaña, se borran.</p>
+        <p>La primera vez, el navegador descarga las herramientas de lectura (PDF.js y Tesseract.js) y el idioma español. Si elegís «Texto con pictogramas», se envían a ARASAAC solo algunas palabras sueltas para buscar cada pictograma, y te avisamos antes.</p>
+      </section>
+        </div>
+      </details>
+    </div>
+  </main>
+  </div>
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>Bermejo Accesible</strong> («La información a tu manera») es un proyecto de código abierto creado para una hackatón en Formosa. Funciona en el navegador: no pide cuentas y no guarda tus materiales.</p>
+      <p>Los pictogramas que se muestran en «Texto con pictogramas» son de Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: Creative Commons BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
+      <p>Extracción de texto con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografía <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a>, creada por Braille Institute. La letra en imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+
 </body>
 </html>
