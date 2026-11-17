@@ -1533,3 +1533,46 @@ html[data-contraste="alto"] .entrada__nombre{color:#fff}
 html[data-contraste="alto"] .repetir-entrada{color:#ffe14d}
 
 @media print{.entrada,.seleccion-carga{display:none!important}}
+
+
+/* Demostración guiada y estrategias DUA (noviembre de 2026) */
+.demo-comprender {
+ display:flex;align-items:center;justify-content:space-between;gap:1rem 2rem;
+ margin:1.25rem 0 1.5rem;padding:clamp(1.15rem,3vw,1.75rem);
+ background:linear-gradient(120deg,#112b40,#0e3a4c);
+ border:1px solid #3a9aab;border-radius:20px;
+ box-shadow:0 15px 35px #05121d5e;
+}
+.demo-comprender h2{margin:.15rem 0 .35rem;font:700 clamp(1.25rem,2.4vw,1.75rem)/1.2 var(--fuente-titulos);color:#e9ffff}
+.demo-comprender p:not(.demo-etiqueta){color:#b7d9e4;font-size:1rem;max-width:50ch;margin:0}
+.demo-comprender .boton{flex-shrink:0}
+.demo-etiqueta{font-size:.75rem!important;font-weight:800;color:#73eef5!important;letter-spacing:.12em;margin:0!important}
+.ayuda-lectura{color:#c7e6ed;font-size:1.04rem;max-width:72ch;margin:.25rem 0 1.35rem}
+.pictos-densidad{padding:1rem;border:1px solid #3c758b;border-radius:15px;margin:.8rem 0 1rem;background:#102e41}
+.pictos-densidad legend{padding:0 .4rem;font-weight:750}
+.pictos-densidad label{display:inline-flex;align-items:center;gap:.35rem;margin:.3rem .55rem .3rem 0;padding:.35rem .55rem;background:#172f43;border:1px solid #426a7d;border-radius:12px;cursor:pointer;font-size:.95rem}
+.pictos-densidad label:has(input:checked){background:#165061;border-color:#61e4ec;color:#e6fdff}
+.pictos-densidad input{accent-color:#54e4ee;width:1.1rem;height:1.1rem;margin:0}
+.picto-manual .boton{min-height:2rem;padding:.35rem .65rem;font-size:.8rem;margin:.3rem}
+.pictos-manuales-titulo{margin:1.2rem 0 .6rem}
+.dua-presentacion{padding:1.15rem;border:1px solid #3b7c8f;border-radius:18px;background:linear-gradient(130deg,#153748,#132b42)}
+.dua-presentacion h4{font:700 clamp(1.05rem,1.8vw,1.35rem) var(--fuente-titulos);margin:0 0 1rem;color:#e4ffff}
+.dua-pilares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.dua-pilares p{min-width:0;max-width:none;padding:.75rem;border:1px solid #365d73;border-radius:12px;background:#102739;margin:0}
+.dua-pilares strong{display:block;color:#6be6ec;line-height:1.35;font-size:.93rem;margin-bottom:.3rem}
+.dua-pilares span{display:block;font-size:.85rem;line-height:1.5;color:#c3d8e4}
+.dua-enfoque{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;padding:1rem;margin:1.1rem 0;border:1px solid #3b6580;border-radius:16px}
+.dua-enfoque legend{font-weight:750;padding:0 .35rem}
+.dua-enfoque label{display:flex;align-items:flex-start;gap:.65rem;min-width:0;padding:1rem;border:1px solid #3a667e;border-radius:14px;background:#102b3b;cursor:pointer}
+.dua-enfoque label:has(input:checked){border-color:#61e4eb;background:#184552;box-shadow:0 0 18px #16b5d229}
+.dua-enfoque input{width:1.2rem;height:1.2rem;flex-shrink:0;accent-color:#65e1e9}
+.dua-enfoque strong{display:block;color:#e7fbff;margin-bottom:.25rem}
+.dua-enfoque small{display:block;font-size:.9rem;color:#c1d7e2;line-height:1.45}
+html[data-contraste="alto"] :is(.demo-comprender,.pictos-densidad,.dua-presentacion,.dua-enfoque,.dua-pilares p,.dua-enfoque label){background:#000!important;border:2px solid #fff;color:#fff}
+html[data-contraste="alto"] :is(.demo-comprender h2,.dua-presentacion h4,.dua-pilares strong,.dua-enfoque strong,.dua-enfoque small){color:#fff}
+@media(max-width:48rem){
+ .demo-comprender{flex-direction:column;align-items:stretch}
+ .demo-comprender .boton{width:100%}
+ .dua-pilares{grid-template-columns:1fr}
+ .dua-enfoque{grid-template-columns:1fr}
+}
