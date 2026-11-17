@@ -27,25 +27,35 @@ document.addEventListener('DOMContentLoaded',function(){
     zona.querySelectorAll('[data-ejemplo]').forEach(b=>b.disabled=flag);
     if(t)status(t);
   }
-  function say(t){
-    if(!escuchar||!('speechSynthesis' in window))return;
-    speechSynthesis.cancel();
+  function say(t,forzado=false){
+    if((!escuchar&&!forzado)||!('speechSynthesis' in window))return;
     const version=vozVersion;
-    const u=new SpeechSynthesisUtterance(t.slice(0,1700));
-    u.lang='es-AR';u.rate=.91;u.pitch=1.04;
-    const voces=speechSynthesis.getVoices();
-    u.voice=voces.find(v=>v.lang.toLowerCase()==='es-ar')||
-      voces.find(v=>v.lang.toLowerCase().startsWith('es-'))||null;
-    u.onstart=()=>{if(modoVoz&&version===vozVersion)estadoVoz('hablando','CLARIA te está respondiendo.');};
-    u.onend=()=>{if(modoVoz&&version===vozVersion) {
-      estadoVoz('transicion','Terminó la respuesta. Preparando el micrófono…');
-      setTimeout(()=>{if(modoVoz&&version===vozVersion&&!trabajando)iniciarEscucha();},500);
-    }};
-    u.onerror=()=>{if(modoVoz&&version===vozVersion){
-      estadoVoz('transicion','No se pudo reproducir la voz. Volvé a tocar el botón del micrófono.');
-      detenerVoz(false);
-    }};
-    speechSynthesis.speak(u);
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(t.slice(0,1700));
+      u.lang='es-AR';u.rate=.91;u.pitch=1.04;
+      const voces=speechSynthesis.getVoices();
+      u.voice=voces.find(v=>v.lang.toLowerCase()==='es-ar')||
+        voces.find(v=>v.lang.toLowerCase().startsWith('es-'))||null;
+      u.onstart=()=>{
+        if(modoVoz&&version===vozVersion)estadoVoz('hablando','CLARIA te está respondiendo.');
+        else status('Reproduciendo la voz de CLARIA…');
+      };
+      u.onend=()=>{if(modoVoz&&version===vozVersion) {
+        estadoVoz('transicion','Terminó la respuesta. Preparando el micrófono…');
+        setTimeout(()=>{if(modoVoz&&version===vozVersion&&!trabajando)iniciarEscucha();},650);
+      }else if(!modoVoz)status('Terminó la lectura de la respuesta.');
+      };
+      u.onerror=()=>{if(modoVoz&&version===vozVersion){
+        detenerVoz(false);
+        estadoVoz('error','No se pudo reproducir la voz automáticamente. Tocá «Escuchar respuesta» debajo del mensaje de CLARIA.');
+      }else status('No se pudo reproducir el audio. Probá abrir la página directamente en Safari, subir el volumen y tocar otra vez «Escuchar respuesta».');
+      };
+      speechSynthesis.speak(u);
+      if(typeof speechSynthesis.resume==='function')speechSynthesis.resume();
+    }catch(e){
+      status('El navegador no pudo reproducir la voz. Probá usar Safari y tocar «Escuchar respuesta».');
+    }
   }
   function bubble(rol,contenido,hablar=true){
     const fila=document.createElement('div');fila.className='asesoria-burbuja asesoria-burbuja--'+(rol==='usuario'?'usuario':'claria');
@@ -57,6 +67,14 @@ document.addEventListener('DOMContentLoaded',function(){
     cuerpo.append(document.createElement('strong'),document.createElement('p'));
     cuerpo.firstChild.textContent=rol==='modelo'?'CLARIA':'Vos';
     cuerpo.lastChild.textContent=contenido;
+    if(rol==='modelo'&&contenido!==saludo&&'speechSynthesis' in window){
+      const btn=document.createElement('button');btn.type='button';
+      btn.className='asesoria-burbuja__repetir';
+      btn.textContent='🔊 Escuchar respuesta';
+      btn.setAttribute('aria-label','Escuchar la respuesta de CLARIA');
+      btn.addEventListener('click',()=>say(contenido,true));
+      cuerpo.appendChild(btn);
+    }
     fila.append(avatar,cuerpo);
     mensajes.append(fila);mensajes.scrollTop=mensajes.scrollHeight;
     if(rol==='modelo'&&hablar)say(contenido);
@@ -80,7 +98,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(cancelarHabla&&'speechSynthesis' in window)speechSynthesis.cancel();
     escuchar=false;
     const escucharBtn=$('asesoria-escuchar');
-    escucharBtn.setAttribute('aria-pressed','false');escucharBtn.textContent='🔊 Escuchar';
+    escucharBtn.setAttribute('aria-pressed','false');escucharBtn.textContent='🔊 Probar sonido';
     vozCaptura.textContent='';
     estadoVoz('apagado','La conversación por voz está detenida. También podés escribir.');
   }
@@ -166,8 +184,18 @@ document.addEventListener('DOMContentLoaded',function(){
       estadoVoz('error','El navegador no dispone de voz de respuesta. Podés usar el chat por escrito.');return;
     }
     modoVoz=true;escuchar=true;silencios=0;vozVersion++;
+    // iOS puede bloquear una voz que se invoca solo tras una respuesta de red.
+    // Iniciar el sintetizador durante el toque del botón permite desbloquearlo.
+    // Es una activación silenciosa; el reconocimiento sigue siendo una acción voluntaria.
+    try{
+      speechSynthesis.cancel();
+      const inicio=new SpeechSynthesisUtterance(' ');
+      inicio.lang='es-AR';inicio.volume=0;
+      speechSynthesis.speak(inicio);
+      if(typeof speechSynthesis.resume==='function')speechSynthesis.resume();
+    }catch(_){ /* Si el navegador impide la activación, sigue disponible escuchar manualmente. */ }
     const escucharBtn=$('asesoria-escuchar');
-    escucharBtn.setAttribute('aria-pressed','true');escucharBtn.textContent='🔇 Silenciar';
+    escucharBtn.setAttribute('aria-pressed','true');escucharBtn.textContent='🔊 Probar sonido';
     estadoVoz('transicion','Solicitando permiso de micrófono…');
     // La primera llamada a start() ocurre directamente tras el toque, para los permisos de Safari.
     iniciarEscucha();
@@ -304,10 +332,8 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   $('asesoria-escuchar').addEventListener('click',function(){
     if(!('speechSynthesis' in window)){status('La lectura en voz alta no está disponible en este dispositivo.');return;}
-    if(modoVoz){detenerVoz();return;}
-    escuchar=!escuchar;this.setAttribute('aria-pressed',String(escuchar));
-    this.textContent=escuchar?'🔇 Silenciar':'🔊 Escuchar';
-    if(!escuchar)speechSynthesis.cancel();
+    if(modoVoz){status('Para escuchar una respuesta específica, tocá «Escuchar respuesta» debajo del mensaje.');return;}
+    say('Hola, soy CLARIA. Esta es una prueba de voz. Si me escuchás, también podés oír mis respuestas.',true);
   });
   function reset(){
     if(trabajando)return;
