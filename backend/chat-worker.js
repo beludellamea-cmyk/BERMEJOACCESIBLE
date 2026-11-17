@@ -307,6 +307,16 @@ async function clariaConversar(data,env,permitido){
   finally{clearTimeout(timer);}
 }
 
+/* Mensajes seguros para distinguir errores de Gemini sin exponer detalles internos ni secretos. */
+function errorGeminiUsuario(status) {
+  if (status === 400 || status === 422) return 'Gemini rechazó la configuración o el modelo de esta solicitud. Revisá GEMINI_MODEL y los registros del Worker.';
+  if (status === 401 || status === 403) return 'Gemini rechazó la autenticación o el acceso de la clave API. Revisá el secreto GEMINI_API_KEY y sus permisos en Cloudflare.';
+  if (status === 404) return 'El modelo de Gemini configurado no está disponible. Revisá GEMINI_MODEL en Cloudflare.';
+  if (status === 429) return 'Se alcanzó el límite de uso de Gemini. Consultá las cuotas de tu proyecto en Google AI Studio antes de volver a intentar.';
+  if (status === 500 || status === 502 || status === 503 || status === 504) return 'Gemini está temporalmente saturado o no disponible. Podés volver a intentar después.';
+  return 'Gemini devolvió un error (' + status + '). Revisá los registros de bermejochat en Cloudflare.';
+}
+
 /* CLARIA docente: generación directa de planificaciones y transformación de materiales. */
 async function docenteDirecto(data,env,permitido){
   const accion=data?.accion;
@@ -363,7 +373,7 @@ async function docenteDirecto(data,env,permitido){
   const cuerpo={
     systemInstruction:{parts:[{text:base.concat(tarea).join('\n')}]},
     contents:[{role:'user',parts:[{text:mensaje}]}],
-    generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:7700},false)
+    generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:6000},true)
   };
   const control=new AbortController(),timer=setTimeout(()=>control.abort(),47000);
   try{
@@ -371,12 +381,22 @@ async function docenteDirecto(data,env,permitido){
       method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},
       body:JSON.stringify(cuerpo),signal:control.signal
     });
-    if(!r.ok){await registrarErrorIA(r,env);return responder({error:r.status===429?'El servicio está ocupado, intentá más tarde.':'La IA no respondió. Revisá el servicio o modelo.'},r.status===429?429:502,permitido);}
+    if(!r.ok){
+      const code=r.status;
+      await registrarErrorIA(r,env);
+      return responder({error:errorGeminiUsuario(code),codigo:'GEMINI_'+code},code===429?429:code===400||code===401||code===403||code===404?502:503,permitido);
+    }
     const parsed=leerJSONIA(await r.json(),env);
     const respuesta=typeof parsed?.respuesta==='string'?parsed.respuesta.trim().slice(0,16000):'';
     if(respuesta.length<40)return responder({error:'La IA no devolvió una propuesta válida. Probá nuevamente.'},502,permitido);
     return responder({respuesta},200,permitido);
-  }catch(_){return responder({error:'No se pudo completar la propuesta con IA. Intentá de nuevo.'},502,permitido);}
+  }catch(err){
+    const tiempo=err && err.name==='AbortError';
+    return responder({
+      error:tiempo?'Gemini tardó demasiado en responder. Probá con un tema o texto más corto y revisá el estado del servicio.':'No se pudo conectar con Gemini. Revisá la conexión del Worker con Google AI y sus registros.',
+      codigo:tiempo?'TIEMPO_AGOTADO':'CONEXION_GEMINI'
+    },503,permitido);
+  }
   finally{clearTimeout(timer);}
 }
 
