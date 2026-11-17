@@ -16,12 +16,12 @@
   <script src="js/preferencias.js"></script>
 
   <link rel="stylesheet" href="css/claria.css?v=4">
-  <link rel="stylesheet" href="css/claria-asesoria.css?v=3">
+  <link rel="stylesheet" href="css/claria-asesoria.css?v=4">
   <script src="js/chat-config.js" defer></script>
   <script src="js/claria.js?v=5" defer></script>
   <script src="js/pictogramas-arasaac.js" defer></script>
   <script src="js/ilustraciones.js" defer></script>
-  <script src="js/claria-asesoria.js?v=3" defer></script>
+  <script src="js/claria-asesoria.js?v=4" defer></script>
 </head>
 <body class="pagina-claria">
 <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -116,6 +116,21 @@
       <div><strong>CLARIA</strong><span>Asistente conversacional para docentes</span></div>
       <button type="button" id="asesoria-escuchar" class="asesoria-escuchar" aria-pressed="false" title="Activar o desactivar la lectura en voz alta de las respuestas">🔊 Escuchar</button>
     </div>
+    <section class="claria-voz" aria-labelledby="claria-voz-titulo" id="asesoria-voz-tarjeta" data-voz-estado="apagado">
+      <div class="claria-voz__retrato" aria-hidden="true">
+        <div class="claria-voz__pulso"></div>
+        <img src="https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png" width="156" height="156" alt="" loading="lazy">
+        <span class="claria-voz__latido"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+      <div class="claria-voz__mensaje">
+        <p class="claria-voz__sobre">MODO CONVERSACIÓN</p>
+        <h4 id="claria-voz-titulo">Hablá con CLARIA</h4>
+        <p id="asesoria-voz-estado" role="status" aria-live="polite">La conversación por voz está lista para comenzar.</p>
+        <p id="asesoria-voz-captura" class="claria-voz__captura" aria-live="off"></p>
+        <button type="button" id="asesoria-modo-voz" class="claria-voz__iniciar" aria-pressed="false">🎙️ Conversar con CLARIA</button>
+        <p class="claria-voz__ayuda">Activá la autorización de IA que está debajo del chat. El micrófono necesita permiso del navegador y el reconocimiento puede procesarse mediante un servicio de voz externo. Para detenerlo, tocá el mismo botón.</p>
+      </div>
+    </section>
     <div id="asesoria-mensajes" class="asesoria-mensajes" role="log" aria-label="Conversación docente con CLARIA" aria-live="polite" aria-relevant="additions text"></div>
     <div class="asesoria-ejemplos" id="asesoria-ejemplos" role="group" aria-label="Ejemplos para empezar a conversar">
       <button type="button" data-ejemplo="Quiero planificar una clase de Matemática para 3.º grado. ¿Qué me sugerís?">Matemática · 3.º grado</button>
