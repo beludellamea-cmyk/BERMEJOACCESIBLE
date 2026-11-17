@@ -1,0 +1,72 @@
+/* CLARIA en Bermejo Accesible — identidad futurista, interfaz conversacional compacta */
+.pagina-claria .contenedor{max-width:74rem}
+.claria-pagina{padding:clamp(1rem,3vw,2.2rem) 0 4rem}
+.claria-presentacion{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:1rem;align-items:center;min-height:22rem;position:relative;isolation:isolate}
+.claria-presentacion::before{content:"";position:absolute;inset:6% -2% 0;z-index:-2;background:radial-gradient(ellipse at 72% 50%,#57369030,transparent 53%),radial-gradient(ellipse at 46% 60%,#18b4d02a,transparent 60%)}
+.claria-presentacion__texto{z-index:1;padding:1rem 0}
+.claria-sello,.claria-paso{display:flex;align-items:center;gap:.55rem;color:#6ae7eb;font:700 .78rem/1.4 "Space Grotesk",system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .8rem}
+.claria-sello span{width:.6rem;height:.6rem;border-radius:50%;background:#5de5eb;box-shadow:0 0 15px #41eeff}
+.claria-presentacion h1{font:700 clamp(2.75rem,5.7vw,5.5rem)/1.05 "Space Grotesk",system-ui,sans-serif;letter-spacing:-.065em;margin:.25rem 0 1rem}
+.claria-presentacion h1 em{font-style:normal;background:linear-gradient(110deg,#55eff3,#9fa0ff 80%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.claria-subtitulo{font-size:clamp(1.06rem,1.7vw,1.3rem);max-width:35ch;line-height:1.55;color:#d3eaf5;margin:0 0 .55rem}
+.claria-instruccion{max-width:50ch;color:#92bfce;font-size:.96rem;margin:.5rem 0 1rem}
+.claria-volver{font-size:.87rem;color:#83dce8;text-underline-offset:.2em}
+.claria-presentacion__visual{position:relative;min-height:22rem;display:grid;place-items:center;isolation:isolate;overflow:hidden}
+.claria-presentacion__visual::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#36def733,#8370e522 45%,transparent 67%);filter:blur(18px);z-index:-1}
+.claria-personaje{display:block;object-fit:contain;width:min(100%,23rem);max-height:23rem;position:relative;filter:drop-shadow(0 15px 40px #050921bb);transform:translateY(.35rem)}
+.claria-orbita{position:absolute;width:18rem;aspect-ratio:1;border:1px solid #66c8e34f;border-radius:50%;transform:rotate(-23deg) scaleX(1.26);pointer-events:none}
+.claria-orbita--dos{width:21rem;opacity:.25;transform:rotate(27deg) scaleX(.9)}
+.claria-pulso{position:absolute;bottom:12%;left:50%;width:9rem;height:.6rem;border-radius:50%;transform:translateX(-50%);filter:blur(13px);background:#3edeeacc;opacity:.7}
+.claria-asistente{border:1px solid #32738b;border-radius:1.6rem;overflow:hidden;background:linear-gradient(140deg,#112c40,#101d34 68%,#151d35);box-shadow:0 15px 60px #020b1bb3}
+.claria-asistente__cabecera{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:clamp(1rem,2.3vw,1.65rem) clamp(1rem,2.5vw,2rem) .3rem}
+.claria-asistente__cabecera h2{font:700 clamp(1.4rem,2.3vw,1.9rem)/1.25 "Space Grotesk",system-ui,sans-serif;letter-spacing:-.035em;margin:0}
+.claria-asistente__cabecera .claria-paso{font-size:.68rem;margin:0 0 .3rem}
+.claria-modo-etiqueta{flex:none;max-width:45%;font-size:.75rem;border:1px solid #426d80;border-radius:99px;padding:.35rem .7rem;background:#113a4a;color:#96ecf3;text-align:center}
+.claria-roles{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.7rem clamp(1rem,2.5vw,2rem) 1.2rem}
+.claria-rol{display:flex;align-items:center;gap:.9rem;min-width:0;padding:1rem;border-radius:1rem;border:1px solid #38657f;background:#0b2336;color:#d7ecf7;text-align:left;cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease;font:inherit}
+.claria-rol:hover{border-color:#54d7e3;transform:translateY(-1px)}
+.claria-rol[aria-pressed="true"]{background:linear-gradient(120deg,#16546a,#14465d);border:2px solid #64e7f0;box-shadow:0 0 17px #38e6f320}
+.claria-rol svg{width:2.2rem;height:2.2rem;flex:none;fill:none;stroke:#75e5ee;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.claria-rol strong,.claria-rol small{display:block;line-height:1.4}
+.claria-rol strong{font-size:1.04rem;color:white}
+.claria-rol small{font-size:.82rem;color:#acc7d4;margin-top:.1rem}
+.claria-conversacion{border-top:1px solid #31566f;background:#081c2e;padding:clamp(.85rem,2.6vw,1.65rem)}
+.claria-mensajes{min-height:13rem;max-height:23rem;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:.8rem;padding:.65rem .3rem 1rem;scrollbar-color:#2d667a transparent}
+.claria-mensaje{display:flex;align-items:flex-start;gap:.7rem;max-width:90%}
+.claria-mensaje--yo{align-self:flex-end;flex-direction:row-reverse}
+.claria-mensaje__avatar{flex:none;display:grid;place-items:center;border-radius:50%;width:2.25rem;height:2.25rem;background:#17485b;border:1px solid #417e8b;overflow:hidden}
+.claria-mensaje__avatar img{width:100%;height:100%;object-fit:cover}
+.claria-mensaje--yo .claria-mensaje__avatar{background:#343f69;border-color:#7477bc}
+.claria-mensaje__burbuja{padding:.85rem 1.05rem;background:#163449;border:1px solid #325d73;border-radius:1.1rem 1.1rem 1.1rem .25rem;min-width:0;box-shadow:0 8px 20px #01091225}
+.claria-mensaje--yo .claria-mensaje__burbuja{background:#213657;border-color:#586891;border-radius:1.1rem 1.1rem .25rem 1.1rem}
+.claria-mensaje__nombre{display:block;font-size:.76rem;font-weight:700;color:#8decf0;margin-bottom:.3rem}
+.claria-mensaje--yo .claria-mensaje__nombre{color:#babcfb}
+.claria-mensaje__texto{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.98rem;line-height:1.6;color:#ecf9fb;margin:0}
+.claria-mensaje__enlaces{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.7rem}
+.claria-mensaje__enlaces a{display:inline-flex;align-items:center;border:1px solid #4497a6;border-radius:99px;padding:.4rem .7rem;background:#103a4b;color:#9bedf6;font-size:.82rem;font-weight:700;text-decoration:none;line-height:1.25}
+.claria-mensaje__enlaces a:hover{background:#1c5268;border-color:#76e4ef}
+.claria-atajos{display:flex;flex-wrap:wrap;gap:.5rem;padding:.3rem .25rem 1rem}
+.claria-atajos button{font:600 .87rem/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;background:#12354a;border:1px solid #3d8090;border-radius:999px;padding:.58rem .82rem;color:#d6f7f9;cursor:pointer}
+.claria-atajos button:hover{background:#1b5165;border-color:#65ddeb}
+.claria-form{background:#102a40;border:1px solid #35647a;border-radius:1.2rem;padding:clamp(.85rem,2vw,1.2rem)}
+.claria-form>label:first-child{display:block;font-size:.93rem;font-weight:700;color:#dcf1f5;margin:0 0 .45rem}
+.claria-form__fila{display:flex;align-items:stretch;gap:.55rem}
+.claria-form__fila textarea{flex:1;resize:vertical;min-height:3.3rem;max-height:13rem;margin:0;border:1px solid #417e90;background:#071f31;border-radius:.85rem;font-size:.98rem;line-height:1.5}
+.claria-enviar{flex:none;align-self:stretch;border:0;border-radius:.85rem;background:linear-gradient(110deg,#2fc0db,#66e9e9);color:#051b28;font:800 .92rem "Atkinson Hyperlegible",system-ui,sans-serif;padding:.5rem 1.2rem;cursor:pointer}
+.claria-enviar:hover{filter:brightness(1.13)}
+.claria-enviar:disabled{opacity:.55;cursor:progress}
+.claria-privacidad{font-size:.81rem;color:#9fbdcb;margin:.65rem 0}
+.claria-consentimiento{display:flex;gap:.55rem;align-items:flex-start;font-size:.83rem;line-height:1.45;color:#c1d9e2}
+.claria-consentimiento input{flex:none;width:1.12rem;height:1.12rem;margin:.08rem 0 0;accent-color:#52e3ec}
+.claria-estado{margin:.5rem 0 0;min-height:1.25rem;color:#91c3d2;font-size:.79rem}
+.claria-acciones{display:flex;align-items:center;flex-wrap:wrap;gap:.7rem 1.2rem;margin:.9rem .1rem 0}
+.claria-acciones>a,.claria-boton-liviano{font:600 .87rem "Atkinson Hyperlegible",system-ui,sans-serif;color:#8fdde6;background:none;border:0;padding:.35rem 0;cursor:pointer;text-decoration:none}
+.claria-acciones>a:hover,.claria-boton-liviano:hover{text-decoration:underline}
+.claria-aviso{border-top:1px solid #30536c;background:#0f2436;padding:.8rem clamp(1rem,2.5vw,2rem);color:#9fc3ce;font-size:.8rem;line-height:1.5}
+.claria-aviso strong{color:#c4e4ee}
+@media(max-width:48rem){.claria-presentacion{grid-template-columns:1fr;min-height:0;gap:0}.claria-presentacion__visual{min-height:14rem;max-height:18rem;order:-1}.claria-personaje{max-height:17rem;max-width:17rem}.claria-presentacion__texto{text-align:center;padding:0 0 1.3rem}.claria-sello{justify-content:center}.claria-subtitulo,.claria-instruccion{margin-left:auto;margin-right:auto}.claria-roles{grid-template-columns:1fr}.claria-modo-etiqueta{font-size:.66rem}}
+@media(max-width:35rem){.claria-asistente{border-radius:1.2rem}.claria-mensaje{max-width:98%}.claria-mensaje__avatar{width:1.8rem;height:1.8rem}.claria-mensaje__burbuja{padding:.7rem .85rem}.claria-form__fila{flex-direction:column}.claria-enviar{align-self:flex-end;min-height:2.7rem;min-width:7rem}.claria-asistente__cabecera{align-items:flex-start;flex-direction:column;gap:.3rem}.claria-modo-etiqueta{max-width:none}.claria-presentacion h1{font-size:clamp(2.5rem,11vw,4rem)}}
+@media(prefers-reduced-motion:reduce){.claria-rol{transition:none}}
+html[data-contraste="alto"] :is(.claria-asistente,.claria-rol,.claria-conversacion,.claria-mensaje__burbuja,.claria-form,.claria-atajos button,.claria-aviso){background:#000!important;border:2px solid #fff!important;color:white!important}
+html[data-contraste="alto"] :is(.claria-subtitulo,.claria-estado,.claria-instruccion,.claria-privacidad,.claria-mensaje__texto,.claria-rol small){color:white!important}
+@media print{.claria-form,.claria-atajos,.claria-acciones,.claria-presentacion__visual{display:none!important}.claria-mensajes{max-height:none;overflow:visible}}
