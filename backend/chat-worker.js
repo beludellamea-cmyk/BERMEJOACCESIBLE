@@ -184,12 +184,26 @@ function labExcedeLimite(ip, env) {
   return false;
 }
 
+/* Ajusta la configuración de generación al modelo elegido.
+   Los modelos Gemini 3.x ignoran la temperatura y usan niveles de razonamiento (no «thinkingBudget»),
+   así que para ellos se quitan esos campos. Los 2.x conservan el comportamiento anterior. */
+function configGeneracion(env, base, sinRazonar) {
+  const modelo = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const g = Object.assign({}, base);
+  if (/gemini-(?:[3-9]|\d{2})/i.test(modelo)) delete g.temperature;
+  else if (sinRazonar && /flash/i.test(modelo)) g.thinkingConfig = { thinkingBudget: 0 };
+  return g;
+}
+/* Deja en los registros del Worker el motivo real del error de Google (nunca la clave). */
+async function registrarErrorIA(result, env) {
+  try { console.error('Gemini ' + result.status + ' (' + (env.GEMINI_MODEL || 'gemini-2.5-flash') + '): ' + (await result.text()).slice(0, 400)); } catch (_) {}
+}
+
 async function laboratorio(data, env, permitido) {
   const p = labValidarPedido(data);
   if (p.error) return responder({ error: p.error }, 400, permitido);
   const modelo = env.GEMINI_MODEL || 'gemini-2.5-flash';
-  const generacion = { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 8000 };
-  if (/flash/i.test(modelo)) generacion.thinkingConfig = { thinkingBudget: 0 };
+  const generacion = configGeneracion(env, { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 8000 }, true);
   const cuerpo = {
     systemInstruction: { parts: [{ text: labInstruccion(p) }] },
     contents: [{ role: 'user', parts: [{ text: JSON.stringify({ materia: p.materia, material: p.texto }) }] }],
@@ -205,7 +219,7 @@ async function laboratorio(data, env, permitido) {
         body: JSON.stringify(cuerpo), signal: controller.signal
       });
     } finally { clearTimeout(timer); }
-    if (!result.ok) return responder({ error: result.status === 429 ? 'El servicio está ocupado; probá más tarde.' : 'La IA no respondió. Revisá el servicio o el modelo.' }, result.status === 429 ? 429 : 502, permitido);
+    if (!result.ok) { await registrarErrorIA(result, env); } if (!result.ok) return responder({ error: result.status === 429 ? 'El servicio está ocupado; probá más tarde.' : 'La IA no respondió. Revisá el servicio o el modelo.' }, result.status === 429 ? 429 : 502, permitido);
     const salida = await result.json();
     const bruto = salida.candidates?.[0]?.content?.parts?.map(x => x.text || '').join('') || '';
     let propuesta;
@@ -266,7 +280,7 @@ export default {
       const cuerpo = {
         systemInstruction:{parts:[{text:instruccion}]},
         contents:[{role:'user',parts:[{text:mensaje}]}],
-        generationConfig:{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:1800}
+        generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:1800},false)
       };
       try {
         const controller = new AbortController();
@@ -276,7 +290,7 @@ export default {
           method:'POST', headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},
           body:JSON.stringify(cuerpo), signal:controller.signal
         }); } finally { clearTimeout(timer); }
-        if (!result.ok) return responder({error:result.status===429?'El servicio está ocupado; probá más tarde.':'La IA no respondió. Revisá el servicio o el modelo.'},result.status===429?429:502,permitido);
+        if (!result.ok) { await registrarErrorIA(result, env); } if (!result.ok) return responder({error:result.status===429?'El servicio está ocupado; probá más tarde.':'La IA no respondió. Revisá el servicio o el modelo.'},result.status===429?429:502,permitido);
         const salida = await result.json();
         const bruto = salida.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('') || '';
         let propuesta;
@@ -315,7 +329,7 @@ export default {
     const cuerpo = {
       systemInstruction:{parts:[{text:instruccion}]},
       contents:[{role:'user',parts:[{text:mensaje}]}],
-      generationConfig:{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:500}
+      generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:500},false)
     };
     try {
       const controller = new AbortController();
@@ -326,7 +340,7 @@ export default {
           method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},body:JSON.stringify(cuerpo),signal:controller.signal
         });
       } finally {clearTimeout(timer);}
-      if (!result.ok) return responder({error:result.status===429?'El servicio está ocupado; probá más tarde.':'La IA no respondió. Revisá el servicio o el modelo configurado.'},result.status===429?429:502,permitido);
+      if (!result.ok) { await registrarErrorIA(result, env); } if (!result.ok) return responder({error:result.status===429?'El servicio está ocupado; probá más tarde.':'La IA no respondió. Revisá el servicio o el modelo configurado.'},result.status===429?429:502,permitido);
       const salida = await result.json();
       const bruto = salida.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('') || '';
       let traduccion;
