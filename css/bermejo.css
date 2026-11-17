@@ -276,6 +276,56 @@ html[data-contraste="alto"] .pie { border-top: 2px solid #fff; }
   .accesos { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .acceso:hover, .acceso:focus-within { transform: none; } }
+/* Libro de la portada: se abre al entrar y muestra el mismo texto «a tu manera». */
+.hero__visual { flex-direction: column; align-items: center; gap: .9rem; }
+.libro { width: min(100%, 30rem); container-type: inline-size; display: flex; flex-direction: column; gap: .9rem; }
+.libro__caja { position: relative; width: 100%; aspect-ratio: 1.45; perspective: 1600px; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.6,.05,.25,1); }
+.libro[data-estado="cerrado"] .libro__caja { transform: translateX(-25%); }
+.libro__pagina, .libro__tapa { position: absolute; top: 0; left: 50%; width: 50%; height: 100%; }
+.libro__pagina { background: #fffdf6; border: 2px solid var(--borde); border-left: 0; border-radius: 0 .9rem .9rem 0; box-shadow: var(--sombra); padding: 5cqw 4.5cqw; transform: translateZ(-1px); overflow: hidden; display: flex; flex-direction: column; gap: 3cqw; }
+.libro__tapa { transform-origin: left center; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.6,.05,.25,1); z-index: 2; }
+.libro[data-estado="abierto"] .libro__tapa { transform: rotateY(-180deg); }
+.libro__cara { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 0 .9rem .9rem 0; overflow: hidden; }
+.libro__cara--frente { background: var(--rio); color: #fff; border: 2px solid var(--tinta); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqw; text-align: center; box-shadow: inset 1.6cqw 0 0 rgba(0,0,0,.18), var(--sombra-alta); }
+.libro__cara--frente img { width: 17cqw; height: 17cqw; background: #fff; border-radius: 50%; padding: 1.2cqw; }
+.libro__titulo { font-family: var(--fuente-titulos); font-weight: 700; font-size: 5.6cqw; line-height: 1.1; }
+.libro__rio { position: absolute; left: 0; right: 0; bottom: 6cqw; width: 100%; height: 9cqw; fill: none; stroke: #f0b99f; stroke-width: 3; stroke-linecap: round; }
+.libro__cara--dorso { background: #f3ede0; border: 2px solid var(--borde); border-right: 0; border-radius: .9rem 0 0 .9rem; transform: rotateY(180deg); padding: 5cqw 4.5cqw; display: flex; flex-direction: column; gap: 3cqw; box-shadow: var(--sombra); }
+.libro__etiqueta { margin: 0; font-size: 2.7cqw; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--rio); }
+.libro__denso { margin: 0; font-size: 2.55cqw; line-height: 1.35; color: #5b6b6c; text-align: justify; hyphens: auto; }
+.libro__vista { display: none; flex: 1; align-items: center; justify-content: center; min-height: 0; }
+.libro[data-vista="grande"] .libro__vista--grande, .libro[data-vista="pictos"] .libro__vista--pictos, .libro[data-vista="partes"] .libro__vista--partes { display: flex; animation: libro-aparece .5s ease both; }
+.libro__vista--grande p { margin: 0; font-size: 7.6cqw; font-weight: 700; line-height: 1.15; color: var(--tinta); text-align: center; }
+.libro__vista--pictos ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 2cqw; width: 100%; justify-content: center; }
+.libro__vista--pictos li { max-width: none; display: flex; flex-direction: column; align-items: center; gap: 1cqw; flex: 1; border: 2px solid var(--borde); border-radius: 1.4cqw; padding: 1.6cqw .6cqw; font-size: 3.2cqw; font-weight: 700; color: var(--tinta); background: #fff; }
+.libro__vista--pictos svg { width: 9cqw; height: 9cqw; fill: none; stroke: var(--rio); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.libro__vista--partes ol { list-style: none; counter-reset: p; margin: 0; padding: 0; display: grid; gap: 1.8cqw; width: 100%; }
+.libro__vista--partes li { max-width: none; counter-increment: p; display: flex; align-items: center; gap: 2cqw; background: var(--rio-claro); border-radius: 1.4cqw; padding: 1.6cqw 2cqw; font-size: 3.8cqw; font-weight: 700; color: var(--tinta); }
+.libro__vista--partes li::before { content: counter(p); display: grid; place-items: center; flex: none; width: 5.4cqw; height: 5.4cqw; border-radius: 50%; background: var(--rio); color: #fff; font-size: 3.2cqw; }
+.libro__controles { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+.libro__controles .boton svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.libro__vistas { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+.libro__nota { margin: 0; text-align: center; font-size: .98rem; color: var(--tinta-suave); max-width: none; }
+.libro[data-estado="cerrado"] .libro__caja { cursor: pointer; }
+@keyframes libro-aparece { from { opacity: 0; transform: translateY(.5rem); } to { opacity: 1; transform: none; } }
+@keyframes acceso-sube { from { opacity: 0; transform: translateY(1.2rem); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__texto { animation: acceso-sube .8s .1s ease both; }
+  .accesos li:nth-child(1) { animation: acceso-sube .8s 1.5s ease both; }
+  .accesos li:nth-child(2) { animation: acceso-sube .8s 1.7s ease both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .libro__caja, .libro__tapa { transition: none; }
+  .libro__vista { animation: none !important; }
+}
+html[data-contraste="alto"] .libro__pagina, html[data-contraste="alto"] .libro__cara--dorso { background: #fff; border-color: #000; }
+html[data-contraste="alto"] .libro__cara--frente { background: #000; border-color: #ffe14d; }
+html[data-contraste="alto"] .libro__denso, html[data-contraste="alto"] .libro__etiqueta { color: #000; }
+html[data-contraste="alto"] .libro__vista--partes li { background: #fff; border: 2px solid #000; }
+html[data-contraste="alto"] .libro__vista--pictos svg { stroke: #000; }
+html[data-contraste="alto"] .libro__vista--partes li::before { background: #000; }
+@media (max-width: 52rem) { .libro { width: min(100%, 24rem); } }
+
 
 /* ---------- 8. Explorar más ---------- */
 .explorar { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
@@ -1215,3 +1265,7 @@ html[data-contraste="alto"] .lab-chips .lab-opcion:has(input:checked) { border-c
   .lab-subgrupo { padding: .4rem 0; border: 0; }
   .lab-chips .lab-opcion { flex: 1 1 100%; min-width: 0; padding-inline: .5rem .7rem; overflow-wrap: anywhere; border-radius: var(--radio); }
 }
+
+/* Libro: controles más compactos para que los accesos queden a la vista. */
+.libro__controles { gap: .45rem; }
+.libro__controles .boton { min-height: 2.75rem; padding: .3rem .95rem; font-size: 1rem; }
