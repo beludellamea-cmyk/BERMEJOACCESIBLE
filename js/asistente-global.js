@@ -35,7 +35,9 @@
     return s;
   }
   var ruta = location.pathname.split('/').pop() || 'index.html';
-  var boton = nodo('button', 'boton boton--principal ayuda-abrir', 'Estoy perdido');
+  var esMaterial = ruta === 'comprender.html' || ruta === 'crear.html';
+  // El asistente se abre desde «Accesibilidad › Ayuda por voz y guía» (ver navegacion.js). No hay botón flotante.
+  var boton = nodo('button', 'boton ayuda-abrir', 'Ayuda');
   boton.type = 'button';
   boton.setAttribute('aria-expanded', 'false');
   boton.setAttribute('aria-controls', 'ayuda-panel');
@@ -70,8 +72,9 @@
   estado.setAttribute('role', 'status');
   panel.append(cab, frase, opciones, controles, estado);
   var principal = $('main');
-  if (principal) principal.before(lanzadores, panel);
-  else document.body.append(lanzadores, panel);
+  if (principal) principal.before(panel);
+  else document.body.append(panel);
+  function devolverFoco() { var a = $('#ajustes > summary') || $('.menu-abrir') || $('main'); if (a) a.focus(); }
 
   var disponible = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
   function leerSesion(k) { try { return sessionStorage.getItem(k); } catch (_) { return null; } }
@@ -113,7 +116,7 @@
     panel.hidden = !abrir;
     boton.setAttribute('aria-expanded', String(abrir));
     if (abrir) { actualizar(); titulo.focus(); }
-    else { detener(); boton.focus(); }
+    else { detener(); devolverFoco(); }
   }
   boton.addEventListener('click', function () { mostrar(panel.hidden); });
   cerrar.addEventListener('click', function () { mostrar(false); });
@@ -127,8 +130,16 @@
   }
   function acciones() {
     if (ruta === 'index.html') return {
-      pregunta: 'Hola, ¿en qué puedo ayudarte? Podés entrar con tu propio material o conocer las herramientas para docentes.',
-      botones: [['Trabajar con mi material', 'material.html'], ['Soy docente', 'docente.html'], ['Chat intercultural', 'qom.html']]
+      pregunta: 'Hola, ¿en qué puedo ayudarte? Podés comprender un material o crear una adaptación accesible.',
+      botones: [['Comprender un material', 'comprender.html'], ['Crear una adaptación', 'crear.html'], ['Explorar más', 'explorar.html']]
+    };
+    if (ruta === 'explorar.html') return {
+      pregunta: 'Hola, ¿en qué puedo ayudarte? Elegí qué querés explorar.',
+      botones: [['Recursos para docentes', 'docente.html'], ['Normativa', 'docente.html#normativa'], ['Chat intercultural', 'qom.html'], ['Lectores de pantalla', '#lectores']]
+    };
+    if (ruta === 'qom.html') return {
+      pregunta: 'Elegí la lengua de la conversación y escribí un mensaje. La traducción es automática y hay que revisarla.',
+      botones: [['Elegir la lengua', '#chat-lengua'], ['Escribir un mensaje', '#chat-texto']]
     };
     if (ruta === 'docente.html') return {
       pregunta: 'Hola, ¿en qué puedo ayudarte? Elegí qué parte del espacio docente querés consultar.',
@@ -140,11 +151,15 @@
     };
     if (paso() === 2) return {
       pregunta: 'Ya cargaste el material. Revisá el texto y corregí lo que haga falta. Después elegí cómo leerlo.',
-      botones: [['Revisar o corregir', '#texto-editable'], ['Continuar a las formas de lectura', '#ir-a-leer'], ['Cargar otro material', '#otro-material']]
+      botones: [['Revisar o corregir', '#texto-editable'], ['Continuar', '#ir-a-leer'], ['Cargar otro material', '#otro-material']]
+    };
+    if (ruta === 'crear.html') return {
+      pregunta: 'Elegí el grado, la materia y los apoyos. Después generá la adaptación con IA y revisala antes de descargarla.',
+      botones: [['Elegir la materia', '#lab-materia'], ['Elegir los objetivos', '#lab-objetivos-grupo'], ['Generar con IA', '#lab-generar'], ['Volver a corregir el contenido', '#volver-revisar']]
     };
     return {
       pregunta: 'Ya podés elegir cómo acceder a tu material. ¿Qué te ayudaría ahora?',
-      botones: [['Escuchar', 'modo:voz'], ['Leer por partes', 'modo:partes'], ['Leer con apoyos visuales', 'modo:imagenes'], ['Trabajar con mi material', '#trabajar-material']]
+      botones: [['Escuchar', 'modo:voz'], ['Leer por partes', 'modo:partes'], ['Leer con apoyos visuales', 'modo:imagenes'], ['Practicar con una actividad', '#trabajar-material']]
     };
   }
   function abrirDestino(destino) {
@@ -193,7 +208,7 @@
       var b = nodo('button', 'boton', item[0]);
       b.type = 'button';
       var simbolos = {
-        'material.html': 'libro', 'docente.html': 'docente', 'qom.html': 'opciones', '#lector-titulo': 'voz',
+        'comprender.html': 'libro', 'crear.html': 'ideas', 'explorar.html': 'opciones', 'docente.html': 'docente', 'qom.html': 'opciones', '#chat-lengua': 'opciones', '#chat-texto': 'texto', '#lab-materia': 'libro', '#lab-objetivos-grupo': 'seguir', '#lab-generar': 'ideas', '#volver-revisar': 'revisar', '#lectores': 'voz', '#lector-titulo': 'voz',
         '#consulta': 'docente', '#guia': 'revisar', '#ideas': 'ideas', '#normativa': 'norma',
         '#texto-pegado': 'texto', '#archivo-pdf': 'texto', '#archivo-foto': 'foto',
         '#usar-ejemplo': 'libro', '#usar-sociales': 'libro', '#texto-editable': 'revisar', '#ir-a-leer': 'seguir',
@@ -218,13 +233,13 @@
     guardarSesion('bermejo-modo','guiado'); guardarSesion('bermejo-voz', disponible ? 'on' : 'off');
     mostrar(true); if (vozActiva) hablar();
   }
-  window.BermejoGuia = { iniciar: iniciarGuia, manual: function () {
+  window.BermejoGuia = { iniciar: iniciarGuia, abrir: function () { mostrar(true); }, manual: function () {
     modoGuiado = false; vozActiva = false; detener(); guardarSesion('bermejo-modo','manual'); guardarSesion('bermejo-voz','off');
   }};
   mostrarComo.addEventListener('click', function () {
-    var destino = ruta === 'index.html' ? '.camino a[href="material.html"]' :
-      ruta === 'material.html' ? (paso() === 1 ? '#texto-pegado' : paso() === 2 ? '#texto-editable' : '[data-modo-rapido="voz"]') :
-      ruta === 'docente.html' ? '#consulta-texto' : '#chat-texto';
+    var destino = ruta === 'index.html' ? '.acceso a[href="comprender.html"]' :
+      esMaterial ? (paso() === 1 ? '#texto-pegado' : paso() === 2 ? '#texto-editable' : (ruta === 'crear.html' ? '#lab-materia' : '[data-modo-rapido="voz"]')) :
+      ruta === 'docente.html' ? '#consulta-texto' : ruta === 'explorar.html' ? '.explorar__enlace' : '#chat-texto';
     var el = $(destino); if (!el) return;
     var detalle = el.closest('details'); if (detalle) detalle.open = true;
     document.querySelectorAll('.ayuda-destacado').forEach(function (n) { n.classList.remove('ayuda-destacado'); });
@@ -232,30 +247,17 @@
     decir('Mirá el elemento resaltado. Tocá o activá con Enter para continuar.');
   });
   volver.addEventListener('click', function () {
-    if (ruta === 'material.html' && paso() === 3) { $('#volver-revisar').click(); return; }
-    if (ruta === 'material.html' && paso() === 2) { $('#volver-cargar').click(); return; }
+    if (esMaterial && paso() === 3) { $('#volver-revisar').click(); return; }
+    if (esMaterial && paso() === 2) { $('#volver-cargar').click(); return; }
     if (ruta !== 'index.html') location.href = 'index.html';
-    else decir('Estás en el inicio. Elegí una de las tres opciones para continuar.');
+    else decir('Estás en el inicio. Elegí Comprender o Crear para continuar.');
   });
   document.addEventListener('change', function (e) {
     if (!modoGuiado || !e.target.matches('input[name="modo"]')) return;
     var etiqueta = e.target.closest('label');
     if (etiqueta) decir('Elegiste ' + etiqueta.innerText.trim() + '. Tu texto aparece a continuación.');
   });
-  if (ruta === 'index.html') {
-    var bienvenida = $('#bienvenida');
-    var guiada = $('#bienvenida-guiada'), manual = $('#bienvenida-manual');
-    if (bienvenida && guiada && manual) {
-      guiada.addEventListener('click', function () { bienvenida.close(); iniciarGuia(); });
-      manual.addEventListener('click', function () { bienvenida.close(); window.BermejoGuia.manual(); $('main h1').focus(); });
-      bienvenida.addEventListener('cancel', function () { window.BermejoGuia.manual(); });
-      if (!leerSesion('bermejo-modo')) bienvenida.showModal();
-    }
-  }
-  if (modoGuiado && !$('#bienvenida')?.open) {
-    mostrar(true); if (vozActiva) hablar();
-  }
-  if (ruta === 'material.html') {
+  if (esMaterial) {
     var pasos = [$('#paso-cargar'), $('#paso-revisar'), $('#paso-leer')].filter(Boolean);
     var observador = new MutationObserver(function () {
       if (modoGuiado) { panel.hidden = false; boton.setAttribute('aria-expanded','true'); actualizar(); if (vozActiva) hablar(); }

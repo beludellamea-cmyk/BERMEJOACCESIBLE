@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520" aria-hidden="true" focusable="false">
+  <defs><clipPath id="marco"><rect x="24" y="16" width="592" height="488" rx="84"/></clipPath></defs>
+  <rect x="24" y="16" width="592" height="488" rx="84" fill="#dff1ee"/>
+  <g clip-path="url(#marco)">
+  <circle cx="506" cy="112" r="44" fill="#f2c487"/>
+    <path d="M40 330c70-62 128-74 190-46 58 26 104 18 176-34 60-43 140-34 194 40v170H40Z" fill="#9fd6cd"/>
+  <path d="M40 372c80-46 150-48 214-18 62 29 118 18 190-26 64-39 130-28 156 20v152H40Z" fill="#5fb3ab"/>
+  <path d="M-10 470c92-34 168-36 246-72 70-32 98-82 176-110 70-25 150-18 238 22" fill="none" stroke="#c4512c" stroke-width="64" stroke-linecap="round" opacity=".95"/>
+  <path d="M-10 470c92-34 168-36 246-72 70-32 98-82 176-110 70-25 150-18 238 22" fill="none" stroke="#dd8761" stroke-width="12" stroke-linecap="round" opacity=".7" transform="translate(0 -6)"/>
+  </g>
+  <rect x="92" y="236" width="456" height="206" rx="26" fill="#0a4a50"/>
+  <path d="M110 252c70-22 140-16 210 26v152c-70-40-140-46-210-24Z" fill="#faf5ea"/>
+  <path d="M530 252c-70-22-140-16-210 26v152c70-40 140-46 210-24Z" fill="#fffdf8"/>
+  <path d="M320 278v152" stroke="#0a4a50" stroke-width="5"/>
+  <g stroke="#0b6b70" stroke-width="9" stroke-linecap="round" opacity=".55">
+    <path d="M150 292h118M150 322h118M150 352h118M150 382h74"/>
+  </g>
+  <rect x="360" y="294" width="62" height="62" rx="16" fill="#0b6b70"/>
+  <path d="M376 340l14-30 14 30M381 332h18" fill="none" stroke="#faf5ea" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="436" y="294" width="62" height="62" rx="16" fill="#c4512c"/>
+  <circle cx="467" cy="325" r="14" fill="none" stroke="#faf5ea" stroke-width="5"/>
+  <path d="M467 311v-8M467 347v8M453 325h-8M481 325h8" stroke="#faf5ea" stroke-width="5" stroke-linecap="round"/>
+  <g stroke="#0b6b70" stroke-width="9" stroke-linecap="round" opacity=".55">
+    <path d="M360 384h138M360 410h92"/>
+  </g>
+  <g fill="none" stroke="#0a4a50" stroke-width="8" stroke-linecap="round">
+    <path d="M150 196a40 40 0 0 1 0 -52" opacity=".9"/>
+    <path d="M122 214a76 76 0 0 1 0 -88" opacity=".6"/>
+    <path d="M94 232a112 112 0 0 1 0 -124" opacity=".35"/>
+  </g>
+  <g stroke="#0a4a50" stroke-width="5" stroke-linecap="round" opacity=".8">
+    <path d="M556 330c4-40 2-70-6-98M574 340c8-34 10-66 2-96M538 336c0-26-6-50-18-70"/>
+  </g>
+</svg>

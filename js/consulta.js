@@ -77,7 +77,7 @@
       acciones: [
         'Dividí el texto en partes cortas con títulos que anticipen de qué trata cada una.',
         'Marcá las ideas clave o entregá una versión en lenguaje claro junto al original.',
-        'Ofrecé el texto en Bermejo Accesible (Acceder a mi material): por partes, con letra más grande o en voz alta.',
+        'Ofrecé el texto en Bermejo Accesible (sección Comprender): por partes, con letra más grande o en voz alta.',
         'Leé en voz alta o proponé lectura compartida antes de la tarea individual.',
         'Dale más tiempo o reducí la cantidad de texto sin cambiar el contenido que se aprende.'
       ],

@@ -1,14 +1,18 @@
 # Bermejo Accesible
 
-## Nueva versión: guía, lectura y actividades
+## Rediseño integral (versión actual)
 
-Al abrir la portada se elige entre ayuda guiada con voz o exploración manual. La elección queda en esta pestaña; la voz se puede apagar. El botón «Estoy perdido» abre indicaciones escritas, permite repetirlas y señalar el próximo control. No se usa micrófono.
+**Bermejo Accesible: la información a tu manera.** La portada tiene solo dos accesos:
 
-Después de cargar y corregir un texto aparecen tres accesos principales: **Escuchar**, **Leer por partes** y **Leer con apoyos visuales**. Las otras opciones están en «Más formas de lectura» y los ajustes existentes siguen disponibles. La paleta tiene acentos más vivos y un modo de alto contraste.
+- **Comprender** (`comprender.html`): asistente de tres pasos. 1) Cargar un texto, PDF o foto. 2) Revisar el contenido (con lectura fácil con IA opcional). 3) Elegir cómo acceder: escuchar, leer por partes, con imágenes o con pictogramas. Los ajustes de lectura, letra y colores, y la actividad con IA, están en paneles desplegables.
+- **Crear** (`crear.html`): espacio docente de cinco pasos (contenido, ajustes, generar, revisar, descargar) con el Laboratorio de adaptaciones accesibles con IA, pictogramas de ARASAAC, fotos libres de Wikimedia Commons, editor, aprobación docente y descarga en Word, HTML o PDF.
+- **Explorar más** (`explorar.html`): recursos para docentes, normativa, chat intercultural, guía de lectores de pantalla y privacidad.
 
-En el paso de revisión se puede pedir una **propuesta de lectura fácil**. En el último paso se puede crear **una actividad breve** por materia y nivel, revisarla, practicarla, descargarla como HTML o imprimirla. El material adaptado también se descarga e imprime desde el archivo HTML. Ninguna propuesta se aplica sin revisión docente; el original se conserva para recuperarlo. Antes de cada envío se exige confirmar que se quitaron nombres y otros datos personales. Los textos enviados llegan al Worker y al proveedor de IA; no se guardan en el navegador después de cerrar o recargar la página.
+El botón **Accesibilidad** (arriba a la derecha) reúne tamaño de texto, imprenta mayúscula, alto contraste y la ayuda por voz y guía. Ya no hay diálogo de bienvenida ni botón flotante.
 
-**Para activar la IA:** subí los archivos estáticos a GitHub Pages y actualizá el Worker `bermejochat` con `backend/chat-worker.js`. La versión anterior del Worker solo responde al chat; las nuevas funciones usan `POST /adaptar` y `POST /actividad`. Mantené `GEMINI_API_KEY` como secreto y `ALLOWED_ORIGIN` como origen exacto; revisá cuotas y condiciones del proveedor antes del uso escolar. Una subida del ZIP a GitHub Pages por sí sola no activa las nuevas funciones de IA.
+`material.html` quedó como aviso de mudanza hacia Comprender y Crear, para no romper enlaces viejos. Se eliminaron `estilos.css`, `renovacion.css`, `laboratorio.css` (ahora todo está en `css/bermejo.css`) y cuatro scripts que ninguna página usaba.
+
+**Para activar la IA:** subí los archivos estáticos a GitHub Pages y actualizá el Worker `bermejochat` con `backend/chat-worker.js`. Las funciones usan `POST /adaptar`, `POST /actividad` y `POST /laboratorio`. Mantené `GEMINI_API_KEY` como secreto y `ALLOWED_ORIGIN` como origen exacto; revisá cuotas y condiciones del proveedor antes del uso escolar. Antes de cada envío se exige confirmar que se quitaron datos personales, y ninguna propuesta de IA se aplica sin revisión docente.
 
 ## Laboratorio de adaptaciones accesibles con IA (etapas 1 y 2)
 
@@ -134,26 +138,31 @@ Todo el contenido docente está marcado como **sujeto a revisión docente**.
 ## Estructura
 
 ```
-index.html              Portada: tres caminos y más información desplegable
-material.html           Recorrido del estudiante
-docente.html            Espacio docente
+index.html              Portada: Comprender y Crear
+comprender.html         Asistente de tres pasos para comprender un material
+crear.html              Asistente de cinco pasos para crear adaptaciones con IA
+explorar.html           Explorar más: recursos, normativa, chat, guías
+docente.html            Recursos para docentes
 qom.html                Chat intercultural presencial con traducción de IA
-icono.svg               Ícono de la pestaña (símbolo del logo)
-img/logo-bermejo-accesible.svg   Logo con el nombre (para presentaciones)
-css/estilos.css         Estilos
+material.html           Aviso de mudanza (redirige a Comprender)
+icono.svg               Ícono de la pestaña
+img/                    Logo, ilustración de la portada y logo con nombre
+css/bermejo.css         Hoja de estilos única (tokens, componentes, herramientas)
+js/navegacion.js        Menú, panel de Accesibilidad y acceso a la ayuda
 js/preferencias.js      Letra, tamaño y contraste de todo el sitio
-js/material.js          Extracción de texto, revisión y los seis modos
-js/descargar-material.js   Descarga de la versión adaptada como HTML autónomo
+js/asistente-global.js  Ayuda escrita y por voz (se abre desde Accesibilidad)
+js/material.js          Carga y revisión de texto; los modos de lectura de Comprender
+js/crear.js             Indicador de cinco pasos de Crear
+js/laboratorio*.js      Laboratorio: adaptación con IA, editor, Word y HTML
+js/pictogramas-arasaac.js  Búsqueda y selección de pictogramas y fotos
+js/descargar-material.js   Descarga de la versión adaptada como HTML
+js/ia-material.js       Lectura fácil y actividad con IA (Comprender)
 js/ilustraciones.js     Dibujos para «Texto con imágenes»
-js/docente.js           Guía, revisor y filtro de normativa
-js/consulta.js          «Contame qué pasa en tu aula»
-js/qom.js               Conversación y correcciones en pantalla
-js/chat-config.js       URL pública del servicio de traducción
+js/docente.js, consulta.js, qom.js, chat-config.js
+js/vendor/              Librería docx (MIT) para el Word
 backend/chat-worker.js  Servicio para Cloudflare Workers (clave en secreto)
-fuentes/                Fuente «Bermejo Mayúscula» (regular y negrita) y su licencia
+fuentes/                Licencia de la fuente «Bermejo Mayúscula»
 ejemplos/               Materiales de prueba (TXT, PDF y foto)
-_partes/                Fuentes de las páginas y scripts para regenerarlas
-.nojekyll               Evita que GitHub Pages procese el sitio con Jekyll
 ```
 
 ## El logo

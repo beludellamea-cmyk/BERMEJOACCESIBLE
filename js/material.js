@@ -1,4 +1,4 @@
-/* Bermejo Accesible · Recorrido «Acceder a mi material»
+/* Bermejo Accesible · Recorrido «Comprender» (y carga de contenido de «Crear»)
    - Extrae texto de PDF con PDF.js y de imágenes con Tesseract.js, en el navegador.
    - No guarda materiales: todo vive en memoria mientras la pestaña está abierta.
    - Las bibliotecas se descargan de jsDelivr solo cuando se necesitan. */
@@ -12,7 +12,9 @@
   var MAX_PAGINAS = 40;
   var MAX_PDF_MB = 40;
   var MAX_FOTO_MB = 25;
-  var TITULO_BASE = 'Acceder a mi material | Bermejo Accesible';
+  /* En «Crear» solo se usan la carga y la revisión del texto; el resto de los controles no existen en esa página. */
+  var SOLO_CARGA = document.body.dataset.modo === 'crear';
+  var TITULO_BASE = (SOLO_CARGA ? 'Crear' : 'Comprender') + ' | Bermejo Accesible';
 
   var EJEMPLO = [
     'El ciclo del agua',
@@ -77,7 +79,13 @@
   };
 
   /* ---------------- Utilidades ---------------- */
-  function $(sel) { return document.querySelector(sel); }
+  var fantasmas = {};
+  function $(sel) {
+    var e = document.querySelector(sel);
+    if (e || !SOLO_CARGA) return e;
+    // En «Crear» faltan los controles de lectura: se usa un elemento suelto para que el resto del código no falle.
+    return fantasmas[sel] || (fantasmas[sel] = document.createElement('div'));
+  }
   function crear(tag, clase, texto) {
     var el = document.createElement(tag);
     if (clase) el.className = clase;
@@ -145,6 +153,7 @@
 
   /* ---------------- Pasos ---------------- */
   function marcarPaso(n) {
+    if (SOLO_CARGA) return; // el indicador de «Crear» lo maneja crear.js
     [1, 2, 3].forEach(function (i) {
       var li = $('#ind-' + i);
       li.removeAttribute('aria-current');
@@ -154,7 +163,7 @@
       if (i < n) li.appendChild(crear('span', 'visualmente-oculto', ' (completo)'));
       if (i === n) li.setAttribute('aria-current', 'step');
     });
-    var titulos = { 1: 'Paso 1: cargar', 2: 'Paso 2: revisar el texto', 3: 'Paso 3: elegir cómo leer' };
+    var titulos = { 1: 'Paso 1: cargar', 2: 'Paso 2: revisar el texto', 3: 'Paso 3: elegir cómo acceder' };
     document.title = titulos[n] + ' | ' + TITULO_BASE;
   }
 

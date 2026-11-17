@@ -70,7 +70,7 @@
     var problemas = [];
     var fuente = texto.value.trim();
     if (fuente.length < 20 || fuente.length > 6000) {
-      problemas.push({ campo: 'texto-editable', mensaje: 'El texto revisado (paso 2) debe tener entre 20 y 6000 caracteres. Podés dividir un material largo en partes.' });
+      problemas.push({ campo: 'texto-editable', mensaje: 'El contenido revisado debe tener entre 20 y 6000 caracteres. Podés dividir un material largo en partes.' });
     }
     var nombreMateria = materia.value === 'otra' ? materiaOtra.value.trim() : materia.value;
     if (!nombreMateria) problemas.push({ campo: materia.value === 'otra' ? 'lab-materia-otra' : 'lab-materia', mensaje: 'Elegí la materia o escribila.' });
@@ -798,7 +798,7 @@
   var avisoCambio = false;
   texto.addEventListener('input', function () {
     if (lab.datos && texto.value.trim() !== lab.textoEnviado) {
-      if (!avisoCambio) decir('El texto del paso 2 cambió después de generar la propuesta. Generá una nueva para que coincida.');
+      if (!avisoCambio) decir('El contenido cambió después de generar la propuesta. Generá una nueva para que coincida.');
       avisoCambio = true;
     } else { avisoCambio = false; }
   });

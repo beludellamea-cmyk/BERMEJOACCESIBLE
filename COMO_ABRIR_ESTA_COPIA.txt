@@ -2,7 +2,7 @@ BERMEJO ACCESIBLE — PROTOTIPO DESCARGABLE
 
 1. Extraé todo el contenido del ZIP en una carpeta. No abras index.html desde dentro del ZIP.
 2. Hacé doble clic en index.html para abrir la portada en tu navegador.
-3. Probá con ejemplos/ o pegá un texto en «Trabajar con mi material».
+3. Entrá a «Comprender», probá con ejemplos/ o pegá un texto.
 4. Si querés compartir la copia, enviá el ZIP entero; todas las carpetas y archivos son necesarios.
 
 Qué requiere conexión:
