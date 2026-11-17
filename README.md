@@ -1,5 +1,15 @@
 # Bermejo Accesible
 
+## CLARIA conversacional por voz: primera versión (17/11/2026)
+
+- En `claria.html?rol=docente`, bajo el perfil **Soy docente**, se agregó **Conversar con CLARIA**. Un botón solicita permiso de micrófono y activa, cuando el navegador lo admite, reconocimiento de voz de un turno mediante Web Speech API (`SpeechRecognition` o `webkitSpeechRecognition`) en español de Argentina. El texto reconocido se muestra en el chat y se envía al endpoint `POST /asistente` ya existente.
+- CLARIA responde con síntesis de voz del navegador (`speechSynthesis`) y, al terminar el audio, intenta escuchar nuevamente para mantener turnos de conversación. La persona puede detenerlo con el mismo botón, cambiar de perfil, desmarcar el consentimiento o cerrar la página. Se suspende si hay errores de permiso, red o servicio, y se muestra texto alternativo. Si falla el reinicio automático (frecuente en móviles), el usuario debe tocar nuevamente para reanudar.
+- El avatar existente está acompañado de un **halo y barras de voz animadas** con estados Escuchando/Pensando/Hablando. **No es sincronización labial real, no usa un motor de video ni una voz neuronal premium**. Las animaciones respetan `prefers-reduced-motion` y las transcripciones quedan visibles para accesibilidad.
+- El reconocimiento de voz puede transmitir audio a servidores del proveedor del navegador. Se pide autorización explícita junto al botón y se recomienda no mencionar nombres ni datos identificatorios de estudiantes. Las consultas de texto y el historial reciente se envían al Worker de IA con consentimiento; no se guardan grabaciones ni historial persistente en Bermejo Accesible.
+- **Cloudflare:** la conversación oral reutiliza la ruta existente `/asistente`, por lo que no requiere volver a desplegar el Worker si esa ruta ya funciona. La función **Crear propuesta de clase y recurso visual** sigue requiriendo desplegar la ruta ampliada `/asesoria-docente` para obtener el documento más extenso y el prompt educativo completo. La interfaz tiene una alternativa breve cuando esa ruta aún no fue publicada.
+- Para un humano digital con sincronización labial precisa y voz premium en tiempo real se necesitaría otra integración (servicio de avatar/TTS y autorización/credenciales), que no forma parte de esta implementación. Verificar funcionamiento en navegador y dispositivo real; las API de voz no tienen soporte uniforme.
+
+
 ## CLARIA docente: conversación, planificación y prompt para imagen didáctica (17/11/2026)
 
 - El perfil **Soy docente** ya no obliga a seleccionar grado, materia y tema en un formulario. Muestra el avatar de CLARIA y un chat para conversar libremente sobre una planificación, las características generales de un grupo y los apoyos DUA. Puede hacer preguntas de seguimiento; el historial reciente acompaña cada consulta. La ruta conversacional existente **`POST /asistente`** sigue activa.
