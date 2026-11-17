@@ -13,6 +13,7 @@
   <script src="js/asistente-global.js" defer></script>
   <script src="js/chat-config.js"></script>
   <script src="js/qom.js" defer></script>
+  <link rel="stylesheet" href="css/organizacion.css">
 </head>
 <body>
   <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -56,18 +57,21 @@
   </header>
   <div class="sitio-grid">
       <nav class="nav-principal" id="menu-principal" aria-label="Secciones principales">
-        <p class="nav-principal__titulo">Secciones</p>
-        <ul>
-          <li><a href="index.html"><span aria-hidden="true">⌂</span> Inicio</a></li>
-          <li><a href="material.html"><span aria-hidden="true">▤</span> Mi material</a></li>
-          <li><a href="docente.html"><span aria-hidden="true">✎</span> Espacio docente</a></li>
-          <li><a href="qom.html" aria-current="page"><span aria-hidden="true">▢</span> Chat intercultural</a></li>
-        </ul>
-        <div class="nav-principal__atajos">
-          <button type="button" class="boton" data-abrir-ajustes>⚙ Ajustes de accesibilidad</button>
-          <button type="button" class="boton" data-abrir-ayuda>❓ Necesito ayuda</button>
-        </div>
-      </nav>
+  <p class="nav-principal__titulo">Secciones</p>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="material.html?recorrido=comprender">Comprender</a></li>
+    <li><a href="material.html?recorrido=adaptar">Crear adaptaciones</a></li>
+    <li><a href="docente.html">Recursos docentes</a></li>
+  </ul>
+  <div class="nav-principal__atajos">
+    <details class="nav-extra">
+      <summary>Más herramientas</summary>
+      <div class="nav-extra__links"><a href="qom.html" aria-current="page">Chat intercultural <small>Traducción experimental, sujeta a revisión</small></a></div>
+    </details>
+    <button type="button" class="boton" data-abrir-ayuda>¿Necesitás ayuda?</button>
+  </div>
+</nav>
 
 <main id="contenido" tabindex="-1">
  <div class="contenedor qom chat-intercultural">
