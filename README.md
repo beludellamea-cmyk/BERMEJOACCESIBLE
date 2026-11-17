@@ -1,5 +1,15 @@
 # Bermejo Accesible
 
+## CLARIA Aula: un solo formulario docente (17 de noviembre de 2026)
+
+- En `claria.html?rol=docente` el docente puede escribir **tema** o subir PDF, foto o TXT, escoger **grado/año y materia**, confirmar que el material no incluye datos personales y presionar **Preparar mi clase y materiales**. No tiene que elegir entre «planificar», «adaptar» o «resumir» previamente.
+- El resultado aparece en la misma página, por secciones: clase desarrollada, texto adaptado, resumen, actividades, evaluación y apoyos DUA. Pictogramas ARASAAC e ilustraciones locales se muestran junto al texto adaptado cuando hay coincidencias (las palabras del material no se envían completas a ARASAAC).
+- Cada sección tiene **Modificar**, edición manual y un campo opcional para pedir cambios a CLARIA; la regeneración afecta solo el apartado seleccionado. Copiar todo, Word editable (texto) e impresión/PDF (contenido visual) están disponibles.
+- El nuevo endpoint Cloudflare **`POST /aula`** en `backend/chat-worker.js` genera todo junto y permite modificar una sección. **El frontend publicado en GitHub Pages no basta: actualizar por separado el Worker `bermejochat` en Cloudflare** copiando el archivo completo y haciendo Deploy; mantener `GEMINI_API_KEY` y `ALLOWED_ORIGIN` configurados. Si la ruta `/aula` todavía no existe, la pantalla informa la actualización pendiente sin inventar resultados.
+- Las explicaciones deben revisarse por el docente y los fundamentos normativos son referencias para lectura, no artículos verificados automáticamente ni asesoramiento legal. El DUA se trata como marco de diseño, no como ley.
+
+
+
 ## Diagnóstico de Gemini y CLARIA — 17/11/2026
 
 Si CLARIA dice «La IA no respondió», el Worker alcanzó la API de Gemini pero esta devolvió un error no exitoso; no asumir que se trata de un fallo del HTML. El archivo `backend/chat-worker.js` diferencia ahora errores 400 (configuración/modelo), 401/403 (clave/permisos), 404 (modelo), 429 (cuota), 5xx (servicio saturado) y tiempos de espera en `/docente` y `/asistente`, sin exponer secretos. Se optimizó el presupuesto de razonamiento para modelos Flash compatibles. Para habilitarlo hay que desplegar manualmente el Worker `bermejochat` desde este archivo, conservando los secretos. En Cloudflare: Workers & Pages → bermejochat → Observability → Logs → Live; ejecutar una prueba y consultar el mensaje de `Gemini status (...)` en registros. No enviar a terceros claves, identificadores o texto privado del material.
