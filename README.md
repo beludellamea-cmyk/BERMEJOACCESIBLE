@@ -1,5 +1,13 @@
 # Bermejo Accesible
 
+### NUMI · La aventura de las 4 operaciones (noviembre 2026)
+
+- Se incorporó el juego **NUMI** a `juegos/numi.html`, a partir del archivo HTML original proporcionado por la usuaria. La página funciona como juego autónomo, sin backend ni recursos externos obligatorios. Acceso en `juegos.html` mediante tarjeta propia.
+- Cuatro mundos: suma, resta, multiplicación y división. Cada uno propone tres misiones con tres niveles de dificultad, manipulación de objetos mediante clic/táctil o arrastre, consignas por voz, pistas, ejemplos, opciones de accesibilidad, pausas y recompensas. Los avances se guardan localmente en el navegador.
+- El juego se abre en una pestaña nueva para no interferir con la interfaz de Bermejo Accesible; su estilo visual se mantiene independiente. La experiencia NO usa IA en tiempo real para generar las operaciones.
+- No requiere nueva publicación del Worker de Cloudflare. Para próximos juegos, incorporar otro HTML autocontenido en `juegos/` o enlace externo y una tarjeta con objetivos pedagógicos en `juegos.html`.
+
+
 ## Juegos y experiencias interactivas (17/11/2026)
 
 - Nueva sección `juegos.html`, con identidad nocturna de Bermejo Accesible, accesible desde la **portada**, el **menú principal** y **Explorar más**.
