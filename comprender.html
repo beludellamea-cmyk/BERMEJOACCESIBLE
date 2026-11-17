@@ -15,7 +15,9 @@
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
   <script src="js/ilustraciones.js" defer></script>
+  <script src="js/pictogramas-arasaac.js" defer></script>
   <script src="js/material.js" defer></script>
+  <script src="js/demo-comprender.js" defer></script>
   <script src="js/descargar-material.js" defer></script>
   <script src="js/chat-config.js"></script>
   <script src="js/ia-material.js" defer></script>
@@ -73,7 +75,12 @@
     <div class="contenedor">
       <div class="encabezado-pagina">
         <h1>Comprender</h1>
-        <p class="intro">Cargá un texto, PDF o foto y elegí cómo acceder a la información.</p>
+        <p class="intro">Subí un material una sola vez. Después elegí cómo querés leerlo: escucharlo, dividirlo en partes, verlo con imágenes o acompañarlo con pictogramas.</p>
+        <div class="demo-comprender" aria-labelledby="demo-titulo">
+          <div><p class="demo-etiqueta">DEMOSTRACIÓN GUIADA</p><h2 id="demo-titulo">Un texto, cuatro maneras de comprender</h2>
+          <p>Probá con «El ciclo del agua» para ver cómo cambia la presentación sin cambiar el contenido.</p></div>
+          <button type="button" class="boton boton--principal" id="demo-comprender">Probar una demostración <span aria-hidden="true">→</span></button>
+        </div>
       </div>
       <ol class="indicador" aria-label="Pasos">
         <li id="ind-1" aria-current="step"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V5m-4.5 4.5L12 5l4.5 4.5M5 19h14"/></svg>Cargar</li>
@@ -215,6 +222,7 @@
 
       <section class="paso" id="paso-leer" aria-labelledby="t-leer" hidden>
         <h2 id="t-leer" tabindex="-1">Elegí cómo acceder a la información</h2>
+        <p class="ayuda-lectura">El contenido es el mismo. Tocá una opción y observá cómo cambia su presentación. Podés cambiar de modo todas las veces que quieras.</p>
         
         <div class="accesos-lectura" role="group" aria-label="Elegí cómo acceder al material">
           <button type="button" class="boton acceso-lectura" data-modo-rapido="voz" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10v4h4l5 4V6l-5 4H3Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><span>Escuchar</span></button>
@@ -349,12 +357,18 @@
         <section class="panel controles" id="controles-pictogramas" aria-labelledby="t-c-pictogramas" hidden>
           <h3 id="t-c-pictogramas">Texto con pictogramas</h3>
           <div class="aviso">
-            <p><strong>Antes de buscar:</strong> para encontrar los pictogramas se envían a ARASAAC hasta 4 palabras sueltas por párrafo (no el texto completo ni tu archivo). Necesitás conexión a internet.</p>
+            <p><strong>Antes de buscar:</strong> se consultan únicamente palabras sueltas en el catálogo de ARASAAC, no el texto completo ni tu archivo. Elegí la cantidad de apoyos visuales y después tocá «Buscar pictogramas». Necesitás conexión a internet.</p>
           </div>
-          <p>Elegimos palabras de cada párrafo de forma automática. Solo mostramos un pictograma cuando ARASAAC tiene uno con esa misma palabra. Si no hay, queda solo el texto.</p>
+          <p>Buscamos palabras importantes y sus variantes más habituales. Si no encontramos un pictograma adecuado, dejamos el texto y podés agregar uno manualmente.</p>
+          <fieldset class="pictos-densidad"><legend>¿Cuántos apoyos visuales querés ver?</legend>
+            <label><input type="radio" name="pictos-densidad" value="3"> Pocos (hasta 3 por bloque)</label>
+            <label><input type="radio" name="pictos-densidad" value="6" checked> Equilibrados (hasta 6)</label>
+            <label><input type="radio" name="pictos-densidad" value="9"> Muchos (hasta 9)</label>
+          </fieldset>
           <div class="fila-botones">
             <button type="button" class="boton boton--principal" id="buscar-pictos">Buscar pictogramas en ARASAAC</button>
             <button type="button" class="boton" id="cancelar-pictos" hidden>Detener la búsqueda</button>
+            <button type="button" class="boton" id="agregar-picto">Agregar un pictograma manualmente</button>
           </div>
           <p class="estado-modo" id="pictos-estado" role="status" aria-live="polite"></p>
           <p class="credito">Pictogramas: Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: CC BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
