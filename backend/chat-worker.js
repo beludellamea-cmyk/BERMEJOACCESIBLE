@@ -199,11 +199,26 @@ async function registrarErrorIA(result, env) {
   try { console.error('Gemini ' + result.status + ' (' + (env.GEMINI_MODEL || 'gemini-2.5-flash') + '): ' + (await result.text()).slice(0, 400)); } catch (_) {}
 }
 
+/* Lee el texto de la respuesta de Gemini: ignora las partes de «razonamiento», quita vallas de código
+   y recorta desde la primera «{» hasta la última «}». Devuelve null si no hay JSON utilizable. */
+function leerJSONIA(salida, env) {
+  const cand = salida && salida.candidates && salida.candidates[0];
+  const partes = (cand && cand.content && cand.content.parts) || [];
+  let bruto = partes.filter(x => x && !x.thought).map(x => x.text || '').join('').trim();
+  bruto = bruto.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+  const a = bruto.indexOf('{'), b = bruto.lastIndexOf('}');
+  if (a >= 0 && b > a) bruto = bruto.slice(a, b + 1);
+  try { return JSON.parse(bruto); } catch (_) {
+    try { console.error('Gemini JSON inválido (' + (env.GEMINI_MODEL || 'gemini-2.5-flash') + ', finishReason=' + (cand && cand.finishReason) + ', largo=' + bruto.length + '): ' + bruto.slice(0, 200) + ' … ' + bruto.slice(-120)); } catch (__) {}
+    return null;
+  }
+}
+
 async function laboratorio(data, env, permitido) {
   const p = labValidarPedido(data);
   if (p.error) return responder({ error: p.error }, 400, permitido);
   const modelo = env.GEMINI_MODEL || 'gemini-2.5-flash';
-  const generacion = configGeneracion(env, { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 8000 }, true);
+  const generacion = configGeneracion(env, { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 16000 }, true);
   const cuerpo = {
     systemInstruction: { parts: [{ text: labInstruccion(p) }] },
     contents: [{ role: 'user', parts: [{ text: JSON.stringify({ materia: p.materia, material: p.texto }) }] }],
@@ -221,9 +236,8 @@ async function laboratorio(data, env, permitido) {
     } finally { clearTimeout(timer); }
     if (!result.ok) { await registrarErrorIA(result, env); } if (!result.ok) return responder({ error: result.status === 429 ? 'El servicio está ocupado; probá más tarde.' : 'La IA no respondió. Revisá el servicio o el modelo.' }, result.status === 429 ? 429 : 502, permitido);
     const salida = await result.json();
-    const bruto = salida.candidates?.[0]?.content?.parts?.map(x => x.text || '').join('') || '';
-    let propuesta;
-    try { propuesta = JSON.parse(bruto); } catch (_) { return responder({ error: 'La IA devolvió una respuesta incompleta. Volvé a intentar o usá un texto más corto.' }, 502, permitido); }
+    const propuesta = leerJSONIA(salida, env);
+    if (!propuesta) return responder({ error: 'La IA devolvió una respuesta incompleta. Volvé a intentar o usá un texto más corto.' }, 502, permitido);
     const limpio = labSanear(propuesta, p);
     if (!limpio.bloques.length || !limpio.actividades.length) return responder({ error: 'No se obtuvo una propuesta completa. Volvé a intentar.' }, 502, permitido);
     return responder(limpio, 200, permitido);
@@ -292,9 +306,8 @@ export default {
         }); } finally { clearTimeout(timer); }
         if (!result.ok) { await registrarErrorIA(result, env); } if (!result.ok) return responder({error:result.status===429?'El servicio está ocupado; probá más tarde.':'La IA no respondió. Revisá el servicio o el modelo.'},result.status===429?429:502,permitido);
         const salida = await result.json();
-        const bruto = salida.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('') || '';
-        let propuesta;
-        try { propuesta = JSON.parse(bruto); } catch (_) { return responder({error:'La IA devolvió una respuesta incompleta. Volvé a intentar.'},502,permitido); }
+        const propuesta = leerJSONIA(salida, env);
+        if (!propuesta) return responder({error:'La IA devolvió una respuesta incompleta. Volvé a intentar.'},502,permitido);
         if (!actividad) {
           if (typeof propuesta.texto !== 'string' || propuesta.texto.trim().length < 20) return responder({error:'No se obtuvo una adaptación válida.'},502,permitido);
           return responder({texto:propuesta.texto.trim().slice(0,14000),nota:typeof propuesta.nota==='string'?propuesta.nota.slice(0,300):''},200,permitido);
@@ -342,9 +355,8 @@ export default {
       } finally {clearTimeout(timer);}
       if (!result.ok) { await registrarErrorIA(result, env); } if (!result.ok) return responder({error:result.status===429?'El servicio está ocupado; probá más tarde.':'La IA no respondió. Revisá el servicio o el modelo configurado.'},result.status===429?429:502,permitido);
       const salida = await result.json();
-      const bruto = salida.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('') || '';
-      let traduccion;
-      try { traduccion = JSON.parse(bruto); } catch (_) { return responder({error:'La IA devolvió una respuesta que no se pudo leer. Reformulá el mensaje.'},502,permitido); }
+      const traduccion = leerJSONIA(salida, env);
+      if (!traduccion) return responder({error:'La IA devolvió una respuesta que no se pudo leer. Reformulá el mensaje.'},502,permitido);
       if (typeof traduccion.traduccion !== 'string' || !traduccion.traduccion.trim()) return responder({error:'No se obtuvo una propuesta de traducción. Probá con una frase más corta.'},502,permitido);
       return responder({traduccion:traduccion.traduccion.trim().slice(0,1500),nota:typeof traduccion.nota==='string'?traduccion.nota.slice(0,250):''},200,permitido);
     } catch (_) { return responder({error:'No se pudo contactar el servicio de IA. Intentá de nuevo.'},502,permitido); }
