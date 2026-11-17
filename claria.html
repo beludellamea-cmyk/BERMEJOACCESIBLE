@@ -128,7 +128,10 @@
         <p id="asesoria-voz-estado" role="status" aria-live="polite">La conversación por voz está lista para comenzar.</p>
         <p id="asesoria-voz-captura" class="claria-voz__captura" aria-live="off"></p>
         <button type="button" id="asesoria-modo-voz" class="claria-voz__iniciar" aria-pressed="false">🎙️ Conversar con CLARIA</button>
-        <p class="claria-voz__ayuda">Activá la autorización de IA que está debajo del chat. El micrófono necesita permiso del navegador y el reconocimiento puede procesarse mediante un servicio de voz externo. Para detenerlo, tocá el mismo botón.</p>
+      <label class="asesoria-permiso"><input type="checkbox" id="asesoria-permiso">
+        <span>Autorizo enviar esta conversación a la IA. No incluiré nombres ni datos que identifiquen a estudiantes.</span>
+      </label>
+        <p class="claria-voz__ayuda">El reconocimiento puede procesar el audio en un servicio externo del navegador. Para detener la escucha, tocá el mismo botón. El contenido de la conversación también se envía a la IA de CLARIA.</p>
       </div>
     </section>
     <div id="asesoria-mensajes" class="asesoria-mensajes" role="log" aria-label="Conversación docente con CLARIA" aria-live="polite" aria-relevant="additions text"></div>
@@ -138,7 +141,7 @@
       <button type="button" data-ejemplo="Quiero transformar una explicación en una actividad visual, no en una imagen decorativa. ¿Cómo lo podemos hacer?">Crear un recurso visual significativo</button>
     </div>
     <form id="asesoria-form" class="asesoria-form">
-      <label for="asesoria-texto" class="asesoria-form__label">Escribile a CLARIA como le hablarías a una colega</label>
+      <label for="asesoria-texto" class="asesoria-form__label">O escribile a CLARIA como le hablarías a una colega</label>
       <div class="asesoria-form__fila">
         <textarea id="asesoria-texto" rows="3" maxlength="1500" placeholder="Por ejemplo: Tengo 25 estudiantes de 3.º grado. Quiero enseñar multiplicación y necesito distintas maneras de explicar y evaluar…" required></textarea>
         <button type="submit" class="asesoria-form__enviar" id="asesoria-enviar">Enviar <span aria-hidden="true">➜</span></button>
@@ -151,9 +154,7 @@
         <label for="asesoria-fuente">O pegá el texto aquí y corregilo si hace falta</label>
         <textarea id="asesoria-fuente" rows="5" maxlength="6000" placeholder="Este material podrá usarse como fuente de la planificación y su adaptación."></textarea>
       </details>
-      <label class="asesoria-permiso"><input type="checkbox" id="asesoria-permiso">
-        <span>Autorizo enviar esta conversación a la IA. No incluiré nombres ni datos que identifiquen a estudiantes.</span>
-      </label>
+
       <p class="asesoria-privacidad">Podés describir necesidades de apoyo sin identificar a ninguna persona. La conversación no se guarda en la página: si la cerrás, se pierde, salvo que la descargues.</p>
       <p id="asesoria-estado" class="asesoria-estado" role="status" aria-live="polite"></p>
     </form>
