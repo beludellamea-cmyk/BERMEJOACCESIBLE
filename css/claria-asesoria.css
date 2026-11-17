@@ -183,3 +183,155 @@ html[data-contraste="alto"] .claria-voz__mensaje>p,html[data-contraste="alto"] .
 .asesoria-conexion__boton:focus-visible{outline:3px solid #ffe7a4;outline-offset:3px}
 .asesoria-conexion__estado{color:#d2eaf1;font-size:.86rem;line-height:1.5;margin:.5rem 0 .2rem;overflow-wrap:anywhere}
 @media print{.pagina-claria .asesoria-conexion{display:none!important}}
+
+
+/* CLARIA CLEAN UI - v8
+   Menos estímulos simultáneos, tipografía legible, controles principales destacados.
+   La funcionalidad y la vista de impresión se conservan. */
+@media screen {
+  .pagina-claria .contenedor{max-width:68rem}
+  .claria-pagina{padding:clamp(.7rem,1.6vw,1.2rem) 0 3rem}
+  .claria-presentacion{
+    min-height:0;grid-template-columns:minmax(0,1fr) 10rem;
+    align-items:center;gap:1rem;margin-bottom:1.05rem
+  }
+  .claria-presentacion__texto{padding:.3rem 0}
+  .claria-presentacion h1{font-size:clamp(2.45rem,4.6vw,3.9rem);line-height:1.1;margin:.25rem 0 .45rem}
+  .claria-sello{font-size:.87rem;letter-spacing:.06em;margin:0 0 .4rem}
+  .claria-subtitulo{font-size:clamp(1.08rem,1.6vw,1.23rem);line-height:1.5;color:#e6f8fd;margin:0 0 .35rem;max-width:45ch}
+  .claria-volver{display:inline-block;font-size:.98rem;color:#a8eff2;padding:.4rem 0}
+  .claria-presentacion__visual{min-height:8rem;max-height:10rem;overflow:visible}
+  .claria-personaje{max-width:9.5rem;max-height:9.5rem;filter:drop-shadow(0 7px 15px #07162d9b)}
+  .claria-orbita{width:9rem}.claria-orbita--dos{width:10rem}
+  .claria-pulso{display:none}
+  .claria-asistente{background:linear-gradient(155deg,#0e2a3f,#10253a);box-shadow:0 12px 36px #020b1b85;border-color:#4b7e91;border-radius:1.2rem}
+  .claria-asistente__cabecera{padding:1.25rem clamp(.9rem,2.5vw,1.5rem) .25rem}
+  .claria-asistente__cabecera h2{font-size:clamp(1.45rem,2.7vw,1.8rem);color:#f2ffff}
+  .claria-modo-etiqueta{display:none}
+  .claria-roles{gap:.7rem;margin:.65rem clamp(.9rem,2.5vw,1.5rem) 1rem}
+  .claria-rol{min-height:4.2rem;padding:.85rem 1rem;background:#15374b;border:1px solid #4d8697;border-radius:13px}
+  .claria-rol strong{font-size:1.1rem}
+  .claria-rol small{display:none}
+  .claria-rol[aria-pressed="true"]{border-color:#82e8e9;background:#1a5164;box-shadow:inset 0 0 0 1px #67dcdf38}
+  .claria-rol:focus-visible{outline:3px solid #fff0a1;outline-offset:3px}
+  .claria-asesoria{margin:0 clamp(.7rem,2vw,1.15rem) 1.15rem}
+  .asesoria-intro{margin:0 0 .9rem}
+  .asesoria-intro h3{font-size:clamp(1.4rem,2.5vw,1.8rem);line-height:1.26;margin:.1rem 0 .24rem}
+  .asesoria-intro p:not(.claria-paso){font-size:1.06rem;line-height:1.5;color:#c6e6ef;max-width:65ch}
+  .asesoria-chat{background:#0b263a;border-color:#518295;border-radius:18px;box-shadow:0 10px 28px #030c2485}
+  .asesoria-chat__encabezado{background:#15384e;padding:.75rem clamp(.85rem,2.3vw,1.2rem)}
+  .asesoria-chat__encabezado>img{display:none}
+  .asesoria-chat__encabezado strong{font-size:1.14rem}
+  .asesoria-chat__encabezado span{font-size:.97rem;color:#cee9f0}
+  .asesoria-escuchar{font-size:.98rem;min-height:2.8rem;border-color:#7fb5c1;background:#214e62;color:#f0ffff}
+  .claria-voz{grid-template-columns:clamp(7.4rem,16vw,9.8rem) minmax(0,1fr);gap:1.1rem;padding:1.1rem clamp(.85rem,2.4vw,1.4rem);background:linear-gradient(125deg,#143249,#203a56)}
+  .claria-voz__retrato{max-width:9.2rem}
+  .claria-voz__mensaje h4{font-size:clamp(1.45rem,2.7vw,1.85rem);margin:0 0 .38rem}
+  .claria-voz__mensaje>p:nth-of-type(1){font-size:1.07rem;line-height:1.48;margin:.2rem 0 .55rem;font-weight:550;color:#e3fbff}
+  .claria-voz__captura{font-size:1rem}
+  .claria-voz__iniciar{font-size:1.1rem;min-height:3.3rem;padding:.7rem 1.2rem;margin:.35rem 0 .6rem;border-radius:12px}
+  .asesoria-permiso{font-size:.97rem;line-height:1.48;color:#e2f2f6;margin:.35rem 0 .55rem}
+  .asesoria-permiso input{width:1.25rem;height:1.25rem}
+  .asesoria-diagnostico,.asesoria-ayuda-privacidad,.asesoria-privacidad-detalle{margin:.45rem 0;padding:0}
+  .asesoria-diagnostico summary,.asesoria-ayuda-privacidad summary,.asesoria-privacidad-detalle summary{
+    display:list-item;cursor:pointer;font-size:.97rem;line-height:1.5;font-weight:650;
+    color:#a4e5ee;padding:.3rem .15rem
+  }
+  .asesoria-diagnostico[open],.asesoria-ayuda-privacidad[open]{border-top:1px solid #527b8d;padding-top:.45rem;margin-top:.65rem}
+  .asesoria-conexion{margin:.45rem 0;padding:.75rem;border-color:#608ea0;background:#0d2b40}
+  .asesoria-conexion__boton{font-size:1rem;min-height:2.8rem}
+  .asesoria-conexion__estado,.claria-voz__ayuda{font-size:.98rem!important;line-height:1.52;color:#d1e6ee}
+  .asesoria-mensajes{min-height:10rem;max-height:31rem;gap:1rem;padding:clamp(1rem,2.5vw,1.4rem)}
+  .asesoria-burbuja{max-width:min(96%,60rem);gap:.65rem}
+  .asesoria-burbuja__cuerpo{padding:.85rem 1.05rem;border-radius:6px 16px 16px 16px}
+  .asesoria-burbuja__cuerpo strong{font-size:.94rem;margin:0 0 .26rem}
+  .asesoria-burbuja__cuerpo p{font-size:1.07rem;line-height:1.63;color:#f1fcff}
+  .asesoria-burbuja__repetir{font-size:.98rem;min-height:2.7rem;padding:.55rem .8rem}
+  .asesoria-ejemplos{display:block;padding:.7rem clamp(.9rem,2.5vw,1.35rem);margin:0;background:#102c3e;border-top:1px solid #416b7f;border-bottom:1px solid #416b7f}
+  .asesoria-ejemplos summary{color:#abedf1;font-size:1.03rem;line-height:1.5;font-weight:700;cursor:pointer}
+  .asesoria-ejemplos__botones{display:flex;flex-wrap:wrap;gap:.6rem;padding:.85rem 0 .1rem}
+  .asesoria-ejemplos button{font-size:.98rem;min-height:2.9rem;border-radius:11px}
+  .asesoria-ejemplos[hidden]{display:none!important}
+  .asesoria-form{padding:1rem clamp(.9rem,2.5vw,1.35rem);background:#102b3f}
+  .asesoria-form__label{font-size:1.08rem;font-weight:750;margin:0 0 .55rem}
+  .asesoria-form textarea{font-size:1.08rem;line-height:1.6;min-height:5.2rem;border-color:#7aabb9;background:#091f2f;border-radius:12px}
+  .asesoria-form__enviar{font-size:1.06rem;min-height:3.1rem;min-width:6.4rem}
+  .asesoria-form ::placeholder{color:#b9d3dd;opacity:1}
+  .asesoria-adjunto{border-top:0;margin:.45rem 0}
+  .asesoria-adjunto summary{font-size:1rem;line-height:1.5;padding:.25rem 0;font-weight:700;color:#a8ecf1}
+  .asesoria-adjunto label{font-size:1.01rem}
+  .asesoria-adjunto textarea{font-size:1.04rem;line-height:1.58}
+  .asesoria-adjunto__estado{font-size:.98rem}
+  .asesoria-privacidad{font-size:1rem;line-height:1.54;color:#e0edf4;margin:.35rem 0}
+  .asesoria-estado{font-size:1rem;line-height:1.5;color:#a5f1ed;margin:.75rem 0 .15rem;min-height:1.5rem}
+  .asesoria-acciones{display:flex;align-items:start;gap:.8rem;padding:1rem clamp(.9rem,2.5vw,1.35rem);background:#0c273a}
+  .asesoria-acciones__crear{background:#71e1e4!important;color:#082d42!important;border:1px solid #adf0f2!important;font-size:1.06rem!important;min-height:3.3rem!important;padding:.75rem 1.2rem!important}
+  .asesoria-acciones__crear:disabled{background:#426879!important;color:#e3f0f4!important;border:1px solid #709aab!important}
+  .asesoria-acciones__menu{margin-left:auto;min-width:0;padding:.24rem 0}
+  .asesoria-acciones__menu summary,.asesoria-entrega__opciones summary{font-size:1rem;font-weight:700;line-height:1.6;color:#c5eff3;cursor:pointer;padding:.4rem .5rem}
+  .asesoria-acciones__opciones,.asesoria-entrega__opciones-botones{display:flex;flex-wrap:wrap;gap:.55rem;margin:.55rem 0}
+  .asesoria-acciones__secundaria{font-size:1rem!important;min-height:2.9rem!important}
+  .asesoria-entrega{border-color:#5290a4;margin:1.3rem 0 0;padding:clamp(1rem,2.8vw,1.6rem);background:#132e41}
+  .asesoria-entrega__encabezado h3{font-size:clamp(1.55rem,2.8vw,2.1rem)}
+  .asesoria-entrega__encabezado p:not(.claria-paso){font-size:1.06rem;color:#d2e7ef;line-height:1.54}
+  .asesoria-entrega__herramientas{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+  .asesoria-entrega__herramientas button,.asesoria-imagen__acciones button{font-size:1rem;min-height:3rem}
+  #asesoria-word{background:#66dfdf;color:#092f40;border:1px solid #8df2ee;font-weight:800}
+  .asesoria-documento label,.asesoria-imagen label{font-size:1.08rem;margin:.8rem 0 .5rem}
+  .asesoria-documento label span,.asesoria-imagen label span{font-size:.99rem;color:#c8dce6}
+  .asesoria-documento textarea,.asesoria-imagen textarea{font-size:1.08rem;line-height:1.64;background:#081f2e;border-color:#6b9dab}
+  .asesoria-imagen-contenedor{margin:1rem 0;padding:.8rem 1rem;border-radius:14px;background:#192f51;border:1px solid #817eb3}
+  .asesoria-imagen-contenedor>summary{font-size:1.15rem;font-weight:800;color:#ecdcff;line-height:1.45;cursor:pointer;padding:.25rem .15rem}
+  .asesoria-imagen{margin:.75rem 0 0;padding:0;background:transparent;border:0}
+  .asesoria-imagen__encabezado h4{font-size:1.4rem}
+  .asesoria-imagen__etiqueta{font-size:.98rem;color:#ece3ff}
+  .asesoria-imagen__aviso{font-size:1rem;color:#dfebf2}
+  .asesoria-fuentes summary{font-size:1.02rem}
+  .claria-aviso{margin:1rem clamp(.9rem,2.5vw,1.5rem);padding:.55rem .8rem;background:transparent;border:1px solid #457284;border-radius:11px}
+  .claria-aviso summary{font-size:1rem;font-weight:700;color:#bdebf1;cursor:pointer}
+  .claria-aviso p{font-size:1rem;line-height:1.55;color:#d8e7ed;margin:.65rem 0 .2rem}
+  .claria-mensaje__texto,.claria-form textarea{font-size:1.07rem;line-height:1.6}
+  .claria-estado,.claria-privacidad,.claria-consentimiento{font-size:1rem;line-height:1.5}
+  .claria-atajos button,.claria-boton-liviano,.claria-enviar{font-size:1rem;min-height:2.8rem}
+  .pagina-claria :is(.asesoria-diagnostico,.asesoria-ayuda-privacidad,.asesoria-privacidad-detalle,.asesoria-ejemplos,.asesoria-acciones__menu,.asesoria-entrega__opciones,.asesoria-imagen-contenedor,.claria-aviso) > summary:focus-visible{
+    outline:3px solid #fff1a8;outline-offset:3px;border-radius:6px
+  }
+}
+@media screen and (max-width:43rem){
+  .claria-presentacion{display:block;margin-bottom:.65rem}
+  .claria-presentacion__visual{display:none}
+  .claria-presentacion h1{font-size:clamp(2.15rem,8vw,3.15rem)}
+  .claria-presentacion .claria-sello{font-size:.85rem}
+  .claria-asistente__cabecera{padding:.95rem .85rem .2rem}
+  .claria-asistente__cabecera h2{font-size:1.55rem}
+  .claria-roles{margin:.65rem .65rem .9rem}
+  .claria-rol{min-height:3.8rem;padding:.7rem .5rem;gap:.45rem;justify-content:center}
+  .claria-rol svg{display:none}
+  .claria-rol strong{font-size:1.02rem}
+  .claria-asesoria{margin:0 .65rem 1rem}
+  .asesoria-intro h3{font-size:1.45rem}
+  .asesoria-chat__encabezado{padding:.7rem .75rem}
+  .asesoria-chat__encabezado span{font-size:.9rem}
+  .asesoria-escuchar{font-size:.91rem;min-height:2.8rem;padding:.45rem .65rem}
+  .claria-voz{grid-template-columns:5.5rem minmax(0,1fr);gap:.55rem;padding:.9rem .75rem}
+  .claria-voz__retrato{max-width:5.5rem}
+  .claria-voz__mensaje h4{font-size:1.48rem}
+  .claria-voz__iniciar{width:100%;font-size:1.04rem;white-space:normal}
+  .asesoria-permiso{font-size:.98rem}
+  .asesoria-mensajes{padding:.9rem .65rem}
+  .asesoria-burbuja__avatar{width:2.05rem;height:2.05rem}
+  .asesoria-burbuja__cuerpo{padding:.75rem .85rem}
+  .asesoria-burbuja__cuerpo p{font-size:1.04rem}
+  .asesoria-ejemplos{padding:.72rem .75rem}
+  .asesoria-form{padding:.9rem .75rem}
+  .asesoria-form__fila{gap:.6rem}
+  .asesoria-form__enviar{align-self:stretch;min-height:3.15rem}
+  .asesoria-acciones{padding:.8rem .75rem}
+  .asesoria-acciones__crear{flex:1 1 100%;width:100%}
+  .asesoria-acciones__menu{margin-left:0}
+  .asesoria-entrega{padding:1rem}
+  .claria-aviso{margin:.8rem}
+}
+@media screen and (prefers-reduced-motion:reduce){
+ .claria-rol,.claria-presentacion__visual{transition:none!important}
+}
