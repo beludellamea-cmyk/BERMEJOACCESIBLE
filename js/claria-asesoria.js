@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded',function(){
       vozVersion=0,vozRespondio=false,transcripcionFinal='',vozPermisoInicial=false;
   const btnVoz=$('asesoria-modo-voz'),vozEstado=$('asesoria-voz-estado'),vozCaptura=$('asesoria-voz-captura'),vozTarjeta=$('asesoria-voz-tarjeta');
   const Reconocimiento=window.SpeechRecognition||window.webkitSpeechRecognition;
-  const saludo='¡Hola, profe! Soy CLARIA. Contame qué estás pensando para tu clase. Podés decirme el grado, la materia, qué querés enseñar y cómo es tu grupo. No hace falta que tengas todo resuelto: podemos pensar alternativas juntas. ¿Por dónde empezamos?';
+  const saludo='¡Hola, profe! Soy CLARIA. Contame qué querés enseñar y pensamos la clase juntos. ¿Por dónde empezamos?';
   function textoSeguro(t){return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\b(?:dni|documento|celular|telefono|teléfono|direccion|dirección)\s*[:#]?\s*[\d\w.-]{6,}|\b\d{8,11}\b/i.test(t);}
   function status(t){estado.textContent=t;}
   function setOcupado(flag,t){
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded',function(){
       bubble('modelo',respuesta);
       status(propuestaLista?'Podés seguir conversando y luego actualizar la propuesta con lo acordado.':'Si la idea te sirve, tocá «Crear propuesta de clase y recurso visual». También podemos seguir pensando.');
       document.getElementById('asesoria-ejemplos').hidden=true;
-      crear.textContent=propuestaLista?'✨ Actualizar propuesta con la conversación':'✨ Crear propuesta de clase y recurso visual';
+      crear.textContent=propuestaLista?'Actualizar mi clase':'Crear clase y recurso visual';
     }catch(e){
       historial=anterior.concat([{rol:'usuario',texto:pregunta}]).slice(-24);
       bubble('modelo','No pude conectarme a la IA esta vez. Tu consulta sigue acá para que la retomes. Podés volver a intentar cuando el servicio responda.',false);
@@ -376,9 +376,10 @@ document.addEventListener('DOMContentLoaded',function(){
     entrega.hidden=true;plan.value='';uso.value='';prompt.value='';
     entrada.value='';fuente.value='';archivo.value='';archivoEstado.textContent='El archivo se lee en tu navegador. Revisá el texto antes de enviarlo a la IA.';permiso.checked=false;
     estadoIA.textContent='Conexión todavía no verificada. Podés comprobarla con una consulta breve.';
-    crear.disabled=true;crear.textContent='✨ Crear propuesta de clase y recurso visual';
+    crear.disabled=true;crear.textContent='Crear clase y recurso visual';
     document.getElementById('asesoria-ejemplos').hidden=false;
-    status('Escribí con tus palabras. CLARIA puede sugerir opciones y hacerte una pregunta a la vez.');
+    document.getElementById('asesoria-ejemplos').open=false;
+    status('Cuando quieras, escribí o hablá con CLARIA.');
   }
   $('asesoria-reiniciar').addEventListener('click',reset);
   function transcript(){
@@ -435,7 +436,7 @@ document.addEventListener('DOMContentLoaded',function(){
       // No se reemplazan ediciones manuales sin aviso: las actualizaciones se solicitan con el botón.
       plan.value=respuesta.plan;uso.value=respuesta.usoImagen||'Revisá qué tienen que observar y hacer los estudiantes con la imagen.';
       prompt.value=respuesta.promptImagen;propuestaLista=true;numeroDeRevision++;
-      entrega.hidden=false;crear.textContent='✨ Actualizar propuesta con la conversación';
+      entrega.hidden=false;crear.textContent='Actualizar mi clase';
       status(respuesta.breve?'Versión breve con el servicio actual. Para obtener una planificación más completa, publicá el Worker actualizado en Cloudflare.':'Propuesta y prompt listos. Podés editar ambos y descargarlos.');
       entrega.scrollIntoView({block:'start',behavior:'smooth'});
     }catch(e){
