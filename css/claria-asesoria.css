@@ -1,0 +1,87 @@
+/* CLARIA | Conversación docente, materiales y prompt con finalidad pedagógica */
+.claria-asesoria[hidden],.asesoria-entrega[hidden],.claria-conversacion[hidden],.asesoria-ejemplos[hidden]{display:none!important}
+.claria-asesoria{margin:0 clamp(.8rem,2.5vw,1.6rem) clamp(1.1rem,3vw,2rem)}
+.asesoria-intro{margin:.25rem 0 1rem}
+.asesoria-intro h3{font:750 clamp(1.6rem,3.3vw,2.3rem)/1.2 "Space Grotesk",system-ui,sans-serif;letter-spacing:-.04em;color:#f0ffff;margin:.2rem 0 .45rem}
+.asesoria-intro p:not(.claria-paso){margin:.2rem 0 0;color:#bfdeea;max-width:72ch;font-size:1rem;line-height:1.6}
+.asesoria-chat{border-radius:22px;overflow:hidden;border:1px solid #4c8197;background:linear-gradient(155deg,#112f44,#0b2236 72%);box-shadow:0 15px 34px #020d246b}
+.asesoria-chat__encabezado{display:flex;align-items:center;gap:.85rem;background:#173b53;border-bottom:1px solid #4d758b;padding:.75rem clamp(.8rem,2vw,1.2rem)}
+.asesoria-chat__encabezado>img{width:3.9rem;height:3.9rem;border-radius:50%;object-fit:cover;object-position:top;background:#4e5b92;border:2px solid #68e4ea}
+.asesoria-chat__encabezado>div{display:flex;flex:1;min-width:0;flex-direction:column;gap:.1rem}
+.asesoria-chat__encabezado strong{color:#f7ffff;font:800 1.18rem "Space Grotesk",system-ui,sans-serif}
+.asesoria-chat__encabezado span{color:#b0d4e2;font-size:.82rem}
+.asesoria-escuchar{flex:none;border:1px solid #6995a5;border-radius:10px;background:#254e62;color:#eaffff;padding:.55rem .75rem;font:700 .84rem "Atkinson Hyperlegible",system-ui,sans-serif;cursor:pointer}
+.asesoria-escuchar[aria-pressed="true"]{border-color:#75ecea;background:#205e6a}
+.asesoria-mensajes{max-height:32rem;min-height:12rem;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:.9rem;padding:clamp(.85rem,2.6vw,1.45rem);scrollbar-color:#5497aa transparent}
+.asesoria-burbuja{display:flex;gap:.65rem;align-items:flex-start;max-width:min(95%,60rem)}
+.asesoria-burbuja--usuario{align-self:flex-end;flex-direction:row-reverse}
+.asesoria-burbuja__avatar{display:grid;flex:none;place-items:center;width:2.55rem;height:2.55rem;border-radius:50%;font-size:1.3rem;color:#b8f1f5;background:#1b4b5c;border:1px solid #5495aa}
+.asesoria-burbuja__avatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%}
+.asesoria-burbuja__cuerpo{max-width:100%;min-width:0;background:#1b3d51;border:1px solid #47778d;border-radius:5px 16px 16px 16px;padding:.78rem 1rem;color:#e7f7fb}
+.asesoria-burbuja--usuario .asesoria-burbuja__cuerpo{background:#204e60;border-color:#62b6c0;border-radius:16px 5px 16px 16px}
+.asesoria-burbuja__cuerpo strong{display:block;font:750 .79rem "Space Grotesk",system-ui,sans-serif;color:#95f0ee;margin:0 0 .3rem}
+.asesoria-burbuja--usuario .asesoria-burbuja__cuerpo strong{color:#e2eaff}
+.asesoria-burbuja__cuerpo p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;line-height:1.64;font-size:.96rem;font-weight:450}
+.asesoria-ejemplos{display:flex;flex-wrap:wrap;gap:.5rem;padding:0 clamp(.85rem,2.6vw,1.45rem) 1rem}
+.asesoria-ejemplos button{border:1px solid #578fa4;border-radius:999px;background:#173f54;color:#a9f3ed;cursor:pointer;min-height:2.55rem;padding:.52rem .82rem;font:700 .83rem "Atkinson Hyperlegible",system-ui,sans-serif}
+.asesoria-ejemplos button:hover{background:#236279}
+.asesoria-form{border-top:1px solid #36647a;background:#0e2b41;padding:clamp(.8rem,2vw,1.2rem)}
+.asesoria-form__label{display:block;margin:0 0 .45rem;color:#e4f5f9;font-size:.96rem;font-weight:750}
+.asesoria-form__fila{display:flex;gap:.55rem;align-items:stretch}
+.asesoria-form textarea{flex:1;min-width:0;width:100%;max-height:13rem;resize:vertical;border:1px solid #5d9cae;border-radius:12px;background:#081d2d;color:#fff;font:500 1rem/1.6 "Atkinson Hyperlegible",Arial,sans-serif;padding:.85rem .95rem;min-height:5.6rem}
+.asesoria-form__enviar{min-width:6.2rem;border:1px solid #66dbe6;border-radius:12px;background:#61e4df;color:#063241;font:800 .99rem "Atkinson Hyperlegible",system-ui,sans-serif;padding:.8rem .9rem;cursor:pointer}
+.asesoria-form__enviar:disabled{opacity:.56;cursor:wait}
+.asesoria-permiso{display:flex!important;gap:.55rem;align-items:flex-start;color:#d1e8ef;font-size:.82rem;line-height:1.45;font-weight:500;margin:.75rem 0 .35rem}
+.asesoria-permiso input{flex:none;width:1.14rem;height:1.14rem;margin:.1rem 0 0;accent-color:#65e6e4}
+.asesoria-privacidad{color:#9fc2d1;font-size:.78rem;line-height:1.5;margin:.35rem 0}
+.asesoria-estado{color:#9de8f1;font-weight:650;font-size:.86rem;line-height:1.5;margin:.7rem 0 0;min-height:1.35rem}
+.asesoria-acciones{display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;background:#0b2639;padding:.85rem clamp(.8rem,2vw,1.2rem);border-top:1px solid #35677e}
+.asesoria-acciones button{min-height:2.85rem;border-radius:11px;font:750 .88rem "Atkinson Hyperlegible",system-ui,sans-serif;cursor:pointer;padding:.6rem .85rem}
+.asesoria-acciones__crear{background:#c4b4ff;color:#1b2448;border:1px solid #d8ceff;font-weight:850!important}
+.asesoria-acciones__crear:disabled{background:#546b7e;border-color:#657d91;color:#d6e4e8;cursor:not-allowed}
+.asesoria-acciones__secundaria{background:#1a4257;border:1px solid #5c8ea0;color:#cfeef4}
+.asesoria-entrega{margin:1.6rem 0 0;background:#102a3d;border:1px solid #448298;border-radius:20px;padding:clamp(1rem,2.5vw,1.55rem);scroll-margin-top:2rem}
+.asesoria-entrega__encabezado h3{font:700 clamp(1.45rem,2.8vw,2rem)/1.25 "Space Grotesk",system-ui,sans-serif;color:#f7ffff;letter-spacing:-.04em;margin:.2rem 0 .5rem}
+.asesoria-entrega__encabezado p:not(.claria-paso){font-size:.92rem;line-height:1.6;color:#bad8e4;max-width:75ch;margin:.2rem 0 .8rem}
+.asesoria-entrega__herramientas{display:flex;flex-wrap:wrap;gap:.5rem;margin:.85rem 0}
+.asesoria-entrega__herramientas button,.asesoria-imagen__acciones button{background:#1e566a;border:1px solid #63b5c4;border-radius:10px;color:#e5ffff;min-height:2.8rem;padding:.6rem .85rem;font:750 .86rem "Atkinson Hyperlegible",system-ui,sans-serif;cursor:pointer}
+.asesoria-documento{margin:1rem 0 1.4rem}
+.asesoria-documento label,.asesoria-imagen label{display:block;font-weight:800;color:#e6faff;margin:.7rem 0 .4rem;font-size:.99rem}
+.asesoria-documento label span,.asesoria-imagen label span{font-size:.79rem;font-weight:500;color:#9dc8d7}
+.asesoria-documento textarea,.asesoria-imagen textarea{width:100%;background:#081c2b;color:#effcff;border:1px solid #477f90;border-radius:12px;font:450 1rem/1.65 Arial,system-ui,sans-serif;padding:1rem;resize:vertical;min-height:5rem}
+.asesoria-documento textarea{min-height:23rem}
+.asesoria-imagen{padding:clamp(.8rem,2vw,1.25rem);border:1px solid #8c91c5;border-radius:16px;background:linear-gradient(140deg,#1a3156,#17273c)}
+.asesoria-imagen__encabezado{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem}
+.asesoria-imagen__encabezado h4{color:#effaff;font:800 clamp(1.13rem,2vw,1.42rem) "Space Grotesk",system-ui,sans-serif;margin:.25rem 0}
+.asesoria-imagen__encabezado .claria-paso{margin:0;color:#baafff}
+.asesoria-imagen__etiqueta{flex:none;border:1px solid #a2a7df;border-radius:999px;padding:.3rem .6rem;color:#d7ceff;font-size:.75rem}
+.asesoria-imagen__acciones{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.asesoria-imagen__acciones button{background:#6656a4;border-color:#a7a1d7}
+.asesoria-imagen__aviso{color:#c2d5e5;line-height:1.6;font-size:.84rem;margin:.3rem 0 0}
+.asesoria-fuentes{margin:1.1rem 0 0;border-top:1px solid #42687c;padding-top:.9rem;color:#c0d8df;font-size:.83rem;line-height:1.5}
+.asesoria-fuentes summary{color:#98e8ed;font-weight:800;cursor:pointer}
+.asesoria-fuentes a{display:inline-block;color:#96e7ec;margin:.35rem .8rem .35rem 0}
+.asesoria-form textarea:focus-visible,.asesoria-entrega textarea:focus-visible,.asesoria-acciones button:focus-visible,.asesoria-entrega button:focus-visible,.asesoria-ejemplos button:focus-visible{outline:3px solid #f5df83;outline-offset:3px}
+@media(max-width:44rem){
+ .asesoria-chat__encabezado>img{width:3.1rem;height:3.1rem}
+ .asesoria-mensajes{min-height:10rem;max-height:28rem}
+ .asesoria-form__fila{flex-direction:column}
+ .asesoria-form__enviar{align-self:flex-end;min-height:2.8rem}
+ .asesoria-acciones__crear{flex:1 1 100%}
+ .asesoria-acciones__secundaria{flex:1 1 40%}
+ .asesoria-imagen__encabezado{flex-direction:column}
+}
+html[data-contraste="alto"] :is(.asesoria-chat,.asesoria-form,.asesoria-burbuja__cuerpo,.asesoria-entrega,.asesoria-imagen){background:#000!important;border:2px solid white!important;color:#fff!important}
+html[data-contraste="alto"] :is(.asesoria-intro p,.asesoria-entrega p,.asesoria-burbuja__cuerpo p){color:#fff!important}
+@media print{
+ .pagina-claria .cabecera,.pagina-claria .pie,.pagina-claria .claria-presentacion,.pagina-claria .claria-asistente__cabecera,
+ .pagina-claria .claria-roles,.pagina-claria .asesoria-intro,.pagina-claria .asesoria-chat,
+ .pagina-claria .claria-conversacion,.pagina-claria .claria-aviso,.pagina-claria .asesoria-entrega__herramientas,
+ .pagina-claria .asesoria-imagen__acciones,.pagina-claria .asesoria-fuentes,.pagina-claria .asesoria-entrega__encabezado p,
+ .pagina-claria .asesoria-imagen__aviso{display:none!important}
+ .pagina-claria .claria-asistente,.pagina-claria .claria-asesoria,.pagina-claria .asesoria-entrega,.pagina-claria .asesoria-imagen{
+   border:0!important;background:white!important;box-shadow:none!important;color:black!important;margin:0!important;padding:.3rem!important}
+ .pagina-claria .asesoria-entrega__encabezado h3,.pagina-claria .asesoria-imagen h4,.pagina-claria .asesoria-entrega label{color:#000!important}
+ .pagina-claria .asesoria-documento textarea,.pagina-claria .asesoria-imagen textarea{width:100%!important;border:0!important;resize:none!important;overflow:visible!important;height:auto!important;color:black!important;background:#fff!important;padding:0!important;white-space:pre-wrap!important}
+ .pagina-claria .asesoria-imagen{break-before:page}
+}
