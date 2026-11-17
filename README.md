@@ -1,5 +1,12 @@
 # Bermejo Accesible
 
+### Fracciones · Alimentos reales (noviembre de 2026)
+
+- Se incorporó al catálogo de `juegos.html` un enlace a `https://baezkaren113-collab.github.io/Detectives-del-aula/fracciones/`, alojado en el repositorio de Detectives del Aula. Se abre el proyecto original en una pestaña nueva; no se copian ni modifican los archivos externos.
+- Recurso de Matemática con estaciones para introducir la fracción como parte de un todo, leer numerador/denominador, unir figuras y fracciones, comprobar verdadero o falso, construir fracciones y trabajar equivalencias. Incluye un laboratorio visual con alimentos.
+- El catálogo ahora contiene cuatro experiencias: MixLab, NUMI, Detectives del Aula · LETI y Fracciones. No requiere actualizar el Worker de Cloudflare.
+
+
 ### NUMI · La aventura de las 4 operaciones (noviembre 2026)
 
 - Se incorporó el juego **NUMI** a `juegos/numi.html`, a partir del archivo HTML original proporcionado por la usuaria. La página funciona como juego autónomo, sin backend ni recursos externos obligatorios. Acceso en `juegos.html` mediante tarjeta propia.

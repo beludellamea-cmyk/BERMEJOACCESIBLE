@@ -106,3 +106,12 @@ html[data-contraste="alto"] :is(.juegos-home__texto>p,.juegos-home__texto h2){co
 .juego-tarjeta--numi .juego-tarjeta__valor{border-color:#9f98ff}
 .juego-tarjeta--numi .juego-tarjeta__enlace{background:#b9acf9;color:#211b48!important}
 .juego-tarjeta__arte--numi .juego-arte__titulo{color:#dcdbff}
+
+/* Fracciones · alimentos reales: acento coral, violeta y amarillo. */
+.juego-tarjeta__arte--fracciones{
+  background:radial-gradient(ellipse at 48% 47%,rgba(244,177,111,.28),transparent 52%),linear-gradient(125deg,#402458,#24376a);
+}
+.juego-tarjeta--fracciones .juego-tarjeta__tipo{color:#f9cf8f}
+.juego-tarjeta--fracciones .juego-tarjeta__valor{border-color:#f6c77a}
+.juego-tarjeta--fracciones .juego-tarjeta__enlace{background:#ffe087;color:#372252!important}
+.juego-tarjeta--fracciones .juego-arte__titulo{color:#ffe4bb}
