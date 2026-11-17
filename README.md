@@ -3,7 +3,7 @@
 ## Juegos y experiencias interactivas (17/11/2026)
 
 - Nueva sección `juegos.html`, con identidad nocturna de Bermejo Accesible, accesible desde la **portada**, el **menú principal** y **Explorar más**.
-- **MixLab · Misión Mezclas:** enlace al proyecto original `https://beludellamea-cmyk.github.io/MixLab/acompanante/`; recurso con contenidos y desafíos sobre mezclas homogéneas y heterogéneas.
+- **MixLab · Misión Mezclas:** enlace al proyecto original `https://beludellamea-cmyk.github.io/MixLab/`; portada del proyecto con dos recorridos: Clase (acompañante accesible) y Laboratorio (juego interactivo con Nova y misiones de clasificación y separación de mezclas).
 - **Detectives del Aula · LETI:** enlace al proyecto original `https://baezkaren113-collab.github.io/Detectives-del-aula/leti/` como experiencia interactiva externa. No se modifica el código de terceros ni se afirma que todos los juegos usan la misma tecnología.
 - Para **agregar nuevos proyectos**, duplicar uno de los `<article class="juego-tarjeta">…</article>` dentro de `<div class="juegos-grilla">` en `juegos.html` y personalizar título, propósito educativo, descripción y URL verificada. Mantener `target="_blank" rel="noopener noreferrer"` para páginas externas, e indicar que se abren en otra pestaña. No poner botones falsos para proyectos futuros.
 - Esta colección refuerza el enfoque pedagógico: la IA es una herramienta para construir experiencias significativas y accesibles, pero las actividades siguen necesitando objetivos y revisión docente. Juegos externos pueden tener opciones de accesibilidad diferentes de las de Bermejo.
