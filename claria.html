@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CLARIA · Tu asistente educativa | Bermejo Accesible</title>
+  <meta name="description" content="Conversá con CLARIA, tu asistente educativa de Bermejo Accesible. Guía para estudiantes, planificación DUA, adaptaciones y orientación normativa para docentes.">
+  <meta name="theme-color" content="#08131f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/bermejo.css?v=claria-20261117">
+
+  <script src="js/navegacion.js" defer></script>
+  <script src="js/preferencias.js"></script>
+
+  <link rel="stylesheet" href="css/claria.css?v=1">
+  <script src="js/chat-config.js" defer></script>
+  <script src="js/claria.js?v=1" defer></script>
+</head>
+<body class="pagina-claria">
+<a class="saltar" href="#contenido">Ir al contenido</a>
+<header class="cabecera">
+    <div class="cabecera__fila">
+      <a class="marca" href="index.html">
+        <img class="marca__logo" src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">
+        <span class="marca__nombre">Bermejo <span>Accesible</span></span>
+      </a>
+      <nav class="menu" id="menu-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="comprender.html">Comprender</a></li>
+          <li><a href="crear.html">Crear</a></li>
+          <li><a href="claria.html" aria-current="page">CLARIA</a></li><li><a href="explorar.html">Explorar más</a></li>
+        </ul>
+      </nav>
+      <div class="cabecera__acciones">
+        <button class="boton boton-icono menu-abrir" type="button" aria-controls="menu-principal" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menú</span></button>
+        <details class="ajustes" id="ajustes">
+          <summary class="boton-icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="7.6" r="1.3"/><path d="M7.5 10.4 12 11.4l4.5-1M12 11.4v3.6l-2.5 4M12 15l2.5 4"/></svg><span class="ajustes__texto">Accesibilidad</span></summary>
+          <div class="ajustes__fila">
+            <p class="ajustes__titulo" id="ajustes-titulo">Accesibilidad</p>
+            <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+              <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto</span>
+              <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+              <span class="ajustes__valor" id="tam-valor">100 %</span>
+              <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+              <span class="ajustes__etiqueta" id="letra-etiqueta">Letra</span>
+              <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="true">Texto habitual</button>
+              <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="false">Imprenta mayúscula</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+              <span class="ajustes__etiqueta" id="con-etiqueta">Contraste</span>
+              <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+              <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+            </div>
+            <div class="ajustes__grupo">
+              <button type="button" class="boton" data-abrir-ayuda><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.3 1.7c-1.2 1-1.8 1.5-1.8 2.7"/><path d="M12 17h.01"/></svg>Ayuda por voz y guía</button>
+              <button type="button" class="boton" data-ajuste="restablecer">Restablecer</button>
+            </div>
+            <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
+<main id="contenido" class="claria-pagina" tabindex="-1">
+<div class="contenedor">
+  <section class="claria-presentacion" aria-labelledby="claria-titulo">
+    <div class="claria-presentacion__texto">
+      <p class="claria-sello"><span aria-hidden="true"></span> TU ASISTENTE DE BERMEJO ACCESIBLE</p>
+      <h1 id="claria-titulo">¡Hola! Soy <em>CLARIA.</em></h1>
+      <p class="claria-subtitulo">Estoy para acompañarte a aprender, enseñar y encontrar otras maneras de comprender.</p>
+      <p class="claria-instruccion">Contame qué necesitás o elegí una opción. Vamos paso a paso.</p>
+      <a class="claria-volver" href="index.html">← Volver al inicio de Bermejo</a>
+    </div>
+    <div class="claria-presentacion__visual">
+      <span class="claria-orbita claria-orbita--uno" aria-hidden="true"></span>
+      <span class="claria-orbita claria-orbita--dos" aria-hidden="true"></span>
+      <img class="claria-personaje" src="https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png" width="500" height="500" alt="CLARIA, asistente digital con cabello castaño y campera lavanda, saludando">
+      <span class="claria-pulso" aria-hidden="true"></span>
+    </div>
+  </section>
+  <section class="claria-asistente" aria-labelledby="claria-conversa-titulo">
+    <div class="claria-asistente__cabecera">
+      <div><p class="claria-paso">1 · ELEGÍ CÓMO QUIERO AYUDARTE</p><h2 id="claria-conversa-titulo">¿Qué necesitás hacer hoy?</h2></div>
+      <span class="claria-modo-etiqueta" id="claria-etiqueta">Guía interactiva</span>
+    </div>
+    <div class="claria-roles" role="group" aria-label="Elegí tu recorrido">
+      <button type="button" id="claria-rol-estudiante" class="claria-rol" data-rol="estudiante" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3.5-1.4 6.5-1.2 9 1 2.5-2.2 5.5-2.4 9-1v13c-3.5-1.4-6.5-1.2-9 1-2.5-2.2-5.5-2.4-9-1zM12 6.5v13"/></svg>
+        <span><strong>Quiero aprender</strong><small>Leer y comprender materiales</small></span>
+      </button>
+      <button type="button" id="claria-rol-docente" class="claria-rol" data-rol="docente" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 12 4l9 5-9 5zM7 12v5c3.1 2.1 6.9 2.1 10 0v-5M21 9v6"/></svg>
+        <span><strong>Soy docente</strong><small>Planificar, adaptar y consultar</small></span>
+      </button>
+    </div>
+    <div class="claria-conversacion" id="claria-conversacion">
+      <div class="claria-mensajes" id="claria-mensajes" role="log" aria-label="Conversación con CLARIA" aria-live="polite" aria-relevant="additions text"></div>
+      <div class="claria-atajos" id="claria-atajos" role="group" aria-label="Elegí una consulta frecuente"></div>
+      <form id="claria-form" class="claria-form">
+        <label for="claria-texto">O escribime tu pregunta</label>
+        <div class="claria-form__fila">
+          <textarea id="claria-texto" rows="2" maxlength="1500" placeholder="Por ejemplo: ¿cómo puedo preparar una clase más participativa?" required></textarea>
+          <button class="claria-enviar" id="claria-enviar" type="submit" aria-label="Enviar pregunta a CLARIA">Enviar <span aria-hidden="true">→</span></button>
+        </div>
+        <p class="claria-privacidad">No ingreses nombres, diagnósticos ni otros datos personales de estudiantes.</p>
+        <label class="claria-consentimiento"><input type="checkbox" id="claria-autorizar"> Autorizo enviar mis consultas sin datos personales al servicio externo de IA, cuando esté disponible.</label>
+        <p id="claria-estado" class="claria-estado" role="status" aria-live="polite">La guía local funciona sin enviar tus preguntas. Para conversar libremente con IA, hace falta activar el servicio.</p>
+      </form>
+      <div class="claria-acciones">
+        <button id="claria-reiniciar" class="claria-boton-liviano" type="button">↻ Nueva conversación</button>
+        <button id="claria-voz" class="claria-boton-liviano" type="button" aria-pressed="false">🔊 Escuchar a CLARIA</button>
+        <a href="docente.html#normativa">Fuentes y normativa</a>
+      </div>
+    </div>
+    <aside class="claria-aviso" aria-label="Sobre las respuestas">
+      <strong>Información importante:</strong> CLARIA orienta, pero las propuestas pedagógicas requieren revisión docente. Las consultas normativas se acompañan de fuentes oficiales; no reemplazan la lectura de la resolución completa, las decisiones institucionales ni el asesoramiento especializado.
+    </aside>
+  </section>
+</div>
+</main>
+<footer class="pie">
+    <div class="contenedor">
+      <div class="pie__fila">
+        <div>
+          <p class="pie__marca"><img src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">Bermejo Accesible</p>
+          <p>La información a tu manera. Proyecto de código abierto creado en Formosa. No pide cuentas y no guarda tus materiales.</p>
+        </div>
+        <ul class="pie__enlaces" aria-label="Enlaces del sitio">
+          <li><a href="comprender.html">Comprender</a></li>
+          <li><a href="crear.html">Crear</a></li>
+          <li><a href="explorar.html">Explorar más</a></li>
+          <li><a href="https://github.com/beludellamea-cmyk/BERMEJOACCESIBLE">Código en GitHub</a></li>
+        </ul>
+      </div>
+      <p class="pie__creditos">Pictogramas de Sergio Palao, origen <a href="https://arasaac.org">ARASAAC</a>, licencia CC BY-NC-SA, propiedad del Gobierno de Aragón (España). Lectura de fotos y PDF con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografías <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a> (Braille Institute) y Fraunces. La imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+</body>
+</html>
