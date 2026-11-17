@@ -89,3 +89,110 @@ html[data-contraste="alto"] :is(.claria-subtitulo,.claria-estado,.claria-instruc
 @media(max-width:49rem){.claria-home{flex-wrap:wrap;gap:.8rem}.claria-home img{width:7rem;height:7rem}.claria-home .boton{width:100%;text-align:center;justify-content:center}}
 @media(max-width:25rem){.claria-home{flex-direction:column;text-align:center}.claria-home img{width:6.5rem;height:6.5rem}}
 html[data-contraste="alto"] .claria-home{background:#000!important;color:#fff!important;border:2px solid #fff}
+
+/* CLARIA docente — recorrido directo de producción (2026). */
+.claria-docente-rapido{padding:0 clamp(.85rem,2.6vw,1.65rem) 1.5rem}
+.claria-docente-rapido[hidden],.docente-form[hidden],.docente-resultado[hidden],
+.claria-conversacion[hidden]{display:none!important}
+.docente-rapido__intro{padding:.6rem .25rem .75rem}
+.docente-rapido__intro h3{margin:.2rem 0 .5rem;font:700 clamp(1.35rem,2.7vw,1.95rem)/1.25 "Space Grotesk",system-ui,sans-serif;letter-spacing:-.035em;color:#f4ffff}
+.docente-rapido__intro p:not(.claria-paso){margin:0;color:#b2d0dd;font-size:.94rem;max-width:64ch;line-height:1.5}
+.docente-pestanas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin:.6rem 0 1rem}
+.docente-pestanas button{display:flex;justify-content:center;align-items:center;gap:.55rem;min-width:0;padding:.8rem .45rem;min-height:3.25rem;
+ background:#112f44;border:1px solid #3d6b80;border-radius:12px;color:#c9e1ea;font:700 .87rem/1.2 "Atkinson Hyperlegible",system-ui,sans-serif;cursor:pointer}
+.docente-pestanas button svg{width:1.3rem;height:1.3rem;flex:none;stroke:#64dce7;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.docente-pestanas button[aria-pressed="true"]{border:2px solid #61dfeb;background:#175467;color:white;box-shadow:0 0 14px #16e2f81c}
+.docente-pestanas button:hover{border-color:#74eff9}
+.docente-form{background:linear-gradient(140deg,#0a2436,#102b41);border:1px solid #345970;border-radius:20px;padding:clamp(.95rem,2.5vw,1.7rem);margin:0}
+.docente-form__titular{font:700 clamp(1.15rem,2vw,1.5rem) "Space Grotesk",system-ui,sans-serif;margin:0 0 1.1rem;color:#f3ffff}
+.docente-form__grilla{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.docente-form label{display:block;font-weight:700;color:#d8eef4;font-size:.92rem;line-height:1.35}
+.docente-form :is(input[type="text"],textarea,select){width:100%;min-width:0;display:block;margin-top:.38rem;min-height:2.85rem;
+ padding:.65rem .8rem;font:400 .99rem "Atkinson Hyperlegible",system-ui,sans-serif;
+ border:1px solid #4a8190;border-radius:11px;background:#081e2f;color:#eafcfd}
+.docente-form textarea{resize:vertical}
+.docente-form :is(input,textarea,select):focus-visible{outline:3px solid #6ce9f1;outline-offset:2px}
+.docente-extra{margin:1rem 0;color:#cfe8f0}
+.docente-extra summary{cursor:pointer;color:#91e3ec;font-size:.92rem;font-weight:750}
+.docente-extra[open] .docente-form__grilla{grid-template-columns:minmax(0,1fr) 11rem;margin-top:.7rem}
+.docente-permiso{display:flex!important;align-items:flex-start;gap:.6rem;max-width:61rem;padding:.7rem 0;margin-top:.85rem;font-size:.83rem!important;font-weight:500!important;color:#bdd6e0!important;line-height:1.5!important}
+.docente-permiso input{width:1.12rem;height:1.12rem;flex:none;margin:.05rem 0 0;accent-color:#5be2e8}
+.docente-form__acciones{display:flex;align-items:center;gap:.75rem 1.1rem;flex-wrap:wrap;margin-top:.65rem}
+.docente-form__acciones .boton{border-radius:12px!important;min-height:3rem;font-size:.97rem;font-weight:800}
+.docente-form__acciones span{color:#a6c9d6;font-size:.83rem;max-width:32rem}
+.docente-tipos{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0}
+.docente-tipos label{display:flex;flex-direction:column;position:relative;gap:.3rem;padding:.75rem 1rem .75rem 2.5rem;border:1px solid #3a6c7e;border-radius:14px;background:#122c3e;cursor:pointer}
+.docente-tipos label:has(input:checked){background:#184557;border:2px solid #57dce7}
+.docente-tipos label input{position:absolute;left:.9rem;top:.95rem;width:1.1rem;height:1.1rem;accent-color:#5fe3ed}
+.docente-tipos label strong{color:#efffff;font-size:1rem}
+.docente-tipos label span{font-size:.82rem;color:#a9c9d9;font-weight:400;line-height:1.4}
+.docente-subida{background:#102c3f;border:1px dashed #448395;border-radius:16px;padding:1rem;margin:1rem 0}
+.docente-subida__archivo{display:flex!important;align-items:center;gap:.7rem;margin-bottom:.5rem}
+.docente-subida__archivo svg{width:2.4rem;height:2.4rem;stroke:#69e7ef;stroke-width:1.8;fill:none}
+.docente-subida__archivo strong{display:block;color:white}
+.docente-subida__archivo small{display:block;font-size:.84rem;color:#a5c8d5;font-weight:400}
+.docente-subida input[type="file"]{width:100%;min-height:2.5rem;font-size:.87rem;margin:.5rem 0}
+.docente-subida__estado{color:#a6ccdc;font-size:.82rem;margin:.4rem 0 .9rem;overflow-wrap:anywhere}
+.docente-subida>label[for="docente-material-texto"]{margin:.7rem 0 .2rem}
+.docente-presentacion{border:0;margin:.85rem 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.55rem}
+.docente-presentacion legend{padding:0 0 .7rem;font-weight:750;color:#f1ffff;font-size:1rem}
+.docente-presentacion label{display:flex;gap:.35rem;align-items:center;justify-content:center;text-align:center;padding:.75rem .3rem;min-width:0;cursor:pointer;background:#153349;border:1px solid #3c6a7e;border-radius:12px;font-size:.88rem}
+.docente-presentacion label:has(input:checked){background:#18566a;border:2px solid #69e4ed}
+.docente-presentacion input{accent-color:#68e5ee}
+.docente-presentacion__ayuda{font-size:.8rem;color:#a3c2d0;margin:.6rem 0}
+.docente-estado{font-size:.91rem;font-weight:650;color:#93e2ec;min-height:1.35rem;margin:.9rem 0}
+.docente-resultado{margin:1.25rem 0 .5rem;border-radius:18px;border:1px solid #3f8697;background:linear-gradient(150deg,#102e40,#0d2233);padding:clamp(.85rem,2.5vw,1.5rem)}
+.docente-resultado__cabecera{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.docente-resultado__cabecera h3{font:700 clamp(1.35rem,2.8vw,2rem) "Space Grotesk",system-ui,sans-serif;margin:.2rem 0;color:white}
+.docente-resultado__cabecera .claria-paso{font-size:.7rem;margin:0}
+.docente-resultado__etiqueta{border:1px solid #5cbece;border-radius:99px;padding:.32rem .7rem;color:#89e9ee;font-size:.75rem;font-weight:750}
+.docente-resultado__aviso{font-size:.84rem;line-height:1.5;color:#bed1dc;padding:.7rem 0}
+.docente-resultado>label{display:block;color:#d8f5fb;font-weight:700;font-size:.94rem;margin:0 0 .35rem}
+.docente-resultado textarea{display:block;width:100%;min-height:18rem;max-height:45rem;background:#071d2e;color:#e7faff;border:1px solid #3d8090;border-radius:12px;padding:1rem;resize:vertical;line-height:1.62;font-family:Arial,system-ui,sans-serif;font-size:1rem;white-space:pre-wrap}
+.docente-resultado__botones{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.docente-resultado__botones .boton{font-size:.88rem;border-radius:10px;padding:.6rem .75rem}
+.docente-resultado__visual{background:#f5fbfc;color:#183343;padding:clamp(1rem,3vw,2rem);border-radius:16px;margin:1rem 0;border:1px solid #7abcca;max-height:40rem;overflow:auto}
+.docente-resultado__visual h4{font-size:1.45rem;font-weight:800;color:#144258;margin:0 0 1rem}
+.docente-resultado__visual p{white-space:pre-wrap;line-height:1.65;margin:.9rem 0}
+.docente-bloque-parte{padding:1rem;margin:.9rem 0;background:#e9f8fa;border-left:4px solid #3b9cb3;border-radius:10px}
+.docente-bloque-parte h5{font-size:1rem;margin:0 0 .4rem}
+.docente-bloque-parte p{margin:0}
+.docente-visuales{margin:1.25rem 0;border-top:1px solid #a9d3db;padding-top:1rem}
+.docente-visuales h5{font-size:1.18rem;margin:0 0 .6rem;color:#19465b}
+.docente-pictos,.docente-ilustraciones{display:flex;flex-wrap:wrap;gap:.7rem;padding:0;margin:.5rem 0;list-style:none}
+.docente-pictos li,.docente-ilustraciones li{width:min(8rem,calc(33% - .5rem));min-width:6rem;background:white;border:1px solid #a2bec5;border-radius:12px;padding:.5rem;text-align:center;color:#143d52}
+.docente-pictos img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.docente-pictos span{font-weight:750;font-size:.84rem}
+.docente-ilustraciones figure{margin:0}
+.docente-ilustraciones svg,.docente-ilustraciones img{max-width:100%;height:auto}
+.docente-resultado__creditos,.docente-fuentes{font-size:.79rem;color:#a9c9d4}
+.docente-fuentes{display:flex;gap:.45rem 1rem;flex-wrap:wrap;align-items:center;border-top:1px solid #35677a;padding-top:.8rem}
+.docente-fuentes a{color:#8feaf0;text-underline-offset:.2em}
+@media(max-width:57rem){
+ .docente-form__grilla{grid-template-columns:1fr 1fr}
+ .docente-form__grilla>label:last-child{grid-column:1/-1}
+ .docente-presentacion{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:38rem){
+ .docente-form__grilla,.docente-extra[open] .docente-form__grilla,.docente-tipos{grid-template-columns:1fr}
+ .docente-form__grilla>label:last-child{grid-column:auto}
+ .docente-pestanas{grid-template-columns:1fr 1fr}
+ .docente-pestanas button:last-child{grid-column:1/-1}
+ .docente-pestanas button{font-size:.82rem}
+ .docente-resultado__cabecera{align-items:flex-start;flex-direction:column}
+ .docente-resultado__botones .boton{flex:1 1 45%}
+}
+@media print{
+ .pagina-claria .cabecera,.pagina-claria .pie,.pagina-claria .claria-presentacion,
+ .pagina-claria .claria-asistente__cabecera,.pagina-claria .claria-roles,.pagina-claria .docente-pestanas,
+ .pagina-claria .docente-rapido__intro,.pagina-claria .docente-form,.pagina-claria .docente-estado,
+ .pagina-claria .claria-conversacion,.pagina-claria .claria-aviso,.pagina-claria .docente-resultado__botones,
+ .pagina-claria .docente-resultado>label,.pagina-claria .docente-resultado textarea,
+ .pagina-claria .docente-resultado__cabecera,.pagina-claria .docente-resultado__aviso{display:none!important}
+ .pagina-claria,.pagina-claria .claria-pagina,.pagina-claria .claria-asistente,.pagina-claria .claria-docente-rapido,
+ .pagina-claria .docente-resultado{background:white!important;color:black!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
+ .pagina-claria .docente-resultado__visual{max-height:none!important;overflow:visible!important;background:white!important;color:black!important;border:0!important;padding:0!important;display:block!important}
+ .pagina-claria .docente-resultado__visual *{color:black!important;box-shadow:none!important}
+ .pagina-claria .docente-fuentes{color:black!important}
+ .pagina-claria .docente-fuentes a{color:black!important}
+}
