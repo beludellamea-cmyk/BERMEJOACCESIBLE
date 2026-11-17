@@ -304,7 +304,7 @@ html[data-contraste="alto"] .claria-voz__mensaje>p,html[data-contraste="alto"] .
   .claria-presentacion .claria-sello{font-size:.85rem}
   .claria-asistente__cabecera{padding:.95rem .85rem .2rem}
   .claria-asistente__cabecera h2{font-size:1.55rem}
-  .claria-roles{margin:.65rem .65rem .9rem}
+  .claria-roles{margin:.65rem .65rem .9rem;grid-template-columns:repeat(2,minmax(0,1fr))}
   .claria-rol{min-height:3.8rem;padding:.7rem .5rem;gap:.45rem;justify-content:center}
   .claria-rol svg{display:none}
   .claria-rol strong{font-size:1.02rem}
