@@ -1,5 +1,13 @@
 # Bermejo Accesible
 
+## Mejoras para demostrar Comprender y generar propuestas DUA (noviembre 2026)
+
+- En **Comprender**, el botón «Probar una demostración» carga el ejemplo del ciclo del agua y abre directamente la selección de las cuatro formas de lectura: Escuchar, Por partes, Con imágenes y Con pictogramas. La carga real sigue siendo Texto/PDF/Foto y la revisión del contenido permanece.
+- En «Con pictogramas», ahora se puede escoger **Pocos (3)**, **Equilibrados (6)** o **Muchos (9)** por bloque; se buscan más palabras, incluidas palabras breves como «sol» y variantes comunes del español, usando la API de búsqueda de ARASAAC. La persona confirma la búsqueda antes de enviar palabras sueltas y puede agregar o quitar pictogramas manualmente. La disponibilidad depende del catálogo y de la conexión; no se garantiza un pictograma por palabra.
+- En **Crear**, una guía breve explica las tres dimensiones DUA: representación, acción y expresión, y compromiso/participación. Se puede dar énfasis a una **adaptación del material** o a una **propuesta de enseñanza**. La selección orienta la solicitud enviada al Worker usando el campo de objetivos libres existente; el formato final sigue siendo un borrador revisable y editable.
+- La IA debe estar activada en Cloudflare para que el laboratorio genere respuestas reales. No se debe afirmar que hay resultados de IA garantizados sin probar ese servicio.
+
+
 ## Rediseño integral (versión actual)
 
 **Bermejo Accesible: la información a tu manera.** La portada tiene solo dos accesos:
