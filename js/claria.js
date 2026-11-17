@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function(){
     {nombre:'Probar el mismo material de cuatro maneras',url:'comprender.html#demo-titulo'},
     {nombre:'Crear adaptación o actividades',url:'crear.html'},
     {nombre:'Recursos docentes y situaciones del aula',url:'docente.html#consulta'},
-    {nombre:'Ver normativa y fuentes',url:'docente.html#normativa'}
+    {nombre:'Ver normativa y fuentes',url:'docente.html#normativa'},
+    {nombre:'Explorar juegos educativos',url:'juegos.html'}
   ];
   function normalizar(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
   function enlaceValido(x){return normativas.concat(entradas).find(function(y){return y.url===x.url&&y.nombre===x.nombre;})||null;}
@@ -60,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function(){
       {titulo:'Quiero subir un PDF o foto',consulta:'¿Cómo subo una foto o PDF y elijo cómo comprenderlo?'},
       {titulo:'Escuchar un texto',consulta:'Quiero escuchar un texto que suba'},
       {titulo:'Leer con pictogramas',consulta:'Quiero ver un texto con pictogramas'},
-      {titulo:'Probar una demostración',consulta:'Quiero probar las cuatro formas de lectura'}
+      {titulo:'Probar una demostración',consulta:'Quiero probar las cuatro formas de lectura'},
+      {titulo:'Quiero jugar y aprender',consulta:'Quiero explorar juegos educativos'}
     ],
     docente:[
       {titulo:'Preparar una clase y materiales',accion:'clase',consulta:'Quiero planificar una clase'},
@@ -98,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function ayudaLocal(pregunta){
     var p=normalizar(pregunta);
     if(rol==='estudiante'){
+      if(/jueg|mixlab|detectiv|interactiv/.test(p)) return {texto:'¡También podés aprender jugando! En Juegos y experiencias vas a encontrar MixLab, Detectives del Aula y las propuestas que iremos agregando. Cada experiencia tiene un objetivo para aprender y explorar.',links:[acceso('Explorar juegos educativos')]};
       if(/pictogra|dibujos|imagenes|visual/.test(p))return {texto:'Para leer con pictogramas: entrá en Comprender, elegí Texto, PDF o Foto, revisá el texto y tocá «Con pictogramas». Después elegí Pocos, Equilibrados o Muchos y buscá en ARASAAC. También podés agregar pictogramas a mano.',links:[acceso('Abrir Comprender')]};
       if(/pdf|foto|imagen|carg|subir|texto|escuch|leer/.test(p))return {texto:'Vamos paso a paso:\n1. Abrí Comprender.\n2. Elegí si querés escribir un texto, subir un PDF o sacar una foto.\n3. Revisá que el texto se haya reconocido bien.\n4. Elegí Escuchar, Leer por partes, Con imágenes o Con pictogramas.\nPodés cambiar de opción sin subir el material de nuevo.',links:[acceso('Abrir Comprender')]};
       if(/demostr|probar|cuatro|opciones/.test(p))return {texto:'Para la demostración entrá en Comprender y tocá «Probar una demostración». Se carga el ejemplo del ciclo del agua y podés observar sus cuatro formas de lectura.',links:[acceso('Probar el mismo material de cuatro maneras')]};

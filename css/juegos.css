@@ -77,3 +77,20 @@
 html[data-contraste="alto"] :is(.juegos-hero,.juegos-visual__ventana,.juego-tarjeta,.juegos-siguientes,.juegos-idea){background:#000!important;border:2px solid white!important;color:white!important}
 html[data-contraste="alto"] :is(.juegos-sobretitulo,.juegos-seccion-sobre,.juegos-hero__intro,.juegos-hero__pista,.juegos-listado__cabecera>p,.juego-tarjeta__contenido p,.juego-tarjeta__valor span,.juegos-siguientes p,.juegos-idea p){color:#fff!important}
 @media print{.juegos-hero__visual,.juego-tarjeta__arte{display:none}.juegos-main{color:#000}.juegos-hero,.juegos-grilla{display:block}.juego-tarjeta{background:#fff!important;color:#000!important;border:1px solid #000;margin:1rem 0;box-shadow:none}.juego-tarjeta__contenido *{color:#000!important}.juegos-siguientes,.juegos-idea{background:#fff!important;border:1px solid #666}}
+
+/* Portada: acceso a juegos */
+.juegos-home{display:flex;align-items:center;gap:clamp(.85rem,2.8vw,1.5rem);margin:1.35rem 0 0;padding:clamp(1rem,2.6vw,1.5rem);border:1px solid #4d8fb0;border-radius:19px;background:linear-gradient(110deg,#113449,#18284a);box-shadow:0 9px 28px #020c1e63}
+.juegos-home__icono{flex:none;display:grid;place-items:center;border:1px solid #4a8aa1;border-radius:16px;width:5.5rem;height:5.5rem;color:#8aedea;background:#1b4d62;box-shadow:inset 0 0 22px #51e0dd13}
+.juegos-home__icono svg{width:3.45rem;height:3.45rem}
+.juegos-home__texto{flex:1;min-width:0}
+.juegos-home__arriba{margin:0 0 .35rem;font:700 .69rem/1.4 "Space Grotesk",system-ui,sans-serif;letter-spacing:.13em;color:#90e5e9}
+.juegos-home h2{font:700 clamp(1.25rem,2.5vw,1.9rem)/1.23 "Space Grotesk",system-ui,sans-serif;margin:0 0 .4rem;letter-spacing:-.03em;color:#f5ffff}
+.juegos-home__texto>p:last-child{margin:0;font-size:.9rem;line-height:1.55;color:#bddae7;max-width:62ch}
+.juegos-home__texto>p:last-child strong{color:#e4fcfd}
+.juegos-home__boton{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.75rem 1.05rem;background:#55dbe0;color:#062b39!important;border-radius:12px;font-size:.91rem;font-weight:800;text-decoration:none!important}
+.juegos-home__boton:hover{filter:brightness(1.12)}
+.juegos-home__boton:focus-visible{outline:3px solid #dff982;outline-offset:4px}
+@media(max-width:53rem){.juegos-home{flex-wrap:wrap}.juegos-home__boton{width:100%}}
+@media(max-width:30rem){.juegos-home__icono{width:3.5rem;height:3.5rem}.juegos-home__icono svg{width:2.7rem;height:2.7rem}}
+html[data-contraste="alto"] .juegos-home{background:#000!important;border:2px solid #fff}
+html[data-contraste="alto"] :is(.juegos-home__texto>p,.juegos-home__texto h2){color:#fff!important}
