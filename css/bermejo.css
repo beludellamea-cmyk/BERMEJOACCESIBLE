@@ -1269,3 +1269,35 @@ html[data-contraste="alto"] .lab-chips .lab-opcion:has(input:checked) { border-c
 /* Libro: controles más compactos para que los accesos queden a la vista. */
 .libro__controles { gap: .45rem; }
 .libro__controles .boton { min-height: 2.75rem; padding: .3rem .95rem; font-size: 1rem; }
+
+/* Pictogramas en los pasos. */
+.indicador li svg { width: 1.35rem; height: 1.35rem; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.indicador li[aria-current="step"] svg { color: var(--rio); }
+@media (max-width: 40rem) { .indicador li:not([aria-current="step"]) svg { display: none; } .indicador li:not([aria-current="step"])::before { font-size: 1rem; } }
+
+/* Menú: «Explorar más» queda como opción secundaria. */
+.menu li:last-child a { font-weight: 400; color: var(--tinta-suave); }
+.menu li:last-child a[aria-current="page"] { font-weight: 700; color: var(--tinta); }
+
+/* Portada: nombre sobre el título. */
+.hero__marca { margin: 0 0 .6rem; font-size: .95rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--rio); max-width: none; }
+
+/* Entrada: libro que se abre. */
+.entrada { position: fixed; inset: 0; z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem; background: var(--papel); cursor: pointer; transition: opacity .6s ease; }
+.con-entrada .entrada { display: flex; }
+.entrada--sale { opacity: 0; pointer-events: none; }
+.entrada__libro { position: relative; width: min(62vw, 15rem); aspect-ratio: 1.45; perspective: 1200px; transform-style: preserve-3d; animation: entrada-centra 1.1s .45s cubic-bezier(.6,.05,.25,1) both; }
+.entrada__tapa, .entrada__der, .entrada__hoja { position: absolute; top: 0; left: 50%; width: 50%; height: 100%; transform-origin: left center; border-radius: 0 .7rem .7rem 0; }
+.entrada__der { background: #fffdf6; border: 2px solid var(--borde); display: flex; flex-direction: column; justify-content: center; gap: 12%; padding: 12%; transform: translateZ(-1px); box-sizing: border-box; }
+.entrada__der span { display: block; height: 7%; border-radius: 99px; background: var(--rio-claro); }
+.entrada__der span:nth-child(2) { width: 75%; background: #f0b99f; }
+.entrada__der span:nth-child(3) { width: 55%; }
+.entrada__tapa { background: var(--rio); border: 2px solid var(--tinta); box-shadow: var(--sombra-alta); animation: entrada-tapa 1.1s .45s cubic-bezier(.6,.05,.25,1) both; z-index: 3; }
+.entrada__hoja { background: #fffdf6; border: 2px solid var(--borde); z-index: 2; }
+.entrada__hoja--1 { animation: entrada-tapa 1s .65s cubic-bezier(.6,.05,.25,1) both; }
+.entrada__hoja--2 { animation: entrada-tapa 1s .85s cubic-bezier(.6,.05,.25,1) both; }
+.entrada__nombre { margin: 0; font-family: var(--fuente-titulos); font-weight: 700; font-size: 1.5rem; color: var(--tinta); animation: libro-aparece .7s 1.1s ease both; max-width: none; }
+@keyframes entrada-tapa { to { transform: rotateY(-178deg); } }
+@keyframes entrada-centra { from { transform: translateX(25%); } to { transform: none; } }
+html[data-contraste="alto"] .entrada { background: #000; }
+html[data-contraste="alto"] .entrada__nombre { color: #fff; }
