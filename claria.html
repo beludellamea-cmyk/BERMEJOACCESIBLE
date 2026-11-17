@@ -128,6 +128,14 @@
         <textarea id="asesoria-texto" rows="3" maxlength="1500" placeholder="Por ejemplo: Tengo 25 estudiantes de 3.º grado. Quiero enseñar multiplicación y necesito distintas maneras de explicar y evaluar…" required></textarea>
         <button type="submit" class="asesoria-form__enviar" id="asesoria-enviar">Enviar <span aria-hidden="true">➜</span></button>
       </div>
+      <details class="asesoria-adjunto" id="asesoria-adjunto">
+        <summary>¿Tenés una fotocopia o un texto? Adjuntalo (opcional)</summary>
+        <label for="asesoria-archivo">Elegí un PDF, una foto o un archivo TXT</label>
+        <input type="file" id="asesoria-archivo" accept=".pdf,.txt,.jpg,.jpeg,.png,.webp,application/pdf,text/plain,image/jpeg,image/png,image/webp">
+        <p class="asesoria-adjunto__estado" id="asesoria-archivo-estado" role="status">El archivo se lee en tu navegador. Revisá el texto antes de enviarlo a la IA.</p>
+        <label for="asesoria-fuente">O pegá el texto aquí y corregilo si hace falta</label>
+        <textarea id="asesoria-fuente" rows="5" maxlength="6000" placeholder="Este material podrá usarse como fuente de la planificación y su adaptación."></textarea>
+      </details>
       <label class="asesoria-permiso"><input type="checkbox" id="asesoria-permiso">
         <span>Autorizo enviar esta conversación a la IA. No incluiré nombres ni datos que identifiquen a estudiantes.</span>
       </label>
