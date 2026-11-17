@@ -1508,4 +1508,28 @@ html.con-entrada{overflow:hidden}
 }
 html[data-contraste="alto"] .entrada{background:#000}
 html[data-contraste="alto"] .entrada__nombre{color:#fff}
+
+/* Página izquierda que aparece bajo la tapa al abrir el libro. */
+.entrada__libro::before{
+  content:"";position:absolute;z-index:1;left:0;top:0;width:50%;height:100%;
+  border-radius:11px 0 0 11px;border:2px solid #98eaf3;
+  background:
+    linear-gradient(90deg,#75b9c677,transparent 18%),
+    repeating-linear-gradient(0deg,transparent 0 20px,#3995a24d 21px 23px,transparent 24px 36px),
+    linear-gradient(130deg,#d5f7fa,#8ec2d2);
+  box-shadow:inset -9px 0 20px #23546e47,0 0 23px #63e7f244;
+  opacity:0;transform:rotateY(-5deg);transform-origin:right center;
+}
+.entrada--activo .entrada__libro::before{animation:entrada-izquierda 1.3s .5s both}
+@keyframes entrada-izquierda{
+  0%,20%{opacity:0;transform:rotateY(-6deg)}
+  70%,100%{opacity:1;transform:rotateY(0)}
+}
+.repetir-entrada{
+  display:inline-flex;align-items:center;margin-top:.7rem;
+  font-size:.84rem;color:#7fcdd9;text-decoration:underline;text-underline-offset:.25em;
+}
+.repetir-entrada:hover{color:#a4f9fb}
+html[data-contraste="alto"] .repetir-entrada{color:#ffe14d}
+
 @media print{.entrada,.seleccion-carga{display:none!important}}
