@@ -1119,11 +1119,15 @@
     var candidatas = [];
     lista.forEach(function (w, pos) {
       var n = normalizar(w);
-      if (n.length < 4 || PALABRAS_VACIAS.has(n) || vistas.has(n)) return;
+      if (n.length < 3 || PALABRAS_VACIAS.has(n) || vistas.has(n)) return;
       vistas.add(n);
       candidatas.push({ palabra: w.toLowerCase(), normal: n, pos: pos, frec: frecuencias.get(n) || 1 });
     });
-    candidatas.sort(function (a, b) { return b.frec - a.frec || a.pos - b.pos; });
+    candidatas.sort(function (a, b) {
+      var av = (a.normal.length <= 3 || SINONIMOS_VISUALES[a.normal]) ? 1 : 0;
+      var bv = (b.normal.length <= 3 || SINONIMOS_VISUALES[b.normal]) ? 1 : 0;
+      return bv - av || b.frec - a.frec || a.pos - b.pos;
+    });
     return candidatas.slice(0, maximo).sort(function (a, b) { return a.pos - b.pos; });
   }
 
@@ -1138,8 +1142,39 @@
       palabra + 's' === clave || palabra + 'es' === clave;
   }
 
-  function elegirPicto(datos, normal) {
+  /* Variantes lingüísticas frecuentes: ayudan a encontrar apoyos sin inventar equivalencias. */
+  var SINONIMOS_VISUALES = {
+    evaporacion: ['vapor'], condensacion: ['nube'], precipitacion: ['lluvia'],
+    infiltracion: ['suelo'], escurrimiento: ['rio'], fotosintesis: ['planta'],
+    raices: ['raiz'], arboles: ['arbol'], nubes: ['nube'], gotas: ['gota'],
+    personas: ['persona'], animales: ['animal'], plantas: ['planta'],
+    peces: ['pez'], aves: ['ave'], alumnos: ['alumno'], estudiantes: ['estudiante'],
+    crece: ['crecer'], crecen: ['crecer'], sube: ['subir'], suben: ['subir'],
+    baja: ['bajar'], bajan: ['bajar'], cae: ['caer'], caen: ['caer'],
+    corre: ['correr'], corren: ['correr'], escribe: ['escribir'],
+    escribi: ['escribir'], leer: ['lectura'], escucha: ['escuchar'],
+    escuchamos: ['escuchar'], llueve: ['lluvia'], llovio: ['lluvia'],
+    calienta: ['calentar','calor'], frio: ['frio'], enfria: ['frio'],
+    dibujos: ['dibujo'], actividades: ['actividad'], palabras: ['palabra']
+  };
+  function variantesPicto(palabra) {
+    var n = normalizar(palabra);
+    var opciones = [palabra];
+    if (n.length > 5 && /es$/.test(n)) opciones.push(palabra.slice(0,-2));
+    if (n.length > 3 && /s$/.test(n)) opciones.push(palabra.slice(0,-1));
+    (SINONIMOS_VISUALES[n] || []).forEach(function (w) { opciones.push(w); });
+    return opciones.filter(function (w,i,a) {
+      return w.length >= 3 && a.findIndex(function (o) { return normalizar(o) === normalizar(w); }) === i;
+    }).slice(0,4);
+  }
+  function coincide(clave, palabra) {
+    if (!clave) return false;
+    return clave === palabra || clave + 's' === palabra || clave + 'es' === palabra ||
+      palabra + 's' === clave || palabra + 'es' === clave;
+  }
+  function elegirPicto(datos, termino) {
     if (!Array.isArray(datos)) return null;
+    var n = normalizar(termino);
     for (var i = 0; i < datos.length; i++) {
       var p = datos[i];
       if (!p || p.sex || p.violence) continue;
@@ -1148,33 +1183,37 @@
         if (k.keyword) claves.push(normalizar(k.keyword));
         if (k.plural) claves.push(normalizar(k.plural));
       });
-      if (claves.some(function (k) { return coincide(k, normal); })) return { id: p._id };
+      if (claves.some(function (k) { return coincide(k, n); })) return { id: p._id, representa: termino };
     }
     return null;
   }
-
   async function buscarPicto(palabra, normal, senal) {
     if (cachePictos.has(normal)) return cachePictos.get(normal);
-    var direcciones = [
-      'https://api.arasaac.org/v1/pictograms/es/bestsearch/' + encodeURIComponent(palabra),
-      'https://api.arasaac.org/api/pictograms/es/bestsearch/' + encodeURIComponent(palabra)
-    ];
-    var datos = null;
-    for (var i = 0; i < direcciones.length; i++) {
+    var opciones = variantesPicto(palabra);
+    var respondio = false;
+    for (var i = 0; i < opciones.length; i++) {
+      var termino = opciones[i];
+      var url = 'https://api.arasaac.org/v1/pictograms/es/search/' + encodeURIComponent(termino);
+      var datos;
       try {
-        var r = await fetch(direcciones[i], { signal: senal });
-        if (r.status === 404) { datos = []; break; }
+        var r = await fetch(url, { signal: senal });
+        if (r.status === 404) { respondio = true; continue; }
         if (!r.ok) continue;
         datos = await r.json();
-        break;
+        respondio = true;
       } catch (e) {
         if (e.name === 'AbortError') throw e;
+        continue;
+      }
+      var elegido = elegirPicto(datos, termino);
+      if (elegido) {
+        cachePictos.set(normal, elegido);
+        return elegido;
       }
     }
-    if (datos === null) throw new Error('red');
-    var elegido = elegirPicto(datos, normal);
-    cachePictos.set(normal, elegido);
-    return elegido;
+    if (!respondio) throw new Error('red');
+    cachePictos.set(normal, null);
+    return null;
   }
 
   function cancelarPictos() {
@@ -1202,14 +1241,16 @@
       });
     });
 
+    var cantidadMarcada = document.querySelector('input[name="pictos-densidad"]:checked');
+    var maximo = Math.max(3, Math.min(9, Number(cantidadMarcada && cantidadMarcada.value) || 6));
     var tareas = [];
     estado.bloques.forEach(function (b, i) {
-      var claves = palabrasClave(textoDeBloque(b), frecuencias, b.tipo === 'titulo' ? 2 : 4);
+      var claves = palabrasClave(textoDeBloque(b), frecuencias, b.tipo === 'titulo' ? Math.min(4,maximo) : maximo);
       if (claves.length) tareas.push({ indice: i, claves: claves });
     });
     var unicas = new Map();
     tareas.forEach(function (t) { t.claves.forEach(function (c) { if (!unicas.has(c.normal)) unicas.set(c.normal, c.palabra); }); });
-    var lista = Array.from(unicas.entries()).slice(0, 90);
+    var lista = Array.from(unicas.entries()).slice(0, 135);
 
     if (!lista.length) {
       estadoP.textContent = 'No hay palabras para buscar. Se muestra solo el texto.';
@@ -1261,7 +1302,7 @@
       if (!nodo) return;
       var encontrados = t.claves.map(function (c) {
         var r = cachePictos.get(c.normal);
-        return r ? { id: r.id, palabra: c.palabra } : null;
+        return r ? { id: r.id, palabra: c.palabra, representa: r.representa } : null;
       }).filter(Boolean);
       if (!encontrados.length) return;
       parrafosCon += 1;
@@ -1273,7 +1314,7 @@
         var fig = crear('figure', 'picto');
         var img = document.createElement('img');
         img.src = 'https://static.arasaac.org/pictograms/' + e.id + '/' + e.id + '_300.png';
-        img.alt = 'Pictograma: ' + e.palabra;
+        img.alt = 'Pictograma de apoyo para ' + e.palabra + (e.representa && normalizar(e.representa) !== normalizar(e.palabra) ? ', representado por ' + e.representa : '');
         img.width = 300; img.height = 300;
         img.loading = 'lazy';
         img.addEventListener('error', function () { li.remove(); });
@@ -1290,7 +1331,7 @@
     var sinPictos = tareas.length - parrafosCon;
     var mensaje = (detenida ? 'Búsqueda detenida. ' : 'Listo. ') +
       'Se agregaron ' + totalPictos + ' pictogramas en ' + parrafosCon + ' de ' + tareas.length + ' bloques.' +
-      (sinPictos > 0 ? ' ' + sinPictos + ' bloques quedaron solo con texto porque no había un pictograma que coincidiera.' : '') +
+      (sinPictos > 0 ? ' ' + sinPictos + ' bloques quedaron solo con texto; podés probar otras palabras con «Agregar un pictograma».' : '') +
       (errorRed ? ' Se cortó la conexión con ARASAAC antes de terminar.' : '');
     estadoP.textContent = mensaje;
     $('#buscar-pictos').focus();
