@@ -1,0 +1,89 @@
+/* CLARIA Aula · formulario único, resultado completo y corrección opcional */
+.aula-unificada[hidden],.aula-resultado[hidden],.aula-tarjeta__editor[hidden],.claria-conversacion[hidden]{display:none!important}
+.aula-unificada{margin:0 clamp(.9rem,2.6vw,1.65rem) clamp(1rem,3vw,2rem)}
+.aula-unificada__cabecera{margin:.1rem 0 1rem}
+.aula-unificada__cabecera h3{font:700 clamp(1.5rem,3vw,2.05rem)/1.17 "Space Grotesk",sans-serif;margin:.25rem 0 .4rem;color:#f0ffff}
+.aula-unificada__cabecera p:not(.claria-paso){font-size:.97rem;color:#bad8e2;max-width:68ch;line-height:1.55;margin:0}
+.aula-formulario{border:1px solid #41778a;border-radius:19px;background:linear-gradient(130deg,#09283a,#112c42);padding:clamp(.9rem,2.6vw,1.5rem)}
+.aula-formulario__campos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.25fr);gap:.75rem}
+.aula-formulario label,.aula-tarjeta__editor label{display:block;font-size:.91rem;font-weight:750;color:#d9eff7;line-height:1.35}
+.aula-formulario :is(select,input[type="text"],textarea),.aula-tarjeta__editor textarea{
+ width:100%;min-width:0;display:block;max-width:100%;margin:.4rem 0 .2rem;padding:.7rem .8rem;
+ color:#eafaff;background:#081d2d;border:1px solid #477689;border-radius:12px;
+ font:400 .99rem/1.5 "Atkinson Hyperlegible",Arial,sans-serif
+}
+.aula-formulario :is(select,input,textarea):focus-visible,.aula-tarjeta__editor :is(input,textarea):focus-visible{outline:3px solid #6ae4ef;outline-offset:2px}
+.aula-origen{margin-top:1rem;border:1px solid #31566a;border-radius:15px;padding:.9rem;background:#0c2335}
+.aula-origen__titulo{color:#dcf8fb;font-weight:750;font-size:.95rem;margin:0 0 .75rem}
+.aula-origen__titulo span{display:inline-block;font-size:.78rem;font-weight:500;color:#a4c6d1}
+.aula-archivo__titulo{display:block;font-size:.87rem!important;color:#9fe5ed!important}
+.aula-origen input[type="file"]{display:block;max-width:100%;margin:.5rem 0;font-size:.88rem;color:#defaff}
+.aula-archivo__estado{font-size:.82rem;color:#adcfdc;margin:.4rem 0 .8rem}
+.aula-origen details{margin:.45rem 0 0;border-top:1px solid #35657a;padding-top:.55rem}
+.aula-origen summary{font-size:.87rem;font-weight:750;color:#a2e9f3;cursor:pointer;list-style:auto}
+.aula-campo-texto{margin:.7rem 0 .25rem}
+.aula-origen textarea{min-height:7rem;resize:vertical}
+.aula-consentimiento{display:flex!important;align-items:flex-start;gap:.55rem;font-size:.81rem!important;font-weight:500!important;color:#bfd5df!important;line-height:1.4!important;margin:1rem 0 .75rem}
+.aula-consentimiento input{width:1.15rem;height:1.15rem;flex:none;margin:0;accent-color:#63e7ed}
+.aula-generar{border-radius:13px!important;min-height:3.2rem;font-size:1.04rem!important;font-weight:800!important}
+.aula-estado{font-size:.84rem;font-weight:600;color:#96eaf0;margin:.8rem 0 0;min-height:1.4rem}
+.aula-resultado{margin:1.4rem 0 0;padding:0}
+.aula-resultado__introduccion{padding:.8rem 0 .9rem}
+.aula-resultado__introduccion h3{font:700 clamp(1.4rem,2.8vw,2.05rem)/1.25 "Space Grotesk",sans-serif;color:#f6ffff;letter-spacing:-.035em;margin:.2rem 0 .45rem}
+.aula-resultado__introduccion>p:not(.claria-paso){font-size:.9rem;color:#bcd8e3;margin:.15rem 0 .85rem}
+.aula-resultado__herramientas{display:flex;gap:.55rem;flex-wrap:wrap}
+.aula-resultado__herramientas .boton{font-size:.89rem;font-weight:750;padding:.6rem .8rem;border-radius:10px}
+.aula-tarjetas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.aula-tarjeta{min-width:0;padding:1.05rem;background:#123147;border:1px solid #3b6880;border-radius:17px;break-inside:avoid}
+.aula-tarjeta:first-child{grid-column:1/-1;background:linear-gradient(130deg,#144055,#112f4b)}
+.aula-tarjeta:nth-child(2){grid-column:1/-1}
+.aula-tarjeta__cabecera{display:flex;justify-content:space-between;align-items:flex-start;gap:.7rem;margin-bottom:.75rem}
+.aula-tarjeta__cabecera h4{font:700 clamp(1.1rem,2vw,1.35rem)/1.25 "Space Grotesk",sans-serif;color:#eaffff;margin:0 0 .2rem}
+.aula-tarjeta__cabecera p{font-size:.8rem;color:#b2d0dc;margin:0;max-width:55ch}
+.aula-tarjeta__editar{flex:none;border:1px solid #69dce9;background:#1b4e60;border-radius:10px;padding:.45rem .7rem;color:#a5f0f5;font:750 .82rem "Atkinson Hyperlegible",sans-serif;cursor:pointer}
+.aula-tarjeta__editar:hover{background:#26677b}
+.aula-tarjeta__texto{font-size:.97rem;line-height:1.62;color:#e3f1f7;white-space:normal;overflow-wrap:anywhere}
+.aula-tarjeta__texto p{margin:.55rem 0;white-space:pre-wrap}
+.aula-tarjeta__texto h5{font-size:.93rem;color:#86eff4;letter-spacing:.02em;margin:.75rem 0 .25rem}
+.aula-tarjeta__editor{margin:.9rem 0 0;border-top:1px solid #39697f;padding-top:.9rem}
+.aula-tarjeta__editor textarea{resize:vertical;margin:.3rem 0 .75rem;min-height:6rem}
+.aula-tarjeta__editor label{color:#d3f1f4}
+.aula-tarjeta__acciones{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.6rem}
+.aula-tarjeta__acciones .boton{padding:.55rem .85rem;font-size:.86rem;border-radius:10px}
+.aula-visuales{margin:1.25rem 0 .2rem;background:#0e293b;padding:.85rem;border:1px solid #376478;border-radius:13px}
+.aula-visuales__titular h4{font:700 1rem "Space Grotesk",sans-serif;color:#e6ffff;margin:0 0 .3rem}
+.aula-visuales__titular p{margin:0 0 .6rem;font-size:.81rem;line-height:1.5;color:#b1d0de}
+.aula-visuales__estado{font-size:.8rem;color:#a6d5e0;margin:.4rem 0}
+.aula-pictos-lista,.aula-ilustraciones{display:flex;flex-wrap:wrap;gap:.55rem;padding:0;margin:.6rem 0;list-style:none}
+.aula-picto{width:min(8rem,calc(33% - .5rem));min-width:6.1rem;background:#fcffff;color:#164057;border-radius:11px;border:1px solid #8fcad2;padding:.45rem;display:flex;flex-direction:column;align-items:center;gap:.25rem;text-align:center}
+.aula-picto img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.aula-picto span{font-weight:750;font-size:.8rem;overflow-wrap:anywhere}
+.aula-imagenes h5{font-size:.95rem;margin:.8rem 0 .4rem;color:#b9f2f6}
+.aula-ilustraciones li{flex:1 1 8rem;max-width:11rem;min-width:6.5rem;background:white;color:#18465a;border-radius:11px;padding:.4rem}
+.aula-ilustraciones figure{margin:0}.aula-ilustraciones svg{max-width:100%;height:auto}
+.aula-ilustraciones figcaption{font-size:.76rem;line-height:1.25}
+.aula-creditos{font-size:.71rem;color:#accbd4;line-height:1.42;margin:.75rem 0 0}
+.aula-fuentes{display:flex;align-items:center;gap:.5rem 1rem;flex-wrap:wrap;border-top:1px solid #356078;padding:.85rem .2rem;margin-top:1rem;color:#b8d5df;font-size:.78rem;line-height:1.5}
+.aula-fuentes a{color:#98e3ed;text-underline-offset:.2em}
+.aula-chat-secundario{padding:.8rem 0 0}
+.aula-chat-secundario button,.aula-chat-enlace{background:none;border:0;padding:.6rem 0;color:#8ce5ef;font:750 .88rem "Atkinson Hyperlegible",sans-serif;text-align:left;cursor:pointer;text-decoration:underline;text-underline-offset:.23em}
+.aula-chat-enlace{margin-top:1rem}
+html[data-contraste="alto"] :is(.aula-formulario,.aula-origen,.aula-tarjeta,.aula-visuales){background:#000!important;color:#fff!important;border:2px solid #fff!important}
+html[data-contraste="alto"] :is(.aula-tarjeta__texto,.aula-tarjeta__texto p,.aula-unificada__cabecera p,.aula-tarjeta__cabecera p){color:#fff!important}
+@media(max-width:54rem){.aula-formulario__campos{grid-template-columns:repeat(2,minmax(0,1fr))}.aula-formulario__campos>label:last-child{grid-column:1/-1}}
+@media(max-width:39rem){.aula-formulario__campos,.aula-tarjetas{grid-template-columns:1fr}.aula-formulario__campos>label:last-child{grid-column:1}.aula-tarjeta:first-child,.aula-tarjeta:nth-child(2){grid-column:1}.aula-resultado__herramientas .boton{flex:1 1 42%}.aula-generar{width:100%}}
+@media print{
+ .pagina-claria .cabecera,.pagina-claria .pie,.pagina-claria .claria-presentacion,.pagina-claria .claria-asistente__cabecera,
+ .pagina-claria .claria-roles,.pagina-claria .aula-unificada__cabecera,.pagina-claria .aula-formulario,
+ .pagina-claria .aula-estado,.pagina-claria .aula-resultado__herramientas,.pagina-claria .aula-tarjeta__editar,
+ .pagina-claria .aula-tarjeta__editor,.pagina-claria .claria-conversacion,.pagina-claria .aula-chat-secundario,
+ .pagina-claria .aula-chat-enlace,.pagina-claria .claria-aviso{display:none!important}
+ .pagina-claria .claria-asistente,.pagina-claria .aula-unificada,.pagina-claria .aula-resultado{box-shadow:none!important;background:white!important;color:#000!important;border:0!important;margin:0!important;padding:0!important}
+ .pagina-claria .aula-tarjetas{display:block!important}
+ .pagina-claria .aula-tarjeta{display:block!important;background:white!important;color:#111!important;border:0!important;border-radius:0!important;border-bottom:1px solid #ccc!important;break-inside:avoid;padding:.5rem 0!important;margin-bottom:.5rem!important}
+ .pagina-claria .aula-tarjeta__texto,.pagina-claria .aula-tarjeta__texto p,.pagina-claria .aula-tarjeta__texto h5,.pagina-claria .aula-tarjeta__cabecera h4,.pagina-claria .aula-tarjeta__cabecera p,.pagina-claria .aula-resultado__introduccion h3{color:#111!important}
+ .pagina-claria .aula-visuales{background:white!important;color:black!important;border:0!important}
+ .pagina-claria .aula-visuales *:not(img){color:black!important}
+ .pagina-claria .aula-fuentes,.pagina-claria .aula-fuentes a{color:black!important}
+ .pagina-claria .aula-resultado__introduccion{padding:0!important}
+}
