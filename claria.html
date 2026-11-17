@@ -16,7 +16,7 @@
   <script src="js/preferencias.js"></script>
 
   <link rel="stylesheet" href="css/claria.css?v=4">
-  <link rel="stylesheet" href="css/claria-asesoria.css?v=7">
+  <link rel="stylesheet" href="css/claria-asesoria.css?v=8">
   <script src="js/chat-config.js" defer></script>
   <script src="js/claria.js?v=6" defer></script>
   <script src="js/pictogramas-arasaac.js" defer></script>
@@ -78,8 +78,7 @@
     <div class="claria-presentacion__texto">
       <p class="claria-sello"><span aria-hidden="true"></span> TU ASISTENTE DE BERMEJO ACCESIBLE</p>
       <h1 id="claria-titulo">¡Hola! Soy <em>CLARIA.</em></h1>
-      <p class="claria-subtitulo">Estoy para acompañarte a aprender, enseñar y encontrar otras maneras de comprender.</p>
-      <p class="claria-instruccion">Si sos docente, contame tu idea. Conversamos, la mejoramos juntos y la convertimos en una clase con recursos visuales significativos.</p>
+      <p class="claria-subtitulo">Aprendé, conversá y creá materiales a tu manera.</p>
       <a class="claria-volver" href="index.html">← Volver al inicio de Bermejo</a>
     </div>
     <div class="claria-presentacion__visual">
@@ -91,7 +90,7 @@
   </section>
   <section class="claria-asistente" aria-labelledby="claria-conversa-titulo">
     <div class="claria-asistente__cabecera">
-      <div><p class="claria-paso">ELEGÍ TU RECORRIDO</p><h2 id="claria-conversa-titulo">¿Qué necesitás hacer hoy?</h2></div>
+      <div><h2 id="claria-conversa-titulo">¿Cómo te puedo ayudar?</h2></div>
       <span class="claria-modo-etiqueta" id="claria-etiqueta">Guía interactiva</span>
     </div>
     <div class="claria-roles" role="group" aria-label="Elegí tu recorrido">
@@ -106,14 +105,13 @@
     </div>
     <section class="claria-asesoria" id="claria-asesoria" aria-labelledby="asesoria-titulo" hidden>
   <div class="asesoria-intro">
-    <p class="claria-paso">CLARIA · TU COMPAÑERA DE PLANIFICACIÓN</p>
-    <h3 id="asesoria-titulo">Contame qué necesitás enseñar.</h3>
-    <p>No hace falta completar formularios. Podemos pensar juntos una clase, sus actividades y los apoyos que necesita tu grupo.</p>
+    <h3 id="asesoria-titulo">Tu clase empieza con una conversación.</h3>
+    <p>Contame tu idea por voz o por escrito. CLARIA te ayuda a desarrollarla.</p>
   </div>
   <div class="asesoria-chat">
     <div class="asesoria-chat__encabezado">
       <img src="https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png" width="72" height="72" alt="" loading="lazy">
-      <div><strong>CLARIA</strong><span>Asistente conversacional para docentes</span></div>
+      <div><strong>CLARIA</strong><span>Tu asistente para planificar</span></div>
       <button type="button" id="asesoria-escuchar" class="asesoria-escuchar" title="Comprobar si la voz de CLARIA se escucha en este navegador">🔊 Probar sonido</button>
     </div>
     <section class="claria-voz" aria-labelledby="claria-voz-titulo" id="asesoria-voz-tarjeta" data-voz-estado="apagado">
@@ -123,32 +121,37 @@
         <span class="claria-voz__latido"><span></span><span></span><span></span><span></span><span></span></span>
       </div>
       <div class="claria-voz__mensaje">
-        <p class="claria-voz__sobre">MODO CONVERSACIÓN</p>
         <h4 id="claria-voz-titulo">Hablá con CLARIA</h4>
-        <p id="asesoria-voz-estado" role="status" aria-live="polite">La conversación por voz está lista para comenzar.</p>
+        <p id="asesoria-voz-estado" role="status" aria-live="polite">Tocá el micrófono para hablar.</p>
         <p id="asesoria-voz-captura" class="claria-voz__captura" aria-live="off"></p>
         <button type="button" id="asesoria-modo-voz" class="claria-voz__iniciar" aria-pressed="false">🎙️ Conversar con CLARIA</button>
       <label class="asesoria-permiso"><input type="checkbox" id="asesoria-permiso">
-        <span>Autorizo enviar esta conversación a la IA. No incluiré nombres ni datos que identifiquen a estudiantes.</span>
+        <span>Autorizo enviar mis consultas a la IA, sin datos personales de estudiantes.</span>
       </label>
-        <p class="claria-voz__ayuda">El reconocimiento puede procesar el audio en un servicio externo del navegador. Para detener la escucha, tocá el mismo botón. El contenido de la conversación también se envía a la IA de CLARIA.</p>
-        <div class="asesoria-conexion" aria-label="Comprobar el estado real de la inteligencia artificial">
-          <button id="asesoria-comprobar-ia" class="asesoria-conexion__boton" type="button">Comprobar IA</button>
-          <p id="asesoria-ia-estado" class="asesoria-conexion__estado" role="status" aria-live="polite">Conexión todavía no verificada. Podés comprobarla con una consulta breve.</p>
-        </div>
+        <details class="asesoria-diagnostico">
+          <summary>¿CLARIA no responde? Comprobar conexión</summary>
+          <div class="asesoria-conexion" aria-label="Comprobar el estado real de la inteligencia artificial">
+            <button id="asesoria-comprobar-ia" class="asesoria-conexion__boton" type="button">Comprobar IA</button>
+            <p id="asesoria-ia-estado" class="asesoria-conexion__estado" role="status" aria-live="polite">Conexión todavía no verificada.</p>
+          </div>
+        </details>
+        <details class="asesoria-ayuda-privacidad">
+          <summary>Privacidad y uso del micrófono</summary>
+          <p class="claria-voz__ayuda">El navegador puede procesar la voz mediante un servicio externo. La transcripción y los mensajes se envían a la IA solo con tu autorización. No compartas nombres ni datos identificatorios de estudiantes. Tocá de nuevo el micrófono para detenerlo.</p>
+        </details>
 
       </div>
     </section>
     <div id="asesoria-mensajes" class="asesoria-mensajes" role="log" aria-label="Conversación docente con CLARIA" aria-live="polite" aria-relevant="additions text"></div>
-    <div class="asesoria-ejemplos" id="asesoria-ejemplos" role="group" aria-label="Ejemplos para empezar a conversar">
-      <button type="button" data-ejemplo="Quiero planificar una clase de Matemática para 3.º grado. ¿Qué me sugerís?">Matemática · 3.º grado</button>
-      <button type="button" data-ejemplo="Quiero preparar una clase para un grupo diverso. Necesito distintas formas de enseñar y participar, siguiendo el DUA.">Planificar para un grupo diverso</button>
-      <button type="button" data-ejemplo="Quiero transformar una explicación en una actividad visual, no en una imagen decorativa. ¿Cómo lo podemos hacer?">Crear un recurso visual significativo</button>
-    </div>
+    <details class="asesoria-ejemplos" id="asesoria-ejemplos"><summary>Ver ideas para empezar</summary><div class="asesoria-ejemplos__botones" role="group" aria-label="Consultas de ejemplo">
+      <button type="button" data-ejemplo="Quiero planificar una clase de Matemática para 3.º grado. ¿Qué me sugerís?">Planificar Matemática</button>
+      <button type="button" data-ejemplo="Quiero preparar una clase para un grupo diverso. Necesito distintas formas de enseñar y participar, siguiendo el DUA.">Preparar apoyos para el grupo</button>
+      <button type="button" data-ejemplo="Quiero transformar una explicación en una actividad visual, no en una imagen decorativa. ¿Cómo lo podemos hacer?">Crear una lámina didáctica</button>
+    </div></details>
     <form id="asesoria-form" class="asesoria-form">
-      <label for="asesoria-texto" class="asesoria-form__label">O escribile a CLARIA como le hablarías a una colega</label>
+      <label for="asesoria-texto" class="asesoria-form__label">O escribí tu consulta</label>
       <div class="asesoria-form__fila">
-        <textarea id="asesoria-texto" rows="3" maxlength="1500" placeholder="Por ejemplo: Tengo 25 estudiantes de 3.º grado. Quiero enseñar multiplicación y necesito distintas maneras de explicar y evaluar…" required></textarea>
+        <textarea id="asesoria-texto" rows="2" maxlength="1500" placeholder="Quiero enseñar multiplicación en 3.º grado. ¿Por dónde empiezo?" required></textarea>
         <button type="submit" class="asesoria-form__enviar" id="asesoria-enviar">Enviar <span aria-hidden="true">➜</span></button>
       </div>
       <details class="asesoria-adjunto" id="asesoria-adjunto">
@@ -160,32 +163,41 @@
         <textarea id="asesoria-fuente" rows="5" maxlength="6000" placeholder="Este material podrá usarse como fuente de la planificación y su adaptación."></textarea>
       </details>
 
-      <p class="asesoria-privacidad">Podés describir necesidades de apoyo sin identificar a ninguna persona. La conversación no se guarda en la página: si la cerrás, se pierde, salvo que la descargues.</p>
+      <details class="asesoria-privacidad-detalle"><summary>¿Se guarda lo que conversamos?</summary><p class="asesoria-privacidad">Podés describir necesidades de apoyo sin identificar a ninguna persona. La conversación no se guarda en esta página: al cerrarla, se pierde, salvo que la descargues.</p></details>
       <p id="asesoria-estado" class="asesoria-estado" role="status" aria-live="polite"></p>
     </form>
     <div class="asesoria-acciones">
-      <button type="button" id="asesoria-crear" class="asesoria-acciones__crear" disabled>✨ Crear propuesta de clase y recurso visual</button>
-      <button type="button" id="asesoria-descargar-chat" class="asesoria-acciones__secundaria">Guardar conversación</button>
-      <button type="button" id="asesoria-reiniciar" class="asesoria-acciones__secundaria">Nueva conversación</button>
+      <button type="button" id="asesoria-crear" class="asesoria-acciones__crear" disabled>Crear clase y recurso visual</button>
+      <details class="asesoria-acciones__menu"><summary>Más opciones</summary>
+        <div class="asesoria-acciones__opciones">
+          <button type="button" id="asesoria-descargar-chat" class="asesoria-acciones__secundaria">Guardar conversación</button>
+          <button type="button" id="asesoria-reiniciar" class="asesoria-acciones__secundaria">Nueva conversación</button>
+        </div>
+      </details>
     </div>
   </div>
 
   <section class="asesoria-entrega" id="asesoria-entrega" aria-labelledby="asesoria-entrega-titulo" hidden>
     <div class="asesoria-entrega__encabezado">
-      <p class="claria-paso">DEL DIÁLOGO AL MATERIAL DIDÁCTICO</p>
-      <h3 id="asesoria-entrega-titulo">Tu propuesta para revisar y llevar al aula</h3>
-      <p>CLARIA organiza lo conversado en una propuesta editable. Podés seguir charlando y actualizarla cuando quieras.</p>
+      <h3 id="asesoria-entrega-titulo">Tu propuesta de clase</h3>
+      <p>Revisala, editá lo que necesites y descargala.</p>
     </div>
     <div class="asesoria-entrega__herramientas">
       <button type="button" id="asesoria-word">Descargar Word editable</button>
-      <button type="button" id="asesoria-copiar-plan">Copiar la propuesta</button>
-      <button type="button" id="asesoria-imprimir">Imprimir / PDF</button>
+      <details class="asesoria-entrega__opciones"><summary>Otras formas de guardar</summary>
+        <div class="asesoria-entrega__opciones-botones">
+          <button type="button" id="asesoria-copiar-plan">Copiar texto</button>
+          <button type="button" id="asesoria-imprimir">Imprimir / PDF</button>
+        </div>
+      </details>
     </div>
     <div class="asesoria-documento">
       <label for="asesoria-plan">Planificación y actividades <span>podés cambiar el texto</span></label>
       <textarea id="asesoria-plan" rows="19" spellcheck="true" aria-label="Propuesta didáctica editable"></textarea>
     </div>
-    <div class="asesoria-imagen">
+    <details class="asesoria-imagen-contenedor">
+      <summary>Crear una imagen con finalidad pedagógica</summary>
+      <div class="asesoria-imagen">
       <div class="asesoria-imagen__encabezado">
         <div><p class="claria-paso">IMAGEN CON PROPÓSITO PEDAGÓGICO</p><h4>Un prompt que enseña, no solo que decora</h4></div>
         <span class="asesoria-imagen__etiqueta">Lámina o actividad visual</span>
@@ -198,8 +210,9 @@
         <button type="button" id="asesoria-copiar-prompt">Copiar prompt de la imagen</button>
         <button type="button" id="asesoria-copiar-todo">Copiar clase + prompt</button>
       </div>
-      <p class="asesoria-imagen__aviso">El prompt no crea automáticamente una imagen: podés copiarlo a un generador de imágenes. Antes de usar el resultado, comprobá cantidades, símbolos, elementos visuales, legibilidad y su relación con el objetivo de aprendizaje.</p>
-    </div>
+      <p class="asesoria-imagen__aviso">Copiá el prompt en un generador de imágenes. Revisá cantidades, símbolos y consignas antes de usar el material.</p>
+      </div>
+    </details>
     <div id="asesoria-impresion" class="asesoria-impresion" aria-hidden="true"></div>
     <details class="asesoria-fuentes">
       <summary>Fuentes pedagógicas y normativa para consultar</summary>
@@ -229,9 +242,10 @@
         <a href="docente.html#normativa">Fuentes y normativa</a>
       </div>
     </div>
-    <aside class="claria-aviso" aria-label="Sobre las respuestas">
-      <strong>Información importante:</strong> CLARIA orienta, pero las propuestas pedagógicas requieren revisión docente. Las consultas normativas se acompañan de fuentes oficiales; no reemplazan la lectura de la resolución completa, las decisiones institucionales ni el asesoramiento especializado.
-    </aside>
+    <details class="claria-aviso">
+      <summary>Información importante</summary>
+      <p>CLARIA orienta, pero las propuestas pedagógicas requieren revisión docente. Las consultas normativas se acompañan de fuentes oficiales; no reemplazan la lectura de la resolución completa, las decisiones institucionales ni el asesoramiento especializado.</p>
+    </details>
   </section>
 </div>
 </main>
