@@ -2,7 +2,7 @@
 
 ## Nueva versión: guía, lectura y actividades
 
-Al abrir la portada se elige entre ayuda guiada con voz o exploración manual. La elección queda en esta pestaña; la voz se puede apagar. El botón «Estoy perdido» abre indicaciones escritas, permite repetirlas y señalar el próximo control. No se usa micrófono.
+La portada prioriza la educación con dos caminos bien diferenciados: «Comprender un material» y «Crear una adaptación». El ingreso es directo, sin ventana de bienvenida obligatoria. La ayuda con voz se activa únicamente cuando la persona la solicita y las indicaciones también aparecen escritas. Los ajustes de accesibilidad siguen disponibles en la cabecera. También se muestran ejemplos de uso cotidiano y, como recursos secundarios, la guía docente y el chat intercultural experimental. En la página de materiales, elegir el otro recorrido desde el menú conserva el texto cargado.
 
 Después de cargar y corregir un texto aparecen tres accesos principales: **Escuchar**, **Leer por partes** y **Leer con apoyos visuales**. Las otras opciones están en «Más formas de lectura» y los ajustes existentes siguen disponibles. La paleta tiene acentos más vivos y un modo de alto contraste.
 
