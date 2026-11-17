@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function(){
       {titulo:'Quiero jugar y aprender',consulta:'Quiero explorar juegos educativos'}
     ],
     docente:[
-      {titulo:'Preparar una clase y materiales',accion:'clase',consulta:'Quiero planificar una clase'},
-      {titulo:'Subir un material',accion:'material',consulta:'Quiero subir un material'},
+      {titulo:'Conversar para planificar',accion:'clase',consulta:'Quiero planificar una clase'},
+      {titulo:'Trabajar con una fotocopia',accion:'material',consulta:'Quiero subir un material'},
       {titulo:'Consultar normativa de Formosa',consulta:'Quiero conocer la Resolución 2481/24 y la normativa inclusiva'},
       {titulo:'Tengo una situación en el aula',consulta:'Necesito orientación sobre una situación de participación en el aula'}
     ]
@@ -78,18 +78,15 @@ document.addEventListener('DOMContentLoaded', function(){
       b.addEventListener('click',function(){
         if(ocupada)return;
         if(o.accion){
-          var formulario=document.getElementById('aula-formulario');
-          if(formulario){
-            formulario.scrollIntoView({behavior:'smooth',block:'start'});
+          var area=document.getElementById('claria-asesoria');
+          if(area){
+            area.scrollIntoView({behavior:'smooth',block:'start'});
+            var inp=document.getElementById('asesoria-texto');
             if(o.accion==='material'){
-              var archivo=document.getElementById('aula-archivo');
-              if(archivo)archivo.focus({preventScroll:true});
-              var detalle=document.getElementById('aula-texto-detalle');
-              if(detalle)detalle.open=true;
-            }else{
-              var campo=document.getElementById('aula-grado');
-              if(campo)campo.focus({preventScroll:true});
-            }
+              var adjunto=document.getElementById('asesoria-adjunto');
+              if(adjunto)adjunto.open=true;
+              var f=document.getElementById('asesoria-archivo');if(f)f.focus({preventScroll:true});
+            }else if(inp){inp.value=o.consulta;inp.focus({preventScroll:true});}
             return;
           }
         }
@@ -110,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function(){
       return {texto:'Estas son las fuentes que conviene consultar antes de tomar una decisión institucional:\n\n• Resolución 2481/24 de Formosa: marco provincial de orientaciones para la inclusión de estudiantes con discapacidad.\n• Resolución CFE 311/16: orientaciones federales para promoción, acreditación y trayectorias escolares de estudiantes con discapacidad.\n• Ley 26.206: marco nacional de educación.\n\nPuedo ayudarte a localizar los documentos. Para saber qué corresponde en un caso concreto hay que leer los artículos completos y consultar con la institución o supervisión. En modo guía no interpreto obligaciones legales ni invento artículos.',links:norm([0,1,2])};
     }
     if(/dua|clase|planific|secuencia|ensenar|enseñar/.test(p)) {
-      return {texto:'Para planificar con DUA: entrá a «Preparar una clase», elegí grado, materia y tema. CLARIA genera el texto explicativo, actividades, cierre y evaluación, con opciones de compromiso, representación y acción y expresión.\n\n• Compromiso: ofrecer opciones para participar y conectar el contenido con experiencias significativas.\n• Representación: combinar explicación oral, texto, imágenes, modelos y vocabulario clave.\n• Acción y expresión: permitir demostrar lo aprendido de distintas maneras, con criterios comunes.\n\nPodés generar la propuesta directamente o entrar a Crear para preparar actividades a partir de un material.',links:[acceso('Crear adaptación o actividades'),normativas[3]]};
+      return {texto:'Para planificar con DUA: conversá directamente con CLARIA en la sección docente. Podés contarle tu idea, el grado, la materia y cómo es el grupo; ella sugiere opciones y hace preguntas útiles. Cuando esté claro, tocá «Crear propuesta de clase y recurso visual» para obtener un Word y un prompt pedagógico.\n\n• Compromiso: ofrecer opciones para participar y conectar el contenido con experiencias significativas.\n• Representación: combinar explicación oral, texto, imágenes, modelos y vocabulario clave.\n• Acción y expresión: permitir demostrar lo aprendido de distintas maneras, con criterios comunes.\n\nPodés generar la propuesta directamente o entrar a Crear para preparar actividades a partir de un material.',links:[acceso('Crear adaptación o actividades'),normativas[3]]};
     }
     if(/adapt|actividad|fotocopia|material|ejercicio|apoyo|pictogra/.test(p)){
       return {texto:'Para crear una adaptación: entrá a Crear y cargá el material. Elegí materia, grado, objetivos y tipos de apoyos. Podés orientar la propuesta hacia una adaptación o una clase siguiendo el DUA. La IA genera un borrador, que después revisás y editás antes de descargar.',links:[acceso('Crear adaptación o actividades'),normativas[3]]};
@@ -157,14 +154,12 @@ document.addEventListener('DOMContentLoaded', function(){
     if(ocupada)return;
     var q=entrada.trim();if(!q)return;
     if(rol==='docente' && q.length<135 && /(?:planific|preparar|armar|organizar).*(?:clase|secuencia)|(?:clase|secuencia).*(?:planific|preparar|armar)/i.test(normalizar(q))){
-      var botonPlan=document.querySelector('[data-docente-tab="clase"]');
-      var entradaPlan=document.getElementById('aula-formulario');
-      if(entradaPlan){entradaPlan.scrollIntoView({block:'start',behavior:'smooth'});estado.textContent='Elegí grado, materia y tema y tocá «Preparar mi clase y materiales».';return;}
+      var conversacion=document.getElementById('claria-asesoria');
+      if(conversacion){conversacion.scrollIntoView({block:'start',behavior:'smooth'});var campo=document.getElementById('asesoria-texto');if(campo){campo.value=q;campo.focus({preventScroll:true});}estado.textContent='Contale tu idea a CLARIA y conversen antes de crear la propuesta.';return;}
     }
     if(rol==='docente' && q.length<135 && /(?:adapt|resum|simplific|subir).*(?:texto|material|fotocopia|documento|pdf)|(?:texto|material|fotocopia|documento|pdf).*(?:adapt|resum|subir)/i.test(normalizar(q))){
-      var botonMaterial=document.querySelector('[data-docente-tab="material"]');
-      var entradaMaterial=document.getElementById('aula-texto-detalle');
-      if(entradaMaterial){entradaMaterial.open=true;entradaMaterial.scrollIntoView({block:'start',behavior:'smooth'});estado.textContent='Subí un material o pegá el texto. CLARIA lo incluirá en la clase y las adaptaciones.';return;}
+      var adjunto=document.getElementById('asesoria-adjunto');
+      if(adjunto){adjunto.open=true;adjunto.scrollIntoView({block:'start',behavior:'smooth'});estado.textContent='Podés adjuntar el material de forma opcional y seguir conversando con CLARIA.';return;}
     }
     if(q.length>1500){estado.textContent='La pregunta es demasiado larga (máximo 1500 caracteres).';return;}
     if(parecenDatosPersonales(q)){estado.textContent='Quitá nombres, DNI, teléfonos y otros datos personales antes de continuar.';return;}
