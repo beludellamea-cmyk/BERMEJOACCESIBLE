@@ -1,43 +1,44 @@
-/* Libro de la portada: se abre solo al entrar (si la persona no pidió menos movimiento) y permite probar el mismo texto de tres maneras. */
+/* Libro holográfico de la portada. Sigue abriéndose en la home al terminar la intro. */
 (function () {
   'use strict';
   var libro = document.getElementById('libro');
   var boton = document.getElementById('libro-alternar');
-  var nota = document.getElementById('libro-nota');
   if (!libro || !boton) return;
-  var textoBoton = boton.querySelector('span');
-  var botonesVista = libro.querySelectorAll('[data-libro-vista]');
+  var texto = boton.querySelector('span');
   var reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var tocado = false;
-  var notas = {
-    grande: 'El mismo texto, con letra grande y poco contenido.',
-    pictos: 'El mismo texto, con pictogramas.',
-    partes: 'El mismo texto, dividido en partes cortas.'
-  };
+  var usuarioIntervino = false;
+  var yaAnimado = false;
 
-  function fijar(abierto) {
+  function mostrar(abierto) {
     libro.dataset.estado = abierto ? 'abierto' : 'cerrado';
     boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-    textoBoton.textContent = abierto ? 'Cerrar el libro' : 'Abrir el libro';
+    if (texto) texto.textContent = abierto ? 'Cerrar el libro' : 'Abrir el libro';
   }
-  function alternar() { tocado = true; fijar(libro.dataset.estado !== 'abierto'); }
-
-  if (!reducir) {
-    fijar(false);
-    setTimeout(function () { if (!tocado) fijar(true); }, 700);
+  function abrirDespuesDeIntro() {
+    if (yaAnimado) return;
+    yaAnimado = true;
+    if (reducir) { mostrar(true); return; }
+    if (!usuarioIntervino) window.setTimeout(function () {
+      if (!usuarioIntervino) mostrar(true);
+    }, 240);
   }
-  boton.addEventListener('click', alternar);
-  libro.querySelector('.libro__caja').addEventListener('click', function () {
-    if (libro.dataset.estado === 'cerrado') alternar();
+  if (!reducir) mostrar(false);
+  else mostrar(true);
+  window.addEventListener('bermejo:entrada-finalizada', abrirDespuesDeIntro, { once: true });
+  boton.addEventListener('click', function () {
+    usuarioIntervino = true;
+    mostrar(libro.dataset.estado !== 'abierto');
   });
-  Array.prototype.forEach.call(botonesVista, function (b) {
-    b.addEventListener('click', function () {
-      var v = b.getAttribute('data-libro-vista');
-      libro.dataset.vista = v;
-      Array.prototype.forEach.call(botonesVista, function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
-      nota.textContent = notas[v];
-      tocado = true;
-      fijar(true);
-    });
+  var visual = libro.querySelector('.libro__caja');
+  if (visual) visual.addEventListener('click', function () {
+    if (libro.dataset.estado !== 'abierto') {
+      usuarioIntervino = true;
+      mostrar(true);
+    }
   });
+  /* Si la introducción no existe (p. ej., apertura desde el historial), el libro se abre. */
+  window.addEventListener('load', function () {
+    if (yaAnimado) return;
+    if (!document.documentElement.classList.contains('con-entrada')) abrirDespuesDeIntro();
+  }, { once: true });
 })();
