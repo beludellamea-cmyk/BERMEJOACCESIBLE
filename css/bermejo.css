@@ -1082,7 +1082,6 @@ html[data-letra="mayuscula"] :is(h1, h2) { font-family: "Bermejo Mayuscula", var
 .chat-intercultural__rol label { display: block; font-weight: normal; }
 .chat-intercultural__rol input[type="radio"] { width: auto; display: inline; accent-color: var(--accion-fondo); }
 .chat-intercultural fieldset { min-width: 0; margin-block: 1.5rem; border: 2px solid var(--borde); padding: 1rem; }
-}
 
 /* ---------- Laboratorio de adaptaciones (Crear) ---------- */
 .laboratorio { margin: 1.25rem 0; padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--linea); border-radius: var(--radio-grande); background: var(--superficie); color: var(--tinta); box-shadow: var(--sombra); }

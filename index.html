@@ -10,11 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/bermejo.css">
+  <link rel="stylesheet" href="css/bermejo.css?v=tech-20261116">
   <script>
     // Evita el parpadeo de la portada antes de animar el libro.
     try {
-      if (!sessionStorage.getItem('bermejo-entrada-tech-v1') &&
+      if ((new URLSearchParams(location.search).get('intro') === '1' || !sessionStorage.getItem('bermejo-entrada-tech-v1')) &&
           !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('con-entrada');
       }
@@ -32,7 +32,7 @@
       <div class="entrada__pagina"><i></i><i></i><i></i></div>
       <div class="entrada__hoja entrada__hoja--2"></div>
       <div class="entrada__hoja entrada__hoja--1"></div>
-      <div class="entrada__tapa"><img src="img/logo-bermejo.svg" alt="" width="64" height="64"></div>
+      <div class="entrada__tapa"><img src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64"></div>
       <div class="entrada__lomo"></div>
     </div>
     <div class="entrada__mensaje">
@@ -45,7 +45,7 @@
   <header class="cabecera">
     <div class="cabecera__fila">
       <a class="marca" href="index.html">
-        <img class="marca__logo" src="img/logo-bermejo.svg" alt="" width="64" height="64">
+        <img class="marca__logo" src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">
         <span class="marca__nombre">Bermejo <span>Accesible</span></span>
       </a>
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -96,6 +96,7 @@
           <h1 id="titulo-portada">La información <em>a tu manera.</em></h1>
           <p class="intro">Subí un texto, PDF o foto. Comprendelo de distintas formas o creá una adaptación con ayuda de inteligencia artificial.</p>
           <p class="hero__sub">Elegí por dónde empezar ↓</p>
+          <a class="repetir-entrada" href="index.html?intro=1">↻ Ver nuevamente la apertura del libro</a>
         </div>
         <div class="hero__visual">
           <div class="libro" id="libro" data-estado="abierto" data-vista="grande">
@@ -106,7 +107,7 @@
               </div>
               <div class="libro__tapa">
                 <div class="libro__cara libro__cara--frente">
-                  <img src="img/logo-bermejo.svg" alt="" width="64" height="64">
+                  <img src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">
                   <span class="libro__titulo">BERMEJO<br>ACCESIBLE</span>
                   <svg class="libro__rio" viewBox="0 0 120 40"><path d="M0 28c15-14 25 10 40-2s25-14 40-2 25 6 40-6"/></svg>
                 </div>
@@ -149,7 +150,7 @@
     <div class="contenedor">
       <div class="pie__fila">
         <div>
-          <p class="pie__marca"><img src="img/logo-bermejo.svg" alt="" width="64" height="64">Bermejo Accesible</p>
+          <p class="pie__marca"><img src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">Bermejo Accesible</p>
           <p>La información a tu manera. Proyecto de código abierto creado en Formosa. No pide cuentas y no guarda tus materiales.</p>
         </div>
         <ul class="pie__enlaces" aria-label="Enlaces del sitio">
@@ -162,7 +163,7 @@
       <p class="pie__creditos">Pictogramas de Sergio Palao, origen <a href="https://arasaac.org">ARASAAC</a>, licencia CC BY-NC-SA, propiedad del Gobierno de Aragón (España). Lectura de fotos y PDF con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografías <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a> (Braille Institute) y Fraunces. La imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
     </div>
   </footer>
-  <script src="js/libro.js"></script>
-  <script src="js/entrada.js"></script>
+  <script src="js/libro.js?v=tech-20261116"></script>
+  <script src="js/entrada.js?v=tech-20261116"></script>
 </body>
 </html>
