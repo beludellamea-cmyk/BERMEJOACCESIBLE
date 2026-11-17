@@ -191,13 +191,16 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   function elegirRol(nuevo){
     if(ocupada)return;
-    rol=nuevo;historial=[];plan=null;mensajes.replaceChildren();autorizar.checked=false;etiqueta.textContent='Guía interactiva';
+    rol=nuevo;historial=[];plan=null;mensajes.replaceChildren();autorizar.checked=false;
+    etiqueta.textContent=rol==='docente'?'CLARIA · asistente docente':'Guía interactiva';
     document.querySelectorAll('.claria-rol').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.rol===rol));});
     botones();
     deClaria({texto:rol==='docente'
       ?'¡Hola, profe! Soy CLARIA. Podemos planificar una clase con DUA, buscar ideas de apoyo, preparar adaptaciones y localizar normativa. ¿Qué necesitás resolver hoy?'
       :'¡Hola! Soy CLARIA. ¿Querés que leamos algo juntos? Podemos subir un texto, PDF o foto y elegir cómo comprenderlo.'});
-    estado.textContent='Modo guía local: no se enviaron preguntas. Para conversar libremente con IA, autorizá el envío cuando el servicio esté activo.';
+    estado.textContent=rol==='docente'
+      ?'Para conversar, usá el panel docente. Si querés verificar Gemini, tocá «Comprobar IA» junto al micrófono.'
+      :'Guía local disponible. Para hacer preguntas con IA, activá la autorización y comprobá que el servicio responda.';
   }
   document.querySelectorAll('.claria-rol').forEach(function(b){b.addEventListener('click',function(){elegirRol(b.dataset.rol);});});
   form.addEventListener('submit',function(e){e.preventDefault();procesar(texto.value);});
