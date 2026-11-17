@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded',function(){
   const endpoint=String(window.BERMEJO_CHAT_ENDPOINT||'').replace(/\/$/,'');
   const cara='https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png';
   let historial=[],trabajando=false,escuchar=false,propuestaLista=false,numeroDeRevision=0,fragmentoEnviado=false;
+  let modoVoz=false,reconocedor=null,escuchandoMicrofono=false,silencios=0,
+      vozVersion=0,vozRespondio=false,transcripcionFinal='',vozPermisoInicial=false;
+  const btnVoz=$('asesoria-modo-voz'),vozEstado=$('asesoria-voz-estado'),vozCaptura=$('asesoria-voz-captura'),vozTarjeta=$('asesoria-voz-tarjeta');
+  const Reconocimiento=window.SpeechRecognition||window.webkitSpeechRecognition;
   const saludo='¡Hola, profe! Soy CLARIA. Contame qué estás pensando para tu clase. Podés decirme el grado, la materia, qué querés enseñar y cómo es tu grupo. No hace falta que tengas todo resuelto: podemos pensar alternativas juntas. ¿Por dónde empezamos?';
   function textoSeguro(t){return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\b(?:dni|documento|celular|telefono|teléfono|direccion|dirección)\s*[:#]?\s*[\d\w.-]{6,}|\b\d{8,11}\b/i.test(t);}
   function status(t){estado.textContent=t;}
@@ -26,10 +30,24 @@ document.addEventListener('DOMContentLoaded',function(){
   function say(t){
     if(!escuchar||!('speechSynthesis' in window))return;
     speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t.slice(0,1600));u.lang='es-AR';u.rate=.9;
+    const version=vozVersion;
+    const u=new SpeechSynthesisUtterance(t.slice(0,1700));
+    u.lang='es-AR';u.rate=.91;u.pitch=1.04;
+    const voces=speechSynthesis.getVoices();
+    u.voice=voces.find(v=>v.lang.toLowerCase()==='es-ar')||
+      voces.find(v=>v.lang.toLowerCase().startsWith('es-'))||null;
+    u.onstart=()=>{if(modoVoz&&version===vozVersion)estadoVoz('hablando','CLARIA te está respondiendo.');};
+    u.onend=()=>{if(modoVoz&&version===vozVersion) {
+      estadoVoz('transicion','Terminó la respuesta. Preparando el micrófono…');
+      setTimeout(()=>{if(modoVoz&&version===vozVersion&&!trabajando)iniciarEscucha();},500);
+    }};
+    u.onerror=()=>{if(modoVoz&&version===vozVersion){
+      estadoVoz('transicion','No se pudo reproducir la voz. Volvé a tocar el botón del micrófono.');
+      detenerVoz(false);
+    }};
     speechSynthesis.speak(u);
   }
-  function bubble(rol,contenido){
+  function bubble(rol,contenido,hablar=true){
     const fila=document.createElement('div');fila.className='asesoria-burbuja asesoria-burbuja--'+(rol==='usuario'?'usuario':'claria');
     const avatar=document.createElement('span');avatar.className='asesoria-burbuja__avatar';avatar.setAttribute('aria-hidden','true');
     if(rol==='modelo'){
@@ -41,12 +59,124 @@ document.addEventListener('DOMContentLoaded',function(){
     cuerpo.lastChild.textContent=contenido;
     fila.append(avatar,cuerpo);
     mensajes.append(fila);mensajes.scrollTop=mensajes.scrollHeight;
-    if(rol==='modelo')say(contenido);
+    if(rol==='modelo'&&hablar)say(contenido);
   }
+  /* Voz conversacional: escucha turnos cortos y vuelve a escuchar cuando termina de hablar.
+     Sin grabaciones persistentes; el motor de reconocimiento puede procesar audio remotamente. */
+  function estadoVoz(estado,descripcion){
+    if(!vozTarjeta)return;
+    vozTarjeta.dataset.vozEstado=estado;
+    vozEstado.textContent=descripcion;
+    btnVoz.setAttribute('aria-pressed',String(modoVoz));
+    btnVoz.textContent=modoVoz?'■ Terminar conversación por voz':'🎙️ Conversar con CLARIA';
+  }
+  function detenerVoz(cancelarHabla=true){
+    modoVoz=false;escuchandoMicrofono=false;transcripcionFinal='';
+    vozVersion++;silencios=0;
+    if(reconocedor){
+      try{reconocedor.abort();}catch(_){}
+      reconocedor=null;
+    }
+    if(cancelarHabla&&'speechSynthesis' in window)speechSynthesis.cancel();
+    escuchar=false;
+    const escucharBtn=$('asesoria-escuchar');
+    escucharBtn.setAttribute('aria-pressed','false');escucharBtn.textContent='🔊 Escuchar';
+    vozCaptura.textContent='';
+    estadoVoz('apagado','La conversación por voz está detenida. También podés escribir.');
+  }
+  function iniciarEscucha(){
+    if(!modoVoz||trabajando||zona.hidden)return;
+    if(!Reconocimiento){
+      estadoVoz('error','Este navegador no permite dictado por voz desde esta página. Podés usar el teclado y escuchar las respuestas.');
+      detenerVoz(false);return;
+    }
+    const version=vozVersion;
+    try{
+      if(reconocedor){try{reconocedor.abort();}catch(_){ }}
+      const r=new Reconocimiento();
+      reconocedor=r;r.lang='es-AR';r.continuous=false;r.interimResults=true;r.maxAlternatives=1;
+      transcripcionFinal='';vozRespondio=false;
+      r.onstart=()=>{
+        if(version!==vozVersion||!modoVoz)return;
+        escuchandoMicrofono=true;estadoVoz('escuchando','Te escucho. Hablá con naturalidad; cuando termines, te respondo.');
+      };
+      r.onspeechstart=()=>{if(version===vozVersion&&modoVoz)estadoVoz('escuchando','Escuchando tu consulta…');};
+      r.onresult=e=>{
+        if(version!==vozVersion||!modoVoz)return;
+        let interino='';
+        for(let i=e.resultIndex;i<e.results.length;i++){
+          const t=e.results[i][0]?.transcript||'';
+          if(e.results[i].isFinal)transcripcionFinal+=(transcripcionFinal?' ':'')+t;
+          else interino+=t;
+        }
+        vozCaptura.textContent=transcripcionFinal||interino?('Vos: '+(transcripcionFinal||interino)):'';
+      };
+      r.onerror=e=>{
+        if(version!==vozVersion||!modoVoz)return;
+        const code=String(e.error||'');
+        if(['not-allowed','service-not-allowed','audio-capture','network','language-not-supported'].includes(code)){
+          const txt=code==='not-allowed'||code==='service-not-allowed'
+            ?'El micrófono no tiene permiso. Permitilo desde el navegador y volvé a intentar.'
+            :code==='audio-capture'?'No se detectó un micrófono disponible.':
+              code==='network'?'Falló el reconocimiento de voz de tu navegador. Revisá internet.':
+                'Tu navegador no reconoce español para dictado.';
+          detenerVoz(false);
+          estadoVoz('error',txt);status(txt);
+        }
+      };
+      r.onend=()=>{
+        if(version!==vozVersion||!modoVoz)return;
+        escuchandoMicrofono=false;reconocedor=null;
+        const frase=transcripcionFinal.trim();transcripcionFinal='';
+        if(frase.length>=3&&!vozRespondio){
+          vozRespondio=true;silencios=0;
+          estadoVoz('pensando','CLARIA está preparando su respuesta…');
+          vozCaptura.textContent='Vos: '+frase;
+          conversar(frase);
+          return;
+        }
+        if(++silencios>2){
+          detenerVoz(false);
+          estadoVoz('pausa','No escuché palabras claras. Tocá «Conversar con CLARIA» para intentar otra vez.');
+          return;
+        }
+        estadoVoz('transicion','No escuché una frase completa. Escuchando otra vez…');
+        setTimeout(()=>{if(modoVoz&&version===vozVersion)iniciarEscucha();},800);
+      };
+      r.start();
+    }catch(e){
+      detenerVoz(false);
+      estadoVoz('error','No se pudo iniciar el micrófono automáticamente. Volvé a tocar «Conversar con CLARIA».');
+    }
+  }
+  function comenzarVoz(){
+    if(modoVoz){detenerVoz();return;}
+    if(trabajando){status('Terminá la respuesta actual antes de empezar a conversar por voz.');return;}
+    if(!permiso.checked){
+      status('Primero autorizá el uso de IA y el reconocimiento de voz. No digas nombres ni datos que identifiquen a estudiantes.');
+      permiso.focus();return;
+    }
+    if(!Reconocimiento){
+      estadoVoz('error','Tu navegador no admite reconocimiento de voz en esta página. Podés conversar escribiendo y activar «Escuchar» para oír a CLARIA.');
+      return;
+    }
+    if(!('speechSynthesis' in window)){
+      estadoVoz('error','El navegador no dispone de voz de respuesta. Podés usar el chat por escrito.');return;
+    }
+    modoVoz=true;escuchar=true;silencios=0;vozVersion++;
+    const escucharBtn=$('asesoria-escuchar');
+    escucharBtn.setAttribute('aria-pressed','true');escucharBtn.textContent='🔇 Silenciar';
+    estadoVoz('transicion','Solicitando permiso de micrófono…');
+    // La primera llamada a start() ocurre directamente tras el toque, para los permisos de Safari.
+    iniciarEscucha();
+  }
+  btnVoz.addEventListener('click',comenzarVoz);
+  permiso.addEventListener('change',()=>{if(!permiso.checked&&modoVoz)detenerVoz();});
   function mostrarRol(){
     const docente=$('claria-rol-docente').getAttribute('aria-pressed')==='true';
     zona.hidden=!docente;chatEstudiantes.hidden=docente;
     document.body.classList.toggle('claria-modo-docente',docente);
+    if(!docente&&modoVoz)detenerVoz();
     if(docente)zona.scrollIntoView({behavior:'auto',block:'nearest'});
   }
   document.querySelectorAll('.claria-rol').forEach(b=>b.addEventListener('click',mostrarRol));
@@ -94,7 +224,8 @@ document.addEventListener('DOMContentLoaded',function(){
       crear.textContent=propuestaLista?'✨ Actualizar propuesta con la conversación':'✨ Crear propuesta de clase y recurso visual';
     }catch(e){
       historial=anterior.concat([{rol:'usuario',texto:pregunta}]).slice(-24);
-      bubble('modelo','No pude conectarme a la IA esta vez. Tu consulta sigue acá para que la retomes. Podés volver a intentar cuando el servicio responda.');
+      bubble('modelo','No pude conectarme a la IA esta vez. Tu consulta sigue acá para que la retomes. Podés volver a intentar cuando el servicio responda.',false);
+      if(modoVoz){detenerVoz(false);estadoVoz('error','La IA no respondió. Revisá el servicio y volvé a activar el micrófono.');}
       status(e.name==='AbortError'?'Se agotó el tiempo de espera de Gemini. Probá nuevamente.':'Error del servicio: '+e.message);
     }finally{setOcupado(false);entrada.focus({preventScroll:true});}
   }
@@ -171,13 +302,16 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   $('asesoria-escuchar').addEventListener('click',function(){
     if(!('speechSynthesis' in window)){status('La lectura en voz alta no está disponible en este dispositivo.');return;}
+    if(modoVoz){detenerVoz();return;}
     escuchar=!escuchar;this.setAttribute('aria-pressed',String(escuchar));
     this.textContent=escuchar?'🔇 Silenciar':'🔊 Escuchar';
     if(!escuchar)speechSynthesis.cancel();
   });
   function reset(){
     if(trabajando)return;
+    if(modoVoz)detenerVoz();
     if('speechSynthesis' in window)speechSynthesis.cancel();
+    escuchar=false;
     historial=[];propuestaLista=false;numeroDeRevision=0;fragmentoEnviado=false;
     mensajes.replaceChildren();bubble('modelo',saludo);
     entrega.hidden=true;plan.value='';uso.value='';prompt.value='';
@@ -305,7 +439,7 @@ document.addEventListener('DOMContentLoaded',function(){
     status('Usá Imprimir o Guardar como PDF; se incluirán completos la planificación y el prompt.');
     window.print();
   });
-  window.addEventListener('pagehide',()=>{if('speechSynthesis' in window)speechSynthesis.cancel();});
+  window.addEventListener('pagehide',()=>{if(modoVoz)detenerVoz();if('speechSynthesis' in window)speechSynthesis.cancel();});
   reset();mostrarRol();
   const params=new URLSearchParams(location.search);
   if(params.get('rol')==='docente')$('claria-rol-docente').click();
