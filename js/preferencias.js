@@ -2,7 +2,7 @@
    Guarda en este navegador solo tres preferencias: tamaño, contraste y tipo de letra.
    Nunca guarda textos ni archivos.
 
-   Tipo de letra: «IMPRENTA MAYÚSCULA» (valor inicial) o «Texto habitual».
+   Tipo de letra: «Texto habitual» (valor inicial) o «Imprenta mayúscula» a elección.
    La imprenta mayúscula NO cambia el texto de la página: se logra con una fuente
    propia («Bermejo Mayúscula») que dibuja cada minúscula con la forma de su
    mayúscula. Así, los lectores de pantalla, la lectura en voz alta, la búsqueda y
@@ -11,13 +11,23 @@
 (function () {
   'use strict';
 
-  var CLAVE = 'bermejo-accesible-preferencias';
+  // Nueva clave: evita que la imprenta mayúscula predeterminada en versiones antiguas
+  // se imponga a quien escanea el QR por primera vez o vuelve tras una visita anterior.
+  // Conserva el tamaño y el contraste previos; la mayúscula sigue siendo optativa.
+  var CLAVE = 'bermejo-accesible-preferencias-v2';
+  var CLAVE_ANTERIOR = 'bermejo-accesible-preferencias';
   var ESCALAS = [100, 115, 130, 150, 175, 200];
   var INICIALES = { escala: 100, contraste: 'normal', letra: 'habitual' };
   var pref = { escala: INICIALES.escala, contraste: INICIALES.contraste, letra: INICIALES.letra };
 
   try {
     var guardadas = JSON.parse(localStorage.getItem(CLAVE));
+    if (!guardadas) {
+      // Migración única: solo recupera escala y contraste.
+      // Antes, la mayúscula podía quedar activada por el valor inicial de la web.
+      var anterior = JSON.parse(localStorage.getItem(CLAVE_ANTERIOR));
+      if (anterior) guardadas = { escala: anterior.escala, contraste: anterior.contraste, letra: 'habitual' };
+    }
     if (guardadas && ESCALAS.indexOf(guardadas.escala) !== -1) pref.escala = guardadas.escala;
     if (guardadas && (guardadas.contraste === 'alto' || guardadas.contraste === 'normal')) pref.contraste = guardadas.contraste;
     if (guardadas && (guardadas.letra === 'mayuscula' || guardadas.letra === 'habitual')) pref.letra = guardadas.letra;
@@ -97,7 +107,7 @@
     restablecer.addEventListener('click', function () {
       pref = { escala: INICIALES.escala, contraste: INICIALES.contraste, letra: INICIALES.letra };
       aplicar(); guardar(); actualizar();
-      avisar('Ajustes restablecidos: texto al 100 %, contraste normal e imprenta mayúscula.');
+      avisar('Ajustes restablecidos: texto al 100 %, contraste normal y letra habitual.');
     });
 
     actualizar();
