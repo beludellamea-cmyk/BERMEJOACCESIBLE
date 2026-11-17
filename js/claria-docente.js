@@ -56,7 +56,16 @@ document.addEventListener('DOMContentLoaded',function(){
     try{
       const r=await fetch(endpoint+ruta,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(contenido),signal:controller.signal});
       const j=await r.json().catch(()=>({}));
-      if(!r.ok){const e=new Error(j.error||'El servicio devolvió un error.');e.status=r.status;throw e;}
+      if(!r.ok){
+        let detalle=typeof j.error==='string'?j.error:'El servicio devolvió un error.';
+        if(/^(La IA no respondió|El servicio de IA no respondió)/i.test(detalle)){
+          detalle='Gemini no pudo generar la respuesta. Podría tratarse de una configuración del modelo, permisos de la clave o una saturación temporal. Revisá los registros de bermejochat en Cloudflare.';
+        }
+        const e=new Error(detalle);
+        e.status=r.status;
+        e.codigo=typeof j.codigo==='string'?j.codigo:'';
+        throw e;
+      }
       return j;
     }finally{clearTimeout(timer);}
   }
@@ -172,7 +181,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(datosPersonales(Object.values(datos).join(' '))){aviso('Quitá datos personales antes de continuar.');return;}
     ocupadoAhora(true,'CLARIA está preparando la clase, el texto explicativo y las actividades…');
     try{const r=await generarClase(datos);entregar(r.texto,r.nota,'clase','texto');aviso('¡Listo! Podés revisar y descargar la clase.');}
-    catch(e){aviso('No se pudo preparar la clase: '+e.message);}
+    catch(e){aviso('No se pudo preparar la clase: '+(e.name==='AbortError'?'Se agotó el tiempo de espera. Probá con un tema o texto más corto.':e.message));}
     finally{ocupadoAhora(false);}
   });
   material.addEventListener('submit',async e=>{
@@ -187,7 +196,7 @@ document.addEventListener('DOMContentLoaded',function(){
     try{
       const r=await generarMaterial({grado:grado.value,materia:materia.value,accion,formato,texto:contenido});
       entregar(r.texto,r.nota,accion,formato);aviso('Material preparado. Revisá el resultado y elegí si querés imprimir o descargar.');
-    }catch(e){aviso('No se pudo preparar el material: '+e.message);}
+    }catch(e){aviso('No se pudo preparar el material: '+(e.name==='AbortError'?'Se agotó el tiempo de espera. Probá con un tema o texto más corto.':e.message));}
     finally{ocupadoAhora(false);}
   });
   function script(url,global){
