@@ -175,3 +175,11 @@ html[data-contraste="alto"] .claria-voz__mensaje>p,html[data-contraste="alto"] .
 .asesoria-burbuja__repetir:hover{background:#2a6a80}
 .asesoria-burbuja__repetir:focus-visible{outline:3px solid #fff2a1;outline-offset:3px}
 @media print{.pagina-claria .asesoria-burbuja__repetir{display:none!important}}
+
+/* Prueba real de Gemini: la conexión solo se considera activa tras una respuesta. */
+.asesoria-conexion{margin:.65rem 0 .3rem;padding:.7rem .85rem;background:#0e2c43;border:1px solid #4f8495;border-radius:12px}
+.asesoria-conexion__boton{display:inline-flex;align-items:center;justify-content:center;min-height:2.4rem;border:1px solid #8bdce6;background:#22546a;border-radius:9px;color:#ecffff;padding:.45rem .9rem;font:750 .87rem "Atkinson Hyperlegible",Arial,sans-serif;cursor:pointer}
+.asesoria-conexion__boton:disabled{opacity:.6;cursor:wait}
+.asesoria-conexion__boton:focus-visible{outline:3px solid #ffe7a4;outline-offset:3px}
+.asesoria-conexion__estado{color:#d2eaf1;font-size:.86rem;line-height:1.5;margin:.5rem 0 .2rem;overflow-wrap:anywhere}
+@media print{.pagina-claria .asesoria-conexion{display:none!important}}
