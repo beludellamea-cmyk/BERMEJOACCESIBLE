@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function(){
       {titulo:'Probar una demostración',consulta:'Quiero probar las cuatro formas de lectura'}
     ],
     docente:[
-      {titulo:'Preparar una clase',accion:'clase',consulta:'Quiero planificar una clase'},
-      {titulo:'Adaptar o resumir un texto',accion:'material',consulta:'Quiero subir un material'},
+      {titulo:'Preparar una clase y materiales',accion:'clase',consulta:'Quiero planificar una clase'},
+      {titulo:'Subir un material',accion:'material',consulta:'Quiero subir un material'},
       {titulo:'Consultar normativa de Formosa',consulta:'Quiero conocer la Resolución 2481/24 y la normativa inclusiva'},
       {titulo:'Tengo una situación en el aula',consulta:'Necesito orientación sobre una situación de participación en el aula'}
     ]
@@ -76,8 +76,20 @@ document.addEventListener('DOMContentLoaded', function(){
       b.addEventListener('click',function(){
         if(ocupada)return;
         if(o.accion){
-          var destino=document.querySelector('[data-docente-tab="'+o.accion+'"]');
-          if(destino){destino.click();destino.scrollIntoView({behavior:'auto',block:'nearest'});return;}
+          var formulario=document.getElementById('aula-formulario');
+          if(formulario){
+            formulario.scrollIntoView({behavior:'smooth',block:'start'});
+            if(o.accion==='material'){
+              var archivo=document.getElementById('aula-archivo');
+              if(archivo)archivo.focus({preventScroll:true});
+              var detalle=document.getElementById('aula-texto-detalle');
+              if(detalle)detalle.open=true;
+            }else{
+              var campo=document.getElementById('aula-grado');
+              if(campo)campo.focus({preventScroll:true});
+            }
+            return;
+          }
         }
         procesar(o.consulta);
       });atajos.appendChild(b);
@@ -143,11 +155,13 @@ document.addEventListener('DOMContentLoaded', function(){
     var q=entrada.trim();if(!q)return;
     if(rol==='docente' && q.length<135 && /(?:planific|preparar|armar|organizar).*(?:clase|secuencia)|(?:clase|secuencia).*(?:planific|preparar|armar)/i.test(normalizar(q))){
       var botonPlan=document.querySelector('[data-docente-tab="clase"]');
-      if(botonPlan){botonPlan.click();estado.textContent='Elegí grado, materia y tema y tocá «Crear mi propuesta de clase».';return;}
+      var entradaPlan=document.getElementById('aula-formulario');
+      if(entradaPlan){entradaPlan.scrollIntoView({block:'start',behavior:'smooth'});estado.textContent='Elegí grado, materia y tema y tocá «Preparar mi clase y materiales».';return;}
     }
     if(rol==='docente' && q.length<135 && /(?:adapt|resum|simplific|subir).*(?:texto|material|fotocopia|documento|pdf)|(?:texto|material|fotocopia|documento|pdf).*(?:adapt|resum|subir)/i.test(normalizar(q))){
       var botonMaterial=document.querySelector('[data-docente-tab="material"]');
-      if(botonMaterial){botonMaterial.click();estado.textContent='Cargá el material y elegí cómo querés presentarlo.';return;}
+      var entradaMaterial=document.getElementById('aula-texto-detalle');
+      if(entradaMaterial){entradaMaterial.open=true;entradaMaterial.scrollIntoView({block:'start',behavior:'smooth'});estado.textContent='Subí un material o pegá el texto. CLARIA lo incluirá en la clase y las adaptaciones.';return;}
     }
     if(q.length>1500){estado.textContent='La pregunta es demasiado larga (máximo 1500 caracteres).';return;}
     if(parecenDatosPersonales(q)){estado.textContent='Quitá nombres, DNI, teléfonos y otros datos personales antes de continuar.';return;}
