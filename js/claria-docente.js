@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   document.querySelectorAll('.claria-rol').forEach(b=>b.addEventListener('click',function(){
     if(ocupado)return;document.body.classList.remove('claria-charlando');seleccionarRol();
+    if(!sector.hidden)sector.scrollIntoView({block:'start',behavior:'auto'});
   }));
   function pestana(nombre){
     if(ocupado)return;

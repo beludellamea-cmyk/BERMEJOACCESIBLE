@@ -196,3 +196,16 @@ html[data-contraste="alto"] .claria-home{background:#000!important;color:#fff!im
  .pagina-claria .docente-fuentes{color:black!important}
  .pagina-claria .docente-fuentes a{color:black!important}
 }
+
+/* Vínculo docente directo desde la portada, menos desplazamiento en docentes. */
+.claria-home__acciones{display:flex;flex-direction:column;gap:.5rem;align-items:center;flex:none;z-index:1}
+.claria-home__directo{font-weight:700;font-size:.84rem;text-align:center;color:#91dfe9;text-underline-offset:.2em}
+.claria-home__directo:hover{color:#c3fbfd}
+.claria-modo-docente .claria-presentacion{min-height:15rem}
+.claria-modo-docente .claria-presentacion__visual{min-height:13rem;max-height:15rem}
+.claria-modo-docente .claria-personaje{max-height:15rem;max-width:16rem}
+.claria-modo-docente .claria-presentacion__texto{padding:.3rem 0}
+.claria-modo-docente .claria-presentacion h1{font-size:clamp(2.5rem,4.4vw,4.2rem)}
+.docente-exportar-nota{color:#abcbd7;font-size:.81rem;line-height:1.5;margin:.3rem 0 1rem}
+@media(max-width:49rem){.claria-home__acciones{width:100%}.claria-home__acciones .boton{width:100%}}
+@media print{.pagina-claria .docente-exportar-nota{display:none!important}}

@@ -1,5 +1,15 @@
 # Bermejo Accesible
 
+## CLARIA docente: clases y materiales sin chat largo (17/11/2026)
+
+- En `claria.html?rol=docente`, el perfil docente presenta tres opciones directas: **Preparar una clase**, **Adaptar o resumir** y **Consultar a CLARIA**. No exige responder preguntas una por una.
+- **Clase**: seleccionar grado/año, materia y tema; opcionales objetivo y duración; con confirmación de privacidad se genera explicación del tema, actividades, cierre, evaluación y apoyos DUA, en un borrador editable.
+- **Material**: seleccionar grado/año, materia; pegar texto o extraerlo de PDF, JPG, PNG, WEBP o TXT en el navegador; revisar OCR; seleccionar adaptar o resumir y presentación (texto, partes, pictogramas ARASAAC o imágenes de la colección local), editar y descargar Word o imprimir/PDF. Los Word descargan texto editable; para conservar imágenes usar impresión/PDF de la vista previa.
+- **IA ya desplegada**: la pantalla usa la ruta `/asistente` para clases breves y resúmenes parciales y `/adaptar` para textos adaptados si `/docente` aún no existe. Advierte si solo se procesó parte del material. La API limita la extensión: **NO afirmar que resume archivos enteros hasta desplegar el nuevo Worker**.
+- **IA ampliada pendiente de desplegar**: el archivo `backend/chat-worker.js` incluye ahora `POST /docente` para producir clases completas y adaptar/resumir hasta 8.000 caracteres. **Hay que copiar el archivo actualizado a Cloudflare Workers (proyecto bermejochat) y desplegarlo**; GitHub Pages solo publica la interfaz. Conservar `GEMINI_API_KEY` como secreto y `ALLOWED_ORIGIN=https://beludellamea-cmyk.github.io`.
+- La guía y el chat general de CLARIA siguen disponibles. La normativa aparece como documentos de consulta: el DUA es un marco de diseño educativo y no equivale a una ley ni a un dictamen jurídico.
+
+
 ## CLARIA: asistente educativa integrada (noviembre 2026)
 
 - **claria.html** presenta a CLARIA con la imagen original de la asistente del repositorio propio `beludellamea-cmyk/claria-`, en dos perfiles: «Quiero aprender» y «Soy docente». Es la puerta principal sugerida desde la portada y está en el menú.
