@@ -1,5 +1,18 @@
 # Bermejo Accesible
 
+## CLARIA docente: conversación, planificación y prompt para imagen didáctica (17/11/2026)
+
+- El perfil **Soy docente** ya no obliga a seleccionar grado, materia y tema en un formulario. Muestra el avatar de CLARIA y un chat para conversar libremente sobre una planificación, las características generales de un grupo y los apoyos DUA. Puede hacer preguntas de seguimiento; el historial reciente acompaña cada consulta. La ruta conversacional existente **`POST /asistente`** sigue activa.
+- El docente puede describir necesidades de apoyo sin identificar a estudiantes; la página advierte contra enviar nombres, DNI, correos u otros datos personales. Se requiere consentimiento explícito antes de enviar el contenido al servicio de IA. La conversación se mantiene **solo en memoria de la pestaña**; se puede guardar localmente como TXT.
+- Como recurso opcional y secundario, se puede pegar un texto o cargar PDF, PNG, JPG, WEBP o TXT. PDF.js y Tesseract.js extraen texto **en el navegador** para que el docente lo revise antes de enviarlo. Solo se usan hasta 6.000 caracteres de material fuente en la generación ampliada y un fragmento contextual en el diálogo.
+- Una vez conversada la clase, el botón **Crear propuesta de clase y recurso visual** transforma los mensajes en una planificación editable con contenido explicado, texto accesible, síntesis, inicio, actividades concretas, cierre, evaluación y apoyos DUA. Aparece debajo del chat y permite seguir conversando, actualizar, copiar, descargar en Word o imprimir/guardar como PDF.
+- La propuesta incluye **usoImagen** (objetivo, momento de clase, consigna y evidencia) y **promptImagen** para generar una lámina/actividad con función pedagógica, no una ilustración decorativa. El prompt prioriza exactitud conceptual y matemática, espacios para resolver, alta legibilidad y comprobación docente. **No genera una imagen automáticamente**: el texto se copia al servicio de generación que elija el docente.
+- La generación ampliada usa la ruta nueva `POST /asesoria-docente` del Worker `backend/chat-worker.js`; **requiere actualizar manualmente `bermejochat` en Cloudflare**. Mientras esa ruta no esté publicada, la interfaz intenta un borrador **breve** y un prompt mediante dos consultas a la ruta `/asistente` ya publicada, identificando claramente su limitación. No confundir el éxito de GitHub Pages con la activación del Worker.
+- La nueva interfaz está en `js/claria-asesoria.js` y `css/claria-asesoria.css`. Se conserva `js/claria.js` para el perfil **Quiero aprender**, y las rutas anteriores `/aula`, `/docente` siguen disponibles para compatibilidad. El script antiguo `js/claria-aula.js` ya no se carga en la página.
+- Verificar el contenido antes de usarlo: DUA 3.0 es un marco de diseño, las normas son referencias para consulta y el modelo puede equivocarse. No se garantizan pictogramas ni imagen generada sin utilizar la herramienta adecuada.
+
+
+
 ### Fracciones · Alimentos reales (noviembre de 2026)
 
 - Se incorporó al catálogo de `juegos.html` un enlace a `https://baezkaren113-collab.github.io/Detectives-del-aula/fracciones/`, alojado en el repositorio de Detectives del Aula. Se abre el proyecto original en una pestaña nueva; no se copian ni modifican los archivos externos.
