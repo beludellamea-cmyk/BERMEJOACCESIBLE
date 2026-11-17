@@ -94,3 +94,15 @@ html[data-contraste="alto"] :is(.juegos-sobretitulo,.juegos-seccion-sobre,.juego
 @media(max-width:30rem){.juegos-home__icono{width:3.5rem;height:3.5rem}.juegos-home__icono svg{width:2.7rem;height:2.7rem}}
 html[data-contraste="alto"] .juegos-home{background:#000!important;border:2px solid #fff}
 html[data-contraste="alto"] :is(.juegos-home__texto>p,.juegos-home__texto h2){color:#fff!important}
+
+/* NUMI: mundo matemático violeta y turquesa */
+.juego-tarjeta__arte--numi{
+  background:
+    radial-gradient(circle at 47% 52%,rgba(133,240,224,.26),transparent 48%),
+    radial-gradient(circle at 79% 18%,rgba(172,148,255,.34),transparent 43%),
+    linear-gradient(125deg,#28245e,#1b3159);
+}
+.juego-tarjeta--numi .juego-tarjeta__tipo{color:#b8b0ff}
+.juego-tarjeta--numi .juego-tarjeta__valor{border-color:#9f98ff}
+.juego-tarjeta--numi .juego-tarjeta__enlace{background:#b9acf9;color:#211b48!important}
+.juego-tarjeta__arte--numi .juego-arte__titulo{color:#dcdbff}
