@@ -16,6 +16,7 @@
   <script src="js/asistente-global.js" defer></script>
   <script src="js/docente.js" defer></script>
   <script src="js/consulta.js" defer></script>
+  <link rel="stylesheet" href="css/organizacion.css">
 </head>
 <body>
   <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -59,23 +60,27 @@
   </header>
   <div class="sitio-grid">
       <nav class="nav-principal" id="menu-principal" aria-label="Secciones principales">
-        <p class="nav-principal__titulo">Secciones</p>
-        <ul>
-          <li><a href="index.html"><span aria-hidden="true">⌂</span> Inicio</a></li>
-          <li><a href="material.html"><span aria-hidden="true">▤</span> Mi material</a></li>
-          <li><a href="docente.html" aria-current="page"><span aria-hidden="true">✎</span> Espacio docente</a></li>
-          <li><a href="qom.html"><span aria-hidden="true">▢</span> Chat intercultural</a></li>
-        </ul>
-        <div class="nav-principal__atajos">
-          <button type="button" class="boton" data-abrir-ajustes>⚙ Ajustes de accesibilidad</button>
-          <button type="button" class="boton" data-abrir-ayuda>❓ Necesito ayuda</button>
-        </div>
-      </nav>
+  <p class="nav-principal__titulo">Secciones</p>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="material.html?recorrido=comprender">Comprender</a></li>
+    <li><a href="material.html?recorrido=adaptar">Crear adaptaciones</a></li>
+    <li><a href="docente.html" aria-current="page">Recursos docentes</a></li>
+  </ul>
+  <div class="nav-principal__atajos">
+    <details class="nav-extra">
+      <summary>Más herramientas</summary>
+      <div class="nav-extra__links"><a href="qom.html">Chat intercultural <small>Traducción experimental, sujeta a revisión</small></a></div>
+    </details>
+    <button type="button" class="boton" data-abrir-ayuda>¿Necesitás ayuda?</button>
+  </div>
+</nav>
 
   <main id="contenido" tabindex="-1">
     <div class="contenedor">
       <h1>Espacio docente</h1>
       <p class="intro">Herramientas para encontrar las barreras de un material y cambiarlo para que todo el curso pueda usarlo.</p>
+      <section class="recursos-docentes-cta" aria-label="Laboratorio de adaptaciones"><h2>¿Necesitás adaptar un material de clase?</h2><p>Empezá en el laboratorio, elegí los apoyos y revisá la propuesta antes de usarla con tus estudiantes.</p><a class="boton boton--principal" href="material.html?recorrido=adaptar">Crear una adaptación →</a></section>
 
       <div class="aviso" role="note" aria-labelledby="revision-titulo">
         <p id="revision-titulo"><strong>Sujeto a revisión docente.</strong></p>
