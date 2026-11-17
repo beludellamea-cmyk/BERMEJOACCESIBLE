@@ -16,11 +16,12 @@
   <script src="js/preferencias.js"></script>
 
   <link rel="stylesheet" href="css/claria.css?v=4">
+  <link rel="stylesheet" href="css/claria-aula.css?v=1">
   <script src="js/chat-config.js" defer></script>
   <script src="js/claria.js?v=2" defer></script>
   <script src="js/pictogramas-arasaac.js" defer></script>
   <script src="js/ilustraciones.js" defer></script>
-  <script src="js/claria-docente.js?v=3" defer></script>
+  <script src="js/claria-aula.js?v=1" defer></script>
 </head>
 <body class="pagina-claria">
 <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -77,7 +78,7 @@
       <p class="claria-sello"><span aria-hidden="true"></span> TU ASISTENTE DE BERMEJO ACCESIBLE</p>
       <h1 id="claria-titulo">¡Hola! Soy <em>CLARIA.</em></h1>
       <p class="claria-subtitulo">Estoy para acompañarte a aprender, enseñar y encontrar otras maneras de comprender.</p>
-      <p class="claria-instruccion">Elegí «Soy docente» y prepará una clase o adaptá un material en pocos pasos.</p>
+      <p class="claria-instruccion">Ingresá el tema o subí un texto: CLARIA organiza la clase y los materiales en una sola pantalla.</p>
       <a class="claria-volver" href="index.html">← Volver al inicio de Bermejo</a>
     </div>
     <div class="claria-presentacion__visual">
@@ -102,124 +103,135 @@
         <span><strong>Soy docente</strong><small>Planificar, adaptar y consultar</small></span>
       </button>
     </div>
-    <section class="claria-docente-rapido" id="claria-docente-rapido" aria-labelledby="docente-rapido-titulo" hidden>
-      <div class="docente-rapido__intro">
-        <div><p class="claria-paso">2 · ELEGÍ QUÉ PREPARAR</p><h3 id="docente-rapido-titulo">Vamos directo a tu clase</h3>
-        <p>Elegí grado, materia y tema. CLARIA prepara una propuesta con explicación, actividades y opciones siguiendo el DUA.</p></div>
+    <section class="aula-unificada" id="claria-docente-rapido" aria-labelledby="aula-titulo" hidden>
+  <div class="aula-unificada__cabecera">
+    <p class="claria-paso">CLARIA PARA DOCENTES</p>
+    <h3 id="aula-titulo">¿Qué tema vas a enseñar?</h3>
+    <p>Escribí el tema <strong>o</strong> subí un material. Elegí grado y materia. Te preparo la clase, el texto adaptado, el resumen, las actividades y los apoyos DUA, todo junto.</p>
+  </div>
+  <form id="aula-formulario" class="aula-formulario" novalidate>
+    <div class="aula-formulario__campos">
+      <label for="aula-grado">Grado o año
+        <select id="aula-grado" required><option value="">Seleccioná</option>
+          <optgroup label="Primaria"><option value="1.º grado">1.º grado</option><option value="2.º grado">2.º grado</option><option value="3.º grado">3.º grado</option><option value="4.º grado">4.º grado</option><option value="5.º grado">5.º grado</option><option value="6.º grado">6.º grado</option><option value="7.º grado">7.º grado</option></optgroup>
+          <optgroup label="Secundaria"><option value="1.º año">1.º año</option><option value="2.º año">2.º año</option><option value="3.º año">3.º año</option><option value="4.º año">4.º año</option><option value="5.º año">5.º año</option><option value="6.º año">6.º año</option></optgroup>
+        </select>
+      </label>
+      <label for="aula-materia">Materia
+        <select id="aula-materia" required><option value="">Seleccioná</option><option value="Matemática">Matemática</option><option value="Lengua">Lengua</option><option value="Ciencias Sociales">Ciencias Sociales</option><option value="Ciencias Naturales">Ciencias Naturales</option><option value="Biología">Biología</option><option value="Química">Química</option><option value="Física">Física</option><option value="Historia">Historia</option><option value="Geografía">Geografía</option><option value="Educación Tecnológica">Educación Tecnológica</option><option value="Formación Ética y Ciudadana">Formación Ética y Ciudadana</option><option value="Educación Artística">Educación Artística</option><option value="Otra materia">Otra materia</option></select>
+      </label>
+      <label for="aula-tema">Tema (si no subís material)
+        <input id="aula-tema" type="text" maxlength="140" placeholder="Ej.: tipos de mezclas">
+      </label>
+    </div>
+    <div class="aula-origen">
+      <p class="aula-origen__titulo">¿Ya tenés una fotocopia o un texto? <span>Opcional si escribiste el tema</span></p>
+      <label for="aula-archivo" class="aula-archivo__titulo">Subir PDF, foto o TXT</label>
+      <input id="aula-archivo" type="file" accept=".pdf,.txt,.jpg,.jpeg,.png,.webp,application/pdf,text/plain,image/jpeg,image/png,image/webp">
+      <p id="aula-archivo-estado" class="aula-archivo__estado" role="status">También podés pegar el texto directamente.</p>
+      <details id="aula-texto-detalle"><summary>Pegar o revisar el texto</summary>
+        <label class="aula-campo-texto" for="aula-texto-fuente">Texto del material (podés corregirlo antes de enviarlo)</label>
+        <textarea id="aula-texto-fuente" rows="6" maxlength="8000" placeholder="Pegá aquí el texto o subí una fotografía y aparecerá el texto extraído."></textarea>
+      </details>
+    </div>
+    <label class="aula-consentimiento"><input type="checkbox" id="aula-confirmar" required>
+      <span>Revisé que el tema o material no incluya datos personales y autorizo enviarlo al servicio de IA.</span>
+    </label>
+    <button type="submit" class="boton boton--principal aula-generar" id="aula-generar">Preparar mi clase y materiales <span aria-hidden="true">→</span></button>
+    <p id="aula-estado" class="aula-estado" role="status" aria-live="polite">CLARIA presentará el resultado aquí mismo, debajo del formulario.</p>
+  </form>
+
+  <section id="aula-resultado" class="aula-resultado" aria-labelledby="aula-resultado-titulo" hidden>
+    <div class="aula-resultado__introduccion">
+      <p class="claria-paso">RESULTADO GENERADO · EDITABLE</p>
+      <h3 id="aula-resultado-titulo">Tu clase y los materiales</h3>
+      <p id="aula-resultados-nota">Este borrador debe revisarse antes de usarlo. Podés modificar cada sección por separado.</p>
+      <div class="aula-resultado__herramientas">
+        <button type="button" class="boton" id="aula-copiar">Copiar todo</button>
+        <button type="button" class="boton" id="aula-word">Descargar Word editable</button>
+        <button type="button" class="boton" id="aula-imprimir">Imprimir / PDF</button>
       </div>
-      <div class="docente-pestanas" role="group" aria-label="Qué querés hacer">
-        <button type="button" data-docente-tab="clase" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h8"/></svg><span>Preparar una clase</span></button>
-        <button type="button" data-docente-tab="material" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M5 20h14"/></svg><span>Adaptar o resumir</span></button>
-        <button type="button" data-docente-tab="dudas" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.7 2.7 0 0 1 5 1.4c-.3 1.6-2.5 2-2.5 3.7M12 17.5v.2"/></svg><span>Consultar a CLARIA</span></button>
+    </div>
+    <div class="aula-tarjetas"><article class="aula-tarjeta" data-seccion="clase">
+  <div class="aula-tarjeta__cabecera"><div><h4>La clase completa</h4><p>Objetivos, texto explicativo, inicio, desarrollo y cierre</p></div><button type="button" class="aula-tarjeta__editar" data-editar="clase" aria-expanded="false">Modificar</button></div>
+  <div class="aula-tarjeta__texto" id="aula-vista-clase"></div>
+  <div class="aula-tarjeta__editor" id="aula-edicion-clase" hidden>
+    <label for="aula-texto-clase">Editá el contenido</label><textarea id="aula-texto-clase" rows="9"></textarea>
+    <label for="aula-instruccion-clase">O pedile a CLARIA qué cambiar (opcional)</label>
+    <textarea id="aula-instruccion-clase" rows="2" placeholder="Ej.: agregá una actividad de recortar y pegar, con pictogramas"></textarea>
+    <div class="aula-tarjeta__acciones"><button type="button" class="boton" data-guardar="clase">Guardar cambios</button><button type="button" class="boton" data-rehacer="clase">Cambiar con CLARIA</button></div>
+  </div>
+</article>
+<article class="aula-tarjeta" data-seccion="textoAdaptado">
+  <div class="aula-tarjeta__cabecera"><div><h4>Texto adaptado</h4><p>La explicación accesible, conservando los conceptos</p></div><button type="button" class="aula-tarjeta__editar" data-editar="textoAdaptado" aria-expanded="false">Modificar</button></div>
+  <div class="aula-tarjeta__texto" id="aula-vista-textoAdaptado"></div>
+  <div class="aula-tarjeta__editor" id="aula-edicion-textoAdaptado" hidden>
+    <label for="aula-texto-textoAdaptado">Editá el contenido</label><textarea id="aula-texto-textoAdaptado" rows="9"></textarea>
+    <label for="aula-instruccion-textoAdaptado">O pedile a CLARIA qué cambiar (opcional)</label>
+    <textarea id="aula-instruccion-textoAdaptado" rows="2" placeholder="Ej.: agregá una actividad de recortar y pegar, con pictogramas"></textarea>
+    <div class="aula-tarjeta__acciones"><button type="button" class="boton" data-guardar="textoAdaptado">Guardar cambios</button><button type="button" class="boton" data-rehacer="textoAdaptado">Cambiar con CLARIA</button></div>
+  </div>
+</article>
+<article class="aula-tarjeta" data-seccion="resumen">
+  <div class="aula-tarjeta__cabecera"><div><h4>Resumen</h4><p>Ideas principales para entregar o proyectar</p></div><button type="button" class="aula-tarjeta__editar" data-editar="resumen" aria-expanded="false">Modificar</button></div>
+  <div class="aula-tarjeta__texto" id="aula-vista-resumen"></div>
+  <div class="aula-tarjeta__editor" id="aula-edicion-resumen" hidden>
+    <label for="aula-texto-resumen">Editá el contenido</label><textarea id="aula-texto-resumen" rows="9"></textarea>
+    <label for="aula-instruccion-resumen">O pedile a CLARIA qué cambiar (opcional)</label>
+    <textarea id="aula-instruccion-resumen" rows="2" placeholder="Ej.: agregá una actividad de recortar y pegar, con pictogramas"></textarea>
+    <div class="aula-tarjeta__acciones"><button type="button" class="boton" data-guardar="resumen">Guardar cambios</button><button type="button" class="boton" data-rehacer="resumen">Cambiar con CLARIA</button></div>
+  </div>
+</article>
+<article class="aula-tarjeta" data-seccion="actividades">
+  <div class="aula-tarjeta__cabecera"><div><h4>Actividades</h4><p>Consignas concretas, ejemplos y formas de responder</p></div><button type="button" class="aula-tarjeta__editar" data-editar="actividades" aria-expanded="false">Modificar</button></div>
+  <div class="aula-tarjeta__texto" id="aula-vista-actividades"></div>
+  <div class="aula-tarjeta__editor" id="aula-edicion-actividades" hidden>
+    <label for="aula-texto-actividades">Editá el contenido</label><textarea id="aula-texto-actividades" rows="9"></textarea>
+    <label for="aula-instruccion-actividades">O pedile a CLARIA qué cambiar (opcional)</label>
+    <textarea id="aula-instruccion-actividades" rows="2" placeholder="Ej.: agregá una actividad de recortar y pegar, con pictogramas"></textarea>
+    <div class="aula-tarjeta__acciones"><button type="button" class="boton" data-guardar="actividades">Guardar cambios</button><button type="button" class="boton" data-rehacer="actividades">Cambiar con CLARIA</button></div>
+  </div>
+</article>
+<article class="aula-tarjeta" data-seccion="evaluacion">
+  <div class="aula-tarjeta__cabecera"><div><h4>Evaluación</h4><p>Criterios, instrumentos y opciones de respuesta</p></div><button type="button" class="aula-tarjeta__editar" data-editar="evaluacion" aria-expanded="false">Modificar</button></div>
+  <div class="aula-tarjeta__texto" id="aula-vista-evaluacion"></div>
+  <div class="aula-tarjeta__editor" id="aula-edicion-evaluacion" hidden>
+    <label for="aula-texto-evaluacion">Editá el contenido</label><textarea id="aula-texto-evaluacion" rows="9"></textarea>
+    <label for="aula-instruccion-evaluacion">O pedile a CLARIA qué cambiar (opcional)</label>
+    <textarea id="aula-instruccion-evaluacion" rows="2" placeholder="Ej.: agregá una actividad de recortar y pegar, con pictogramas"></textarea>
+    <div class="aula-tarjeta__acciones"><button type="button" class="boton" data-guardar="evaluacion">Guardar cambios</button><button type="button" class="boton" data-rehacer="evaluacion">Cambiar con CLARIA</button></div>
+  </div>
+</article>
+<article class="aula-tarjeta" data-seccion="dua">
+  <div class="aula-tarjeta__cabecera"><div><h4>Apoyos DUA</h4><p>Compromiso, representación y acción y expresión</p></div><button type="button" class="aula-tarjeta__editar" data-editar="dua" aria-expanded="false">Modificar</button></div>
+  <div class="aula-tarjeta__texto" id="aula-vista-dua"></div>
+  <div class="aula-tarjeta__editor" id="aula-edicion-dua" hidden>
+    <label for="aula-texto-dua">Editá el contenido</label><textarea id="aula-texto-dua" rows="9"></textarea>
+    <label for="aula-instruccion-dua">O pedile a CLARIA qué cambiar (opcional)</label>
+    <textarea id="aula-instruccion-dua" rows="2" placeholder="Ej.: agregá una actividad de recortar y pegar, con pictogramas"></textarea>
+    <div class="aula-tarjeta__acciones"><button type="button" class="boton" data-guardar="dua">Guardar cambios</button><button type="button" class="boton" data-rehacer="dua">Cambiar con CLARIA</button></div>
+  </div>
+</article></div>
+    <section class="aula-visuales" aria-labelledby="aula-visuales-titulo">
+      <div class="aula-visuales__titular">
+        <h4 id="aula-visuales-titulo">Material visual de apoyo</h4>
+        <p>Se buscan pictogramas para conceptos importantes en ARASAAC y se ofrecen ilustraciones cuando hay coincidencias. No todos los conceptos tienen una imagen disponible.</p>
       </div>
-      <form id="docente-form-clase" class="docente-form" novalidate>
-        <p class="docente-form__titular">Armá tu clase en tres datos</p>
-        <div class="docente-form__grilla">
-          <label>Grado o año
-            <select id="docente-clase-grado" required><option value="">Elegí un grado o año</option>
-              <optgroup label="Primaria"><option>1.º grado</option><option>2.º grado</option><option>3.º grado</option><option>4.º grado</option><option>5.º grado</option><option>6.º grado</option><option>7.º grado</option></optgroup>
-              <optgroup label="Secundaria"><option>1.º año</option><option>2.º año</option><option>3.º año</option><option>4.º año</option><option>5.º año</option><option>6.º año</option></optgroup>
-            </select>
-          </label>
-          <label>Materia
-            <select id="docente-clase-materia" required><option value="">Elegí la materia</option>
-              <option>Matemática</option><option>Lengua</option><option>Ciencias Sociales</option><option>Ciencias Naturales</option><option>Biología</option><option>Química</option><option>Física</option><option>Historia</option><option>Geografía</option><option>Educación Tecnológica</option><option>Formación Ética y Ciudadana</option><option>Educación Artística</option><option>Otra materia</option>
-            </select>
-          </label>
-          <label>Tema de la clase
-            <input id="docente-clase-tema" type="text" maxlength="140" placeholder="Ej.: tipos de mezclas" required>
-          </label>
-        </div>
-        <details class="docente-extra">
-          <summary>Personalizar un poco más (opcional)</summary>
-          <div class="docente-form__grilla">
-            <label>¿Qué querés que aprendan?
-              <textarea id="docente-clase-objetivo" rows="2" maxlength="300" placeholder="Ej.: reconocer mezclas homogéneas y heterogéneas"></textarea>
-            </label>
-            <label>Duración
-              <select id="docente-clase-tiempo"><option>40 minutos</option><option selected>80 minutos</option><option>Dos clases</option></select>
-            </label>
-          </div>
-        </details>
-        <label class="docente-permiso"><input type="checkbox" id="docente-clase-consentimiento" required>
-          <span>Confirmo que no incluí datos personales y autorizo enviar estos datos a la IA para preparar la clase.</span>
-        </label>
-        <div class="docente-form__acciones">
-          <button type="submit" class="boton boton--principal" id="docente-clase-generar">Crear mi propuesta de clase <span aria-hidden="true">→</span></button>
-          <span>Incluye explicación, inicio, desarrollo, actividades, cierre, evaluación y apoyos DUA.</span>
-        </div>
-      </form>
-      <form id="docente-form-material" class="docente-form" novalidate hidden>
-        <p class="docente-form__titular">Subí un material y elegí cómo presentarlo</p>
-        <div class="docente-form__grilla">
-          <label>Grado o año
-            <select id="docente-material-grado" required><option value="">Elegí el grado</option>
-              <optgroup label="Primaria"><option>1.º grado</option><option>2.º grado</option><option>3.º grado</option><option>4.º grado</option><option>5.º grado</option><option>6.º grado</option><option>7.º grado</option></optgroup>
-              <optgroup label="Secundaria"><option>1.º año</option><option>2.º año</option><option>3.º año</option><option>4.º año</option><option>5.º año</option><option>6.º año</option></optgroup>
-            </select>
-          </label>
-          <label>Materia
-            <select id="docente-material-materia" required><option value="">Elegí la materia</option>
-              <option>Matemática</option><option>Lengua</option><option>Ciencias Sociales</option><option>Ciencias Naturales</option><option>Biología</option><option>Química</option><option>Física</option><option>Historia</option><option>Geografía</option><option>Educación Tecnológica</option><option>Formación Ética y Ciudadana</option><option>Otra materia</option>
-            </select>
-          </label>
-        </div>
-        <div class="docente-tipos" role="group" aria-label="¿Qué querés hacer con el material?">
-          <label><input type="radio" name="docente-tipo" value="adaptar" checked><strong>Adaptar el texto</strong><span>Explicarlo con apoyos, sin perder los conceptos.</span></label>
-          <label><input type="radio" name="docente-tipo" value="resumir"><strong>Resumir el texto</strong><span>Extraer las ideas principales en lenguaje claro.</span></label>
-        </div>
-        <div class="docente-subida">
-          <label class="docente-subida__archivo" for="docente-material-archivo">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-4 5 4-5 4 5M4 17v3h16v-3"/></svg>
-            <span><strong>Subir un PDF, foto o archivo .txt</strong><small>O pegá el texto en el espacio de abajo</small></span>
-          </label>
-          <input type="file" id="docente-material-archivo" accept=".pdf,.txt,.jpg,.jpeg,.png,.webp,application/pdf,text/plain,image/png,image/jpeg,image/webp">
-          <p class="docente-subida__estado" id="docente-archivo-estado" role="status">No seleccionaste un archivo.</p>
-          <label for="docente-material-texto">Texto para adaptar o resumir (podés revisarlo)</label>
-          <textarea id="docente-material-texto" rows="6" maxlength="10000" placeholder="Pegá aquí el texto o subí una foto/PDF para extraerlo."></textarea>
-        </div>
-        <fieldset class="docente-presentacion">
-          <legend>¿Cómo querés presentarlo?</legend>
-          <label><input type="radio" name="docente-presentacion" value="texto" checked><span>Texto claro</span></label>
-          <label><input type="radio" name="docente-presentacion" value="partes"><span>Por partes</span></label>
-          <label><input type="radio" name="docente-presentacion" value="pictogramas"><span>Con pictogramas</span></label>
-          <label><input type="radio" name="docente-presentacion" value="imagenes"><span>Con imágenes</span></label>
-        </fieldset>
-        <p class="docente-presentacion__ayuda">Los pictogramas se buscan en ARASAAC; las imágenes provienen de una colección ilustrada y pueden no estar disponibles para todos los temas.</p>
-        <label class="docente-permiso"><input type="checkbox" id="docente-material-consentimiento" required>
-          <span>Revisé el texto, eliminé datos personales y autorizo enviarlo a la IA para preparar el material.</span>
-        </label>
-        <div class="docente-form__acciones">
-          <button type="submit" class="boton boton--principal" id="docente-material-generar">Preparar mi material <span aria-hidden="true">→</span></button>
-        </div>
-      </form>
-      <p class="docente-estado" id="docente-estado" role="status" aria-live="polite"></p>
-      <section class="docente-resultado" id="docente-resultado" aria-labelledby="docente-resultado-titulo" hidden>
-        <div class="docente-resultado__cabecera">
-          <div><p class="claria-paso">PROPUESTA GENERADA · REVISIÓN DOCENTE</p><h3 id="docente-resultado-titulo">Tu propuesta está preparada</h3></div>
-          <span id="docente-resultado-etiqueta" class="docente-resultado__etiqueta">Editable</span>
-        </div>
-        <p class="docente-resultado__aviso">Es un borrador generado con IA: verificá contenidos y normativa antes de utilizarlo.</p>
-        <label for="docente-resultado-editar">Podés corregir la propuesta aquí:</label>
-        <textarea id="docente-resultado-editar" rows="16" spellcheck="true"></textarea>
-        <div class="docente-resultado__botones">
-          <button type="button" class="boton" id="docente-resultado-copiar">Copiar</button>
-          <button type="button" class="boton" id="docente-resultado-word">Descargar Word editable</button>
-          <button type="button" class="boton" id="docente-resultado-imprimir">Imprimir / PDF</button>
-          <button type="button" class="boton" id="docente-resultado-preview">Actualizar vista previa</button>
-        </div>
-        <p class="docente-exportar-nota">Word descarga el texto editable; para conservar los pictogramas o imágenes visibles, usá Imprimir / PDF.</p>
-        <div id="docente-resultado-visual" class="docente-resultado__visual" aria-label="Presentación del material"></div>
-        <p class="docente-resultado__creditos" id="docente-resultado-creditos"></p>
-        <div class="docente-fuentes">
-          <span>Referencias para consultar (no equivalen a un dictamen legal):</span>
-          <a href="https://udlguidelines.cast.org/" rel="noopener noreferrer" target="_blank">DUA 3.0 — CAST</a>
-          <a href="https://archivos.formosa.gob.ar/media/uploads/documentos/documento_1720711093.pdf" rel="noopener noreferrer" target="_blank">Resolución 2481/24 — Formosa</a>
-          <a href="https://cfe.educacion.gob.ar/resoluciones/res16/RES_311_CFE.pdf" rel="noopener noreferrer" target="_blank">Resolución CFE 311/16</a>
-        </div>
-      </section>
+      <div id="aula-pictogramas" class="aula-pictogramas" aria-live="polite"></div>
+      <div id="aula-imagenes" class="aula-imagenes"></div>
+      <p class="aula-creditos">Pictogramas: Sergio Palao · ARASAAC · CC BY-NC-SA · Gobierno de Aragón. Antes de imprimir, comprobá que los apoyos visuales correspondan al contenido.</p>
     </section>
-    <div class="claria-conversacion" id="claria-conversacion">
+    <aside class="aula-fuentes">
+      <strong>Fuentes para orientar la revisión docente:</strong>
+      <a target="_blank" rel="noopener noreferrer" href="https://udlguidelines.cast.org/">DUA 3.0 (CAST)</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://archivos.formosa.gob.ar/media/uploads/documentos/documento_1720711093.pdf">Resolución 2481/24 (Formosa)</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.bnm.me.gov.ar/giga1/normas/RCFE_311-16.pdf">Resolución CFE 311/16</a>
+    </aside>
+    <button type="button" id="aula-preguntar" class="aula-chat-enlace">¿Querés preguntarle algo a CLARIA sobre esta propuesta?</button>
+  </section>
+  <div class="aula-chat-secundario"><button type="button" id="aula-chat-abrir">Tengo una duda, quiero conversar con CLARIA</button></div>
+</section>
+<div class="claria-conversacion" id="claria-conversacion">
       <div class="claria-mensajes" id="claria-mensajes" role="log" aria-label="Conversación con CLARIA" aria-live="polite" aria-relevant="additions text"></div>
       <div class="claria-atajos" id="claria-atajos" role="group" aria-label="Elegí una consulta frecuente"></div>
       <form id="claria-form" class="claria-form">
