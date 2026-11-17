@@ -85,3 +85,12 @@ html[data-contraste="alto"] :is(.asesoria-intro p,.asesoria-entrega p,.asesoria-
  .pagina-claria .asesoria-documento textarea,.pagina-claria .asesoria-imagen textarea{width:100%!important;border:0!important;resize:none!important;overflow:visible!important;height:auto!important;color:black!important;background:#fff!important;padding:0!important;white-space:pre-wrap!important}
  .pagina-claria .asesoria-imagen{break-before:page}
 }
+/* Material opcional: no interrumpe la conversación ni exige completar formularios. */
+.asesoria-adjunto{margin:.8rem 0;border-top:1px solid #36617a;padding-top:.7rem}
+.asesoria-adjunto summary{color:#a9eaf1;font:750 .9rem "Atkinson Hyperlegible",system-ui,sans-serif;cursor:pointer;line-height:1.5}
+.asesoria-adjunto[open]{padding-bottom:.65rem;border-bottom:1px solid #36617a}
+.asesoria-adjunto label{display:block;margin:.85rem 0 .3rem;font:700 .83rem "Atkinson Hyperlegible",system-ui,sans-serif;color:#deeff7}
+.asesoria-adjunto input[type="file"]{display:block;max-width:100%;font-size:.85rem;color:#d4e7f1;padding:.3rem 0}
+.asesoria-adjunto textarea{width:100%;min-height:6.5rem;max-height:14rem;border:1px solid #5f91a4;background:#071c2d;color:#f2ffff;border-radius:12px;padding:.85rem;resize:vertical;font:450 .96rem/1.58 Arial,system-ui,sans-serif}
+.asesoria-adjunto__estado{font-size:.79rem;line-height:1.5;color:#aacddb;margin:.65rem 0}
+@media print{.pagina-claria .asesoria-adjunto{display:none!important}}
