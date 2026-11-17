@@ -1,5 +1,10 @@
 # Bermejo Accesible
 
+## Diagnóstico de Gemini y CLARIA — 17/11/2026
+
+Si CLARIA dice «La IA no respondió», el Worker alcanzó la API de Gemini pero esta devolvió un error no exitoso; no asumir que se trata de un fallo del HTML. El archivo `backend/chat-worker.js` diferencia ahora errores 400 (configuración/modelo), 401/403 (clave/permisos), 404 (modelo), 429 (cuota), 5xx (servicio saturado) y tiempos de espera en `/docente` y `/asistente`, sin exponer secretos. Se optimizó el presupuesto de razonamiento para modelos Flash compatibles. Para habilitarlo hay que desplegar manualmente el Worker `bermejochat` desde este archivo, conservando los secretos. En Cloudflare: Workers & Pages → bermejochat → Observability → Logs → Live; ejecutar una prueba y consultar el mensaje de `Gemini status (...)` en registros. No enviar a terceros claves, identificadores o texto privado del material.
+
+
 ## CLARIA docente: clases y materiales sin chat largo (17/11/2026)
 
 - En `claria.html?rol=docente`, el perfil docente presenta tres opciones directas: **Preparar una clase**, **Adaptar o resumir** y **Consultar a CLARIA**. No exige responder preguntas una por una.
