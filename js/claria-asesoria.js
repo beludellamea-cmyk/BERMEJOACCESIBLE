@@ -104,12 +104,13 @@ document.addEventListener('DOMContentLoaded',function(){
       r.onresult=e=>{
         if(version!==vozVersion||!modoVoz)return;
         let interino='';
-        for(let i=e.resultIndex;i<e.results.length;i++){
+        for(let i=e.resultIndex||0;i<e.results.length;i++){
           const t=e.results[i][0]?.transcript||'';
           if(e.results[i].isFinal)transcripcionFinal+=(transcripcionFinal?' ':'')+t;
           else interino+=t;
         }
-        vozCaptura.textContent=transcripcionFinal||interino?('Vos: '+(transcripcionFinal||interino)):'';
+        vozCaptura.textContent=(transcripcionFinal||interino)?('Vos: '+(transcripcionFinal||interino)):'';
+        if(transcripcionFinal){try{r.stop();}catch(_){}}
       };
       r.onerror=e=>{
         if(version!==vozVersion||!modoVoz)return;
@@ -153,7 +154,8 @@ document.addEventListener('DOMContentLoaded',function(){
     if(modoVoz){detenerVoz();return;}
     if(trabajando){status('Terminá la respuesta actual antes de empezar a conversar por voz.');return;}
     if(!permiso.checked){
-      status('Primero autorizá el uso de IA y el reconocimiento de voz. No digas nombres ni datos que identifiquen a estudiantes.');
+      const aviso='Marcá la autorización junto al micrófono para comenzar a hablar. No compartas datos identificatorios de estudiantes.';
+      status(aviso);estadoVoz('aviso',aviso);
       permiso.focus();return;
     }
     if(!Reconocimiento){
