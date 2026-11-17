@@ -1282,22 +1282,231 @@ html[data-contraste="alto"] .lab-chips .lab-opcion:has(input:checked) { border-c
 /* Portada: nombre sobre el título. */
 .hero__marca { margin: 0 0 .6rem; font-size: .95rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--rio); max-width: none; }
 
-/* Entrada: libro que se abre. */
-.entrada { position: fixed; inset: 0; z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem; background: var(--papel); cursor: pointer; transition: opacity .6s ease; }
-.con-entrada .entrada { display: flex; }
-.entrada--sale { opacity: 0; pointer-events: none; }
-.entrada__libro { position: relative; width: min(62vw, 15rem); aspect-ratio: 1.45; perspective: 1200px; transform-style: preserve-3d; animation: entrada-centra 1.1s .45s cubic-bezier(.6,.05,.25,1) both; }
-.entrada__tapa, .entrada__der, .entrada__hoja { position: absolute; top: 0; left: 50%; width: 50%; height: 100%; transform-origin: left center; border-radius: 0 .7rem .7rem 0; }
-.entrada__der { background: #fffdf6; border: 2px solid var(--borde); display: flex; flex-direction: column; justify-content: center; gap: 12%; padding: 12%; transform: translateZ(-1px); box-sizing: border-box; }
-.entrada__der span { display: block; height: 7%; border-radius: 99px; background: var(--rio-claro); }
-.entrada__der span:nth-child(2) { width: 75%; background: #f0b99f; }
-.entrada__der span:nth-child(3) { width: 55%; }
-.entrada__tapa { background: var(--rio); border: 2px solid var(--tinta); box-shadow: var(--sombra-alta); animation: entrada-tapa 1.1s .45s cubic-bezier(.6,.05,.25,1) both; z-index: 3; }
-.entrada__hoja { background: #fffdf6; border: 2px solid var(--borde); z-index: 2; }
-.entrada__hoja--1 { animation: entrada-tapa 1s .65s cubic-bezier(.6,.05,.25,1) both; }
-.entrada__hoja--2 { animation: entrada-tapa 1s .85s cubic-bezier(.6,.05,.25,1) both; }
-.entrada__nombre { margin: 0; font-family: var(--fuente-titulos); font-weight: 700; font-size: 1.5rem; color: var(--tinta); animation: libro-aparece .7s 1.1s ease both; max-width: none; }
-@keyframes entrada-tapa { to { transform: rotateY(-178deg); } }
-@keyframes entrada-centra { from { transform: translateX(25%); } to { transform: none; } }
-html[data-contraste="alto"] .entrada { background: #000; }
-html[data-contraste="alto"] .entrada__nombre { color: #fff; }
+/* ---------- 10. Identidad tecnológica: Bermejo 2026 ---------- */
+:root {
+  --tinta:#effbff; --tinta-suave:#b7ccda; --papel:#08131f; --superficie:#122237;
+  --linea:#2e4d63; --borde:#629bad; --rio:#4ce2ee; --rio-claro:#143c49;
+  --bermejo:#f5a474; --bermejo-claro:#3f302f; --lapacho:#f5a474; --lapacho-claro:#3f302f;
+  --banado:#50d6bb; --banado-claro:#173e42; --enlace:#79edf7;
+  --accion-fondo:#38d5e5; --accion-texto:#05202b; --accion-hover:#84f1f7;
+  --error:#ff9b9e; --error-fondo:#3e2430; --aviso-fondo:#302d26; --aviso-borde:#eeb376;
+  --foco:#a2f6fc; --halo:#144053; --pie-fondo:#050b15; --pie-texto:#cfe8ef; --pie-enlace:#7ce9f2;
+  --fuente-titulos:"Space Grotesk","Atkinson Hyperlegible",system-ui,sans-serif;
+  --sombra:0 14px 36px #01091345; --sombra-alta:0 22px 52px #01091384;
+}
+html:not([data-contraste="alto"]) body {
+  background:radial-gradient(circle at 84% 10%,#124d605c 0,transparent 29rem),
+             radial-gradient(circle at 9% 41%,#1d3a7d3c 0,transparent 35rem),
+             linear-gradient(165deg,#070f1a,#0c1b2c 54%,#060e19);
+  color:var(--tinta);
+}
+html:not([data-contraste="alto"]) body::before {
+  content:""; pointer-events:none; position:fixed; z-index:0; inset:0;
+  background-image:linear-gradient(#7bc5e008 1px,transparent 1px),linear-gradient(90deg,#7bc5e008 1px,transparent 1px);
+  background-size:55px 55px; mask-image:linear-gradient(to bottom,#000,transparent 85%);
+}
+html:not([data-contraste="alto"]) :is(.cabecera,main,.pie){position:relative}
+html:not([data-contraste="alto"]) .cabecera {
+  position:sticky; top:0; z-index:45;
+  background:#091725e8; backdrop-filter:blur(24px);
+  border-bottom:1px solid #3fc5d231; box-shadow:0 5px 24px #0004;
+}
+.cabecera__fila{max-width:79rem;min-height:5.3rem}
+.marca__logo{border-radius:1rem;box-shadow:0 0 22px #3fe0f536}
+.marca__nombre{font-family:var(--fuente-titulos);font-size:clamp(1.04rem,1.65vw,1.4rem);font-weight:700;letter-spacing:-.045em}
+.marca__nombre span{color:#54eaf1}
+html:not([data-contraste="alto"]) .menu a{color:#c7e3ec;font-size:.97rem;font-weight:600}
+html:not([data-contraste="alto"]) .menu a:hover{background:#183b4c;color:white}
+html:not([data-contraste="alto"]) .menu a[aria-current="page"]{background:#123a48;color:#78eff2;border-color:#2dc8d45c}
+html:not([data-contraste="alto"]) .ajustes>summary{background:#102738;color:#d4f6f9;border:1px solid #2b6877;border-radius:999px}
+html:not([data-contraste="alto"]) .ajustes__fila{background:#102334;border:1px solid #366073;box-shadow:0 20px 45px #0009}
+html:not([data-contraste="alto"]) .boton{border-color:#3d7b8c;background:#142b3d;color:#dffbff}
+html:not([data-contraste="alto"]) .boton:hover{background:#1b4255;border-color:#62e1ed;color:white}
+html:not([data-contraste="alto"]) .boton--principal,html:not([data-contraste="alto"]) .boton[aria-pressed="true"] {
+  background:linear-gradient(115deg,#21b6d3,#58ebec);border-color:#4ad9e3;color:#05202b;
+  box-shadow:0 7px 23px #09c9dd2d;
+}
+html:not([data-contraste="alto"]) .boton--principal:hover{background:linear-gradient(120deg,#48d8e5,#a2fff5);color:#041a27}
+html:not([data-contraste="alto"]) .boton[disabled],html:not([data-contraste="alto"]) .boton[aria-disabled="true"]{background:#1b2938;border-style:dashed;color:#c0d2dc;box-shadow:none}
+html:not([data-contraste="alto"]) :is(textarea,input[type="text"],input[type="search"],select,input[type="file"]){
+ background:#0c2031;color:#e5faff;border-color:#396c7d;border-radius:12px;
+}
+html:not([data-contraste="alto"]) input[type="file"]{border-style:dashed;border-color:#3cb9c8}
+html:not([data-contraste="alto"]) input[type="file"]::file-selector-button{
+  background:#153b49;border-color:#2c8a9b;color:#ddfbfe;border-radius:10px;
+}
+html:not([data-contraste="alto"]) :is(textarea,input[type="text"],input[type="search"],select):focus{border-color:#5de9f4}
+html:not([data-contraste="alto"]) .pie{background:#050b14;border-top:1px solid #1c5262}
+.pie__marca{font-family:var(--fuente-titulos)}
+html:not([data-contraste="alto"]) .pie__creditos{color:#91aebd;font-size:.83rem}
+html:not([data-contraste="alto"]) .saltar{background:#50e8eb;border-color:#041420;color:#031927}
+
+/* Portada corta: impacto tecnológico, sólo dos decisiones. */
+.portada{padding-top:clamp(1.5rem,4vw,3.4rem);padding-bottom:0}
+.portada .contenedor{max-width:78rem}
+.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,3vw,3rem);min-height:clamp(21rem,45vw,32rem);align-items:center;padding:0}
+.hero__marca{
+  width:fit-content;max-width:none;
+  padding:.42rem .8rem;border:1px solid #45b7c25e;border-radius:99px;
+  background:#1b4e5e6e;color:#77e8e9;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-family:var(--fuente-titulos);font-weight:700;
+}
+.hero__texto h1{
+  font-family:var(--fuente-titulos);font-weight:700;font-size:clamp(2.8rem,6.5vw,6rem);
+  line-height:1.04;letter-spacing:-.07em;hyphens:none;max-width:13ch;margin:.7rem 0 1.2rem;
+}
+.hero__texto h1 em{
+  display:block;color:#61f0ef;
+  background:linear-gradient(110deg,#70f6f4 14%,#39c9e4 70%,#b9a3ff);
+  background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero__texto .intro{font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.65;color:#b7cedd;max-width:39ch}
+.hero__sub{margin:1.2rem 0 0;color:#7faeba;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;font-weight:700}
+.hero__visual{min-width:0}
+.libro{width:min(100%,32rem);gap:.5rem;filter:drop-shadow(0 25px 38px #09a6cd12)}
+.libro__caja{transition:transform 1.55s cubic-bezier(.22,.75,.15,1)}
+.libro__tapa{transition:transform 1.45s cubic-bezier(.22,.75,.15,1)}
+.libro__pagina{background:linear-gradient(160deg,#e2f9fc,#a5cddf);border:2px solid #6ce4eb;border-left:0;box-shadow:0 0 32px #22d8e83e,inset 0 0 30px #5fdce318}
+.libro__cara--frente{
+  background:linear-gradient(145deg,#103448 0%,#0b6979 67%,#0d2a3c 100%);
+  border:1px solid #70dae8;color:#f7ffff;box-shadow:0 0 35px #22e7f750,inset 1rem 0 2rem #04121e7a,0 15px 30px #0007;
+}
+.libro__cara--frente img{border-radius:1rem;background:#0a2031;padding:1cqw}
+.libro__cara--dorso{background:#d5edf6;border-color:#8adde9;box-shadow:inset 0 0 35px #39bcd423}
+.libro__denso{color:#2d5564}
+.libro__etiqueta{color:#16778a}
+.libro__vista--grande p{color:#0b5368}
+.libro__vista--partes li{color:#153b4f;background:#d5f5f7}
+.libro__vista--partes li::before{background:#176c86;color:white}
+.libro__vista--pictos li{color:#0c3b52;background:#f6ffff;border-color:#86afc1}
+.libro__rio{stroke:#6be6ee;filter:drop-shadow(0 0 3px #6be6ee)}
+.libro__controles .boton{font-size:.85rem;min-height:2.7rem;padding:.4rem 1rem}
+.libro__nota{font-size:.88rem;color:#85aebc}
+.accesos{gap:clamp(.75rem,2vw,1.5rem);margin-top:clamp(.8rem,2vw,1.45rem)}
+.acceso{
+  overflow:hidden;border-radius:22px;padding:clamp(1.15rem,2.6vw,1.75rem);
+  min-height:14rem;background:linear-gradient(135deg,#132a3d,#0f2534);
+  border:1px solid #417487;box-shadow:0 12px 36px #010b166a;
+}
+.acceso::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 95% 5%,#36dae72a,transparent 45%)}
+.accesos li:nth-child(2) .acceso::before{background:radial-gradient(circle at 95% 5%,#ad8bff29,transparent 47%)}
+.acceso:hover,.acceso:focus-within{border-color:#4ceaf0;box-shadow:0 0 25px #26d4e929,0 20px 42px #0009;transform:translateY(-3px)}
+.acceso__icono{width:3.15rem;height:3.15rem;border-radius:13px;background:#194658;color:#59e7ef}
+.acceso__icono svg{width:1.95rem;height:1.95rem}
+.accesos li:nth-child(2) .acceso__icono{background:#302c56;color:#c6a6ff}
+.acceso h2{font-family:var(--fuente-titulos);font-size:clamp(1.55rem,2.3vw,2.15rem);color:#fff}
+.acceso p{color:#b8d1db;font-size:.96rem;line-height:1.45;max-width:44ch}
+.acceso .boton{border-radius:12px;margin-top:auto;font-size:.95rem;font-weight:750;min-height:2.8rem}
+.acceso:hover .boton{box-shadow:0 0 22px #16cfe347}
+
+/* Herramientas: superficie oscura de cristal, campos con iconografía clara. */
+html:not([data-contraste="alto"]) :is(.panel,.laboratorio,.paso,.resultado,.seccion-docente,.info-bloque,.aviso,.demo-detalle,.plegable,.modos-avanzados,.actividad){
+  border-color:#315268;border-radius:18px;
+}
+html:not([data-contraste="alto"]) .panel{background:linear-gradient(150deg,#132b40,#102339);box-shadow:0 10px 32px #0003}
+html:not([data-contraste="alto"]) .laboratorio{background:linear-gradient(155deg,#132c40,#0d2132);box-shadow:0 14px 35px #0004}
+html:not([data-contraste="alto"]) .lab-grupo{background:#0d2031;border-color:#31596a;border-radius:16px}
+html:not([data-contraste="alto"]) .lab-subgrupo{background:#142c3c;border-color:#2d5266}
+html:not([data-contraste="alto"]) .lab-chips .lab-opcion:has(input:checked){background:#174a51;color:#d3fbfa;border-color:#54d7e4}
+html:not([data-contraste="alto"]) .lab-opcion:hover{background:#173a48}
+html:not([data-contraste="alto"]) .paso>h2{font-family:var(--fuente-titulos);font-size:clamp(1.6rem,2.5vw,2.2rem);color:#eafdff}
+html:not([data-contraste="alto"]) .indicador li[aria-current="step"]{background:#143d4a;color:#ddfcfc;border-color:#2cceea}
+html:not([data-contraste="alto"]) :is(.plegable,.modos-avanzados,.demo-detalle,.actividad){background:#112a3e}
+html:not([data-contraste="alto"]) :is(.ia-consentimiento,.lab-chips .lab-opcion){background:#162e3b}
+html:not([data-contraste="alto"]) .acceso-lectura{background:#153144;border-color:#3a7185}
+html:not([data-contraste="alto"]) .acceso-lectura[aria-pressed="true"]{background:#164957;color:#dcffff;border-color:#49dbe6}
+html:not([data-contraste="alto"]) .acceso-lectura svg,html:not([data-contraste="alto"]) .opciones-carga h3 svg{stroke:#65e7f2}
+html:not([data-contraste="alto"]) .lectura{border-color:#426179}
+html:not([data-contraste="alto"]) .lab-bloque,html:not([data-contraste="alto"]) .lab-actividad{background:#112536}
+
+/* Selector pictográfico de material: una opción por pantalla, sin tocar procesamiento. */
+.seleccion-carga{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin:1rem 0 .8rem}
+.seleccion-carga button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-height:7.25rem;
+  padding:1rem .4rem;border:1px solid #3a697e;border-radius:17px;background:#142c3e;
+  font:700 1rem/1.2 var(--fuente);color:#cceaf3;cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.seleccion-carga button svg{width:2.6rem;height:2.6rem;stroke:#6dddec;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.seleccion-carga button:hover{border-color:#67e6ef;transform:translateY(-2px)}
+.seleccion-carga button[aria-pressed="true"]{background:linear-gradient(140deg,#134a5c,#14546a);border:2px solid #60e8ec;box-shadow:0 0 20px #23cddd33;color:white}
+.opciones-carga{grid-template-columns:1fr;margin:0 0 1.4rem}
+.opciones-carga>.panel{width:100%;max-width:100%;margin:0}
+.opciones-carga>.panel[hidden]{display:none!important}
+.opciones-carga>.panel h3{font-family:var(--fuente-titulos);font-size:1.2rem}
+.opciones-carga>.panel h3 svg{width:1.4rem;height:1.4rem}
+.opciones-carga>.panel textarea{min-height:9rem}
+.opciones-carga>.panel .boton--principal{margin-top:.65rem}
+
+/* Cinemática: libro real en perspectiva que se abre, emite luz y revela la interfaz. */
+.entrada{
+  position:fixed;inset:0;z-index:250;display:none;isolation:isolate;overflow:hidden;
+  flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+  background:radial-gradient(circle at 50% 48%,#174a63,#091522 56%,#03070e);
+  opacity:1;transition:opacity .65s ease,visibility .65s ease;
+}
+html.con-entrada{overflow:hidden}
+.con-entrada .entrada{display:flex}
+.entrada--sale{opacity:0;visibility:hidden;pointer-events:none}
+.entrada::before{
+  content:"";position:absolute;z-index:-1;inset:-40%;
+  background:repeating-linear-gradient(0deg,transparent 0 59px,#45d2f314 60px),repeating-linear-gradient(90deg,transparent 0 59px,#45d2f314 60px);
+  transform:perspective(600px) rotateX(68deg) scale(1.3);opacity:.35;
+}
+.entrada::after{content:"";position:absolute;z-index:-1;inset:10%;border-radius:50%;background:#16cdeb37;filter:blur(100px);opacity:0}
+.entrada--activo::after{animation:entrada-brillo 2.2s ease-out both}
+.entrada__particulas span{position:absolute;width:5px;height:5px;border-radius:50%;background:#78edfc;box-shadow:0 0 22px 7px #38d9ea83}
+.entrada__particulas span:nth-child(1){top:23%;left:19%}
+.entrada__particulas span:nth-child(2){top:32%;right:20%;width:3px;height:3px}
+.entrada__particulas span:nth-child(3){bottom:23%;right:24%;width:4px;height:4px}
+.entrada__libro{position:relative;width:min(62vw,19rem);aspect-ratio:1.45;perspective:1400px;transform-style:preserve-3d;transform:translateX(-22%) scale(.92);z-index:2}
+.entrada--activo .entrada__libro{animation:entrada-acerca 1.8s .15s cubic-bezier(.2,.74,.24,1) both}
+.entrada__pagina,.entrada__tapa,.entrada__hoja{position:absolute;left:50%;top:0;width:50%;height:100%;transform-origin:0% 50%;border-radius:0 11px 11px 0;backface-visibility:hidden}
+.entrada__pagina{background:linear-gradient(130deg,#e8fbff,#7ebacb);border:2px solid #a8f7fa;box-shadow:0 0 32px #38cde64a,inset 6px 0 15px #2a769c54;display:flex;flex-direction:column;justify-content:center;gap:10%;padding:13% 9%;z-index:0}
+.entrada__pagina i{display:block;height:7px;border-radius:12px;background:#2f8190;opacity:.48}
+.entrada__pagina i:nth-child(2){width:74%}
+.entrada__pagina i:nth-child(3){width:55%}
+.entrada__hoja{background:linear-gradient(100deg,#c2f5f7,#e8fcff 38%,#7bbdca);border:2px solid #72dce5;box-shadow:0 0 8px #69dfeb55;z-index:2}
+.entrada__hoja--1{z-index:3}
+.entrada__tapa{background:linear-gradient(140deg,#0a4154,#07687b,#062838);border:2px solid #7bedf1;box-shadow:inset 11px 0 20px #041520a8,0 0 42px #29d4e77a;z-index:4;display:grid;place-items:center}
+.entrada__tapa img{width:46%;height:auto;filter:drop-shadow(0 0 12px #75edf9)}
+.entrada__lomo{position:absolute;left:47%;top:-3%;height:106%;width:7%;background:linear-gradient(90deg,#0a2636,#4ce1ea,#0a293c);border-radius:8px;z-index:5;box-shadow:0 0 15px #44cdd5a0}
+.entrada__resplandor{position:absolute;inset:15%;border-radius:50%;background:#56eafb;filter:blur(45px);opacity:0;z-index:-1}
+.entrada--activo .entrada__resplandor{animation:entrada-destello 2.3s ease both}
+.entrada--activo .entrada__tapa{animation:entrada-pagina 1.55s .35s cubic-bezier(.2,.7,.2,1) both}
+.entrada--activo .entrada__hoja--1{animation:entrada-pagina 1.33s .63s cubic-bezier(.2,.7,.2,1) both}
+.entrada--activo .entrada__hoja--2{animation:entrada-pagina 1.2s .78s cubic-bezier(.2,.7,.2,1) both}
+.entrada__mensaje{text-align:center;opacity:0;transform:translateY(16px);max-width:min(94vw,46rem);z-index:2}
+.entrada--activo .entrada__mensaje{animation:entrada-titulo .7s 1.32s ease both}
+.entrada__nombre{font-family:var(--fuente-titulos);font-size:clamp(1.5rem,5vw,2.6rem);font-weight:700;letter-spacing:-.04em;color:#f2ffff;margin:0}
+.entrada__lema{font-size:clamp(.85rem,2vw,1.05rem);letter-spacing:.14em;text-transform:uppercase;color:#78e9ed;margin:.5rem 0 0}
+.entrada__saltar{position:absolute;right:clamp(1rem,4vw,2.8rem);bottom:clamp(1rem,4vw,2.8rem);z-index:4;
+  background:transparent;color:#aad8e6;border:1px solid #6fc7db70;border-radius:999px;padding:.6rem 1rem;font:600 .9rem var(--fuente);cursor:pointer}
+.entrada__saltar:hover,.entrada__saltar:focus-visible{background:#1d5162;color:white}
+@keyframes entrada-pagina{0%{transform:rotateY(0deg)}100%{transform:rotateY(-176deg)}}
+@keyframes entrada-acerca{0%{transform:translateX(-22%) scale(.78)}100%{transform:translateX(0%) scale(1.14)}}
+@keyframes entrada-brillo{0%{opacity:0}57%{opacity:.7}100%{opacity:.15}}
+@keyframes entrada-destello{0%,25%{opacity:0}60%{opacity:.73}100%{opacity:.12}}
+@keyframes entrada-titulo{to{opacity:1;transform:translateY(0)}}
+@media(max-width:52rem){
+ html:not([data-contraste="alto"]) .cabecera{position:relative}
+ html:not([data-contraste="alto"]) .menu{background:#0d2132;border-color:#3b647b}
+ .hero{grid-template-columns:1fr;gap:1.1rem}
+ .hero__texto h1{max-width:none}
+ .hero__visual{max-width:27rem;margin-inline:auto}
+ .accesos{grid-template-columns:1fr}
+ .acceso{min-height:12rem}
+}
+@media(max-width:36rem){
+ .hero__texto h1{font-size:clamp(2.7rem,13vw,4rem)}
+ .portada{padding-top:1rem}
+ .libro{max-width:24rem}
+ .entrada__libro{width:min(68vw,17rem)}
+ .seleccion-carga{gap:.4rem}
+ .seleccion-carga button{min-height:6.2rem;font-size:.87rem;padding:.8rem .25rem}
+ .seleccion-carga button svg{width:2rem;height:2rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .entrada{display:none!important}
+ .entrada *,.entrada::after{animation:none!important}
+ .acceso,.seleccion-carga button{transition:none}
+}
+html[data-contraste="alto"] .entrada{background:#000}
+html[data-contraste="alto"] .entrada__nombre{color:#fff}
+@media print{.entrada,.seleccion-carga{display:none!important}}
