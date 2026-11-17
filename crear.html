@@ -75,7 +75,7 @@
     <div class="contenedor">
       <div class="encabezado-pagina">
         <h1>Crear</h1>
-        <p class="intro">Preparás un material accesible con apoyo de IA. La propuesta es un borrador: la revisión y la aprobación son tuyas.</p>
+        <p class="intro">Subí el contenido, elegí el grado y los objetivos, y prepará una adaptación o propuesta con actividades siguiendo el DUA.</p>
       </div>
       <ol class="indicador" id="indicador-crear" aria-label="Pasos">
         <li id="ind-1" aria-current="step"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V5m-4.5 4.5L12 5l4.5 4.5M5 19h14"/></svg>Contenido</li>
@@ -204,7 +204,20 @@
         <h2 id="t-leer" tabindex="-1">Elegí los ajustes y generá la adaptación</h2>
         <section class="laboratorio" id="laboratorio" aria-labelledby="lab-titulo">
           <h3 id="lab-titulo">Laboratorio de adaptaciones accesibles</h3>
-          <p>La IA propone un borrador con explicación en lenguaje claro, pictogramas y actividades. Vos lo revisás, lo corregís y lo aprobás antes de descargarlo.</p>
+          <p>Prepará una adaptación o propuesta de enseñanza basada en el DUA. Elegí qué querés trabajar y después personalizá los apoyos y las actividades.</p>
+          <section class="dua-presentacion" aria-labelledby="dua-titulo">
+            <h4 id="dua-titulo">Tres formas de abrir el aprendizaje (DUA)</h4>
+            <div class="dua-pilares">
+              <p><strong>Representación</strong><span>Explicar con textos claros, imágenes, pictogramas y ejemplos.</span></p>
+              <p><strong>Acción y expresión</strong><span>Responder de distintas maneras: escribir, unir, hablar, dibujar.</span></p>
+              <p><strong>Compromiso</strong><span>Dar opciones, conectar con intereses y ofrecer apoyos graduales.</span></p>
+            </div>
+          </section>
+          <fieldset class="dua-enfoque">
+            <legend>¿Qué querés preparar?</legend>
+            <label><input type="radio" name="lab-enfoque" value="material" checked> <span><strong>Adaptar un material</strong><small>Una explicación accesible con actividades para trabajar el tema.</small></span></label>
+            <label><input type="radio" name="lab-enfoque" value="propuesta"> <span><strong>Propuesta de enseñanza</strong><small>Organizar la explicación y las actividades con inicio, desarrollo y cierre.</small></span></label>
+          </fieldset>
           <div id="lab-errores" class="lab-errores" role="alert" tabindex="-1" hidden></div>
           <form id="lab-form" novalidate>
             <fieldset class="lab-grupo">
