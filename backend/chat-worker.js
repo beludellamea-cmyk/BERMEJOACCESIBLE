@@ -289,7 +289,7 @@ async function clariaConversar(data,env,permitido){
   const cuerpo={
     systemInstruction:{parts:[{text:directivas}]},
     contents:contents,
-    generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.3,maxOutputTokens:2600},false)
+    generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.3,maxOutputTokens:2200},true)
   };
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),25000);
@@ -298,12 +298,21 @@ async function clariaConversar(data,env,permitido){
       method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},
       body:JSON.stringify(cuerpo),signal:controller.signal
     });
-    if(!r.ok){await registrarErrorIA(r,env);return responder({error:r.status===429?'Servicio ocupado: probá más tarde.':'El servicio de IA no respondió.'},r.status===429?429:502,permitido);}
+    if(!r.ok){
+      const code=r.status;
+      await registrarErrorIA(r,env);
+      return responder({error:errorGeminiUsuario(code),codigo:'GEMINI_'+code},code===429?429:503,permitido);
+    }
     const respuesta=leerJSONIA(await r.json(),env);
     const textoRespuesta=typeof respuesta?.respuesta==='string'?respuesta.respuesta.trim().slice(0,3200):'';
     if(!textoRespuesta)return responder({error:'La respuesta de IA no tuvo un formato válido.'},502,permitido);
     return responder({respuesta:textoRespuesta},200,permitido);
-  }catch(_){return responder({error:'No se pudo conectar con la IA. La guía local sigue disponible.'},502,permitido);}
+  }catch(err){
+    return responder({error:err?.name==='AbortError'
+      ?'Gemini tardó demasiado. Podés volver a intentar con una pregunta más corta.'
+      :'No se pudo conectar con Gemini. La guía local sigue disponible.',
+      codigo:err?.name==='AbortError'?'TIEMPO_AGOTADO':'CONEXION_GEMINI'},503,permitido);
+  }
   finally{clearTimeout(timer);}
 }
 
