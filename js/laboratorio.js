@@ -77,6 +77,10 @@
     if (!grado.value) problemas.push({ campo: 'lab-grado', mensaje: 'Elegí el grado o año.' });
     var objetivos = valores('lab-objetivo');
     var libres = $('#lab-objetivos-libres').value.trim();
+    var enfoque = ($('input[name="lab-enfoque"]:checked') || {}).value || 'material';
+    var orientacionDUA = enfoque === 'propuesta'
+      ? 'Organizá la propuesta en inicio, desarrollo y cierre; ofrecé opciones para participar y expresar lo aprendido según el DUA.'
+      : 'Priorizá una explicación accesible, apoyos visuales y actividades diversas según el DUA.';
     if (!objetivos.length && !libres) problemas.push({ campo: 'lab-objetivos-grupo', mensaje: 'Marcá al menos un objetivo pedagógico o escribí uno.' });
     var formatos = valores('lab-formato');
     if (!formatos.length) problemas.push({ campo: 'lab-formatos-grupo', mensaje: 'Elegí al menos un formato de actividad.' });
@@ -95,7 +99,7 @@
         etapa: partes[0],
         numero: Number(partes[1]),
         objetivos: objetivos,
-        objetivosLibres: libres.slice(0, 400),
+        objetivosLibres: [libres.slice(0, 250), orientacionDUA].filter(Boolean).join(' ').slice(0, 400),
         apoyos: valores('lab-apoyo'),
         niveles: valores('lab-nivel'),
         cantidadApoyos: ($('input[name="lab-cantidad"]:checked') || {}).value || 'pocos',
