@@ -291,7 +291,19 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   $('asesoria-imprimir').addEventListener('click',function(){
     if(!propuestaLista)return;
-    status('Usá Imprimir o Guardar como PDF; el contenido editado se conserva.');window.print();
+    const caja=$('asesoria-impresion');
+    caja.replaceChildren();
+    [
+      ['CLARIA · Propuesta de clase',plan.value],
+      ['Uso pedagógico de la imagen',uso.value],
+      ['Prompt para generar la imagen didáctica',prompt.value]
+    ].forEach(function(par){
+      const h=document.createElement('h2'),p=document.createElement('pre');
+      h.textContent=par[0];p.textContent=par[1];
+      caja.append(h,p);
+    });
+    status('Usá Imprimir o Guardar como PDF; se incluirán completos la planificación y el prompt.');
+    window.print();
   });
   window.addEventListener('pagehide',()=>{if('speechSynthesis' in window)speechSynthesis.cancel();});
   reset();mostrarRol();
