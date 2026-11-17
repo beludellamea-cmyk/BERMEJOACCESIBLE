@@ -103,3 +103,62 @@ html[data-contraste="alto"] :is(.asesoria-intro p,.asesoria-entrega p,.asesoria-
  .pagina-claria .asesoria-impresion h2{font:700 15pt Arial,sans-serif!important;margin:1rem 0 .5rem;break-after:avoid;color:#111!important}
  .pagina-claria .asesoria-impresion pre{font:400 11pt/1.5 Arial,sans-serif!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;margin:0 0 .6rem;color:#111!important}
 }
+
+/* CLARIA: humana digital de voz · estados legibles y controles explícitos */
+.claria-voz{
+  display:grid;grid-template-columns:clamp(8rem,18vw,12.5rem) minmax(0,1fr);
+  align-items:center;gap:clamp(.7rem,2vw,1.6rem);padding:clamp(.8rem,2vw,1.4rem);
+  background:linear-gradient(130deg,#10283f,#182d4d 55%,#20375c);
+  border-bottom:1px solid #547992;position:relative;isolation:isolate;overflow:hidden
+}
+.claria-voz::before{content:"";position:absolute;inset:-3rem auto auto -4rem;width:23rem;height:23rem;
+  border-radius:50%;background:radial-gradient(circle,#5dcfd126,transparent 67%);z-index:-1;pointer-events:none}
+.claria-voz__retrato{position:relative;display:grid;place-items:center;aspect-ratio:1;width:100%;max-width:12rem;justify-self:center}
+.claria-voz__retrato img{position:relative;z-index:2;border-radius:50%;width:78%;height:78%;
+  object-fit:cover;object-position:top;background:#45547b;box-shadow:0 8px 24px #030d2e96;border:3px solid #63bac8}
+.claria-voz__pulso{position:absolute;z-index:1;inset:3%;border-radius:50%;border:2px solid #6288b1;box-shadow:0 0 0 7px #5c9bc512}
+.claria-voz__latido{position:absolute;z-index:3;bottom:4%;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;justify-content:center;gap:3px;height:1.8rem;min-width:4.2rem;padding:.35rem;
+  background:#133956;border:1px solid #5fbed2;border-radius:999px;box-shadow:0 4px 12px #02142f96}
+.claria-voz__latido span{width:4px;height:5px;border-radius:3px;background:#80e8e8;transform-origin:center}
+.claria-voz__sobre{font:700 .71rem/1.4 "Space Grotesk",system-ui,sans-serif;color:#87e0e7;letter-spacing:.13em;margin:.1rem 0 .35rem}
+.claria-voz__mensaje{min-width:0}
+.claria-voz__mensaje h4{font:750 clamp(1.35rem,2.6vw,2rem)/1.15 "Space Grotesk",system-ui,sans-serif;color:#f8ffff;margin:0 0 .4rem;letter-spacing:-.04em}
+.claria-voz__mensaje>p:nth-of-type(2){font-size:.92rem;font-weight:750;color:#c3ebf1;line-height:1.42;margin:.2rem 0}
+.claria-voz__captura{color:#d9f7ff;font-size:.88rem;line-height:1.45;max-height:4.2rem;overflow:auto;margin:.5rem 0!important}
+.claria-voz__iniciar{display:inline-flex;align-items:center;justify-content:center;background:#60e3e0;
+  color:#082e45;border:2px solid #a8fcf4;border-radius:13px;min-height:3.1rem;max-width:100%;
+  padding:.7rem 1.15rem;font:800 .99rem "Atkinson Hyperlegible",system-ui,sans-serif;cursor:pointer;
+  box-shadow:0 5px 18px #30a6b659;margin:.55rem 0}
+.claria-voz__iniciar[aria-pressed="true"]{background:#ffc6c6;border-color:#ffdbde;color:#502332}
+.claria-voz__ayuda{color:#a9c7d7;font-size:.76rem!important;line-height:1.53;font-weight:400!important;max-width:68ch;margin:.3rem 0}
+.claria-voz[data-voz-estado="escuchando"] .claria-voz__pulso{border-color:#54f1d2;box-shadow:0 0 0 9px #54f1d21a,0 0 30px #43dddc70;animation:claria-respirar 1.7s ease-in-out infinite}
+.claria-voz[data-voz-estado="hablando"] .claria-voz__pulso{border-color:#c8acff;box-shadow:0 0 0 8px #a58cf21d,0 0 35px #a58cf28c}
+.claria-voz[data-voz-estado="pensando"] .claria-voz__pulso{border-color:#fce09b;box-shadow:0 0 0 8px #ffde9a15}
+.claria-voz[data-voz-estado="hablando"] .claria-voz__latido span{animation:claria-voz-ondas .58s ease-in-out infinite alternate;background:#d8bcff}
+.claria-voz[data-voz-estado="hablando"] .claria-voz__latido span:nth-child(2){animation-delay:.12s}
+.claria-voz[data-voz-estado="hablando"] .claria-voz__latido span:nth-child(3){animation-delay:.21s}
+.claria-voz[data-voz-estado="hablando"] .claria-voz__latido span:nth-child(4){animation-delay:.09s}
+.claria-voz[data-voz-estado="hablando"] .claria-voz__latido span:nth-child(5){animation-delay:.27s}
+.claria-voz[data-voz-estado="escuchando"] .claria-voz__latido span{animation:claria-voz-ondas .9s ease-in-out infinite alternate}
+.claria-voz[data-voz-estado="escuchando"] .claria-voz__latido span:nth-child(2){animation-delay:.15s}
+.claria-voz[data-voz-estado="escuchando"] .claria-voz__latido span:nth-child(3){animation-delay:.3s}
+.claria-voz[data-voz-estado="escuchando"] .claria-voz__latido span:nth-child(4){animation-delay:.08s}
+.claria-voz[data-voz-estado="escuchando"] .claria-voz__latido span:nth-child(5){animation-delay:.24s}
+.claria-voz[data-voz-estado="error"] .claria-voz__pulso{border-color:#ffd8a8}
+@keyframes claria-respirar{0%,100%{transform:scale(.97)}50%{transform:scale(1.035)}}
+@keyframes claria-voz-ondas{0%{height:4px}100%{height:21px}}
+.claria-voz__iniciar:focus-visible{outline:3px solid #fff09c;outline-offset:4px}
+@media(max-width:42rem){
+  .claria-voz{grid-template-columns:5.6rem minmax(0,1fr);gap:.7rem;padding:.85rem}
+  .claria-voz__latido{bottom:-.55rem;transform:translateX(-50%) scale(.82)}
+  .claria-voz__iniciar{width:100%;font-size:.87rem;line-height:1.3}
+  .claria-voz__mensaje h4{font-size:1.35rem}
+  .claria-voz__ayuda{font-size:.72rem!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .claria-voz__pulso,.claria-voz__latido span{animation:none!important}
+}
+html[data-contraste="alto"] .claria-voz{background:#000!important;border:2px solid #fff}
+html[data-contraste="alto"] .claria-voz__mensaje>p,html[data-contraste="alto"] .claria-voz__mensaje h4{color:#fff!important}
+@media print{.pagina-claria .claria-voz{display:none!important}}
