@@ -1,53 +1,83 @@
-/* Bermejo Accesible: entrada contextual a los dos recorridos, sin duplicar los procesadores de archivos. */
+/* Bermejo Accesible: dos recorridos en una sola página, sin perder el material cargado. */
 (function () {
   'use strict';
   document.addEventListener('DOMContentLoaded', function () {
-    var params = new URLSearchParams(window.location.search);
-    var destino = params.get('recorrido') === 'adaptar' ? 'adaptar' : 'comprender';
     var main = document.getElementById('contenido');
-    var laboratorio = document.getElementById('laboratorio');
+    var lab = document.getElementById('laboratorio');
     var pasoLeer = document.getElementById('paso-leer');
-    if (!main) return;
+    if (!main || !lab || !pasoLeer) return;
+    var h1 = main.querySelector('h1');
+    var intro = main.querySelector('.intro');
+    var pasoTitulo = document.getElementById('t-leer');
+    var pasoIntro = pasoLeer.querySelector(':scope > p');
+    var primero = pasoLeer.querySelector('.accesos-lectura');
+    var textoH1 = h1 ? h1.textContent : '';
+    var textoIntro = intro ? intro.textContent : '';
+    var textoPaso = pasoTitulo ? pasoTitulo.textContent : '';
+    var textoPasoIntro = pasoIntro ? pasoIntro.textContent : '';
+    var detalles = document.createElement('details');
+    detalles.className = 'laboratorio-acceso';
+    var sumario = document.createElement('summary');
+    sumario.textContent = '¿Sos docente y también querés crear una adaptación con IA?';
+    detalles.appendChild(sumario);
+    var nota = document.createElement('section');
+    nota.className = 'recorrido-contexto';
+    nota.setAttribute('aria-labelledby', 'recorrido-titulo');
+    nota.innerHTML = '<h2 id="recorrido-titulo">Primero cargá el material, después usá el laboratorio.</h2>' +
+      '<p><strong>1.</strong> Pegá texto, subí un PDF o una foto. <strong>2.</strong> Revisá el contenido extraído. <strong>3.</strong> Elegí grado, materia y apoyos para crear tu adaptación.</p>' +
+      '<p>La IA ofrece un borrador sujeto a revisión docente. No ingreses datos personales identificables.</p>';
+    if (intro) intro.insertAdjacentElement('afterend', nota);
 
-    var enlaces = document.querySelectorAll('.nav-principal a[href*="material.html?recorrido="]');
-    enlaces.forEach(function (a) {
-      var esActual = a.getAttribute('href').indexOf('recorrido=' + destino) !== -1;
-      if (esActual) a.setAttribute('aria-current', 'page');
-      else a.removeAttribute('aria-current');
-    });
-
-    if (!laboratorio || !pasoLeer) return;
-    if (destino === 'adaptar') {
-      document.body.classList.add('recorrido-adaptar');
-      document.title = 'Crear una adaptación | Bermejo Accesible';
-      var titulo = main.querySelector('h1');
-      if (titulo) titulo.textContent = 'Crear una adaptación educativa';
-      var intro = main.querySelector('.intro');
-      if (intro) {
-        intro.textContent = 'Un recorrido para transformar tu material de clase en una propuesta accesible, con apoyos visuales y revisión docente.';
-        var nota = document.createElement('section');
-        nota.className = 'recorrido-contexto';
-        nota.setAttribute('aria-labelledby', 'recorrido-titulo');
-        nota.innerHTML = '<h2 id="recorrido-titulo">Primero cargá el material, después usá el laboratorio.</h2>' +
-          '<p><strong>1.</strong> Pegá texto, subí un PDF o una foto. <strong>2.</strong> Revisá el contenido extraído. <strong>3.</strong> Elegí grado, materia y apoyos para generar la propuesta de adaptación.</p>' +
-          '<p>La IA trabaja con un borrador que siempre necesita revisión docente. No ingreses información personal identificable.</p>';
-        intro.insertAdjacentElement('afterend', nota);
-      }
-      var tLeer = document.getElementById('t-leer');
-      if (tLeer) tLeer.textContent = 'Paso 3. Prepará la adaptación';
-      var resumen = pasoLeer.querySelector(':scope > p');
-      if (resumen) resumen.textContent = 'Comenzá por el laboratorio. Si después querés escuchar o leer el texto de otras formas, esas opciones siguen disponibles debajo.';
-      var primer = pasoLeer.querySelector('.accesos-lectura');
-      if (primer) pasoLeer.insertBefore(laboratorio, primer);
-    } else {
-      document.body.classList.add('recorrido-comprender');
-      var contenedor = document.createElement('details');
-      contenedor.className = 'laboratorio-acceso';
-      var sum = document.createElement('summary');
-      sum.textContent = '¿Sos docente y también querés crear una adaptación con IA?';
-      laboratorio.parentNode.insertBefore(contenedor, laboratorio);
-      contenedor.appendChild(sum);
-      contenedor.appendChild(laboratorio);
+    function modoActual() {
+      return new URLSearchParams(location.search).get('recorrido') === 'adaptar' ? 'adaptar' : 'comprender';
     }
+    function aplicar(modo) {
+      var adaptar = modo === 'adaptar';
+      document.body.classList.toggle('recorrido-adaptar', adaptar);
+      document.body.classList.toggle('recorrido-comprender', !adaptar);
+      document.title = adaptar ? 'Crear una adaptación | Bermejo Accesible' : 'Comprender mi material | Bermejo Accesible';
+      if (h1) h1.textContent = adaptar ? 'Crear una adaptación educativa' : textoH1;
+      if (intro) intro.textContent = adaptar
+        ? 'Un recorrido para transformar tu material de clase en una propuesta accesible, con apoyos visuales y revisión docente.'
+        : textoIntro;
+      nota.hidden = !adaptar;
+      if (pasoTitulo) pasoTitulo.textContent = adaptar ? 'Paso 3. Prepará la adaptación' : textoPaso;
+      if (pasoIntro) pasoIntro.textContent = adaptar
+        ? 'Comenzá por el laboratorio. Las opciones para leer y escuchar el texto siguen disponibles debajo.'
+        : textoPasoIntro;
+      if (adaptar) {
+        if (lab.parentNode === detalles) detalles.removeChild(lab);
+        if (detalles.isConnected) detalles.remove();
+        if (primero) pasoLeer.insertBefore(lab, primero);
+        else pasoLeer.appendChild(lab);
+      } else {
+        if (!detalles.isConnected) pasoLeer.appendChild(detalles);
+        detalles.appendChild(lab);
+      }
+      document.querySelectorAll('.nav-principal a[href*="material.html?recorrido="]').forEach(function (a) {
+        var actual = a.getAttribute('href').indexOf('recorrido=' + modo) !== -1;
+        if (actual) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    aplicar(modoActual());
+
+    /* Al cambiar de recorrido dentro de esta página se conserva el material ya cargado. */
+    document.querySelectorAll('.nav-principal a[href^="material.html?recorrido="]').forEach(function (a) {
+      a.addEventListener('click', function (evento) {
+        var url = new URL(a.href, location.href);
+        if (url.pathname !== location.pathname) return;
+        evento.preventDefault();
+        var nuevoModo = url.searchParams.get('recorrido') === 'adaptar' ? 'adaptar' : 'comprender';
+        history.pushState({recorrido:nuevoModo}, '', url);
+        aplicar(nuevoModo);
+        var destino = !pasoLeer.hidden && pasoTitulo ? pasoTitulo : h1;
+        if (destino) {
+          destino.scrollIntoView({block:'start',behavior:'auto'});
+          if (destino.hasAttribute('tabindex')) destino.focus({preventScroll:true});
+        }
+      });
+    });
+    window.addEventListener('popstate', function () { aplicar(modoActual()); });
   });
 })();
