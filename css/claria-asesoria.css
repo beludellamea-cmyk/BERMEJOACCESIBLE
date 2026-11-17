@@ -162,3 +162,16 @@ html[data-contraste="alto"] :is(.asesoria-intro p,.asesoria-entrega p,.asesoria-
 html[data-contraste="alto"] .claria-voz{background:#000!important;border:2px solid #fff}
 html[data-contraste="alto"] .claria-voz__mensaje>p,html[data-contraste="alto"] .claria-voz__mensaje h4{color:#fff!important}
 @media print{.pagina-claria .claria-voz{display:none!important}}
+
+/* Audio accesible: cada respuesta se puede reproducir a demanda con un toque. */
+.asesoria-burbuja__repetir{
+  display:inline-flex;align-items:center;gap:.35rem;
+  margin:.8rem 0 .05rem;padding:.48rem .7rem;
+  background:#245b6e;border:1px solid #82cbd6;
+  border-radius:10px;color:#e0fbff;
+  font:750 .81rem/1.4 "Atkinson Hyperlegible",Arial,sans-serif;
+  cursor:pointer;
+}
+.asesoria-burbuja__repetir:hover{background:#2a6a80}
+.asesoria-burbuja__repetir:focus-visible{outline:3px solid #fff2a1;outline-offset:3px}
+@media print{.pagina-claria .asesoria-burbuja__repetir{display:none!important}}
