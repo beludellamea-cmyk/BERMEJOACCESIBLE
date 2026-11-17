@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded',function(){
         estado=$('asesoria-estado'),permiso=$('asesoria-permiso'),enviar=$('asesoria-enviar'),
         crear=$('asesoria-crear'),entrega=$('asesoria-entrega'),
         plan=$('asesoria-plan'),uso=$('asesoria-uso-imagen'),prompt=$('asesoria-prompt'),
-        fuente=$('asesoria-fuente'),archivo=$('asesoria-archivo'),archivoEstado=$('asesoria-archivo-estado');
+        fuente=$('asesoria-fuente'),archivo=$('asesoria-archivo'),archivoEstado=$('asesoria-archivo-estado'),
+        comprobarIA=$('asesoria-comprobar-ia'),estadoIA=$('asesoria-ia-estado');
   const endpoint=String(window.BERMEJO_CHAT_ENDPOINT||'').replace(/\/$/,'');
   const cara='https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png';
   let historial=[],trabajando=false,escuchar=false,propuestaLista=false,numeroDeRevision=0,fragmentoEnviado=false;
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded',function(){
   function textoSeguro(t){return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\b(?:dni|documento|celular|telefono|teléfono|direccion|dirección)\s*[:#]?\s*[\d\w.-]{6,}|\b\d{8,11}\b/i.test(t);}
   function status(t){estado.textContent=t;}
   function setOcupado(flag,t){
-    trabajando=flag;enviar.disabled=flag;crear.disabled=flag||!historial.some(x=>x.rol==='modelo');
+    trabajando=flag;enviar.disabled=flag;comprobarIA.disabled=flag;crear.disabled=flag||!historial.some(x=>x.rol==='modelo');
     zona.querySelectorAll('[data-ejemplo]').forEach(b=>b.disabled=flag);
     if(t)status(t);
   }
@@ -224,6 +225,36 @@ document.addEventListener('DOMContentLoaded',function(){
       return j;
     }finally{clearTimeout(timer);}
   }
+  // Verificación explícita: requiere consentimiento y comprueba una respuesta real de Gemini.
+  // No agrega la consulta de prueba al historial del docente.
+  comprobarIA.addEventListener('click',async function(){
+    if(trabajando)return;
+    if(!permiso.checked){
+      const msg='Para probar la IA, marcá primero la autorización de envío que está junto al micrófono.';
+      estadoIA.textContent=msg;status(msg);permiso.focus();return;
+    }
+    if(modoVoz){detenerVoz();}
+    comprobarIA.disabled=true;
+    estadoIA.textContent='Comprobando la respuesta real de CLARIA mediante Gemini…';
+    try{
+      const r=await post('/asistente',{
+        texto:'Hola CLARIA. Respondé brevemente si podés ayudar a planificar una clase.',
+        perfil:'docente',confirmacion:true,historial:[]
+      },28000);
+      if(typeof r.respuesta!=='string'||!r.respuesta.trim())
+        throw new Error('El servidor respondió sin contenido de IA.');
+      estadoIA.textContent='IA conectada. CLARIA respondió correctamente. Ya podés conversar escribiendo o por voz.';
+      const etiqueta=$('claria-etiqueta');if(etiqueta)etiqueta.textContent='CLARIA · IA conectada';
+      status('Prueba exitosa: respuesta recibida de la IA. Ya podés conversar.');
+    }catch(err){
+      const motivo=err.name==='AbortError'
+        ?'Se agotó el tiempo de espera.'
+        :err.message||'Error de conexión no identificado.';
+      estadoIA.textContent='No pude confirmar la IA: '+motivo;
+      const etiqueta=$('claria-etiqueta');if(etiqueta)etiqueta.textContent='CLARIA · conexión pendiente';
+      status('La IA no pasó la prueba de conexión. Podés revisar el detalle arriba, junto al micrófono.');
+    }finally{comprobarIA.disabled=false;}
+  });
   async function conversar(q){
     if(trabajando)return;
     const pregunta=q.trim();
@@ -344,6 +375,7 @@ document.addEventListener('DOMContentLoaded',function(){
     mensajes.replaceChildren();bubble('modelo',saludo);
     entrega.hidden=true;plan.value='';uso.value='';prompt.value='';
     entrada.value='';fuente.value='';archivo.value='';archivoEstado.textContent='El archivo se lee en tu navegador. Revisá el texto antes de enviarlo a la IA.';permiso.checked=false;
+    estadoIA.textContent='Conexión todavía no verificada. Podés comprobarla con una consulta breve.';
     crear.disabled=true;crear.textContent='✨ Crear propuesta de clase y recurso visual';
     document.getElementById('asesoria-ejemplos').hidden=false;
     status('Escribí con tus palabras. CLARIA puede sugerir opciones y hacerte una pregunta a la vez.');
