@@ -5,25 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bermejo Accesible · La información a tu manera</title>
   <meta name="description" content="Leé, comprendé y adaptá información con herramientas accesibles e inteligencia artificial. Plataforma educativa desde Formosa.">
-  <meta name="theme-color" content="#0b6b70">
+  <meta name="theme-color" content="#08131f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/bermejo.css">
+  <script>
+    // Evita el parpadeo de la portada antes de animar el libro.
+    try {
+      if (!sessionStorage.getItem('bermejo-entrada-tech-v1') &&
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('con-entrada');
+      }
+    } catch (e) { /* Continúa sin animación si el navegador bloquea almacenamiento. */ }
+  </script>
   <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
 </head>
 <body class="pagina-inicio">
-  <div class="entrada" id="entrada" aria-hidden="true">
-    <div class="entrada__libro">
-      <div class="entrada__tapa"></div>
-      <div class="entrada__hoja entrada__hoja--1"></div>
+  <div class="entrada" id="entrada" role="region" aria-label="Presentación animada de Bermejo Accesible">
+    <div class="entrada__particulas" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="entrada__libro" aria-hidden="true">
+      <div class="entrada__resplandor"></div>
+      <div class="entrada__pagina"><i></i><i></i><i></i></div>
       <div class="entrada__hoja entrada__hoja--2"></div>
-      <div class="entrada__der"><span></span><span></span><span></span></div>
+      <div class="entrada__hoja entrada__hoja--1"></div>
+      <div class="entrada__tapa"><img src="img/logo-bermejo.svg" alt="" width="64" height="64"></div>
+      <div class="entrada__lomo"></div>
     </div>
-    <p class="entrada__nombre">Bermejo Accesible</p>
+    <div class="entrada__mensaje">
+      <p class="entrada__nombre">BERMEJO ACCESIBLE</p>
+      <p class="entrada__lema">La información a tu manera</p>
+    </div>
+    <button type="button" class="entrada__saltar" id="entrada-saltar">Omitir animación</button>
   </div>
   <a class="saltar" href="#contenido">Ir al contenido</a>
   <header class="cabecera">
@@ -76,48 +92,36 @@
     <div class="contenedor">
       <section class="hero" aria-labelledby="titulo-portada">
         <div class="hero__texto">
-          <p class="hero__marca">Bermejo Accesible</p>
+          <p class="hero__marca">Educación · Tecnología · Inclusión</p>
           <h1 id="titulo-portada">La información <em>a tu manera.</em></h1>
-          <p class="intro">Leé, comprendé y adaptá información de forma simple.</p>
+          <p class="intro">Subí un texto, PDF o foto. Comprendelo de distintas formas o creá una adaptación con ayuda de inteligencia artificial.</p>
+          <p class="hero__sub">Elegí por dónde empezar ↓</p>
         </div>
         <div class="hero__visual">
           <div class="libro" id="libro" data-estado="abierto" data-vista="grande">
             <div class="libro__caja" aria-hidden="true">
               <div class="libro__pagina libro__pagina--der">
-                <p class="libro__etiqueta">A tu manera</p>
-                <div class="libro__vista libro__vista--grande"><p>El río crece en verano.</p></div>
-                <div class="libro__vista libro__vista--pictos">
-                  <ul>
-                    <li><svg viewBox="0 0 48 48"><path d="M5 17c5-5 8 5 13 0s8 5 13 0 8 5 12 0M5 27c5-5 8 5 13 0s8 5 13 0 8 5 12 0M5 37c5-5 8 5 13 0s8 5 13 0 8 5 12 0"/></svg>río</li>
-                    <li><svg viewBox="0 0 48 48"><path d="M24 40V9M12 21 24 9l12 12"/></svg>crece</li>
-                    <li><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="8"/><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.6 10.6l4.2 4.2M33.2 33.2l4.2 4.2M10.6 37.4l4.2-4.2M33.2 14.8l4.2-4.2"/></svg>verano</li>
-                  </ul>
-                </div>
-                <div class="libro__vista libro__vista--partes">
-                  <ol><li>El río crece.</li><li>Pasa en verano.</li><li>Llueve mucho.</li></ol>
-                </div>
+                <p class="libro__etiqueta">Un contenido. Más posibilidades.</p>
+                <div class="libro__vista libro__vista--grande"><p>Leé. Escuchá. Comprendé.</p></div>
               </div>
               <div class="libro__tapa">
                 <div class="libro__cara libro__cara--frente">
                   <img src="img/logo-bermejo.svg" alt="" width="64" height="64">
-                  <span class="libro__titulo">Bermejo<br>Accesible</span>
+                  <span class="libro__titulo">BERMEJO<br>ACCESIBLE</span>
                   <svg class="libro__rio" viewBox="0 0 120 40"><path d="M0 28c15-14 25 10 40-2s25-14 40-2 25 6 40-6"/></svg>
                 </div>
                 <div class="libro__cara libro__cara--dorso">
-                  <p class="libro__etiqueta">Texto original</p>
-                  <p class="libro__denso">El caudal del río Bermejo experimenta un incremento sustancial durante la estación estival, a raíz de las precipitaciones copiosas registradas en la cuenca alta, lo que determina el desborde de sus márgenes en los sectores de menor altitud.</p>
+                  <p class="libro__etiqueta">Punto de partida</p>
+                  <p class="libro__denso">Un texto puede presentar barreras para comprenderlo. Podemos ofrecer otras formas de leerlo, escucharlo y aprender con él.</p>
                 </div>
               </div>
             </div>
             <div class="libro__controles">
-              <button type="button" class="boton" id="libro-alternar" aria-controls="libro" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 7c-2.5-1.6-5.5-2-8.5-1.2v12.5c3-.8 6-.4 8.5 1.2 2.5-1.6 5.5-2 8.5-1.2V5.8C17.5 5 14.5 5.4 12 7Z"/><path d="M12 7v12.5"/></svg><span>Cerrar el libro</span></button>
-              <div class="libro__vistas" role="group" aria-label="Probá el mismo texto de otra manera">
-                <button type="button" class="boton" data-libro-vista="grande" aria-pressed="true">Letra grande</button>
-                <button type="button" class="boton" data-libro-vista="pictos" aria-pressed="false">Pictogramas</button>
-                <button type="button" class="boton" data-libro-vista="partes" aria-pressed="false">Por partes</button>
-              </div>
+              <button type="button" class="boton" id="libro-alternar" aria-controls="libro" aria-expanded="true">
+                <span>Cerrar el libro</span>
+              </button>
             </div>
-            <p class="libro__nota" id="libro-nota" role="status" aria-live="polite">Ejemplo: a la izquierda, un texto difícil; a la derecha, el mismo contenido a tu manera.</p>
+            <p class="visualmente-oculto" id="libro-nota" role="status" aria-live="polite">Libro interactivo: tocá el botón para abrirlo o cerrarlo.</p>
           </div>
         </div>
       </section>
