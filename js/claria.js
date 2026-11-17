@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function(){
       {titulo:'Probar una demostración',consulta:'Quiero probar las cuatro formas de lectura'}
     ],
     docente:[
-      {titulo:'Planificar una clase con DUA',consulta:'Quiero planificar una clase siguiendo el DUA',esPlan:true},
-      {titulo:'Adaptar un material',consulta:'¿Cómo preparo una adaptación educativa?'},
+      {titulo:'Preparar una clase',accion:'clase',consulta:'Quiero planificar una clase'},
+      {titulo:'Adaptar o resumir un texto',accion:'material',consulta:'Quiero subir un material'},
       {titulo:'Consultar normativa de Formosa',consulta:'Quiero conocer la Resolución 2481/24 y la normativa inclusiva'},
       {titulo:'Tengo una situación en el aula',consulta:'Necesito orientación sobre una situación de participación en el aula'}
     ]
@@ -75,11 +75,9 @@ document.addEventListener('DOMContentLoaded', function(){
       var b=document.createElement('button');b.type='button';b.textContent=o.titulo;
       b.addEventListener('click',function(){
         if(ocupada)return;
-        if(o.esPlan && !autorizar.checked){
-          burbuja('yo',o.consulta);
-          plan={paso:'materia',datos:{}};
-          deClaria({texto:'¡Armemos una planificación con DUA! Primero contame: ¿qué materia querés enseñar? Por ejemplo, Matemática, Lengua, Biología o Historia.'});
-          return;
+        if(o.accion){
+          var destino=document.querySelector('[data-docente-tab="'+o.accion+'"]');
+          if(destino){destino.click();destino.scrollIntoView({behavior:'auto',block:'nearest'});return;}
         }
         procesar(o.consulta);
       });atajos.appendChild(b);
@@ -97,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function(){
       return {texto:'Estas son las fuentes que conviene consultar antes de tomar una decisión institucional:\n\n• Resolución 2481/24 de Formosa: marco provincial de orientaciones para la inclusión de estudiantes con discapacidad.\n• Resolución CFE 311/16: orientaciones federales para promoción, acreditación y trayectorias escolares de estudiantes con discapacidad.\n• Ley 26.206: marco nacional de educación.\n\nPuedo ayudarte a localizar los documentos. Para saber qué corresponde en un caso concreto hay que leer los artículos completos y consultar con la institución o supervisión. En modo guía no interpreto obligaciones legales ni invento artículos.',links:norm([0,1,2])};
     }
     if(/dua|clase|planific|secuencia|ensenar|enseñar/.test(p)) {
-      return {texto:'Para planificar con DUA: primero definí materia, grado y qué se espera aprender. Después diseñá tres caminos:\n\n• Compromiso: ofrecer opciones para participar y conectar el contenido con experiencias significativas.\n• Representación: combinar explicación oral, texto, imágenes, modelos y vocabulario clave.\n• Acción y expresión: permitir demostrar lo aprendido de distintas maneras, con criterios comunes.\n\nPodemos seguir con una planificación guiada. Tocá «Planificar una clase con DUA» sin activar el envío de IA, o entrá a Crear para preparar una adaptación.',links:[acceso('Crear adaptación o actividades'),normativas[3]]};
+      return {texto:'Para planificar con DUA: entrá a «Preparar una clase», elegí grado, materia y tema. CLARIA genera el texto explicativo, actividades, cierre y evaluación, con opciones de compromiso, representación y acción y expresión.\n\n• Compromiso: ofrecer opciones para participar y conectar el contenido con experiencias significativas.\n• Representación: combinar explicación oral, texto, imágenes, modelos y vocabulario clave.\n• Acción y expresión: permitir demostrar lo aprendido de distintas maneras, con criterios comunes.\n\nPodés generar la propuesta directamente o entrar a Crear para preparar actividades a partir de un material.',links:[acceso('Crear adaptación o actividades'),normativas[3]]};
     }
     if(/adapt|actividad|fotocopia|material|ejercicio|apoyo|pictogra/.test(p)){
       return {texto:'Para crear una adaptación: entrá a Crear y cargá el material. Elegí materia, grado, objetivos y tipos de apoyos. Podés orientar la propuesta hacia una adaptación o una clase siguiendo el DUA. La IA genera un borrador, que después revisás y editás antes de descargar.',links:[acceso('Crear adaptación o actividades'),normativas[3]]};
@@ -143,6 +141,14 @@ document.addEventListener('DOMContentLoaded', function(){
   async function procesar(entrada){
     if(ocupada)return;
     var q=entrada.trim();if(!q)return;
+    if(rol==='docente' && q.length<135 && /(?:planific|preparar|armar|organizar).*(?:clase|secuencia)|(?:clase|secuencia).*(?:planific|preparar|armar)/i.test(normalizar(q))){
+      var botonPlan=document.querySelector('[data-docente-tab="clase"]');
+      if(botonPlan){botonPlan.click();estado.textContent='Elegí grado, materia y tema y tocá «Crear mi propuesta de clase».';return;}
+    }
+    if(rol==='docente' && q.length<135 && /(?:adapt|resum|simplific|subir).*(?:texto|material|fotocopia|documento|pdf)|(?:texto|material|fotocopia|documento|pdf).*(?:adapt|resum|subir)/i.test(normalizar(q))){
+      var botonMaterial=document.querySelector('[data-docente-tab="material"]');
+      if(botonMaterial){botonMaterial.click();estado.textContent='Cargá el material y elegí cómo querés presentarlo.';return;}
+    }
     if(q.length>1500){estado.textContent='La pregunta es demasiado larga (máximo 1500 caracteres).';return;}
     if(parecenDatosPersonales(q)){estado.textContent='Quitá nombres, DNI, teléfonos y otros datos personales antes de continuar.';return;}
     texto.value='';burbuja('yo',q);
