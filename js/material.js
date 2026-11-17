@@ -1337,6 +1337,38 @@
     $('#buscar-pictos').focus();
   });
 
+  /* Pictograma elegido por la persona: se suma como apoyo sin modificar el texto original. */
+  $('#agregar-picto').addEventListener('click', async function () {
+    if (!window.BermejoPictos || typeof window.BermejoPictos.elegir !== 'function') {
+      $('#pictos-estado').textContent = 'El selector de pictogramas todavía no está disponible.';
+      return;
+    }
+    var accion = $('#agregar-picto');
+    var resultado = await window.BermejoPictos.elegir({ termino:'', busqueda:'', desde:accion, sinQuitar:true });
+    if (!resultado || !resultado.id) return;
+    var lista = el.lectura.querySelector('#pictos-elegidos');
+    if (!lista) {
+      el.lectura.appendChild(crear('h4', 'pictos-manuales-titulo', 'Pictogramas que elegiste'));
+      lista = crear('ul','pictos');
+      lista.id = 'pictos-elegidos';
+      lista.setAttribute('aria-label','Pictogramas agregados manualmente');
+      el.lectura.appendChild(lista);
+    }
+    var li = crear('li', 'picto-manual');
+    var figura = crear('figure','picto');
+    var img = document.createElement('img');
+    img.src = window.BermejoPictos.url(resultado.id,300);
+    img.alt = 'Pictograma: ' + (resultado.palabra || resultado.buscado);
+    img.width = 300;img.height = 300; img.loading='lazy';
+    var titulo = crear('figcaption',null,resultado.palabra || resultado.buscado || 'Pictograma');
+    var quitar = crear('button','boton','Quitar');
+    quitar.type='button';
+    quitar.setAttribute('aria-label','Quitar el pictograma '+ (resultado.palabra || resultado.buscado || 'elegido'));
+    quitar.addEventListener('click',function () { li.remove(); });
+    figura.append(img,titulo); li.append(figura,quitar); lista.appendChild(li);
+    $('#pictos-estado').textContent = 'Agregaste un pictograma. Podés buscar otros o quitarlo.';
+  });
+
   /* ----- Lectura en voz alta ----- */
   var voz = {
     soportada: 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window,
