@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/bermejo.css?v=dua-20261117">
+  <link rel="stylesheet" href="css/bermejo.css?v=claria-20261117">
   <script>
     // Evita el parpadeo de la portada antes de animar el libro.
     try {
@@ -23,6 +23,7 @@
   <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
+  <link rel="stylesheet" href="css/claria.css?v=2">
 </head>
 <body class="pagina-inicio">
   <div class="entrada" id="entrada" role="region" aria-label="Presentación animada de Bermejo Accesible">
@@ -50,6 +51,7 @@
       </a>
       <nav class="menu" id="menu-principal" aria-label="Principal">
         <ul>
+          <li><a href="claria.html">CLARIA</a></li>
           <li><a href="index.html" aria-current="page">Inicio</a></li>
           <li><a href="comprender.html">Comprender</a></li>
           <li><a href="crear.html">Crear</a></li>
@@ -94,8 +96,8 @@
         <div class="hero__texto">
           <p class="hero__marca">Educación · Tecnología · Inclusión</p>
           <h1 id="titulo-portada">La información <em>a tu manera.</em></h1>
-          <p class="intro">Subí un texto, PDF o foto. Comprendelo de distintas formas o creá una adaptación con ayuda de inteligencia artificial.</p>
-          <p class="hero__sub">Elegí por dónde empezar ↓</p>
+          <p class="intro">Leé, aprendé y prepará clases con herramientas accesibles. CLARIA te acompaña para encontrar por dónde empezar.</p>
+          <p class="hero__sub">Elegí tu camino o conversá con CLARIA</p>
           <a class="repetir-entrada" href="index.html?intro=1">↻ Ver nuevamente la apertura del libro</a>
         </div>
         <div class="hero__visual">
@@ -125,6 +127,15 @@
             <p class="visualmente-oculto" id="libro-nota" role="status" aria-live="polite">Libro interactivo: tocá el botón para abrirlo o cerrarlo.</p>
           </div>
         </div>
+      </section>
+      <section class="claria-home" aria-labelledby="claria-home-titulo">
+        <img src="https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png" alt="CLARIA, asistente digital que saluda" width="180" height="180" loading="lazy">
+        <div class="claria-home__cuerpo">
+          <p>TE PRESENTO A TU ASISTENTE</p>
+          <h2 id="claria-home-titulo">¡Hola! Soy CLARIA.</h2>
+          <p>Te acompaño a comprender materiales, planificar clases con DUA y encontrar orientaciones para enseñar.</p>
+        </div>
+        <a class="boton boton--principal" href="claria.html">Hablar con CLARIA →</a>
       </section>
       <ul class="accesos">
         <li>

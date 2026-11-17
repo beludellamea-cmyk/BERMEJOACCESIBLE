@@ -1,5 +1,15 @@
 # Bermejo Accesible
 
+## CLARIA: asistente educativa integrada (noviembre 2026)
+
+- **claria.html** presenta a CLARIA con la imagen original de la asistente del repositorio propio `beludellamea-cmyk/claria-`, en dos perfiles: «Quiero aprender» y «Soy docente». Es la puerta principal sugerida desde la portada y está en el menú.
+- **Guía local, sin IA**: ofrece recorridos, botones de acceso a Comprender/Crear, orientaciones sobre apoyo DUA y fuentes oficiales de normativa. También guía al docente para preparar un esqueleto de clase (materia, grado/año, tema; inicio, desarrollo, cierre y evaluación). Las respuestas guiadas no se presentan como generación de IA.
+- **Conversación con IA, condicionada al despliegue**: el nuevo `POST /asistente` se programó en `backend/chat-worker.js`, pero **editar GitHub no publica el Worker**. Para activar respuestas abiertas, hay que desplegar manualmente el Worker nuevo en Cloudflare, conservar `GEMINI_API_KEY` como secreto y verificar `ALLOWED_ORIGIN`. La web pide consentimiento explícito antes de enviar consultas sin datos personales, ofrece límites y conserva la conversación solo en memoria.
+- **Normativa**: las orientaciones incluyen enlaces a la Resolución 2481/24, la Resolución CFE 311/16 y la Ley de Educación Nacional 26.206; verificar siempre el texto oficial y su vigencia. La IA no debe inventar artículos ni ofrecer dictámenes jurídicos.
+- **DUA**: la guía docente sigue los tres principios de CAST 3.0: compromiso, representación y acción y expresión. La revisión docente es obligatoria antes de usar propuestas generadas.
+
+
+
 ## Mejoras para demostrar Comprender y generar propuestas DUA (noviembre 2026)
 
 - En **Comprender**, el botón «Probar una demostración» carga el ejemplo del ciclo del agua y abre directamente la selección de las cuatro formas de lectura: Escuchar, Por partes, Con imágenes y Con pictogramas. La carga real sigue siendo Texto/PDF/Foto y la revisión del contenido permanece.

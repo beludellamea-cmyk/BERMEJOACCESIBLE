@@ -70,3 +70,22 @@
 html[data-contraste="alto"] :is(.claria-asistente,.claria-rol,.claria-conversacion,.claria-mensaje__burbuja,.claria-form,.claria-atajos button,.claria-aviso){background:#000!important;border:2px solid #fff!important;color:white!important}
 html[data-contraste="alto"] :is(.claria-subtitulo,.claria-estado,.claria-instruccion,.claria-privacidad,.claria-mensaje__texto,.claria-rol small){color:white!important}
 @media print{.claria-form,.claria-atajos,.claria-acciones,.claria-presentacion__visual{display:none!important}.claria-mensajes{max-height:none;overflow:visible}}
+
+/* CLARIA como primera puerta de entrada a la experiencia Bermejo. */
+.claria-home{
+  display:flex;align-items:center;gap:1.35rem;position:relative;overflow:hidden;
+  margin:clamp(1rem,2vw,1.7rem) 0 1rem;padding:clamp(.9rem,2.1vw,1.4rem);
+  border:1px solid #4d94ad;border-radius:1.4rem;
+  background:linear-gradient(110deg,#142f45,#172e4e 70%,#19284a);
+  box-shadow:0 13px 33px #04152268;
+}
+.claria-home::after{content:"";position:absolute;inset:auto -4rem -8rem auto;width:19rem;height:19rem;background:#7695fb27;filter:blur(60px);pointer-events:none}
+.claria-home img{width:clamp(7rem,15vw,10rem);height:clamp(7rem,15vw,10rem);flex:none;object-fit:contain;object-position:center;filter:drop-shadow(0 8px 17px #00101a95)}
+.claria-home__cuerpo{flex:1;min-width:0}
+.claria-home__cuerpo>p:first-child{font:700 .72rem "Space Grotesk",system-ui;color:#77e9eb;letter-spacing:.12em;margin:0 0 .25rem}
+.claria-home h2{font:700 clamp(1.45rem,2.8vw,2.15rem)/1.15 "Space Grotesk",system-ui;letter-spacing:-.04em;color:#fff;margin:.1rem 0 .3rem}
+.claria-home__cuerpo>p:last-of-type{margin:0;color:#c2dce8;line-height:1.45;font-size:.93rem;max-width:58ch}
+.claria-home .boton{flex:none;z-index:1;border-radius:12px!important;font-weight:750}
+@media(max-width:49rem){.claria-home{flex-wrap:wrap;gap:.8rem}.claria-home img{width:7rem;height:7rem}.claria-home .boton{width:100%;text-align:center;justify-content:center}}
+@media(max-width:25rem){.claria-home{flex-direction:column;text-align:center}.claria-home img{width:6.5rem;height:6.5rem}}
+html[data-contraste="alto"] .claria-home{background:#000!important;color:#fff!important;border:2px solid #fff}
