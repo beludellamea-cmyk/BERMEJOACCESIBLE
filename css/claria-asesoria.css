@@ -94,3 +94,12 @@ html[data-contraste="alto"] :is(.asesoria-intro p,.asesoria-entrega p,.asesoria-
 .asesoria-adjunto textarea{width:100%;min-height:6.5rem;max-height:14rem;border:1px solid #5f91a4;background:#071c2d;color:#f2ffff;border-radius:12px;padding:.85rem;resize:vertical;font:450 .96rem/1.58 Arial,system-ui,sans-serif}
 .asesoria-adjunto__estado{font-size:.79rem;line-height:1.5;color:#aacddb;margin:.65rem 0}
 @media print{.pagina-claria .asesoria-adjunto{display:none!important}}
+
+/* La salida impresa no depende del alto visible de un campo de texto. */
+.asesoria-impresion{display:none}
+@media print{
+ .pagina-claria .asesoria-documento,.pagina-claria .asesoria-imagen{display:none!important}
+ .pagina-claria .asesoria-impresion{display:block!important;margin:0!important;padding:0!important;color:#111!important}
+ .pagina-claria .asesoria-impresion h2{font:700 15pt Arial,sans-serif!important;margin:1rem 0 .5rem;break-after:avoid;color:#111!important}
+ .pagina-claria .asesoria-impresion pre{font:400 11pt/1.5 Arial,sans-serif!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;margin:0 0 .6rem;color:#111!important}
+}
