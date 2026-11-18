@@ -1,12 +1,12 @@
-/* Bermejo Accesible · Decilo con pictogramas, basado en el motor
+/* Bermejo Accesible · Crear · Decilo con pictogramas, basado en el motor
  * de CLARIA · La información, más clara para todos.
  * Funciona en el navegador: no envía las frases a Gemini. */
 (function(){
 'use strict';
 document.addEventListener('DOMContentLoaded', function(){
   const $=id=>document.getElementById(id);
-  const conversar=$('claria-modo-conversar'),pictogramas=$('claria-modo-pictogramas'),
-        interaccion=$('claria-interaccion'),panel=$('claria-pictogramas');
+  const conversar=$('crear-modo-adaptar'),pictogramas=$('crear-modo-pictogramas'),
+        interaccion=$('crear-adaptaciones'),panel=$('crear-pictogramas');
   if(!conversar||!pictogramas||!panel||!interaccion)return;
   const texto=$('pictos-texto'),estado=$('pictos-estado'),
         convertirBtn=$('pictos-convertir'),resultado=$('pictos-resultado'),
@@ -40,14 +40,11 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   function modo(nombre){
     const esPictos=nombre==='pictogramas';
-    if(esPictos){
-      const mic=$('asesoria-modo-voz');
-      if(mic&&mic.getAttribute('aria-pressed')==='true')mic.click();
-    }
     interaccion.hidden=esPictos;
     panel.hidden=!esPictos;
     conversar.setAttribute('aria-pressed',String(!esPictos));
     pictogramas.setAttribute('aria-pressed',String(esPictos));
+    document.title=esPictos?'Decilo con pictogramas | Crear | Bermejo Accesible':'Crear | Bermejo Accesible';
     if(esPictos){
       if(!motor)mostrar('Cargando pictogramas…');
       panel.scrollIntoView({block:'nearest',behavior:'auto'});

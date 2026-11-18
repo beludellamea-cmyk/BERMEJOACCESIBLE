@@ -1,5 +1,14 @@
 # Bermejo Accesible
 
+## Organización actual · noviembre de 2026
+
+- **CLARIA** (`claria.html`) quedó dedicada a **Conversar con CLARIA**; conserva recorridos `Quiero aprender` y `Soy docente`, guía conversacional y planificación docente.
+- **Crear** (`crear.html`) ofrece una elección inicial entre **Adaptar un material** y **Decilo con pictogramas**. Se conserva todo el motor ARASAAC y el tablero, revisión de símbolos, voz y descarga PNG/PDF en `crear.html?modo=pictogramas`.
+- Los enlaces de **Mi ciudad** para mostrar frases con pictogramas ahora abren `crear.html?modo=pictogramas&frase=...`. Las URL antiguas de `claria.html?modo=pictogramas` redirigen a Crear.
+- Las cuatro secciones principales de la portada siguen ordenadas: **Comprender, Crear, CLARIA, Juegos**.
+
+
+
 ## Mi ciudad, más accesible · integrado sin códigos físicos (noviembre 2026)
 
 - Se agregó `ciudad.html`, enlazado desde **Explorar más**, como guía accesible de seis lugares de **El Colorado, Formosa**. El recorrido comienza eligiendo una institución en una lista grande, sin cámara, escaneo ni códigos que deban estar instalados en edificios públicos.

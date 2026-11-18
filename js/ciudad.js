@@ -68,7 +68,7 @@
         decir.type='button';decir.setAttribute('aria-label','Escuchar: '+oracion);
         decir.addEventListener('click',()=>leer(oracion));
         const pictos=nodo('a','ciudad-frase__pictos','Ver con pictogramas');
-        pictos.href='claria.html?modo=pictogramas&frase='+encodeURIComponent(oracion);
+        pictos.href='crear.html?modo=pictogramas&frase='+encodeURIComponent(oracion);
         pictos.setAttribute('aria-label','Mostrar con pictogramas la frase: '+oracion);
         acciones.append(decir,pictos);fila.append(p,acciones);frases.append(fila);
       });
