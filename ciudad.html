@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi ciudad, más accesible | Bermejo Accesible</title>
+  <meta name="description" content="Guía accesible de lugares de El Colorado: elegí una institución, conocé para qué sirve y usá frases con voz y pictogramas para pedir ayuda.">
+  <meta name="theme-color" content="#08131f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/bermejo.css?v=dua-20261117">
+  <link rel="stylesheet" href="css/ciudad.css?v=1">
+  <script src="js/navegacion.js" defer></script>
+  <script src="js/preferencias.js?v=20261117-2"></script>
+  <script src="js/asistente-global.js" defer></script>
+  <script src="js/ciudad.js?v=1" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="cabecera__fila">
+      <a class="marca" href="index.html">
+        <img class="marca__logo" src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">
+        <span class="marca__nombre">Bermejo <span>Accesible</span></span>
+      </a>
+      <nav class="menu" id="menu-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="comprender.html">Comprender</a></li>
+          <li><a href="crear.html">Crear</a></li>
+          <li><a href="claria.html">CLARIA</a></li>
+          <li><a href="juegos.html">Juegos</a></li>
+          <li><a href="explorar.html" aria-current="page">Explorar más</a></li>
+        </ul>
+      </nav>
+      <div class="cabecera__acciones">
+        <button class="boton boton-icono menu-abrir" type="button" aria-controls="menu-principal" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menú</span></button>
+        <details class="ajustes" id="ajustes">
+          <summary class="boton-icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="7.6" r="1.3"/><path d="M7.5 10.4 12 11.4l4.5-1M12 11.4v3.6l-2.5 4M12 15l2.5 4"/></svg><span class="ajustes__texto">Accesibilidad</span></summary>
+          <div class="ajustes__fila">
+            <p class="ajustes__titulo" id="ajustes-titulo">Accesibilidad</p>
+            <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+              <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto</span>
+              <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+              <span class="ajustes__valor" id="tam-valor">100 %</span>
+              <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+              <span class="ajustes__etiqueta" id="letra-etiqueta">Letra</span>
+              <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="true">Texto habitual</button>
+              <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="false">Imprenta mayúscula</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+              <span class="ajustes__etiqueta" id="con-etiqueta">Contraste</span>
+              <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+              <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+            </div>
+            <div class="ajustes__grupo">
+              <button type="button" class="boton" data-abrir-ayuda><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.3 1.7c-1.2 1-1.8 1.5-1.8 2.7"/><path d="M12 17h.01"/></svg>Ayuda por voz y guía</button>
+              <button type="button" class="boton" data-ajuste="restablecer">Restablecer</button>
+            </div>
+            <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
+  <main id="contenido" class="ciudad-main" tabindex="-1">
+    <div class="contenedor">
+      <a href="explorar.html" class="ciudad-migas">← Volver a Explorar más</a>
+      <header class="ciudad-encabezado">
+        <p class="ciudad-etiqueta">EL COLORADO · FORMOSA</p>
+        <h1>Mi ciudad, más accesible</h1>
+        <p>Elegí un lugar. Te mostramos qué podés consultar, cómo orientarte y frases para pedir ayuda.</p>
+      </header>
+      <p id="ciudad-estado" class="ciudad-estado" role="status" aria-live="polite">Cargando lugares…</p>
+      <section id="ciudad-inicio" aria-labelledby="ciudad-titulo">
+        <h2 id="ciudad-titulo" tabindex="-1" class="visualmente-oculto">Elegí un lugar de El Colorado</h2>
+        <div id="ciudad-lista" class="ciudad-lugares" role="group" aria-label="Lugares disponibles"></div>
+        <div class="ciudad-explicacion">
+          <p>Las orientaciones son <strong>informativas</strong>: los datos proceden de fuentes públicas y no implican que una institución haya aprobado esta guía. Confirmá los datos antes de visitar un lugar.</p>
+        </div>
+      </section>
+      <section id="ciudad-detalle" hidden aria-labelledby="ciudad-nombre">
+        <button id="ciudad-volver" type="button" class="ciudad-volver">← Elegir otro lugar</button>
+        <article class="ciudad-panel">
+          <header class="ciudad-panel__titulo">
+            <span id="ciudad-icono" class="ciudad-panel__icono" aria-hidden="true">🏛️</span>
+            <h2 id="ciudad-nombre" tabindex="-1"></h2>
+          </header>
+          <p class="ciudad-panel__fecha" id="ciudad-fecha"></p>
+          <div class="ciudad-guia">
+            <section class="ciudad-seccion" aria-labelledby="ciudad-servicios-titulo">
+              <h3 id="ciudad-servicios-titulo">¿Qué puedo consultar?</h3>
+              <ul id="ciudad-servicios"></ul>
+            </section>
+            <section class="ciudad-seccion" aria-labelledby="ciudad-pasos-titulo">
+              <h3 id="ciudad-pasos-titulo">¿Cómo puedo orientarme?</h3>
+              <ol id="ciudad-pasos"></ol>
+            </section>
+          </div>
+          <section class="ciudad-comunicacion" aria-labelledby="ciudad-comunicacion-titulo">
+            <h3 id="ciudad-comunicacion-titulo">Frases para pedir ayuda</h3>
+            <p>Podés hacer que CLARIA diga una frase en voz alta o verla con pictogramas para comunicarte.</p>
+            <ul id="ciudad-frases" class="ciudad-frases"></ul>
+          </section>
+          <div id="ciudad-referencia" class="ciudad-referencia"></div>
+          <p class="ciudad-advertencia" id="ciudad-advertencia"></p>
+        </article>
+      </section>
+    </div>
+  </main>
+  <footer class="pie">
+    <div class="contenedor">
+      <div class="pie__fila">
+        <div>
+          <p class="pie__marca"><img src="img/logo-bermejo.svg?v=tech-20261116" alt="" width="64" height="64">Bermejo Accesible</p>
+          <p>La información a tu manera. Proyecto de código abierto creado en Formosa. No pide cuentas y no guarda tus materiales.</p>
+        </div>
+        <ul class="pie__enlaces" aria-label="Enlaces del sitio">
+          <li><a href="comprender.html">Comprender</a></li>
+          <li><a href="crear.html">Crear</a></li>
+          <li><a href="juegos.html">Juegos</a></li>
+          <li><a href="explorar.html">Explorar más</a></li>
+          <li><a href="https://github.com/beludellamea-cmyk/BERMEJOACCESIBLE">Código en GitHub</a></li>
+        </ul>
+      </div>
+      <p class="pie__creditos">Pictogramas de Sergio Palao, origen <a href="https://arasaac.org">ARASAAC</a>, licencia CC BY-NC-SA, propiedad del Gobierno de Aragón (España). Lectura de fotos y PDF con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografías <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a> (Braille Institute) y Fraunces. La imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+</body>
+</html>
