@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Explorar más | Bermejo Accesible</title>
-  <meta name="description" content="Recursos para docentes, normativa, chat intercultural y guías de accesibilidad de Bermejo Accesible.">
+  <meta name="description" content="Explorá la ciudad, conversá entre lenguas y consultá normativa desde Bermejo Accesible. Herramientas claras y accesibles.">
   <meta name="theme-color" content="#08131f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/bermejo.css?v=dua-20261117">
+  <link rel="stylesheet" href="css/explorar-limpio.css?v=1">
   <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js?v=20261117-2"></script>
   <script src="js/asistente-global.js" defer></script>
 </head>
-<body>
+<body class="pagina-explorar">
   <a class="saltar" href="#contenido">Ir al contenido</a>
   <header class="cabecera">
     <div class="cabecera__fila">
@@ -65,38 +66,61 @@
       </div>
     </div>
   </header>
-  <main id="contenido" tabindex="-1">
+  <main id="contenido" tabindex="-1" class="explorar-limpio">
     <div class="contenedor">
-      <div class="encabezado-pagina">
+      <header class="encabezado-pagina explorar-limpio__encabezado">
         <h1>Explorar más</h1>
-        <p class="intro">Orientaciones para tu comunidad, recursos docentes y herramientas de comunicación.</p>
-      </div>
-      <ul class="explorar">
-        <li><a class="explorar__enlace" href="ciudad.html"><strong>Mi ciudad, más accesible</strong><span>Elegí un lugar de El Colorado y encontrá orientaciones y frases para pedir ayuda, con voz y pictogramas.</span></a></li>
-        <li><a class="explorar__enlace" href="juegos.html"><strong>Juegos y experiencias educativas</strong><span>MixLab, Detectives del Aula y nuevos proyectos para aprender haciendo.</span></a></li>
-        <li><a class="explorar__enlace" href="docente.html"><strong>Recursos para docentes</strong><span>Detectar barreras, ideas prácticas y revisión de textos.</span></a></li>
-        <li><a class="explorar__enlace" href="docente.html#normativa"><strong>Normativa</strong><span>Resoluciones y leyes provinciales, nacionales e internacionales.</span></a></li>
-        <li><a class="explorar__enlace" href="qom.html"><strong>Chat intercultural</strong><span>Conversar con estudiantes de lenguas originarias, con traducción asistida y revisada.</span></a></li>
-        <li><a class="explorar__enlace" href="#lectores"><strong>Lectores de pantalla</strong><span>Cómo usar el de tu dispositivo con este sitio.</span></a></li>
-        <li><a class="explorar__enlace" href="#privacidad"><strong>Privacidad</strong><span>Qué se guarda y qué se envía a servicios externos.</span></a></li>
-      </ul>
-
-      <section class="info-bloque" id="lectores" aria-labelledby="lectores-titulo" tabindex="-1">
-        <h2 id="lectores-titulo">¿Usás un lector de pantalla?</h2>
-        <p>Podés usar el que ya trae tu dispositivo. No hace falta instalar nada ni activarlo desde esta web.</p>
-        <ul>
-          <li><strong>Computadora con Windows:</strong> Narrador viene incluido y se activa con la tecla de Windows + Ctrl + Enter. También funciona con NVDA, que es gratuito.</li>
-          <li><strong>Celular Android:</strong> TalkBack, en Ajustes › Accesibilidad.</li>
-          <li><strong>iPhone:</strong> VoiceOver, en Ajustes › Accesibilidad.</li>
+        <p class="intro">Más formas de comunicarte, orientarte y aprender.</p>
+      </header>
+      <section class="explorar-destinos" aria-label="Herramientas para explorar">
+        <ul class="explorar explorar--limpia">
+          <li>
+            <a class="explorar__enlace" href="ciudad.html">
+              <span class="explorar__icono explorar__icono--ciudad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 12h2m2 0h2M9 16h2m2 0h2M10 21v-3h4v3"/></svg></span>
+              <h2>Mi ciudad, más accesible</h2>
+              <p>Elegí un lugar de El Colorado y encontrá orientación y frases para pedir ayuda.</p>
+              <span class="explorar__accion">Conocer los lugares <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="explorar__enlace" href="qom.html">
+              <span class="explorar__icono explorar__icono--chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11a7 7 0 0 1-7 7H7l-4 3v-7a7 7 0 0 1 7-7h3"/><circle cx="15" cy="8" r="5"/><path d="M10.5 8h9M15 3c-2 2-2 8 0 10M15 3c2 2 2 8 0 10"/></svg></span>
+              <h2>Chat intercultural</h2>
+              <p>Comunicarse entre distintas lenguas, con traducción asistida que debe revisarse.</p>
+              <span class="explorar__accion">Abrir el chat <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="explorar__enlace" href="docente.html#normativa">
+              <span class="explorar__icono explorar__icono--normativa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h8l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M15 3v5h5M9 12h7M9 16h7M9 8h2"/></svg></span>
+              <h2>Normativa</h2>
+              <p>Consultá resoluciones sobre inclusión educativa y sus fuentes oficiales.</p>
+              <span class="explorar__accion">Ver normativa <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
         </ul>
-        <p>Cada página empieza con el enlace «Ir al contenido» y está ordenada con títulos. Con NVDA o Narrador, la tecla H salta de título en título; con TalkBack o VoiceOver, elegí «Encabezados» en el menú de lectura o en el rotor.</p>
-        <p>La opción «Imprenta mayúscula» solo cambia cómo se ven las letras: tu lector recibe el texto tal como está escrito. La lectura en voz alta de Comprender es para quien no usa lector de pantalla.</p>
       </section>
-
-      <section class="info-bloque" id="privacidad" aria-labelledby="privacidad-titulo" tabindex="-1">
-        <h2 id="privacidad-titulo">Tus archivos se quedan en tu dispositivo</h2>
-        <p>El texto de tus fotos y PDF se lee dentro de tu navegador. No hace falta crear una cuenta y la web no guarda tus materiales: al cerrar la pestaña, se borran.</p>
-        <p>La primera vez, el navegador descarga las herramientas de lectura (PDF.js y Tesseract.js) y el idioma español. Si elegís pictogramas, se envían a ARASAAC solo algunas palabras sueltas para buscar cada uno, y te avisamos antes. Las funciones con inteligencia artificial envían el texto al servicio de IA del proyecto solo cuando lo confirmás.</p>
+      <section class="explorar-ayuda" aria-labelledby="explorar-ayuda-titulo">
+        <h2 id="explorar-ayuda-titulo">Información útil</h2>
+        <details id="lectores" class="explorar-ayuda__detalle">
+          <summary>¿Cómo uso un lector de pantalla?</summary>
+          <div class="explorar-ayuda__contenido">
+            <p>Podés usar el lector que ya trae tu dispositivo:</p>
+            <ul>
+              <li><strong>Windows:</strong> Narrador (Windows + Ctrl + Enter) o NVDA.</li>
+              <li><strong>Android:</strong> TalkBack, desde Ajustes → Accesibilidad.</li>
+              <li><strong>iPhone:</strong> VoiceOver, desde Ajustes → Accesibilidad.</li>
+            </ul>
+            <p>Los títulos permiten recorrer la página con tecnologías de apoyo. No necesitás activar nada especial dentro de Bermejo.</p>
+          </div>
+        </details>
+        <details id="privacidad" class="explorar-ayuda__detalle">
+          <summary>Privacidad y uso de la IA</summary>
+          <div class="explorar-ayuda__contenido">
+            <p>Podés trabajar con textos y documentos en tu navegador, sin crear una cuenta. La web no guarda tus materiales como archivos personales.</p>
+            <p>Algunas funciones necesitan conexión para descargar herramientas o pictogramas. Cuando elegís utilizar IA, revisá el aviso de cada herramienta antes de autorizar el envío de información. Evitá incluir datos personales.</p>
+          </div>
+        </details>
       </section>
     </div>
   </main>
