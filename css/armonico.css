@@ -103,3 +103,11 @@ html[data-contraste="alto"] body.visual-limpio :is(.seleccion-carga button,.opci
 html[data-contraste="alto"] body.visual-limpio :is(.seleccion-carga button small,.pulido-demo summary,.juegos-hero__intro){color:#fff!important}
 @media(prefers-reduced-motion:reduce){body.visual-limpio :is(.acceso,.juego-tarjeta,.seleccion-carga button){transition:none!important;animation:none!important}}
 @media print{body.visual-limpio .pulido-demo{display:none!important}body.visual-limpio .opciones-carga .panel{background:white!important;color:black!important}body.visual-limpio .seleccion-carga{display:none!important}}
+
+/* En cada juego, el contenido pedagógico se abre a demanda. */
+body.visual-limpio .juego-detalle{margin:.55rem 0 .85rem;border:1px solid #55728d;border-radius:12px;background:#122c44;overflow:hidden}
+body.visual-limpio .juego-detalle>summary{cursor:pointer;min-height:2.7rem;padding:.65rem .85rem;display:list-item;font:750 1.015rem/1.5 "Atkinson Hyperlegible",Arial,sans-serif;color:#b8eef2}
+body.visual-limpio .juego-detalle>summary:hover{color:#fff}
+body.visual-limpio .juego-detalle[open]>.juego-tarjeta__valor{margin:0;border:0;border-top:1px solid #4d7089;border-radius:0;padding:.8rem .9rem;background:#0f293f}
+html[data-contraste="alto"] body.visual-limpio .juego-detalle{background:#000!important;border:2px solid #fff!important}
+html[data-contraste="alto"] body.visual-limpio .juego-detalle>summary{color:#fff!important}
