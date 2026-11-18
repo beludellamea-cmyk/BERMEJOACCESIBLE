@@ -17,11 +17,15 @@
 
   <link rel="stylesheet" href="css/claria.css?v=4">
   <link rel="stylesheet" href="css/claria-asesoria.css?v=10">
+  <link rel="stylesheet" href="css/claria-pictogramas.css?v=1">
   <script src="js/chat-config.js" defer></script>
   <script src="js/claria.js?v=6" defer></script>
   <script src="js/pictogramas-arasaac.js" defer></script>
   <script src="js/ilustraciones.js" defer></script>
   <script src="js/claria-asesoria.js?v=9" defer></script>
+  <script src="js/claria-pictos-motor.js" defer></script>
+  <script src="js/claria-pictos-exportar.js" defer></script>
+  <script src="js/claria-pictogramas.js?v=1" defer></script>
 </head>
 <body class="pagina-claria">
 <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -94,7 +98,12 @@
       <div><h2 id="claria-conversa-titulo">¿Cómo te puedo ayudar?</h2></div>
       <span class="claria-modo-etiqueta" id="claria-etiqueta">Guía interactiva</span>
     </div>
-    <div class="claria-roles" role="group" aria-label="Elegí tu recorrido">
+    <div class="claria-modos" role="group" aria-label="Elegí cómo usar CLARIA">
+      <button id="claria-modo-conversar" type="button" class="claria-modos__opcion" aria-pressed="true" aria-controls="claria-interaccion"><span class="claria-modos__icono" aria-hidden="true">💬</span><span><strong>Conversar con CLARIA</strong><small>Preguntá, recibí orientación o planificá</small></span></button>
+      <button id="claria-modo-pictogramas" type="button" class="claria-modos__opcion" aria-pressed="false" aria-controls="claria-pictogramas"><span class="claria-modos__icono" aria-hidden="true">🗣️</span><span><strong>Decilo con pictogramas</strong><small>Escribí o elegí imágenes para comunicar</small></span></button>
+    </div>
+    <div id="claria-interaccion">
+      <div class="claria-roles" role="group" aria-label="Elegí tu recorrido">
       <button type="button" id="claria-rol-estudiante" class="claria-rol" data-rol="estudiante" aria-pressed="true">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3.5-1.4 6.5-1.2 9 1 2.5-2.2 5.5-2.4 9-1v13c-3.5-1.4-6.5-1.2-9 1-2.5-2.2-5.5-2.4-9-1zM12 6.5v13"/></svg>
         <span><strong>Quiero aprender</strong><small>Leer y comprender materiales</small></span>
@@ -247,6 +256,68 @@
       <summary>Información importante</summary>
       <p>CLARIA orienta, pero las propuestas pedagógicas requieren revisión docente. Las consultas normativas se acompañan de fuentes oficiales; no reemplazan la lectura de la resolución completa, las decisiones institucionales ni el asesoramiento especializado.</p>
     </details>
+    </div>
+    <section id="claria-pictogramas" class="claria-pictogramas" aria-labelledby="pictos-titulo" hidden>
+      <div class="pictos-presentacion">
+        <h3 id="pictos-titulo">Decilo con pictogramas</h3>
+        <p>Elegí cómo expresar un mensaje. CLARIA lo muestra con imágenes y puede decirlo en voz alta.</p>
+      </div>
+      <div class="pictos-formas" role="group" aria-label="Cómo crear tu frase">
+        <button type="button" id="pictos-forma-escribir" aria-pressed="true">✏️ Escribir mi frase</button>
+        <button type="button" id="pictos-forma-elegir" aria-pressed="false">🧩 Elegir imágenes</button>
+      </div>
+      <div id="pictos-escribir" class="pictos-editor">
+        <label for="pictos-texto">¿Qué querés decir?</label>
+        <textarea id="pictos-texto" rows="3" maxlength="280" placeholder="Por ejemplo: Quiero agua, por favor."></textarea>
+        <div class="pictos-editor__botones">
+          <button type="button" id="pictos-convertir" class="pictos-primario" disabled>Mostrar con pictogramas</button>
+          <button type="button" id="pictos-dictar">🎙️ Dictar frase</button>
+        </div>
+      </div>
+      <div id="pictos-elegir" class="pictos-elegir" hidden>
+        <p class="pictos-explica">Elegí una categoría y tocá palabras o frases rápidas para comunicarte.</p>
+        <div id="pictos-categorias" class="pictos-categorias" role="group" aria-label="Categorías de mensajes"></div>
+        <div id="pictos-opciones" class="pictos-opciones" aria-live="polite"></div>
+      </div>
+      <p id="pictos-estado" class="pictos-estado" role="status" aria-live="polite">Preparando pictogramas…</p>
+      <div id="pictos-resultado" class="pictos-resultado" hidden>
+        <div class="pictos-resultado__cabecera">
+          <h4>Tu mensaje con imágenes</h4>
+          <p>Revisá que las imágenes representen exactamente lo que querés decir. Si hace falta, tocá una tarjeta para cambiarla.</p>
+        </div>
+        <p id="pictos-frase" class="pictos-frase"></p>
+        <ul id="pictos-tarjetas" class="pictos-tarjetas" aria-label="Pictogramas de tu mensaje"></ul>
+        <div id="pictos-revision" class="pictos-revision" hidden>
+          <h4 id="pictos-revision-titulo">Elegí otro pictograma</h4>
+          <p id="pictos-revision-ayuda">Algunas palabras pueden tener más de un significado.</p>
+          <div id="pictos-alternativas" class="pictos-alternativas" role="group" aria-label="Pictogramas alternativos"></div>
+          <button type="button" id="pictos-cerrar-revision">Listo</button>
+        </div>
+        <div class="pictos-acciones">
+          <button type="button" id="pictos-escuchar" class="pictos-primario">🔊 Decir en voz alta</button>
+          <button type="button" id="pictos-mostrar">Mostrar en pantalla grande</button>
+          <button type="button" id="pictos-png">Descargar imagen PNG</button>
+          <button type="button" id="pictos-pdf">Descargar PDF</button>
+        </div>
+        <details class="pictos-ayuda">
+          <summary>Información sobre los pictogramas</summary>
+          <p>Se utiliza un diccionario de pictogramas ARASAAC con identificadores verificados. Las palabras sin coincidencia se muestran como texto. Los símbolos pueden tener distintos significados y siempre deben revisarse antes de compartir.</p>
+          <p>Pictogramas: ARASAAC (Gobierno de Aragón). Autor: Sergio Palao. Licencia <strong>CC BY-NC-SA 4.0</strong>, uso no comercial.</p>
+          <p>La conversión y la voz no requieren enviar tu frase a Gemini. Las imágenes se cargan desde el servidor de ARASAAC.</p>
+        </details>
+      </div>
+      <dialog id="pictos-pantalla" class="pictos-pantalla" aria-labelledby="pictos-pantalla-titulo">
+        <div class="pictos-pantalla__interior">
+          <h3 id="pictos-pantalla-titulo">Mi mensaje</h3>
+          <p id="pictos-pantalla-frase"></p>
+          <ul id="pictos-pantalla-tarjetas" class="pictos-tarjetas pictos-tarjetas--grandes"></ul>
+          <div class="pictos-pantalla__botones">
+            <button type="button" id="pictos-pantalla-decir">🔊 Decir</button>
+            <button type="button" id="pictos-pantalla-cerrar">Cerrar</button>
+          </div>
+        </div>
+      </dialog>
+    </section>
   </section>
 </div>
 </main>
