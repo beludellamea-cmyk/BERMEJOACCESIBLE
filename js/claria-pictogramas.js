@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(t.length>280){mostrar('La frase es demasiado larga. Usá hasta 280 caracteres.');return;}
     const r=motor.analizar(t);
     if(!r.tokens.length){mostrar('No encontré palabras. Probá con otro texto.');return;}
-    fraseActual=t;fichas=r.tokens.map(f=>({...f,alternativas:(f.alternativas||[]).slice()}));
+    fraseActual=t;fichas=r.tokens.map(f=>({...f,originalPic:f.pic||null,alternativas:(f.alternativas||[]).slice()}));
     revision.hidden=true;resultado.hidden=false;
     dibujarTarjetas();
     const encontrados=fichas.filter(f=>f.pic).length,pendientes=fichas.filter(f=>f.estado==='sin'||f.estado==='revisar').length;
@@ -151,11 +151,12 @@ document.addEventListener('DOMContentLoaded', function(){
     const label=nodo('label','','Buscar otra palabra');
     const input=document.createElement('input');input.type='search';input.maxLength=40;
     input.value=f.lema||f.orig;input.id='pictos-buscar-dinamico';label.htmlFor=input.id;
+    revision.querySelectorAll('.pictos-buscar').forEach(e=>e.remove());
     caja.append(label,input);revision.insertBefore(caja,alternativas);
-    revision.querySelectorAll('.pictos-buscar').forEach((e,j)=>{if(j>0)e.remove();});
     const sugerencias=()=>{
-      const a=ofrecerBusqueda(input.value);
-      if(!a&&f.pic){opcion('Usar la imagen anterior',f.pic,'elegido');}
+      const n=ofrecerBusqueda(input.value);
+      const original=f.originalPic||f.pic;
+      if(original)opcion('Usar la imagen anterior',original,'elegido');
     };
     input.addEventListener('input',sugerencias);
     sugerencias();
