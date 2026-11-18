@@ -1,0 +1,95 @@
+/* Bermejo Accesible · CLARIA: Conversar / Decilo con pictogramas.
+   Diseño con opciones progresivas, lectura amplia y pantalla para compartir. */
+#claria-interaccion[hidden],.claria-pictogramas[hidden],.claria-pictogramas [hidden]{display:none!important}
+.claria-modos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin:.75rem clamp(.9rem,2.5vw,1.5rem) 1rem}
+.claria-modos__opcion{display:flex;align-items:center;gap:.85rem;text-align:left;min-width:0;min-height:6rem;border:2px solid #5489a3;border-radius:18px;background:linear-gradient(135deg,#173d55,#1b2e4d);color:#eafaff;padding:1rem;cursor:pointer;font-family:"Atkinson Hyperlegible",Arial,sans-serif}
+.claria-modos__opcion[aria-pressed="true"]{background:linear-gradient(145deg,#1e526a,#344069);border-color:#83e8e8;box-shadow:0 0 0 2px #71e3de26}
+.claria-modos__opcion:hover{border-color:#abf3ef}
+.claria-modos__opcion:focus-visible{outline:3px solid #fff0a1;outline-offset:4px}
+.claria-modos__opcion strong{display:block;font-size:clamp(1.04rem,2vw,1.28rem);font-weight:800;line-height:1.32}
+.claria-modos__opcion small{display:block;font-size:.94rem;color:#cce6ee;line-height:1.42;margin-top:.28rem}
+.claria-modos__icono{flex:none;display:grid;place-items:center;width:3rem;height:3rem;background:#244c68;border:1px solid #69a7b9;border-radius:13px;font-size:1.5rem}
+.claria-modos+.claria-roles{margin-top:.65rem}
+#claria-interaccion>.claria-roles{margin-top:0;padding-top:.15rem}
+#claria-interaccion>.claria-roles .claria-rol{min-height:3.4rem;padding:.7rem 1rem}
+#claria-interaccion>.claria-roles .claria-rol strong{font-size:1.02rem}
+.claria-pictogramas{margin:.2rem clamp(.8rem,2.5vw,1.5rem) 1.5rem;padding:clamp(.9rem,2.4vw,1.45rem);border:1px solid #5c93aa;border-radius:20px;background:linear-gradient(155deg,#102f44,#11283e)}
+.pictos-presentacion h3{font:800 clamp(1.55rem,3vw,2.1rem)/1.25 "Space Grotesk",Arial,sans-serif;color:#f4ffff;margin:0 0 .35rem}
+.pictos-presentacion p,.pictos-explica{font:450 1.06rem/1.58 "Atkinson Hyperlegible",Arial,sans-serif;color:#d0e8ee;margin:.25rem 0 1rem;max-width:72ch}
+.pictos-formas{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.15rem 0}
+.claria-pictogramas button{font-family:"Atkinson Hyperlegible",Arial,sans-serif;cursor:pointer;min-height:2.75rem;line-height:1.35}
+.claria-pictogramas button:focus-visible{outline:3px solid #ffea90;outline-offset:3px}
+.pictos-formas button{flex:1 1 14rem;border:2px solid #6e9bb3;border-radius:13px;background:#1c4259;color:#f2ffff;padding:.78rem 1rem;font-size:1.08rem;font-weight:800}
+.pictos-formas button[aria-pressed="true"]{background:#3f527e;border-color:#b9c9ff}
+.pictos-editor label{display:block;font-size:1.14rem;font-weight:800;color:#eaffff;margin:.85rem 0 .5rem}
+.pictos-editor textarea{display:block;width:100%;min-height:7rem;resize:vertical;border:2px solid #6d9eb5;background:#071e30;color:#fff;border-radius:15px;padding:1rem;font:500 1.15rem/1.6 "Atkinson Hyperlegible",Arial,sans-serif}
+.pictos-editor textarea::placeholder{color:#c3d8df;opacity:1}
+.pictos-editor__botones,.pictos-acciones,.pictos-componer,.pictos-pantalla__botones{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin:.9rem 0}
+.pictos-editor__botones button,.pictos-acciones button,.pictos-componer button,.pictos-revision>button,.pictos-pantalla__botones button{border:1px solid #77adbe;border-radius:12px;background:#215267;color:#f6ffff;padding:.7rem 1rem;font-size:1.02rem;font-weight:750}
+.claria-pictogramas .pictos-primario{background:#71e8df!important;border-color:#b3fbf8!important;color:#062f3f!important;font-weight:850!important}
+.claria-pictogramas button:disabled{cursor:not-allowed;opacity:.52;filter:saturate(.45)}
+.pictos-estado{min-height:1.6rem;font-size:1rem;line-height:1.5;color:#abf1ea;margin:.7rem 0 1rem}
+.pictos-resultado{background:#0d2b40;border:1px solid #548ca2;border-radius:17px;padding:clamp(.8rem,2.5vw,1.35rem)}
+.pictos-resultado__cabecera h4{font:800 clamp(1.27rem,2.3vw,1.55rem)/1.3 "Space Grotesk",Arial,sans-serif;color:#f2ffff;margin:0 0 .35rem}
+.pictos-resultado__cabecera p{font-size:1.01rem;line-height:1.54;color:#c5dce6;max-width:75ch}
+.pictos-frase{font-size:clamp(1.24rem,2.7vw,1.65rem);font-weight:850;line-height:1.55;color:#fff;background:#244660;border:1px solid #547994;padding:.8rem 1rem;border-radius:12px;margin:.85rem 0 1.1rem}
+.pictos-tarjetas{list-style:none;padding:0;margin:.5rem 0;display:flex;flex-wrap:wrap;gap:.75rem;align-items:stretch}
+.pictos-tarjeta{flex:0 1 11rem;min-width:9.1rem;max-width:100%;display:flex;align-items:center;flex-direction:column;justify-content:start;gap:.45rem;background:#fff;color:#142435;border:2px solid #83b5c5;border-radius:14px;padding:.7rem .6rem;box-shadow:0 4px 12px #0003}
+.pictos-tarjeta img{width:100%;max-width:9rem;aspect-ratio:1;object-fit:contain;height:auto;min-height:6.5rem}
+.pictos-falta{display:grid;place-items:center;min-height:6.5rem;max-width:9rem;text-align:center;color:#52626f;font-size:.93rem}
+.pictos-tarjeta__palabra{font-weight:800;font-size:1.02rem;text-align:center;overflow-wrap:anywhere}
+.pictos-tarjeta__aviso{font-size:.8rem;line-height:1.35;text-align:center;color:#654434;font-weight:650}
+.claria-pictogramas .pictos-tarjeta__editar{font-size:.9rem;min-height:2.4rem;width:100%;background:#e8effa;color:#192846;border:1px solid #9ba9ca;border-radius:8px;padding:.3rem .45rem;font-weight:800}
+.pictos-revision{margin:1rem 0;background:#192d4a;border:1px solid #8b91d2;border-radius:14px;padding:1rem}
+.pictos-revision h4{font-size:1.2rem;color:#fff;margin:0 0 .45rem}
+.pictos-revision p{color:#d2ddec;line-height:1.5}
+.pictos-buscar{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.8rem 0}
+.pictos-buscar label{font-weight:750;font-size:1rem;color:#e7f7ff}
+.pictos-buscar input{flex:1 1 13rem;min-width:0;border:1px solid #6ba4ba;border-radius:9px;background:#081f31;color:white;padding:.7rem;font:500 1.08rem "Atkinson Hyperlegible",Arial,sans-serif}
+.pictos-alternativas{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+.claria-pictogramas .pictos-alternativa{display:flex;flex-direction:column;align-items:center;gap:.4rem;max-width:9rem;min-width:6rem;min-height:6rem;border:2px solid #9fbed6;background:#fff;color:#102e44;border-radius:12px;padding:.5rem;font-weight:750;font-size:.96rem}
+.pictos-alternativa img{width:5rem;height:5rem;object-fit:contain}
+.pictos-alternativa:hover{border-color:#58dcca;background:#e7faf9}
+.pictos-revision__ninguno{font-size:1rem}
+.pictos-categorias{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:1rem 0}
+.pictos-categoria{min-width:0;min-height:3.25rem;border:1px solid #608da6;background:#1c4259;color:#edfcff;border-radius:12px;font-size:1.02rem;font-weight:750;padding:.6rem}
+.pictos-categoria[aria-pressed="true"]{background:#3a4f7c;border:2px solid #bdb4ff}
+.pictos-opciones{background:#102c41;border:1px solid #477c96;border-radius:15px;padding:1rem;margin:.9rem 0}
+.pictos-opciones h4{font-size:1.25rem;font-weight:800;color:#eafaff;margin:0 0 .5rem}
+.pictos-frases-rapidas,.pictos-palabras{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0 1.2rem}
+.pictos-frases-rapidas button{border:1px solid #63acbb;background:#1f5265;border-radius:11px;color:#f7ffff;padding:.68rem .85rem;font-size:1.03rem;font-weight:650}
+.pictos-palabra{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-width:6rem;max-width:8rem;border:1px solid #a9bace;border-radius:11px;background:#fff;color:#1b2e45;padding:.55rem;font-weight:750;font-size:1rem}
+.pictos-palabra img{width:4.3rem;height:4.3rem;object-fit:contain}
+.pictos-componer{border-top:1px solid #62869b;padding-top:1rem}
+.pictos-frase-componer{flex:1 1 100%;font-size:1.1rem;font-weight:750;line-height:1.5;color:#fff;min-height:1rem;margin:0}
+.pictos-ayuda{border-top:1px solid #487991;margin-top:1.4rem;padding-top:.75rem}
+.pictos-ayuda summary{cursor:pointer;font-size:1.04rem;color:#adf1ef;font-weight:750}
+.pictos-ayuda p{color:#d5e6ef;font-size:1rem;line-height:1.55;margin:.7rem 0}
+.pictos-pantalla{width:100vw;max-width:100vw;height:100vh;max-height:100vh;border:0;margin:0;padding:0;background:#fff;color:#111}
+.pictos-pantalla::backdrop{background:#07182ce8}
+.pictos-pantalla__interior{display:flex;flex-direction:column;height:100%;overflow-y:auto;padding:clamp(1rem,4vw,2.5rem)}
+.pictos-pantalla h3{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:850;color:#19334b;margin:.2rem 0}
+.pictos-pantalla-frase,#pictos-pantalla-frase{font-size:clamp(1.45rem,4vw,2.7rem);font-weight:850;color:#1f314b;max-width:none;line-height:1.45}
+.pictos-tarjetas--grandes{justify-content:center;align-items:center;flex:1;overflow:auto}
+.pictos-tarjetas--grandes .pictos-tarjeta{flex:1 1 12rem;max-width:18rem;min-width:9rem;border-color:#667fab}
+.pictos-tarjetas--grandes .pictos-tarjeta img{max-width:13rem}
+.pictos-tarjetas--grandes .pictos-tarjeta__palabra{font-size:clamp(1.2rem,2.5vw,1.7rem)}
+.pictos-pantalla__botones{justify-content:center}
+.pictos-pantalla__botones button{background:#155b68;color:#fff;border:1px solid #266a72;border-radius:12px;padding:.8rem 1.3rem;font-weight:800;font-size:1.08rem}
+html[data-contraste="alto"] :is(.claria-modos__opcion,.claria-pictogramas,.pictos-editor,.pictos-resultado,.pictos-opciones,.pictos-revision,.pictos-formas button,.pictos-categoria){background:#000!important;border:2px solid #fff!important;color:#fff!important}
+html[data-contraste="alto"] :is(.pictos-presentacion p,.pictos-resultado__cabecera p,.pictos-estado,.pictos-ayuda p,.pictos-explica){color:#fff!important}
+@media(max-width:46rem){
+ .claria-modos{gap:.55rem;margin:.55rem .65rem .75rem}
+ .claria-modos__opcion{min-height:5.3rem;gap:.5rem;padding:.7rem .55rem;flex-direction:column;align-items:center;text-align:center}
+ .claria-modos__icono{width:2.5rem;height:2.5rem;font-size:1.35rem}
+ .claria-modos__opcion strong{font-size:1rem}
+ .claria-modos__opcion small{font-size:.85rem}
+ .claria-pictogramas{margin:.35rem .65rem 1rem;padding:.8rem}
+ .pictos-categorias{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pictos-tarjeta{flex:1 1 7.3rem;min-width:7rem;max-width:11rem}
+ .pictos-tarjeta img{min-height:5.4rem}
+ .pictos-editor__botones button,.pictos-acciones button{flex:1 1 100%}
+ .pictos-frases-rapidas button{flex:1 1 45%}
+}
+@media(prefers-reduced-motion:reduce){.claria-modos__opcion{transition:none}}
+@media print{.claria-modos,.claria-pictogramas{display:none!important}}
