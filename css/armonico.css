@@ -1,0 +1,105 @@
+/* Bermejo Accesible · armonía visual 2026-11-18.
+   Menos ruido visual; funciones, accesibilidad y contrastes conservados. */
+body.visual-limpio{--pulido-fondo:#10283c;--pulido-borde:#406a80;--pulido-texto:#e9f8fd;--pulido-suave:#bed9e3;--pulido-turquesa:#89e8e7;--pulido-violeta:#bdbaff}
+body.visual-limpio :is(.encabezado-pagina,.hero__texto,.claria-presentacion__texto) .intro,
+body.visual-limpio .encabezado-pagina>.intro{line-height:1.62;max-width:57ch;font-size:clamp(1.06rem,1.7vw,1.18rem)}
+body.visual-limpio :is(button,a,summary):focus-visible{outline:3px solid #ffe39e;outline-offset:3px}
+body.visual-limpio :is(.acceso,.panel,.juego-tarjeta,.claria-asistente,.claria-home,.juegos-home,.paso){scroll-margin-top:5rem}
+body.visual-limpio .paso>h2{font-size:clamp(1.45rem,2.5vw,1.9rem);line-height:1.32;margin-bottom:.6rem}
+body.visual-limpio .paso>p{max-width:65ch;line-height:1.58}
+body.visual-limpio .encabezado-pagina{padding-top:.2rem;padding-bottom:.25rem}
+body.visual-limpio :is(.encabezado-pagina h1,.juegos-hero h1){letter-spacing:-.027em}
+body.visual-limpio .indicador{margin-block:1rem 1.3rem;gap:clamp(.3rem,1vw,.7rem)}
+body.visual-limpio .indicador li{font-size:clamp(.85rem,1.5vw,.98rem);line-height:1.4}
+body.visual-limpio .panel:not(.original){box-shadow:none}
+body.visual-limpio .plegable summary,
+body.visual-limpio .demo-detalle>summary{min-height:2.8rem;font-size:1rem;line-height:1.5}
+body.visual-limpio .repetir-entrada{font-size:.91rem;line-height:1.6;color:#a5deeb}
+body.visual-limpio .hero__sub{font-size:1.04rem;color:#bfe0ea}
+body.visual-limpio .portada .hero{gap:clamp(1.1rem,2.7vw,2.4rem)}
+body.visual-limpio .portada .accesos{gap:clamp(.8rem,2vw,1.25rem)}
+body.visual-limpio .portada .acceso{box-shadow:none;border:1px solid #48748a;border-radius:20px;padding:clamp(1.15rem,2.4vw,1.55rem)}
+body.visual-limpio .portada .acceso__icono{width:3.6rem;height:3.6rem;border-radius:15px}
+body.visual-limpio .portada .acceso h2{font-size:clamp(1.4rem,2.5vw,1.78rem);margin:.45rem 0 .35rem}
+body.visual-limpio .portada .acceso p{font-size:1.08rem;line-height:1.58;max-width:34ch}
+body.visual-limpio .portada .claria-home,
+body.visual-limpio .portada .juegos-home{box-shadow:none;border-radius:20px;border-width:1px}
+body.visual-limpio .portada .claria-home__cuerpo>p:first-child,
+body.visual-limpio .portada .juegos-home__arriba{font-size:.84rem;letter-spacing:.06em;opacity:.84}
+body.visual-limpio .portada .claria-home__cuerpo>p:not(:first-child),
+body.visual-limpio .portada .juegos-home__texto>p:not(:first-child){font-size:1.06rem;line-height:1.55;max-width:55ch}
+body.visual-limpio .portada .juegos-home__icono{flex:none}
+body.visual-limpio .portada .claria-home__acciones{gap:.7rem}
+body.visual-limpio .portada .boton--principal{font-weight:750}
+/* Carga por elección. El JS existente mantiene los mismos campos y eventos. */
+body.visual-limpio .seleccion-carga{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;max-width:56rem;margin:.8rem 0 1.15rem}
+body.visual-limpio .seleccion-carga button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;min-height:6rem;gap:.55rem;padding:1rem;border:2px solid var(--pulido-borde);border-radius:16px;background:linear-gradient(145deg,#152d44,#15293f);color:var(--pulido-texto);font:750 clamp(1rem,1.75vw,1.13rem)/1.4 "Atkinson Hyperlegible",system-ui,sans-serif;text-align:left;cursor:pointer;box-shadow:none}
+body.visual-limpio .seleccion-carga button[aria-pressed="true"]{background:linear-gradient(140deg,#1b5165,#283e63);border-color:#83e7e9;box-shadow:inset 0 0 0 1px #85e8e727}
+body.visual-limpio .seleccion-carga button:hover{border-color:#a6f1ed}
+body.visual-limpio .seleccion-carga button svg{width:2rem;height:2rem;stroke:#99e9ef;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+body.visual-limpio .seleccion-carga button small{font-size:.89rem;font-weight:500;color:#c3dfe8;line-height:1.35}
+body.visual-limpio .opciones-carga{display:block;max-width:52rem;margin:.5rem 0 1.25rem}
+body.visual-limpio .opciones-carga .panel{margin:0;border:1px solid #467389;border-radius:18px;padding:clamp(1.05rem,2.5vw,1.5rem);background:linear-gradient(155deg,#102c40,#10283c);gap:.72rem}
+body.visual-limpio .opciones-carga .panel[hidden]{display:none!important}
+body.visual-limpio .opciones-carga .panel h3{font-size:clamp(1.22rem,2vw,1.42rem);margin:0 0 .1rem}
+body.visual-limpio .opciones-carga .panel textarea{min-height:8rem;font-size:1.06rem}
+body.visual-limpio .opciones-carga .panel .ayuda{font-size:1rem;line-height:1.52;max-width:62ch}
+body.visual-limpio .opciones-carga .panel .boton{min-height:2.85rem}
+body.visual-limpio .pulido-demo{max-width:62rem;margin:.7rem 0 1.05rem;padding:.1rem .85rem;border:1px solid #406d7e;border-radius:13px;background:#112b40}
+body.visual-limpio .pulido-demo>summary{cursor:pointer;padding:.7rem .25rem;font-size:1.04rem;font-weight:750;color:#c9eef1;line-height:1.55}
+body.visual-limpio .pulido-demo>summary:focus-visible{outline:3px solid #ffe39e;outline-offset:3px}
+body.visual-limpio .pulido-demo .demo-comprender{margin:.45rem 0 .7rem;padding:.8rem 1rem;border:1px solid #4a8396;box-shadow:none;border-radius:14px}
+body.visual-limpio .pulido-demo .demo-comprender .demo-etiqueta{display:none}
+body.visual-limpio .pulido-demo .demo-comprender h2{font-size:clamp(1.14rem,2vw,1.45rem)}
+body.visual-limpio .pulido-demo .demo-comprender p{font-size:1rem}
+body.visual-limpio .demo-detalle{margin:1rem 0}
+body.visual-limpio .demo-detalle>summary{padding:.7rem .85rem}
+body.visual-limpio .demo-detalle :is(h3,h4){line-height:1.4}
+body.visual-limpio .crear-tipos__boton{box-shadow:none}
+body.visual-limpio #crear-pictogramas .pictos-presentacion p{max-width:62ch}
+/* CLARIA: avatar y conversación protagonistas; selector de roles compacto. */
+body.visual-limpio .claria-presentacion{min-height:12rem;gap:clamp(.5rem,2vw,1.5rem);margin-bottom:.6rem}
+body.visual-limpio .claria-presentacion__texto{padding-block:.4rem}
+body.visual-limpio .claria-presentacion__visual{max-height:13.5rem;min-height:10rem}
+body.visual-limpio .claria-personaje{max-height:13.5rem;max-width:13.5rem}
+body.visual-limpio .claria-presentacion h1{font-size:clamp(2.35rem,4.4vw,3.8rem)}
+body.visual-limpio .claria-subtitulo{font-size:1.13rem;line-height:1.5}
+body.visual-limpio .claria-asistente{box-shadow:none;border:1px solid #4a8599}
+body.visual-limpio .claria-asistente__cabecera{padding-block:.95rem .6rem}
+body.visual-limpio .claria-asistente__cabecera h2{font-size:clamp(1.45rem,2.6vw,1.8rem)}
+body.visual-limpio .claria-roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;margin:.45rem clamp(.7rem,2.4vw,1.4rem) .65rem}
+body.visual-limpio .claria-rol{min-height:3.15rem;gap:.55rem;justify-content:center;padding:.55rem .7rem;border-radius:12px;box-shadow:none}
+body.visual-limpio .claria-rol svg{width:1.45rem;height:1.45rem;flex:none}
+body.visual-limpio .claria-rol strong{font-size:1.02rem;line-height:1.4}
+body.visual-limpio .claria-rol small{display:none!important}
+body.visual-limpio .claria-conversacion{box-shadow:none}
+body.visual-limpio .asesoria-chat{box-shadow:none}
+/* Juegos: la experiencia es protagonista, menos artículos dentro de artículos. */
+body.visual-limpio .juegos-hero{padding-block:clamp(.85rem,2vw,1.45rem);gap:1.5rem}
+body.visual-limpio .juegos-hero__contenido h1{font-size:clamp(2.3rem,5vw,4rem);line-height:1.13}
+body.visual-limpio .juegos-hero__intro{font-size:1.11rem;line-height:1.6;max-width:56ch}
+body.visual-limpio .juegos-hero__pista{font-size:1rem;line-height:1.5}
+body.visual-limpio .juegos-grilla{gap:clamp(.85rem,2vw,1.15rem)}
+body.visual-limpio .juego-tarjeta{border-radius:19px;box-shadow:none;overflow:hidden}
+body.visual-limpio .juego-tarjeta__contenido>p{line-height:1.54;font-size:1.055rem}
+body.visual-limpio .juego-tarjeta__valor{margin:.2rem 0 .6rem;padding:.8rem;border-radius:12px}
+body.visual-limpio .juego-tarjeta__valor strong{font-size:1rem}
+body.visual-limpio .juego-tarjeta__valor span{font-size:.98rem;line-height:1.5}
+body.visual-limpio .juego-tarjeta__externo{font-size:.91rem;line-height:1.4}
+body.visual-limpio .juegos-idea,body.visual-limpio .juegos-siguientes{box-shadow:none}
+@media(max-width:55rem){body.visual-limpio .seleccion-carga{max-width:none}body.visual-limpio .claria-presentacion__visual{max-height:11rem}}
+@media(max-width:36rem){
+ body.visual-limpio .seleccion-carga{gap:.45rem}
+ body.visual-limpio .seleccion-carga button{min-height:5.4rem;gap:.45rem;padding:.65rem .45rem;align-items:center;text-align:center;font-size:.96rem}
+ body.visual-limpio .seleccion-carga button svg{width:1.7rem;height:1.7rem}
+ body.visual-limpio .seleccion-carga button small{font-size:.82rem}
+ body.visual-limpio .claria-rol{padding:.65rem .35rem}
+ body.visual-limpio .claria-rol svg{display:none}
+ body.visual-limpio .claria-presentacion__visual{max-height:10rem;min-height:9rem}
+ body.visual-limpio .claria-personaje{max-height:10rem}
+ body.visual-limpio .portada .claria-home__acciones{flex-wrap:wrap}
+}
+html[data-contraste="alto"] body.visual-limpio :is(.seleccion-carga button,.opciones-carga .panel,.pulido-demo,.claria-rol,.juego-tarjeta){background:#000!important;color:#fff!important;border:2px solid #fff!important;box-shadow:none!important}
+html[data-contraste="alto"] body.visual-limpio :is(.seleccion-carga button small,.pulido-demo summary,.juegos-hero__intro){color:#fff!important}
+@media(prefers-reduced-motion:reduce){body.visual-limpio :is(.acceso,.juego-tarjeta,.seleccion-carga button){transition:none!important;animation:none!important}}
+@media print{body.visual-limpio .pulido-demo{display:none!important}body.visual-limpio .opciones-carga .panel{background:white!important;color:black!important}body.visual-limpio .seleccion-carga{display:none!important}}
