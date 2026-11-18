@@ -206,6 +206,42 @@
         "¿DÓNDE ESTÁ EL BAÑO?",
         "¿CUÁNTO CUESTA EL PASAJE?"
       ]
+    },
+    {
+      "id": "comisaria-el-colorado",
+      "nombre": "Comisaría El Colorado",
+      "icono": "👮",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-18",
+      "fuenteOficial": "https://fd.formosa.gob.ar/puntosconectados",
+      "direccionReferencia": "Av. 25 de Mayo 293, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Orientación sobre seguridad y prevención de delitos",
+        "Información para realizar denuncias",
+        "Orientación ante situaciones de violencia familiar"
+      ],
+      "orientacion": [
+        {
+          "texto": "Contale al personal qué pasó o qué ayuda necesitás."
+        },
+        {
+          "texto": "Si querés hacer una denuncia, pedí que te expliquen cómo realizarla."
+        },
+        {
+          "texto": "Preguntá qué pasos siguen y cómo recibir información sobre tu consulta."
+        },
+        {
+          "texto": "Si hay peligro inmediato, acudí a los servicios de emergencia: esta guía no recibe avisos urgentes."
+        }
+      ],
+      "frases": [
+        "Necesito ayuda, por favor.",
+        "Quiero hacer una denuncia.",
+        "Necesito hablar con un policía.",
+        "No entiendo. ¿Me puede explicar otra vez?",
+        "Necesito informar lo que pasó.",
+        "Tengo miedo. Necesito ayuda."
+      ]
     }
   ]
 }
