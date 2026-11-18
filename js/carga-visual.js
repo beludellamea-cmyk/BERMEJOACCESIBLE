@@ -6,7 +6,8 @@
     if (!contenedor) return;
     var paneles = Array.from(contenedor.children).filter(function (e) { return e.classList.contains('panel'); });
     if (paneles.length < 3) return;
-    var etiquetas = ['Texto','PDF','Foto'];
+    var etiquetas = ['Escribir texto','Subir PDF','Sacar o subir foto'];
+    var breves = ['Escribí o pegá','Elegí un documento','Usá la cámara o galería'];
     var codigos = ['texto','pdf','foto'];
     var selector = document.createElement('div');
     selector.className = 'seleccion-carga';
@@ -31,6 +32,9 @@
       var texto = document.createElement('span');
       texto.textContent = etiquetas[i];
       boton.appendChild(texto);
+      var breve = document.createElement('small');
+      breve.textContent = breves[i];
+      boton.appendChild(breve);
       boton.addEventListener('click', function () {
         paneles.slice(0,3).forEach(function (p,j) {
           p.hidden = i !== j;
@@ -45,7 +49,7 @@
     });
     var titulo = document.createElement('p');
     titulo.className = 'ayuda';
-    titulo.textContent = 'Elegí una opción:';
+    titulo.textContent = 'Elegí cómo comenzar';
     contenedor.parentNode.insertBefore(titulo,contenedor);
     contenedor.parentNode.insertBefore(selector,contenedor);
   });
