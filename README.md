@@ -1,5 +1,14 @@
 # Bermejo Accesible
 
+## Mi ciudad, más accesible · integrado sin códigos físicos (noviembre 2026)
+
+- Se agregó `ciudad.html`, enlazado desde **Explorar más**, como guía accesible de seis lugares de **El Colorado, Formosa**. El recorrido comienza eligiendo una institución en una lista grande, sin cámara, escaneo ni códigos que deban estar instalados en edificios públicos.
+- Cada ficha ofrece qué se puede consultar (servicios orientativos), instrucciones comunitarias sencillas, frases para pedir ayuda, lectura en voz alta y un enlace **Ver con pictogramas** que abre `claria.html?modo=pictogramas&frase=...` con el mensaje ya preparado. También ofrece dirección de referencia y enlaces a fuentes públicas, diferenciados de una confirmación institucional.
+- Los datos reducidos están en `data/ciudad-lugares.json`, derivados de `data/ciudad.json` del repositorio original `beludellamea-cmyk/claria-` (consulta del **15/11/2026**). La base contiene **Registro Civil**, **Hospital de El Colorado**, **Municipalidad**, **PAMI**, **Correo Argentino** y **Terminal de Ómnibus**. Son datos de fuentes públicas **no aprobados ni avalados por cada institución**; las fichas advierten que es necesario confirmar horarios, direcciones, servicios y requisitos directamente con el organismo antes de actuar. Se omiten horarios potencialmente desactualizados.
+- Diseño en `css/ciudad.css`, comportamiento en `js/ciudad.js`, frases del origen copiadas al directorio reducido. No requiere geolocalización, cuentas, consultas a Gemini ni actualización de Cloudflare. La síntesis de voz del navegador se activa solamente con un toque.
+- La función de enlace desde la guía a pictogramas utiliza un parámetro `frase` limitado a 280 caracteres y no envía mensajes a la IA; el texto aparece en la URL, por lo que solamente se usan frases genéricas y no datos privados.
+
+
 ## CLARIA integrada: «Decilo con pictogramas» (noviembre de 2026)
 
 - CLARIA en `claria.html` ofrece dos caminos visibles: **Conversar con CLARIA** (mantiene las opciones Quiero aprender y Soy docente) y **Decilo con pictogramas**, accesible también con `claria.html?modo=pictogramas`.
