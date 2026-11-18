@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "proyecto": "Mi ciudad, más accesible · Bermejo Accesible",
+  "lugar": "El Colorado, Formosa, Argentina",
+  "fuenteDatos": "CLARIA · Mi ciudad, más accesible, recopilación de fuentes públicas",
+  "fechaConsulta": "2026-11-15",
+  "advertencia": "Orientación comunitaria. Los datos se recopilaron de fuentes públicas y no implican aprobación ni validación por las instituciones. Confirmá dirección, horarios, servicios y requisitos con cada organismo.",
+  "instituciones": [
+    {
+      "id": "registro-civil",
+      "nombre": "Registro Civil · Seccional El Colorado 1490",
+      "icono": "📄",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-15",
+      "fuenteOficial": "https://m.formosa.gob.ar/tramite/171/pasaporte",
+      "direccionReferencia": "Santa Fe y San Juan, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Consultas sobre documentación personal",
+        "Consultas sobre trámites del Registro Civil",
+        "Orientación sobre DNI y partidas"
+      ],
+      "orientacion": [
+        {
+          "texto": "Elegí qué querés consultar: DNI, partida u otro trámite."
+        },
+        {
+          "texto": "Acercate a la seccional en el horario publicado."
+        },
+        {
+          "texto": "Preguntá al personal qué requisitos corresponden a tu consulta."
+        },
+        {
+          "texto": "Si necesitás comunicarte con imágenes, abrí el tablero de CLARIA."
+        }
+      ],
+      "frases": [
+        "NECESITO INFORMACIÓN SOBRE MI DNI.",
+        "QUIERO PEDIR UNA PARTIDA DE NACIMIENTO.",
+        "TENGO UN TURNO.",
+        "¿DÓNDE TENGO QUE ESPERAR?",
+        "¿QUÉ DOCUMENTOS NECESITO?",
+        "NO ENTIENDO LA INFORMACIÓN."
+      ]
+    },
+    {
+      "id": "hospital-y-centros-de-salud",
+      "nombre": "Hospital de El Colorado",
+      "icono": "🏥",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-15",
+      "fuenteOficial": "https://fd.formosa.gob.ar/puntosconectados",
+      "direccionReferencia": "Santa Fe 273, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Atención de salud pública",
+        "Información sobre atención hospitalaria",
+        "Orientación para consultas de salud"
+      ],
+      "orientacion": [
+        {
+          "texto": "Contale al personal del hospital qué necesitás."
+        },
+        {
+          "texto": "Pedí información sobre el sector de atención que corresponde."
+        },
+        {
+          "texto": "Si no entendiste una indicación, pedí que te la expliquen otra vez."
+        }
+      ],
+      "frases": [
+        "NECESITO AYUDA.",
+        "ME SIENTO MAL.",
+        "TENGO DOLOR.",
+        "NECESITO UN MÉDICO.",
+        "TENGO UN TURNO.",
+        "¿DÓNDE ESTÁ EL BAÑO?"
+      ]
+    },
+    {
+      "id": "municipalidad",
+      "nombre": "Municipalidad de El Colorado",
+      "icono": "🏛️",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-15",
+      "fuenteOficial": "https://www.elcolorado.gob.ar/index.php",
+      "direccionReferencia": "Av. 25 de Mayo 651, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Información sobre servicios municipales",
+        "Atención de consultas y solicitudes vecinales",
+        "Orientación sobre gestiones municipales"
+      ],
+      "orientacion": [
+        {
+          "texto": "Elegí qué consulta municipal querés realizar."
+        },
+        {
+          "texto": "Buscá la oficina que puede ayudarte o consultá el portal oficial."
+        },
+        {
+          "texto": "Pedí información sobre los pasos y requisitos de tu gestión."
+        }
+      ],
+      "frases": [
+        "QUIERO HACER UNA CONSULTA.",
+        "NECESITO INFORMACIÓN.",
+        "¿DÓNDE PRESENTO ESTE FORMULARIO?",
+        "¿QUÉ DOCUMENTOS NECESITO?",
+        "NECESITO AYUDA PARA COMPLETAR.",
+        "¿DÓNDE PUEDO ESPERAR?"
+      ]
+    },
+    {
+      "id": "pami",
+      "nombre": "PAMI · Agencia El Colorado",
+      "icono": "💙",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-15",
+      "fuenteOficial": "https://www.pami.org.ar/contacto",
+      "direccionReferencia": "Calle Santa Fe, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Consultas de personas afiliadas",
+        "Información sobre prestaciones y trámites PAMI",
+        "Orientación sobre turnos y canales de atención"
+      ],
+      "orientacion": [
+        {
+          "texto": "Elegí qué consulta de PAMI necesitás realizar."
+        },
+        {
+          "texto": "Llamá al 138 para recibir orientación o consultá los canales oficiales."
+        },
+        {
+          "texto": "Preguntá qué documentación corresponde a tu trámite."
+        }
+      ],
+      "frases": [
+        "SOY AFILIADO DE PAMI.",
+        "NECESITO INFORMACIÓN.",
+        "QUIERO CONSULTAR POR MEDICAMENTOS.",
+        "TENGO UN TURNO.",
+        "¿QUÉ DOCUMENTOS NECESITO?",
+        "¿DÓNDE TENGO QUE IR?"
+      ]
+    },
+    {
+      "id": "correo-argentino",
+      "nombre": "Correo Argentino · Sucursal El Colorado",
+      "icono": "📮",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-15",
+      "fuenteOficial": "https://www.correoargentino.com.ar/atencion-al-cliente/centros-de-atencion-al-cliente",
+      "direccionReferencia": "Corrientes 100, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Envío de correspondencia y paquetes",
+        "Recepción o retiro de correspondencia y paquetes",
+        "Consultas de seguimiento de envíos"
+      ],
+      "orientacion": [
+        {
+          "texto": "Elegí si querés enviar, retirar o consultar un envío."
+        },
+        {
+          "texto": "Acercate a la sucursal o consultá los servicios en el sitio de Correo Argentino."
+        },
+        {
+          "texto": "Pedí información sobre los requisitos y costos antes de realizar la operación."
+        }
+      ],
+      "frases": [
+        "QUIERO ENVIAR UN PAQUETE.",
+        "VENGO A RETIRAR UN ENVÍO.",
+        "NECESITO INFORMACIÓN.",
+        "¿QUÉ DOCUMENTO NECESITO?",
+        "¿CUÁNTO TENGO QUE PAGAR?",
+        "¿DÓNDE TENGO QUE ESPERAR?"
+      ]
+    },
+    {
+      "id": "terminal-de-omnibus",
+      "nombre": "Terminal de Ómnibus de El Colorado",
+      "icono": "🚌",
+      "procedencia": "fuentes públicas; sin aval institucional",
+      "fechaFuente": "2026-11-15",
+      "fuenteOficial": "https://rutamar.com.ar/puntos-de-venta/",
+      "direccionReferencia": "Av. Néstor Kirchner 1150, esquina Nicolás Barrios, El Colorado, Formosa",
+      "serviciosReferencia": [
+        "Consulta y venta de pasajes a través de empresas de transporte",
+        "Información sobre destinos y salidas",
+        "Orientación para viajar desde El Colorado"
+      ],
+      "orientacion": [
+        {
+          "texto": "Elegí el destino y el día en que querés viajar."
+        },
+        {
+          "texto": "Preguntá a la empresa de transporte por recorridos y horarios disponibles."
+        },
+        {
+          "texto": "Confirmá el precio, el horario y el punto de salida antes de viajar."
+        }
+      ],
+      "frases": [
+        "QUIERO VIAJAR.",
+        "NECESITO UN PASAJE.",
+        "¿A QUÉ HORA SALE EL COLECTIVO?",
+        "¿DÓNDE ESPERO?",
+        "¿DÓNDE ESTÁ EL BAÑO?",
+        "¿CUÁNTO CUESTA EL PASAJE?"
+      ]
+    }
+  ]
+}
