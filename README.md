@@ -1,5 +1,17 @@
 # Bermejo Accesible
 
+## CLARIA integrada: «Decilo con pictogramas» (noviembre de 2026)
+
+- CLARIA en `claria.html` ofrece dos caminos visibles: **Conversar con CLARIA** (mantiene las opciones Quiero aprender y Soy docente) y **Decilo con pictogramas**, accesible también con `claria.html?modo=pictogramas`.
+- «Decilo» utiliza el **motor de análisis lingüístico original de CLARIA** (`js/claria-pictos-motor.js`) y el diccionario local `data/claria-pictogramas.json` (261 entradas con identificadores ARASAAC verificados). Conserva conjugaciones y expresiones de varias palabras y señala los términos ambiguos o sin pictograma. Los recursos gráficos se cargan desde `static.arasaac.org` usando únicamente IDs del diccionario; no inventar pictogramas ni asociar automáticamente palabras desconocidas a símbolos arbitrarios.
+- El usuario puede **escribir una frase** (280 caracteres), **dictarla** cuando el navegador lo permite, o elegir una de **seis categorías** del tablero `data/claria-tablero.json`: Ayuda, Salud, Escuela, Transporte, Compras y Necesidades básicas. Incluye frases rápidas y selección de palabras para componer mensajes.
+- La vista de tarjetas permite **revisar/cambiar símbolos** entre los del diccionario validado (o dejar una palabra como texto), **decir el mensaje en voz alta**, **mostrarlo en pantalla completa** y **descargarlo en PNG o PDF** con `js/claria-pictos-exportar.js`, basado en el módulo de CLARIA original.
+- Se preservó la página de conversación y el asistente docente. En la portada, CLARIA ahora se presenta también como apoyo para comunicar mensajes, sin sumar otra sección principal: la navegación general continúa Comprender → Crear → CLARIA → Juegos.
+- **Privacidad:** la frase no se envía a Gemini ni requiere un Worker de Cloudflare. El diccionario es local; se descargan los archivos pictográficos del servidor ARASAAC, y la opción de dictado puede usar el servicio de reconocimiento de voz del navegador. La aplicación no almacena el mensaje en un servidor.
+- **Licencia de pictogramas:** Sergio Palao, ARASAAC, Gobierno de Aragón, CC BY-NC-SA 4.0, uso no comercial. Verificar las imágenes antes de usarlas para comunicación aumentativa.
+- El nuevo módulo está en `js/claria-pictogramas.js` y `css/claria-pictogramas.css`; es independiente del módulo docente. Si fallan las imágenes remotas, permanece el texto como apoyo.
+
+
 ## CLARIA conversacional por voz: primera versión (17/11/2026)
 
 - En `claria.html?rol=docente`, bajo el perfil **Soy docente**, se agregó **Conversar con CLARIA**. Un botón solicita permiso de micrófono y activa, cuando el navegador lo admite, reconocimiento de voz de un turno mediante Web Speech API (`SpeechRecognition` o `webkitSpeechRecognition`) en español de Argentina. El texto reconocido se muestra en el chat y se envía al endpoint `POST /asistente` ya existente.
