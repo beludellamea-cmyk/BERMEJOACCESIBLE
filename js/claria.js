@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function(){
     botones();
     deClaria({texto:rol==='docente'
       ?'¡Hola, profe! Soy CLARIA. Podemos planificar una clase con DUA, buscar ideas de apoyo, preparar adaptaciones y localizar normativa. ¿Qué necesitás resolver hoy?'
-      :'¡Hola! Soy CLARIA. ¿Querés que leamos algo juntos? Podemos subir un texto, PDF o foto y elegir cómo comprenderlo.'});
+      :'¡Hola! Soy CLARIA. ¿Qué te gustaría aprender hoy?'});
     estado.textContent=rol==='docente'
       ?'Para conversar, usá el panel docente. Si querés verificar Gemini, tocá «Comprobar IA» junto al micrófono.'
       :'Guía local disponible. Para hacer preguntas con IA, activá la autorización y comprobá que el servicio responda.';
