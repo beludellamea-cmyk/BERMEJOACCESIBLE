@@ -1,0 +1,54 @@
+/* Mi ciudad, más accesible | versión simple, sin requisitos de infraestructura */
+.ciudad-main{padding:clamp(1rem,3vw,2.2rem) 0 3.5rem}
+.ciudad-main .contenedor{max-width:67rem}
+.ciudad-migas{display:inline-flex;align-items:center;margin:0 0 1.2rem;color:#a7e8ec;font:700 1rem/1.5 "Atkinson Hyperlegible",Arial,sans-serif;text-decoration:none}
+.ciudad-migas:hover{text-decoration:underline}
+.ciudad-encabezado{max-width:72ch;margin:0 0 1.6rem}
+.ciudad-etiqueta{color:#7cdddd;font:700 .97rem "Space Grotesk",Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin:0 0 .35rem}
+.ciudad-encabezado h1{font:750 clamp(2.05rem,5vw,3.4rem)/1.13 "Space Grotesk",Arial,sans-serif;color:#f4ffff;letter-spacing:-.045em;margin:.1rem 0 .65rem}
+.ciudad-encabezado>p:not(.ciudad-etiqueta){font-size:clamp(1.08rem,2vw,1.19rem);line-height:1.62;color:#d2eaf1;margin:.45rem 0}
+#ciudad-inicio[hidden],#ciudad-detalle[hidden]{display:none!important}
+.ciudad-estado{min-height:1.5rem;font-size:1rem;line-height:1.5;color:#9ee8e4;margin:.8rem 0}
+.ciudad-lugares{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.ciudad-lugar{display:flex;align-items:center;text-align:left;gap:1rem;width:100%;min-height:6.5rem;background:linear-gradient(125deg,#15394f,#1e3354);border:1px solid #5d96ac;border-radius:18px;padding:1rem;cursor:pointer;font-family:"Atkinson Hyperlegible",Arial,sans-serif;color:#fff}
+.ciudad-lugar:hover{background:#204b62;border-color:#9de9e2}
+.ciudad-lugar:focus-visible,.ciudad-main button:focus-visible,.ciudad-main a:focus-visible{outline:3px solid #ffe7a0;outline-offset:4px}
+.ciudad-lugar__icono{display:grid;place-items:center;flex:none;background:#24546a;border-radius:13px;width:3.5rem;height:3.5rem;font-size:1.7rem}
+.ciudad-lugar__contenido{min-width:0;flex:1;display:flex;flex-direction:column;gap:.32rem}
+.ciudad-lugar__contenido strong{font-size:1.15rem;line-height:1.38;overflow-wrap:anywhere}
+.ciudad-lugar__contenido>span{color:#c8e3e9;font-size:.98rem;line-height:1.4}
+.ciudad-lugar__flecha{flex:none;color:#85eeee;font-size:1.7rem;line-height:1}
+.ciudad-explicacion{margin:1.35rem 0;border:1px solid #4e7e91;background:#102b40;border-radius:15px;padding:.95rem 1.1rem;color:#cfe6ee;font-size:1rem;line-height:1.6}
+.ciudad-explicacion p{margin:.1rem 0}
+.ciudad-volver{border:1px solid #82c1c5;background:#224d60;color:#f6ffff;padding:.65rem 1rem;border-radius:11px;font:750 1rem "Atkinson Hyperlegible",Arial,sans-serif;cursor:pointer;min-height:3rem;margin:0 0 1.2rem}
+.ciudad-panel{background:linear-gradient(155deg,#0e3046,#11263e);border:1px solid #4f899c;border-radius:19px;padding:clamp(1rem,3vw,1.7rem)}
+.ciudad-panel__titulo{display:flex;align-items:center;gap:1rem;margin:0 0 .5rem}
+.ciudad-panel__icono{flex:none;font-size:2.3rem;width:4rem;height:4rem;display:grid;place-items:center;background:#25485f;border-radius:13px}
+.ciudad-panel h2{font:750 clamp(1.6rem,3.3vw,2.25rem)/1.24 "Space Grotesk",Arial,sans-serif;color:#f5ffff;margin:0;letter-spacing:-.03em}
+.ciudad-panel__fecha{font-size:.98rem;color:#b8dbe4;margin:.4rem 0 1.15rem}
+.ciudad-guia{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.ciudad-seccion{border:1px solid #4a8296;border-radius:15px;background:#133349;padding:1rem}
+.ciudad-seccion h3{font:750 clamp(1.2rem,2.5vw,1.5rem)/1.3 "Space Grotesk",Arial,sans-serif;color:#f1ffff;margin:0 0 .65rem}
+.ciudad-seccion ul,.ciudad-seccion ol{padding-left:1.4rem;margin:0;color:#e6f3f7;font-size:1.09rem;line-height:1.63}
+.ciudad-seccion li{padding-left:.15rem;margin:.45rem 0}
+.ciudad-comunicacion{margin:1.1rem 0 0;border:1px solid #7b86b8;background:#1c3052;border-radius:15px;padding:clamp(.9rem,2vw,1.35rem)}
+.ciudad-comunicacion h3{font:750 clamp(1.23rem,2.4vw,1.55rem) "Space Grotesk",Arial,sans-serif;color:#f2eeff;margin:0 0 .35rem}
+.ciudad-comunicacion>p{font-size:1.05rem;line-height:1.55;color:#dbe7f1;margin:0 0 .85rem}
+.ciudad-frases{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
+.ciudad-frase{border:1px solid #6880aa;background:#112940;border-radius:12px;padding:1rem}
+.ciudad-frase__texto{font:750 clamp(1.03rem,2vw,1.18rem)/1.48 "Atkinson Hyperlegible",Arial,sans-serif;color:#fff;margin:0 0 .7rem}
+.ciudad-frase__acciones{display:flex;gap:.55rem;flex-wrap:wrap}
+.ciudad-secundario,.ciudad-frase__pictos,.ciudad-enlace{display:inline-flex;align-items:center;justify-content:center;border:1px solid #90bcda;border-radius:9px;background:#28506c;color:#f4ffff;padding:.58rem .8rem;font:750 .98rem/1.35 "Atkinson Hyperlegible",Arial,sans-serif;text-decoration:none;cursor:pointer}
+.ciudad-frase__pictos{background:#6b5aa7;border-color:#b4aaf1;color:#fff}
+.ciudad-referencia{margin:1.2rem 0 0;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.ciudad-referencia__direccion{flex:1 1 100%;border:1px solid #5c889b;border-radius:13px;padding:1rem;color:#e3f3f7;background:#143449}
+.ciudad-referencia__direccion strong{font-size:1.1rem;color:#e7ffff}
+.ciudad-referencia__direccion p{font-size:1.02rem;line-height:1.55;margin:.3rem 0}
+.ciudad-referencia__cuidado{color:#ffdba0;font-weight:750}
+.ciudad-referencia__direccion .ciudad-enlace{margin:.6rem 0 .1rem}
+.ciudad-advertencia{border-left:4px solid #f7c987;background:#243d4e;border-radius:8px;padding:1rem;color:#fff0d3;font-size:1.02rem;line-height:1.6;margin:1.3rem 0 .3rem}
+.ciudad-main :is(.ciudad-panel,.ciudad-lugar,.ciudad-seccion){overflow-wrap:anywhere}
+html[data-contraste="alto"] :is(.ciudad-panel,.ciudad-lugar,.ciudad-seccion,.ciudad-comunicacion,.ciudad-frase,.ciudad-explicacion){background:#000!important;color:#fff!important;border:2px solid #fff!important}
+html[data-contraste="alto"] :is(.ciudad-encabezado p,.ciudad-panel p,.ciudad-panel li,.ciudad-frase p){color:#fff!important}
+@media(max-width:49rem){.ciudad-lugares,.ciudad-guia,.ciudad-frases{grid-template-columns:1fr}.ciudad-lugar{min-height:5.8rem}.ciudad-panel__icono{width:3.2rem;height:3.2rem;font-size:1.8rem}}
+@media print{.ciudad-migas,.ciudad-volver,.ciudad-frase__acciones,.ciudad-referencia a,.ciudad-inicio{display:none!important}.ciudad-panel,.ciudad-seccion,.ciudad-comunicacion,.ciudad-frase{background:#fff!important;color:#111!important;box-shadow:none!important;border:1px solid #888!important}.ciudad-panel :is(h2,h3,p,li){color:#111!important}}
