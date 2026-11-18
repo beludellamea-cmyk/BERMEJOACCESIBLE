@@ -27,8 +27,9 @@
   <script src="js/claria-pictos-motor.js" defer></script>
   <script src="js/claria-pictos-exportar.js" defer></script>
   <script src="js/claria-pictogramas.js?v=4" defer></script>
+  <link rel="stylesheet" href="css/armonico.css?v=1">
 </head>
-<body data-modo="crear">
+<body class="visual-limpio" data-modo="crear">
   <a class="saltar" href="#contenido">Ir al contenido</a>
   <header class="cabecera">
     <div class="cabecera__fila">
@@ -82,18 +83,18 @@
     <div class="contenedor">
       <div class="encabezado-pagina">
         <h1>Crear</h1>
-        <p class="intro">Adaptá materiales y actividades, o creá mensajes con pictogramas.</p>
+        <p class="intro">Elegí cómo querés crear.</p>
       </div>
       <section class="crear-tipos" aria-labelledby="crear-tipos-titulo">
         <h2 id="crear-tipos-titulo">¿Qué querés crear?</h2>
         <div class="crear-tipos__opciones" role="group" aria-label="Elegí qué querés crear">
           <button type="button" id="crear-modo-adaptar" class="crear-tipos__boton" aria-pressed="true" aria-controls="crear-adaptaciones">
             <span class="crear-tipos__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4zM16 4v4h4M8 12h8M8 16h5"/></svg></span>
-            <span><strong>Adaptar un material</strong><small>Prepará contenidos y actividades accesibles</small></span>
+            <span><strong>Adaptar un material</strong><small>Materiales y actividades accesibles</small></span>
           </button>
           <button type="button" id="crear-modo-pictogramas" class="crear-tipos__boton" aria-pressed="false" aria-controls="crear-pictogramas">
             <span class="crear-tipos__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="3"/><path d="M7 10h3M14 10h3M8 15h8M9 19v2M15 19v2"/></svg></span>
-            <span><strong>Decilo con pictogramas</strong><small>Escribí o elegí imágenes para comunicarte</small></span>
+            <span><strong>Decilo con pictogramas</strong><small>Mensajes visuales para comunicarte</small></span>
           </button>
         </div>
       </section>
@@ -112,8 +113,8 @@
       </noscript>
 
       <section class="paso" id="paso-cargar" aria-labelledby="t-cargar">
-        <h2 id="t-cargar" tabindex="-1">Cargá o escribí el contenido</h2>
-        <p>Elegí una forma de cargar tu material. Si tenés dudas, probá con un ejemplo.</p>
+        <h2 id="t-cargar" tabindex="-1">¿Qué material vas a adaptar?</h2>
+        <p>Elegí texto, PDF o foto.</p>
 
         <div class="opciones-carga">
           <section class="panel" aria-labelledby="t-pegar">
@@ -150,7 +151,7 @@
         <details class="demo-detalle"><summary>Probar con ejemplos (opcional)</summary>
         <section class="panel" aria-labelledby="t-ejemplo">
           <h3 id="t-ejemplo">Probar con un ejemplo</h3>
-          <p>El ejemplo «El ciclo del agua» sirve para probar las seis formas de lectura, incluidas las imágenes y los pictogramas.</p>
+          <p>Probá un contenido de ejemplo antes de usar el tuyo.</p>
           <div class="fila-botones">
             <button type="button" class="boton boton--principal" id="usar-ejemplo">Cargar el texto de ejemplo</button>
           </div>
@@ -164,7 +165,7 @@
           <p>Si querés demostrar la lectura de una página en imagen, descargá la <a href="https://raw.githubusercontent.com/beludellamea-cmyk/Bermejo-accesible./main/ejemplos/sociales-bermejo-cuaderno.png" download>página de cuaderno de ejemplo (PNG)</a> y después cargala en «Foto de tu material». También está el <a href="ejemplos/sociales-bermejo.txt" download>texto de ejemplo (TXT)</a>.</p>
           <p class="ayuda">Datos sobre El Colorado: <a href="https://m.formosa.gob.ar/noticia/10511/61/el_colorado_feriarte__">Gobierno de Formosa</a>. El texto y la imagen son una elaboración didáctica para esta demostración.</p>
           <h4>Probá con una página real de Geografía de Formosa</h4>
-          <p>La página del material aportado por el equipo trata sobre la localización de Formosa, sus límites, departamentos y contexto histórico (módulo 1, página 6). Este PDF tiene texto seleccionable. La foto de las banderas forma parte del original; la lectura del PDF extrae texto, pero no describe esa imagen automáticamente.</p>
+          <p>Material de Geografía de Formosa en PDF. La lectura extrae texto, pero no describe automáticamente las fotografías.</p>
           <p><a href="https://raw.githubusercontent.com/beludellamea-cmyk/Bermejo-accesible./main/ejemplos/geografia-formosa-pagina-6.pdf" download>Descargar la página de Geografía (PDF, una página)</a>. Después, en «Subir un PDF», elegí ese archivo y pulsá «Leer el PDF». Revisá el texto extraído antes de elegir voz, lectura por partes u otra forma de acceso.</p>
           <p class="ayuda">El ejemplo «El Colorado y el río Bermejo» es una actividad creada para esta demostración: su texto es distinto del libro. Revisá la vigencia de los datos del libro antes de usarlo en clase.</p>
         </section>

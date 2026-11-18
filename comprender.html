@@ -22,8 +22,9 @@
   <script src="js/chat-config.js"></script>
   <script src="js/ia-material.js" defer></script>
   <script src="js/carga-visual.js?v=tech-20261116" defer></script>
+  <link rel="stylesheet" href="css/armonico.css?v=1">
 </head>
-<body data-modo="comprender">
+<body class="visual-limpio" data-modo="comprender">
   <a class="saltar" href="#contenido">Ir al contenido</a>
   <header class="cabecera">
     <div class="cabecera__fila">
@@ -77,12 +78,15 @@
     <div class="contenedor">
       <div class="encabezado-pagina">
         <h1>Comprender</h1>
-        <p class="intro">Subí un material una sola vez. Después elegí cómo querés leerlo: escucharlo, dividirlo en partes, verlo con imágenes o acompañarlo con pictogramas.</p>
+        <p class="intro">Elegí texto, PDF o foto. Después, decidí cómo querés comprenderlo.</p>
+        <details class="pulido-demo">
+          <summary>¿Querés probar con un ejemplo?</summary>
         <div class="demo-comprender" aria-labelledby="demo-titulo">
           <div><p class="demo-etiqueta">DEMOSTRACIÓN GUIADA</p><h2 id="demo-titulo">Un texto, cuatro maneras de comprender</h2>
           <p>Probá con «El ciclo del agua» para ver cómo cambia la presentación sin cambiar el contenido.</p></div>
-          <button type="button" class="boton boton--principal" id="demo-comprender">Probar una demostración <span aria-hidden="true">→</span></button>
+          <button type="button" class="boton boton--principal" id="demo-comprender">Probar demostración <span aria-hidden="true">→</span></button>
         </div>
+        </details>
       </div>
       <ol class="indicador" aria-label="Pasos">
         <li id="ind-1" aria-current="step"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V5m-4.5 4.5L12 5l4.5 4.5M5 19h14"/></svg>Cargar</li>
@@ -96,8 +100,8 @@
       </noscript>
 
       <section class="paso" id="paso-cargar" aria-labelledby="t-cargar">
-        <h2 id="t-cargar" tabindex="-1">Cargá tu material</h2>
-        <p>Elegí una forma de cargar tu material. Si tenés dudas, probá con un ejemplo.</p>
+        <h2 id="t-cargar" tabindex="-1">¿Qué querés comprender?</h2>
+        <p>Elegí cómo vas a compartir el material.</p>
 
         <div class="opciones-carga">
           <section class="panel" aria-labelledby="t-pegar">
@@ -134,7 +138,7 @@
         <details class="demo-detalle"><summary>Probar con ejemplos (opcional)</summary>
         <section class="panel" aria-labelledby="t-ejemplo">
           <h3 id="t-ejemplo">Probar con un ejemplo</h3>
-          <p>El ejemplo «El ciclo del agua» sirve para probar las seis formas de lectura, incluidas las imágenes y los pictogramas.</p>
+          <p>Probá el ciclo del agua sin subir archivos.</p>
           <div class="fila-botones">
             <button type="button" class="boton boton--principal" id="usar-ejemplo">Cargar el texto de ejemplo</button>
           </div>
@@ -148,7 +152,7 @@
           <p>Si querés demostrar la lectura de una página en imagen, descargá la <a href="https://raw.githubusercontent.com/beludellamea-cmyk/Bermejo-accesible./main/ejemplos/sociales-bermejo-cuaderno.png" download>página de cuaderno de ejemplo (PNG)</a> y después cargala en «Foto de tu material». También está el <a href="ejemplos/sociales-bermejo.txt" download>texto de ejemplo (TXT)</a>.</p>
           <p class="ayuda">Datos sobre El Colorado: <a href="https://m.formosa.gob.ar/noticia/10511/61/el_colorado_feriarte__">Gobierno de Formosa</a>. El texto y la imagen son una elaboración didáctica para esta demostración.</p>
           <h4>Probá con una página real de Geografía de Formosa</h4>
-          <p>La página del material aportado por el equipo trata sobre la localización de Formosa, sus límites, departamentos y contexto histórico (módulo 1, página 6). Este PDF tiene texto seleccionable. La foto de las banderas forma parte del original; la lectura del PDF extrae texto, pero no describe esa imagen automáticamente.</p>
+          <p>Material de Geografía de Formosa en PDF. La lectura extrae el texto, pero no describe automáticamente las fotografías.</p>
           <p><a href="https://raw.githubusercontent.com/beludellamea-cmyk/Bermejo-accesible./main/ejemplos/geografia-formosa-pagina-6.pdf" download>Descargar la página de Geografía (PDF, una página)</a>. Después, en «Subir un PDF», elegí ese archivo y pulsá «Leer el PDF». Revisá el texto extraído antes de elegir voz, lectura por partes u otra forma de acceso.</p>
           <p class="ayuda">El ejemplo «El Colorado y el río Bermejo» es una actividad creada para esta demostración: su texto es distinto del libro. Revisá la vigencia de los datos del libro antes de usarlo en clase.</p>
         </section>
