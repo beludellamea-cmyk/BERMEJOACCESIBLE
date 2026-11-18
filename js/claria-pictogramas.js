@@ -55,7 +55,10 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   conversar.addEventListener('click',()=>modo('conversar'));
   pictogramas.addEventListener('click',()=>modo('pictogramas'));
-  if(new URLSearchParams(window.location.search).get('modo')==='pictogramas')modo('pictogramas');
+  const urlParams=new URLSearchParams(window.location.search);
+  if(urlParams.get('modo')==='pictogramas')modo('pictogramas');
+  // Enlaces desde Mi ciudad: la frase llega preparada, sin enviarse a un servidor de IA.
+  const fraseCompartida=String(urlParams.get('frase')||'').replace(/\s+/g,' ').trim().slice(0,280);
   function setForma(name){
     const elegir=name==='elegir';
     formaEscribir.setAttribute('aria-pressed',String(!elegir));
@@ -257,7 +260,11 @@ document.addEventListener('DOMContentLoaded', function(){
     if(!window.ClariaPictos)throw new Error('motor de pictogramas no disponible');
     dic=d;tablero=t;motor=window.ClariaPictos.crearMotor(d);
     convertirBtn.disabled=false;dibujarCategorias();
-    mostrar('Listo. Escribí una frase o elegí imágenes para comunicarte.');
+    if(fraseCompartida&&urlParams.get('modo')==='pictogramas'){
+      texto.value=fraseCompartida;
+      setForma('escribir');
+      convertir();
+    }else mostrar('Listo. Escribí una frase o elegí imágenes para comunicarte.');
   }).catch(e=>mostrar('No pude cargar los pictogramas ('+e.message+'). Actualizá la página e intentá nuevamente.'));
 });
 })();
