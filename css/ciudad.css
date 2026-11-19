@@ -52,3 +52,101 @@ html[data-contraste="alto"] :is(.ciudad-panel,.ciudad-lugar,.ciudad-seccion,.ciu
 html[data-contraste="alto"] :is(.ciudad-encabezado p,.ciudad-panel p,.ciudad-panel li,.ciudad-frase p){color:#fff!important}
 @media(max-width:49rem){.ciudad-lugares,.ciudad-guia,.ciudad-frases{grid-template-columns:1fr}.ciudad-lugar{min-height:5.8rem}.ciudad-panel__icono{width:3.2rem;height:3.2rem;font-size:1.8rem}}
 @media print{.ciudad-migas,.ciudad-volver,.ciudad-frase__acciones,.ciudad-referencia a,.ciudad-inicio{display:none!important}.ciudad-panel,.ciudad-seccion,.ciudad-comunicacion,.ciudad-frase{background:#fff!important;color:#111!important;box-shadow:none!important;border:1px solid #888!important}.ciudad-panel :is(h2,h3,p,li){color:#111!important}}
+
+
+/* --- 2026-11-19: comunicación visible sin pasos intermedios --- */
+.ciudad-comunicacion{
+  margin:.8rem 0 1.15rem;
+  background:linear-gradient(150deg,#193e57,#1c3155);
+  border:1px solid #6cabc3;
+  box-shadow:0 10px 28px #0000001c;
+}
+.ciudad-comunicacion h3{font-size:clamp(1.33rem,2.5vw,1.65rem);line-height:1.3;margin-bottom:.45rem}
+.ciudad-comunicacion>p{max-width:68ch}
+.ciudad-frases{gap:.85rem}
+.ciudad-frase{
+  display:flex;flex-direction:column;min-width:0;
+  padding:1rem;
+  border:1px solid #638fa7;border-left:4px solid #68dfe5;
+  border-radius:16px;
+  background:#102a42;
+}
+.ciudad-frase__texto{font-size:clamp(1.075rem,2vw,1.24rem);line-height:1.45;margin:0 0 .75rem;overflow-wrap:anywhere}
+.ciudad-frase__visual{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  max-width:24.5rem;gap:.5rem;width:100%;margin:0 0 .75rem;
+}
+.ciudad-picto{
+  margin:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-start;gap:.2rem;min-width:0;
+  padding:.55rem .35rem .45rem;
+  background:#fff;border:1px solid #a7c8d0;border-radius:12px;
+  color:#1d3341;text-align:center;
+}
+.ciudad-picto img{display:block;width:min(100%,6.1rem);height:auto;aspect-ratio:1;object-fit:contain}
+.ciudad-picto img[hidden]{display:none!important}
+.ciudad-picto__palabra{
+  width:100%;font:750 clamp(.82rem,1.6vw,.91rem)/1.3 "Atkinson Hyperlegible",Arial,sans-serif;
+  text-transform:uppercase;overflow-wrap:anywhere;color:#102f39;
+}
+.ciudad-picto__aviso{font-size:.72rem;line-height:1.3;color:#545a65}
+.ciudad-frase__acciones{display:flex;align-items:center;justify-content:flex-start;gap:.75rem;flex-wrap:wrap;margin-top:auto}
+.ciudad-frase__acciones .ciudad-secundario{
+  min-height:3rem;background:#1b6579;color:#fff;
+  border:2px solid #79dce7;border-radius:12px;padding:.65rem 1rem;
+  font-size:1rem;
+}
+.ciudad-frase__editar{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:2.8rem;padding:.45rem .2rem;
+  color:#b6f1f3;text-decoration:underline;text-underline-offset:.2em;
+  font:700 .96rem/1.4 "Atkinson Hyperlegible",Arial,sans-serif;
+}
+.ciudad-comunicacion__nota{
+  border-top:1px solid #6586a3;padding-top:.85rem;margin:1rem 0 0!important;
+  color:#c7e4ee;font-size:.95rem!important;line-height:1.5;
+}
+html[data-contraste="alto"] .ciudad-picto{background:#fff!important;color:#000!important;border:2px solid #fff!important}
+html[data-contraste="alto"] .ciudad-picto__palabra,html[data-contraste="alto"] .ciudad-picto__aviso{color:#000!important}
+html[data-contraste="alto"] .ciudad-frase__editar{color:#ffe14d!important}
+html[data-contraste="alto"] .ciudad-comunicacion__nota{color:#fff!important}
+@media(max-width:49rem){
+  .ciudad-main{padding-top:.7rem}
+  .ciudad-main .contenedor{padding-inline:clamp(.8rem,3.5vw,1.2rem)}
+  .ciudad-encabezado{margin-bottom:.9rem}
+  .ciudad-encabezado h1{font-size:clamp(2rem,8.4vw,2.65rem);line-height:1.12;letter-spacing:-.035em}
+  .ciudad-estado{font-size:.94rem;margin:.4rem 0 .65rem;min-height:1.2rem}
+  .ciudad-panel{padding:clamp(.78rem,2.8vw,1.2rem);border-radius:17px}
+  .ciudad-panel__titulo{gap:.65rem}
+  .ciudad-panel__icono{flex-basis:3rem;width:3rem;height:3rem;font-size:1.7rem}
+  .ciudad-panel h2{font-size:clamp(1.4rem,6.2vw,1.85rem)}
+  .ciudad-comunicacion{padding:.8rem;border-radius:14px;margin:.8rem 0 .95rem}
+  .ciudad-comunicacion>p{font-size:1rem;line-height:1.52}
+  .ciudad-frases{grid-template-columns:minmax(0,1fr);gap:.7rem}
+  .ciudad-frase{padding:.85rem;border-radius:13px}
+  .ciudad-frase__visual{gap:.4rem;max-width:100%;margin-bottom:.7rem}
+  .ciudad-picto{padding:.4rem .25rem}
+  .ciudad-picto img{max-width:6rem}
+  .ciudad-frase__acciones{gap:.4rem}
+  .ciudad-frase__acciones .ciudad-secundario{flex:1 1 auto}
+  .ciudad-frase__editar{flex:1 1 auto;text-align:center}
+  .ciudad-guia{gap:.7rem}
+  .ciudad-seccion{padding:.85rem}
+  .ciudad-lugares{gap:.65rem}
+  .ciudad-lugar{min-height:5.25rem;padding:.8rem;gap:.7rem;border-radius:14px}
+  .ciudad-lugar__icono{height:3rem;width:3rem;font-size:1.55rem}
+  .ciudad-lugar__contenido strong{font-size:1.06rem}
+  .ciudad-lugar__contenido>span{font-size:.88rem}
+  .ciudad-lugar__flecha{font-size:1.4rem}
+}
+@media(max-width:24rem){
+ .ciudad-picto__palabra{font-size:.76rem}
+ .ciudad-frase__acciones{flex-direction:column;align-items:stretch}
+ .ciudad-frase__editar{width:100%}
+}
+@media print{
+ .ciudad-picto{background:#fff!important;color:#111!important;border:1px solid #999!important}
+ .ciudad-picto__palabra,.ciudad-picto__aviso{color:#111!important}
+ .ciudad-comunicacion__nota{color:#111!important}
+ .ciudad-frase__visual{max-width:22rem}
+}
