@@ -280,6 +280,7 @@ document.addEventListener('DOMContentLoaded',function(){
   async function decidirMaterial(si){
     if(!ofertaPendiente)return;
     ofertaPendiente=false;
+    mensajes.querySelectorAll('.claria-material-opciones button').forEach(b=>b.disabled=true);
     bubble('usuario',si?'Sí':'No',false);
     if(!si){bubble('modelo','Perfecto, seguimos conversando. ¿Qué más querés saber?');status('Seguimos conversando, sin generar material.');return;}
     if(!permiso.checked){permiso.focus();status('Autorizá el envío a la IA para preparar el material.');return;}
@@ -297,7 +298,7 @@ document.addEventListener('DOMContentLoaded',function(){
       entrega.querySelector('.asesoria-entrega__encabezado p').textContent='Revisalo, editalo y descargalo. CLARIA no leerá la adaptación.';
       const panelImagen=entrega.querySelector('.asesoria-imagen-contenedor');
       if(panelImagen)panelImagen.hidden=true;
-      crear.textContent='Crear clase y recurso visual';
+      crear.textContent='Crear planificación (opcional)';
       bubble('modelo','Listo, te dejé el material adaptado debajo de la conversación. Podés editarlo y descargarlo. No voy a leerlo en voz alta.');
       status('Material adaptado listo por escrito. Revisalo antes de usarlo.');
       entrega.scrollIntoView({behavior:'auto',block:'start'});
@@ -330,7 +331,7 @@ document.addEventListener('DOMContentLoaded',function(){
         :pregunta;
       const r=await post('/asistente',{
         texto:textoParaIA,perfil:'docente',confirmacion:true,
-        historial:anterior.slice(-6).map(x=>({rol:x.rol,texto:x.texto.slice(0,700)}))
+        historial:anterior.slice(-12).map(x=>({rol:x.rol,texto:x.texto.slice(0,700)}))
       },33000);
       if(typeof r.respuesta!=='string'||!r.respuesta.trim())throw new Error('No llegó una respuesta válida.');
       const respuesta=r.respuesta.trim();
@@ -342,7 +343,7 @@ document.addEventListener('DOMContentLoaded',function(){
       if(ofrecer){preguntarMaterial();say((respuesta.length>280?'Ya te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');}
       status(ofrecer?'Podés responder Sí o No, incluso por voz.':'Podés seguir haciendo preguntas o pedir un material cuando quieras.');
       document.getElementById('asesoria-ejemplos').hidden=true;
-      crear.textContent=propuestaLista?'Actualizar mi clase':'Crear clase y recurso visual';
+      crear.textContent=propuestaLista?'Actualizar mi clase':'Crear planificación (opcional)';
     }catch(e){
       historial=anterior.concat([{rol:'usuario',texto:pregunta}]).slice(-24);
       bubble('modelo','No pude conectarme a la IA esta vez. Tu consulta sigue acá para que la retomes. Podés volver a intentar cuando el servicio responda.',false);
@@ -440,7 +441,7 @@ document.addEventListener('DOMContentLoaded',function(){
     entrega.hidden=true;plan.value='';uso.value='';prompt.value='';
     entrada.value='';fuente.value='';archivo.value='';archivoEstado.textContent='El archivo se lee en tu navegador. Revisá el texto antes de enviarlo a la IA.';permiso.checked=false;
     estadoIA.textContent='Conexión todavía no verificada. Podés comprobarla con una consulta breve.';
-    crear.disabled=true;crear.textContent='Crear clase y recurso visual';
+    crear.disabled=true;crear.textContent='Crear planificación (opcional)';
     document.getElementById('asesoria-ejemplos').hidden=false;
     document.getElementById('asesoria-ejemplos').open=false;
     status('Cuando quieras, escribí o hablá con CLARIA.');
