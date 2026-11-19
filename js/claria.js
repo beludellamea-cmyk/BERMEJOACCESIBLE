@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     fila.append(avatar,burb);mensajes.appendChild(fila);mensajes.scrollTop=mensajes.scrollHeight;
     if(quien==='claria'&&hablar&&voz&&'speechSynthesis' in window){
-      speechSynthesis.cancel();var utter=new SpeechSynthesisUtterance(contenido.slice(0,450));utter.lang='es-AR';utter.rate=.93;
+      speechSynthesis.cancel();var utter=new SpeechSynthesisUtterance(contenido.slice(0,1100));utter.lang='es-AR';utter.rate=.93;
       speechSynthesis.speak(utter);
     }
     return burb;
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function(){
         invitarMaterial();
         if(voz&&'speechSynthesis' in window){
           speechSynthesis.cancel();
-          var u=new SpeechSynthesisUtterance((respuesta.length>280?'Te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');
+          var u=new SpeechSynthesisUtterance((respuesta.length>950?'Te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');
           u.lang='es-AR';u.rate=.93;speechSynthesis.speak(u);
         }
       }
