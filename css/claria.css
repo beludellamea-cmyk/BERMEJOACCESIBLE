@@ -209,3 +209,38 @@ html[data-contraste="alto"] .claria-home{background:#000!important;color:#fff!im
 .docente-exportar-nota{color:#abcbd7;font-size:.81rem;line-height:1.5;margin:.3rem 0 1rem}
 @media(max-width:49rem){.claria-home__acciones{width:100%}.claria-home__acciones .boton{width:100%}}
 @media print{.pagina-claria .docente-exportar-nota{display:none!important}}
+
+/* CLARIA · conversación primero; materiales editables solo cuando se aceptan. */
+.claria-material-opciones{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.9rem}
+.claria-material-opciones .boton{
+  border-radius:12px;min-height:3rem;min-width:8rem;padding:.7rem 1rem;
+  font:700 1rem/1.4 "Atkinson Hyperlegible",Arial,sans-serif;white-space:normal;
+}
+.claria-material-opciones .boton:disabled{opacity:.75;cursor:default}
+.claria-material-panel{
+  margin:1.2rem 0;padding:clamp(1rem,3vw,1.7rem);border:2px solid #79c9d4;
+  background:#102b3d;color:#eef9fc;border-radius:18px;max-width:68rem;
+}
+.claria-material-panel[hidden],.asesoria-imagen-contenedor[hidden]{display:none!important}
+.claria-material-panel h2{color:#fff;font-size:1.55rem;margin:0 0 .55rem}
+.claria-material-panel p{color:#d2eaf2;margin:.3rem 0 1.1rem}
+.claria-material-panel label{display:block;font-weight:700;margin:.5rem 0}
+.claria-material-panel textarea{
+ display:block;box-sizing:border-box;width:100%;min-height:20rem;
+ padding:1rem;background:#fff;color:#16303e;border:2px solid #638898;
+ border-radius:12px;font:1.05rem/1.65 "Atkinson Hyperlegible",Arial,sans-serif;
+}
+.claria-material-acciones{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.claria-material-acciones button{
+ padding:.8rem 1.1rem;min-height:3rem;border-radius:12px;border:2px solid #8ee0e6;
+ background:#e5f7fa;color:#103849;font:700 1rem/1.4 "Atkinson Hyperlegible",Arial,sans-serif;
+ cursor:pointer;
+}
+.claria-material-acciones button:focus-visible{outline:3px solid #ffe39e;outline-offset:3px}
+html[data-contraste="alto"] .claria-material-panel{border:2px solid #fff;background:#000;color:#fff}
+html[data-contraste="alto"] .claria-material-panel p{color:#fff}
+html[data-contraste="alto"] .claria-material-acciones button{background:#ffe14d;color:#000;border-color:#fff}
+@media(max-width:36rem){
+ .claria-material-opciones,.claria-material-acciones{flex-direction:column}
+ .claria-material-opciones .boton,.claria-material-acciones button{width:100%}
+}
