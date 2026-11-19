@@ -60,19 +60,51 @@
       else agregarTexto(pasos,'li','','Consultá al personal cómo realizar tu consulta.');
       const lines=Array.isArray(i.frases)?i.frases.slice(0,6):[];
       lines.forEach(f=>{
-        const oracion=texto(f);if(!oracion)return;
+        const oracion=texto(typeof f==='string'?f:f?.texto);
+        if(!oracion)return;
         const fila=nodo('li','ciudad-frase');
         const p=nodo('p','ciudad-frase__texto',oracion);
+        fila.appendChild(p);
+
+        // Las imágenes acompañan la oración desde el primer momento.
+        // IDs locales revisados contra data/claria-pictogramas.json: sin búsquedas ni envío de frases a terceros.
+        const tarjetas=Array.isArray(f?.pictogramas)?f.pictogramas:[];
+        const visual=nodo('div','ciudad-frase__visual');
+        visual.setAttribute('role','group');
+        visual.setAttribute('aria-label','Pictogramas de apoyo para la frase');
+        tarjetas.slice(0,4).forEach(item=>{
+          const id=Number(item?.id),palabra=texto(item?.palabra);
+          if(!Number.isInteger(id)||id<=0||id>999999||!palabra)return;
+          const tarjeta=nodo('figure','ciudad-picto');
+          const img=document.createElement('img');
+          img.src='https://static.arasaac.org/pictograms/'+id+'/'+id+'_300.png';
+          img.alt='';img.width=104;img.height=104;img.loading='lazy';img.decoding='async';
+          img.addEventListener('error',()=>{
+            img.hidden=true;tarjeta.classList.add('ciudad-picto--sin-imagen');
+          },{once:true});
+          const etiqueta=nodo('figcaption','ciudad-picto__palabra',palabra);
+          tarjeta.append(img,etiqueta);
+          if(texto(item?.aviso)){
+            const aviso=nodo('span','ciudad-picto__aviso','Imagen ilustrativa');
+            aviso.title=texto(item.aviso);
+            tarjeta.append(aviso);
+          }
+          visual.append(tarjeta);
+        });
+        if(visual.childElementCount)fila.appendChild(visual);
+
         const acciones=nodo('div','ciudad-frase__acciones');
-        const decir=nodo('button','ciudad-secundario','🔊 Decir');
-        decir.type='button';decir.setAttribute('aria-label','Escuchar: '+oracion);
+        const decir=nodo('button','ciudad-secundario','🔊 Decir la frase');
+        decir.type='button';decir.setAttribute('aria-label','Escuchar la frase: '+oracion);
         decir.addEventListener('click',()=>leer(oracion));
-        const pictos=nodo('a','ciudad-frase__pictos','Ver con pictogramas');
-        pictos.href='crear.html?modo=pictogramas&frase='+encodeURIComponent(oracion);
-        pictos.setAttribute('aria-label','Mostrar con pictogramas la frase: '+oracion);
-        acciones.append(decir,pictos);fila.append(p,acciones);frases.append(fila);
+        const editar=nodo('a','ciudad-frase__editar','Personalizar pictogramas');
+        editar.href='crear.html?modo=pictogramas&frase='+encodeURIComponent(oracion);
+        editar.setAttribute('aria-label','Personalizar los pictogramas de la frase: '+oracion);
+        acciones.append(decir,editar);
+        fila.appendChild(acciones);
+        frases.appendChild(fila);
       });
-      if(!lines.length)agregarTexto(frases,'li','','No hay ejemplos disponibles. Podés usar Decilo con pictogramas.');
+      if(!frases.childElementCount)agregarTexto(frases,'li','','No hay frases disponibles para este lugar.');
       const address=texto(i.direccionReferencia);
       if(address){
         const bloque=nodo('div','ciudad-referencia__direccion');
