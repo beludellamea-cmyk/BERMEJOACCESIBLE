@@ -275,8 +275,8 @@ document.addEventListener('DOMContentLoaded',function(){
     });
     cuerpo.append(grupo);
   }
-  function esSi(t){return /^(si|sí|claro|dale|por favor|si quiero|sí quiero|preparalo|prepará|ok|bueno)$/i.test(t.trim().replace(/[.!?]+$/,''));}
-  function esNo(t){return /^(no|no gracias|por ahora no|prefiero seguir|seguimos|no quiero)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  function esSi(t){return /^(si|sí|claro|dale|por favor|si quiero|sí quiero|preparalo|prepará|ok|bueno|sí por favor|si por favor|sí quiero el material|si quiero el material)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  function esNo(t){return /^(no|no gracias|no por ahora|por ahora no|prefiero seguir|seguimos|no quiero|no hace falta)$/i.test(t.trim().replace(/[.!?]+$/,''));}
   async function decidirMaterial(si){
     if(!ofertaPendiente)return;
     ofertaPendiente=false;
@@ -312,6 +312,7 @@ document.addEventListener('DOMContentLoaded',function(){
   async function conversar(q){
     if(trabajando)return;
     const pregunta=q.trim();
+    if(/(?:quiero|necesito|pod[eé]s|haceme|prepar[aá]).{0,55}(?:material adaptad|adaptaci[oó]n|ficha adaptad)/i.test(pregunta))ofertaHecha=false;
     if(pregunta.length<3){entrada.focus();status('Contame un poquito más para empezar.');return;}
     if(pregunta.length>1500){status('Escribí hasta 1.500 caracteres por mensaje.');return;}
     if(ofertaPendiente&&(esSi(pregunta)||esNo(pregunta))){
