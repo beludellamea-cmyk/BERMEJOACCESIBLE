@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "proyecto": "Mi ciudad, más accesible · Bermejo Accesible",
   "lugar": "El Colorado, Formosa, Argentina",
   "fuenteDatos": "CLARIA · Mi ciudad, más accesible, recopilación de fuentes públicas",
@@ -34,12 +34,101 @@
         }
       ],
       "frases": [
-        "NECESITO INFORMACIÓN SOBRE MI DNI.",
-        "QUIERO PEDIR UNA PARTIDA DE NACIMIENTO.",
-        "TENGO UN TURNO.",
-        "¿DÓNDE TENGO QUE ESPERAR?",
-        "¿QUÉ DOCUMENTOS NECESITO?",
-        "NO ENTIENDO LA INFORMACIÓN."
+        {
+          "texto": "NECESITO INFORMACIÓN SOBRE MI DNI.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "información",
+              "id": 9897
+            },
+            {
+              "palabra": "DNI",
+              "id": 5987,
+              "aviso": "Imagen de ejemplo de ARASAAC (modelo español): el DNI argentino se ve distinto."
+            }
+          ]
+        },
+        {
+          "texto": "QUIERO PEDIR UNA PARTIDA DE NACIMIENTO.",
+          "pictogramas": [
+            {
+              "palabra": "querer",
+              "id": 5441
+            },
+            {
+              "palabra": "certificado",
+              "id": 27677
+            },
+            {
+              "palabra": "bebé",
+              "id": 6060
+            }
+          ]
+        },
+        {
+          "texto": "TENGO UN TURNO.",
+          "pictogramas": [
+            {
+              "palabra": "tener",
+              "id": 7271
+            },
+            {
+              "palabra": "turno",
+              "id": 22190
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE TENGO QUE ESPERAR?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "esperar",
+              "id": 8109
+            }
+          ]
+        },
+        {
+          "texto": "¿QUÉ DOCUMENTOS NECESITO?",
+          "pictogramas": [
+            {
+              "palabra": "qué",
+              "id": 11351
+            },
+            {
+              "palabra": "documento",
+              "id": 21802
+            },
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            }
+          ]
+        },
+        {
+          "texto": "NO ENTIENDO LA INFORMACIÓN.",
+          "pictogramas": [
+            {
+              "palabra": "no",
+              "id": 5526
+            },
+            {
+              "palabra": "entender",
+              "id": 11697
+            },
+            {
+              "palabra": "información",
+              "id": 9897
+            }
+          ]
+        }
       ]
     },
     {
@@ -67,12 +156,88 @@
         }
       ],
       "frases": [
-        "NECESITO AYUDA.",
-        "ME SIENTO MAL.",
-        "TENGO DOLOR.",
-        "NECESITO UN MÉDICO.",
-        "TENGO UN TURNO.",
-        "¿DÓNDE ESTÁ EL BAÑO?"
+        {
+          "texto": "NECESITO AYUDA.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "ayudar",
+              "id": 4570
+            }
+          ]
+        },
+        {
+          "texto": "ME SIENTO MAL.",
+          "pictogramas": [
+            {
+              "palabra": "yo",
+              "id": 2617
+            },
+            {
+              "palabra": "sentir",
+              "id": 30196
+            },
+            {
+              "palabra": "enfermo",
+              "id": 28742
+            }
+          ]
+        },
+        {
+          "texto": "TENGO DOLOR.",
+          "pictogramas": [
+            {
+              "palabra": "tener",
+              "id": 7271
+            },
+            {
+              "palabra": "dolor",
+              "id": 2367
+            }
+          ]
+        },
+        {
+          "texto": "NECESITO UN MÉDICO.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "médico",
+              "id": 2467
+            }
+          ]
+        },
+        {
+          "texto": "TENGO UN TURNO.",
+          "pictogramas": [
+            {
+              "palabra": "tener",
+              "id": 7271
+            },
+            {
+              "palabra": "turno",
+              "id": 22190
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE ESTÁ EL BAÑO?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "baño",
+              "id": 15905
+            }
+          ]
+        }
       ]
     },
     {
@@ -100,12 +265,92 @@
         }
       ],
       "frases": [
-        "QUIERO HACER UNA CONSULTA.",
-        "NECESITO INFORMACIÓN.",
-        "¿DÓNDE PRESENTO ESTE FORMULARIO?",
-        "¿QUÉ DOCUMENTOS NECESITO?",
-        "NECESITO AYUDA PARA COMPLETAR.",
-        "¿DÓNDE PUEDO ESPERAR?"
+        {
+          "texto": "QUIERO HACER UNA CONSULTA.",
+          "pictogramas": [
+            {
+              "palabra": "querer",
+              "id": 5441
+            },
+            {
+              "palabra": "preguntar",
+              "id": 9844
+            }
+          ]
+        },
+        {
+          "texto": "NECESITO INFORMACIÓN.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "información",
+              "id": 9897
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE PRESENTO ESTE FORMULARIO?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "formulario",
+              "id": 9173
+            }
+          ]
+        },
+        {
+          "texto": "¿QUÉ DOCUMENTOS NECESITO?",
+          "pictogramas": [
+            {
+              "palabra": "qué",
+              "id": 11351
+            },
+            {
+              "palabra": "documento",
+              "id": 21802
+            },
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            }
+          ]
+        },
+        {
+          "texto": "NECESITO AYUDA PARA COMPLETAR.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "ayudar",
+              "id": 4570
+            },
+            {
+              "palabra": "completar",
+              "id": 13078
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE PUEDO ESPERAR?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "esperar",
+              "id": 8109
+            }
+          ]
+        }
       ]
     },
     {
@@ -133,12 +378,92 @@
         }
       ],
       "frases": [
-        "SOY AFILIADO DE PAMI.",
-        "NECESITO INFORMACIÓN.",
-        "QUIERO CONSULTAR POR MEDICAMENTOS.",
-        "TENGO UN TURNO.",
-        "¿QUÉ DOCUMENTOS NECESITO?",
-        "¿DÓNDE TENGO QUE IR?"
+        {
+          "texto": "SOY AFILIADO DE PAMI.",
+          "pictogramas": [
+            {
+              "palabra": "yo",
+              "id": 2617
+            },
+            {
+              "palabra": "documento",
+              "id": 21802
+            }
+          ]
+        },
+        {
+          "texto": "NECESITO INFORMACIÓN.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "información",
+              "id": 9897
+            }
+          ]
+        },
+        {
+          "texto": "QUIERO CONSULTAR POR MEDICAMENTOS.",
+          "pictogramas": [
+            {
+              "palabra": "querer",
+              "id": 5441
+            },
+            {
+              "palabra": "preguntar",
+              "id": 9844
+            },
+            {
+              "palabra": "medicina",
+              "id": 8163
+            }
+          ]
+        },
+        {
+          "texto": "TENGO UN TURNO.",
+          "pictogramas": [
+            {
+              "palabra": "tener",
+              "id": 7271
+            },
+            {
+              "palabra": "turno",
+              "id": 22190
+            }
+          ]
+        },
+        {
+          "texto": "¿QUÉ DOCUMENTOS NECESITO?",
+          "pictogramas": [
+            {
+              "palabra": "qué",
+              "id": 11351
+            },
+            {
+              "palabra": "documento",
+              "id": 21802
+            },
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE TENGO QUE IR?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "ir",
+              "id": 2432
+            }
+          ]
+        }
       ]
     },
     {
@@ -166,12 +491,96 @@
         }
       ],
       "frases": [
-        "QUIERO ENVIAR UN PAQUETE.",
-        "VENGO A RETIRAR UN ENVÍO.",
-        "NECESITO INFORMACIÓN.",
-        "¿QUÉ DOCUMENTO NECESITO?",
-        "¿CUÁNTO TENGO QUE PAGAR?",
-        "¿DÓNDE TENGO QUE ESPERAR?"
+        {
+          "texto": "QUIERO ENVIAR UN PAQUETE.",
+          "pictogramas": [
+            {
+              "palabra": "querer",
+              "id": 5441
+            },
+            {
+              "palabra": "enviar",
+              "id": 21828
+            },
+            {
+              "palabra": "correo",
+              "id": 3086
+            }
+          ]
+        },
+        {
+          "texto": "VENGO A RETIRAR UN ENVÍO.",
+          "pictogramas": [
+            {
+              "palabra": "venir",
+              "id": 11708
+            },
+            {
+              "palabra": "recibir",
+              "id": 17042
+            },
+            {
+              "palabra": "correo",
+              "id": 3086
+            }
+          ]
+        },
+        {
+          "texto": "NECESITO INFORMACIÓN.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "información",
+              "id": 9897
+            }
+          ]
+        },
+        {
+          "texto": "¿QUÉ DOCUMENTO NECESITO?",
+          "pictogramas": [
+            {
+              "palabra": "qué",
+              "id": 11351
+            },
+            {
+              "palabra": "documento",
+              "id": 21802
+            },
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            }
+          ]
+        },
+        {
+          "texto": "¿CUÁNTO TENGO QUE PAGAR?",
+          "pictogramas": [
+            {
+              "palabra": "cuánto",
+              "id": 24731
+            },
+            {
+              "palabra": "pagar",
+              "id": 9014
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE TENGO QUE ESPERAR?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "esperar",
+              "id": 8109
+            }
+          ]
+        }
       ]
     },
     {
@@ -199,12 +608,100 @@
         }
       ],
       "frases": [
-        "QUIERO VIAJAR.",
-        "NECESITO UN PASAJE.",
-        "¿A QUÉ HORA SALE EL COLECTIVO?",
-        "¿DÓNDE ESPERO?",
-        "¿DÓNDE ESTÁ EL BAÑO?",
-        "¿CUÁNTO CUESTA EL PASAJE?"
+        {
+          "texto": "QUIERO VIAJAR.",
+          "pictogramas": [
+            {
+              "palabra": "querer",
+              "id": 5441
+            },
+            {
+              "palabra": "ir",
+              "id": 2432
+            },
+            {
+              "palabra": "colectivo",
+              "id": 38090
+            }
+          ]
+        },
+        {
+          "texto": "NECESITO UN PASAJE.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "colectivo",
+              "id": 38090
+            }
+          ]
+        },
+        {
+          "texto": "¿A QUÉ HORA SALE EL COLECTIVO?",
+          "pictogramas": [
+            {
+              "palabra": "qué",
+              "id": 11351
+            },
+            {
+              "palabra": "hora",
+              "id": 7129
+            },
+            {
+              "palabra": "salir",
+              "id": 2806
+            },
+            {
+              "palabra": "colectivo",
+              "id": 38090
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE ESPERO?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "esperar",
+              "id": 8109
+            }
+          ]
+        },
+        {
+          "texto": "¿DÓNDE ESTÁ EL BAÑO?",
+          "pictogramas": [
+            {
+              "palabra": "dónde",
+              "id": 7764
+            },
+            {
+              "palabra": "baño",
+              "id": 15905
+            }
+          ]
+        },
+        {
+          "texto": "¿CUÁNTO CUESTA EL PASAJE?",
+          "pictogramas": [
+            {
+              "palabra": "cuánto",
+              "id": 24731
+            },
+            {
+              "palabra": "pagar",
+              "id": 9014
+            },
+            {
+              "palabra": "colectivo",
+              "id": 38090
+            }
+          ]
+        }
       ]
     },
     {
@@ -235,13 +732,110 @@
         }
       ],
       "frases": [
-        "Necesito ayuda, por favor.",
-        "Quiero hacer una denuncia.",
-        "Necesito hablar con un policía.",
-        "No entiendo. ¿Me puede explicar otra vez?",
-        "Necesito informar lo que pasó.",
-        "Tengo miedo. Necesito ayuda."
+        {
+          "texto": "Necesito ayuda, por favor.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "ayudar",
+              "id": 4570
+            },
+            {
+              "palabra": "por favor",
+              "id": 8194
+            }
+          ]
+        },
+        {
+          "texto": "Quiero hacer una denuncia.",
+          "pictogramas": [
+            {
+              "palabra": "querer",
+              "id": 5441
+            },
+            {
+              "palabra": "hablar",
+              "id": 3345
+            },
+            {
+              "palabra": "policía",
+              "id": 2824
+            }
+          ]
+        },
+        {
+          "texto": "Necesito hablar con un policía.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "hablar",
+              "id": 3345
+            },
+            {
+              "palabra": "policía",
+              "id": 2824
+            }
+          ]
+        },
+        {
+          "texto": "No entiendo. ¿Me puede explicar otra vez?",
+          "pictogramas": [
+            {
+              "palabra": "no",
+              "id": 5526
+            },
+            {
+              "palabra": "entender",
+              "id": 11697
+            },
+            {
+              "palabra": "decir",
+              "id": 9692
+            }
+          ]
+        },
+        {
+          "texto": "Necesito informar lo que pasó.",
+          "pictogramas": [
+            {
+              "palabra": "necesitar",
+              "id": 37160
+            },
+            {
+              "palabra": "información",
+              "id": 9897
+            },
+            {
+              "palabra": "policía",
+              "id": 2824
+            }
+          ]
+        },
+        {
+          "texto": "Tengo miedo. Necesito ayuda.",
+          "pictogramas": [
+            {
+              "palabra": "tener",
+              "id": 7271
+            },
+            {
+              "palabra": "miedo",
+              "id": 10261
+            },
+            {
+              "palabra": "ayudar",
+              "id": 4570
+            }
+          ]
+        }
       ]
     }
-  ]
+  ],
+  "pictogramas": "Pictogramas ARASAAC con identificadores verificados en el diccionario local del proyecto. Las imágenes representan palabras clave, no una traducción completa de la oración."
 }
