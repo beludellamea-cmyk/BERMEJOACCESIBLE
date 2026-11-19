@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded',function(){
     const version=vozVersion;
     try{
       speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(t.slice(0,450));
+      const u=new SpeechSynthesisUtterance(t.slice(0,1100));
       u.lang='es-AR';u.rate=.91;u.pitch=1.04;
       const voces=speechSynthesis.getVoices();
       u.voice=voces.find(v=>v.lang.toLowerCase()==='es-ar')||
@@ -341,10 +341,10 @@ document.addEventListener('DOMContentLoaded',function(){
       const ofrecer=!ofertaHecha&&(r.ofrecerMaterial===true||
         /(adapt|material|fotocopia|actividades|ejercicios|ficha|secuencia didáctica)/i.test(pregunta));
       bubble('modelo',respuesta,!ofrecer);
-      if(ofrecer){preguntarMaterial();say((respuesta.length>280?'Ya te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');}
+      if(ofrecer){preguntarMaterial();say((respuesta.length>950?'Ya te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');}
       status(ofrecer?'Podés responder Sí o No, incluso por voz.':'Podés seguir haciendo preguntas o pedir un material cuando quieras.');
       document.getElementById('asesoria-ejemplos').hidden=true;
-      crear.textContent=propuestaLista?'Actualizar mi clase':'Crear planificación (opcional)';
+      crear.textContent=adaptacionLista?'Crear planificación (opcional)':propuestaLista?'Actualizar mi clase':'Crear planificación (opcional)';
     }catch(e){
       historial=anterior.concat([{rol:'usuario',texto:pregunta}]).slice(-24);
       bubble('modelo','No pude conectarme a la IA esta vez. Tu consulta sigue acá para que la retomes. Podés volver a intentar cuando el servicio responda.',false);
