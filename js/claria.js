@@ -186,8 +186,8 @@ document.addEventListener('DOMContentLoaded', function(){
       grupo.append(boton);
     });burb.append(grupo);
   }
-  function esSi(t){return /^(si|sí|claro|dale|bueno|ok|sí quiero|si quiero|preparalo)$/i.test(t.trim().replace(/[.!?]+$/,''));}
-  function esNo(t){return /^(no|no gracias|por ahora no|no quiero|prefiero seguir)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  function esSi(t){return /^(si|sí|claro|dale|bueno|ok|sí quiero|si quiero|preparalo|sí por favor|si por favor|dale preparalo|sí quiero el material|si quiero el material)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  function esNo(t){return /^(no|no gracias|no por ahora|por ahora no|no quiero|prefiero seguir|no hace falta)$/i.test(t.trim().replace(/[.!?]+$/,''));}
   async function decidirMaterial(si){
     if(!ofertaPendiente||materialGenerando)return;
     ofertaPendiente=false;mensajes.querySelectorAll('.claria-material-opciones button').forEach(b=>b.disabled=true);burbuja('yo',si?'Sí':'No');
@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function(){
   async function procesar(entrada){
     if(ocupada)return;
     var q=entrada.trim();if(!q)return;
+    if(/(?:quiero|necesito|pod[eé]s|haceme|prepar[aá]).{0,55}(?:material adaptad|adaptaci[oó]n|ficha adaptad)/i.test(q))ofertaHecha=false;
     if(ofertaPendiente&&(esSi(q)||esNo(q))){texto.value='';decidirMaterial(esSi(q));return;}
     if(ofertaPendiente)ofertaPendiente=false;
     if(rol==='docente' && q.length<135 && /(?:planific|preparar|armar|organizar).*(?:clase|secuencia)|(?:clase|secuencia).*(?:planific|preparar|armar)/i.test(normalizar(q))){
