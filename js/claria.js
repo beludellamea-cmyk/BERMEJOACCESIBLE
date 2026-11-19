@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function(){
     try{
       var r=await fetch(ruta+'/asistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         texto:pregunta,perfil:rol,confirmacion:true,
-        historial:historial.slice(-6).map(function(h){return {rol:h.rol,texto:h.texto.slice(0,700)};})
+        historial:historial.slice(-12).map(function(h){return {rol:h.rol,texto:h.texto.slice(0,700)};})
       }),signal:controller.signal});
       var data=await r.json().catch(function(){return {};});
       if(!r.ok || !data || typeof data.respuesta!=='string' || !data.respuesta.trim())
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function esNo(t){return /^(no|no gracias|por ahora no|no quiero|prefiero seguir)$/i.test(t.trim().replace(/[.!?]+$/,''));}
   async function decidirMaterial(si){
     if(!ofertaPendiente||materialGenerando)return;
-    ofertaPendiente=false;burbuja('yo',si?'Sí':'No');
+    ofertaPendiente=false;mensajes.querySelectorAll('.claria-material-opciones button').forEach(b=>b.disabled=true);burbuja('yo',si?'Sí':'No');
     if(!si){deClaria({texto:'Perfecto, seguimos conversando. ¿Qué más querés saber?'});return;}
     if(!autorizar.checked){estado.textContent='Autorizá el envío a la IA antes de generar material.';autorizar.focus();return;}
     materialGenerando=true;ocupada=true;enviar.disabled=true;estado.textContent='Preparando el material adaptado…';
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if(rol==='docente' && /dua|planific|clase/.test(normalizar(q)))links.push(normativas[3]);
       var ofrecer=!ofertaHecha&&(resultado.ofrecerMaterial||/(adapt|material|fotocopia|actividad|ejercicio|ficha)/i.test(q));
       deClaria({texto:respuesta,links:links},!ofrecer);
-      historial=contexto.concat([{rol:'usuario',texto:q},{rol:'modelo',texto:respuesta}]).slice(-6);
+      historial=contexto.concat([{rol:'usuario',texto:q},{rol:'modelo',texto:respuesta}]).slice(-12);
       if(ofrecer){
         invitarMaterial();
         if(voz&&'speechSynthesis' in window){
