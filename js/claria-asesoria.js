@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded',function(){
   const endpoint=String(window.BERMEJO_CHAT_ENDPOINT||'').replace(/\/$/,'');
   const cara='https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png';
   let historial=[],trabajando=false,escuchar=false,propuestaLista=false,numeroDeRevision=0,fragmentoEnviado=false;
+  let ofertaPendiente=false,ofertaHecha=false,adaptacionLista=false;
   let modoVoz=false,reconocedor=null,escuchandoMicrofono=false,silencios=0,
       vozVersion=0,vozRespondio=false,transcripcionFinal='',vozPermisoInicial=false;
   const btnVoz=$('asesoria-modo-voz'),vozEstado=$('asesoria-voz-estado'),vozCaptura=$('asesoria-voz-captura'),vozTarjeta=$('asesoria-voz-tarjeta');
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded',function(){
     const version=vozVersion;
     try{
       speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(t.slice(0,1700));
+      const u=new SpeechSynthesisUtterance(t.slice(0,450));
       u.lang='es-AR';u.rate=.91;u.pitch=1.04;
       const voces=speechSynthesis.getVoices();
       u.voice=voces.find(v=>v.lang.toLowerCase()==='es-ar')||
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded',function(){
     fila.append(avatar,cuerpo);
     mensajes.append(fila);mensajes.scrollTop=mensajes.scrollHeight;
     if(rol==='modelo'&&hablar)say(contenido);
+    return cuerpo;
   }
   /* Voz conversacional: escucha turnos cortos y vuelve a escuchar cuando termina de hablar.
      Sin grabaciones persistentes; el motor de reconocimiento puede procesar audio remotamente. */
@@ -255,11 +257,65 @@ document.addEventListener('DOMContentLoaded',function(){
       status('La IA no pasó la prueba de conexión. Podés revisar el detalle arriba, junto al micrófono.');
     }finally{comprobarIA.disabled=false;}
   });
+
+  function preguntarMaterial(){
+    if(ofertaPendiente||ofertaHecha)return;
+    ofertaPendiente=true;ofertaHecha=true;
+    const cuerpo=bubble('modelo','¿Querés que te prepare el material adaptado?',false);
+    const grupo=document.createElement('div');grupo.className='claria-material-opciones';
+    grupo.setAttribute('role','group');grupo.setAttribute('aria-label','¿Querés el material adaptado?');
+    [[true,'Sí, preparar material'],[false,'No, seguir conversando']].forEach(([si,nombre])=>{
+      const boton=document.createElement('button');boton.type='button';boton.className='boton';
+      boton.textContent=nombre;
+      boton.addEventListener('click',()=>{
+        grupo.querySelectorAll('button').forEach(b=>b.disabled=true);
+        decidirMaterial(si);
+      });
+      grupo.append(boton);
+    });
+    cuerpo.append(grupo);
+  }
+  function esSi(t){return /^(si|sí|claro|dale|por favor|si quiero|sí quiero|preparalo|prepará|ok|bueno)$/i.test(t.trim());}
+  function esNo(t){return /^(no|no gracias|por ahora no|prefiero seguir|seguimos|no quiero)$/i.test(t.trim());}
+  async function decidirMaterial(si){
+    if(!ofertaPendiente)return;
+    ofertaPendiente=false;
+    bubble('usuario',si?'Sí':'No',false);
+    if(!si){bubble('modelo','Perfecto, seguimos conversando. ¿Qué más querés saber?');status('Seguimos conversando, sin generar material.');return;}
+    if(!permiso.checked){permiso.focus();status('Autorizá el envío a la IA para preparar el material.');return;}
+    if(historial.some(m=>textoSeguro(m.texto))||textoSeguro(fuente.value)){status('Quitá los datos personales antes de continuar.');return;}
+    setOcupado(true,'Preparando el material adaptado…');
+    try{
+      const r=await post('/asesoria-docente',{accion:'adaptacion',perfil:'docente',confirmacion:true,
+        historial:armarContexto(),textoFuente:fuente.value.trim().slice(0,6000)},60000);
+      if(typeof r.material!=='string'||r.material.trim().length<180)throw new Error('La adaptación llegó incompleta.');
+      plan.value=r.material.trim();uso.value='';prompt.value='';
+      adaptacionLista=true;propuestaLista=true;numeroDeRevision++;
+      entrega.hidden=false;
+      $('asesoria-entrega-titulo').textContent='Tu material adaptado';
+      entrega.querySelector('.asesoria-entrega__encabezado p').textContent='Revisalo, editalo y descargalo. CLARIA no leerá la adaptación.';
+      const panelImagen=entrega.querySelector('.asesoria-imagen-contenedor');
+      if(panelImagen)panelImagen.hidden=true;
+      crear.textContent='Crear clase y recurso visual';
+      bubble('modelo','Listo, te dejé el material adaptado debajo de la conversación. Podés editarlo y descargarlo. No voy a leerlo en voz alta.');
+      status('Material adaptado listo por escrito. Revisalo antes de usarlo.');
+      entrega.scrollIntoView({behavior:'auto',block:'start'});
+    }catch(e){
+      const aviso=e.status===400||e.status===404
+        ?'Para generar esta adaptación hay que publicar la versión nueva del servicio en Cloudflare.'
+        :'No pude preparar la adaptación: '+(e.name==='AbortError'?'Se agotó el tiempo de espera.':e.message);
+      bubble('modelo',aviso,false);status(aviso);ofertaHecha=false;
+    }finally{setOcupado(false);}
+  }
   async function conversar(q){
     if(trabajando)return;
     const pregunta=q.trim();
     if(pregunta.length<3){entrada.focus();status('Contame un poquito más para empezar.');return;}
     if(pregunta.length>1500){status('Escribí hasta 1.500 caracteres por mensaje.');return;}
+    if(ofertaPendiente&&(esSi(pregunta)||esNo(pregunta))){
+      entrada.value='';decidirMaterial(esSi(pregunta));return;
+    }
+    if(ofertaPendiente)ofertaPendiente=false;
     if(textoSeguro(pregunta)||textoSeguro(fuente.value)){status('Quitá datos identificatorios de la consulta o del material antes de enviarlo.');return;}
     if(!permiso.checked){permiso.focus();status('Para conversar con IA, marcá la autorización. Evitá nombres y datos personales de estudiantes.');return;}
     const anterior=historial.slice();
@@ -279,8 +335,11 @@ document.addEventListener('DOMContentLoaded',function(){
       const respuesta=r.respuesta.trim();
       if(enviarFuente)fragmentoEnviado=true;
       historial=anterior.concat([{rol:'usuario',texto:pregunta},{rol:'modelo',texto:respuesta}]).slice(-24);
-      bubble('modelo',respuesta);
-      status(propuestaLista?'Podés seguir conversando y luego actualizar la propuesta con lo acordado.':'Si la idea te sirve, tocá «Crear propuesta de clase y recurso visual». También podemos seguir pensando.');
+      const ofrecer=!ofertaHecha&&(r.ofrecerMaterial===true||
+        /(adapt|material|fotocopia|actividades|ejercicios|ficha|secuencia didáctica)/i.test(pregunta));
+      bubble('modelo',respuesta,!ofrecer);
+      if(ofrecer){preguntarMaterial();say(respuesta+' ¿Querés que te prepare el material adaptado?');}
+      status(ofrecer?'Podés responder Sí o No, incluso por voz.':'Podés seguir haciendo preguntas o pedir un material cuando quieras.');
       document.getElementById('asesoria-ejemplos').hidden=true;
       crear.textContent=propuestaLista?'Actualizar mi clase':'Crear clase y recurso visual';
     }catch(e){
@@ -372,6 +431,9 @@ document.addEventListener('DOMContentLoaded',function(){
     if('speechSynthesis' in window)speechSynthesis.cancel();
     escuchar=false;
     historial=[];propuestaLista=false;numeroDeRevision=0;fragmentoEnviado=false;
+    ofertaPendiente=false;ofertaHecha=false;adaptacionLista=false;
+    $('asesoria-entrega-titulo').textContent='Tu propuesta de clase';
+    const panelImagen=entrega.querySelector('.asesoria-imagen-contenedor');if(panelImagen)panelImagen.hidden=false;
     mensajes.replaceChildren();bubble('modelo',saludo);
     entrega.hidden=true;plan.value='';uso.value='';prompt.value='';
     entrada.value='';fuente.value='';archivo.value='';archivoEstado.textContent='El archivo se lee en tu navegador. Revisá el texto antes de enviarlo a la IA.';permiso.checked=false;
@@ -434,7 +496,9 @@ document.addEventListener('DOMContentLoaded',function(){
       }
       if(!respuesta||typeof respuesta.plan!=='string'||typeof respuesta.promptImagen!=='string')throw new Error('El servicio devolvió un material incompleto.');
       // No se reemplazan ediciones manuales sin aviso: las actualizaciones se solicitan con el botón.
-      plan.value=respuesta.plan;uso.value=respuesta.usoImagen||'Revisá qué tienen que observar y hacer los estudiantes con la imagen.';
+      adaptacionLista=false;$('asesoria-entrega-titulo').textContent='Tu propuesta de clase';
+       const panelImagen=entrega.querySelector('.asesoria-imagen-contenedor');if(panelImagen)panelImagen.hidden=false;
+       plan.value=respuesta.plan;uso.value=respuesta.usoImagen||'Revisá qué tienen que observar y hacer los estudiantes con la imagen.';
       prompt.value=respuesta.promptImagen;propuestaLista=true;numeroDeRevision++;
       entrega.hidden=false;crear.textContent='Actualizar mi clase';
       status(respuesta.breve?'Versión breve con el servicio actual. Para obtener una planificación más completa, publicá el Worker actualizado en Cloudflare.':'Propuesta y prompt listos. Podés editar ambos y descargarlos.');
