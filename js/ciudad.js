@@ -147,7 +147,7 @@
         b.type='button';
         const icono=nodo('span','ciudad-lugar__icono',i.icono||'🏛️');icono.setAttribute('aria-hidden','true');
         const cuerpo=nodo('span','ciudad-lugar__contenido');
-        cuerpo.append(nodo('strong','',i.nombre),nodo('span','','Ver servicios y cómo pedir ayuda'));
+        cuerpo.append(nodo('strong','',i.nombre),nodo('span','','Frases con pictogramas y voz'));
         const arrow=nodo('span','ciudad-lugar__flecha','→');arrow.setAttribute('aria-hidden','true');
         b.append(icono,cuerpo,arrow);
         b.addEventListener('click',()=>abrirLugar(i.id));
