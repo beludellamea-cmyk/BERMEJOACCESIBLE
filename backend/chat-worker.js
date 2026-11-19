@@ -252,7 +252,7 @@ function clariaPermite(ip) {
   if(CLARIA_CUPOS.size>1400) for(const [k,v] of CLARIA_CUPOS){if(ahora-v.inicio>600000)CLARIA_CUPOS.delete(k);}
   const anterior=CLARIA_CUPOS.get(ip);
   const item=!anterior||ahora-anterior.inicio>600000?{inicio:ahora,usos:0}:anterior;
-  if(item.usos>=12) return false;
+  if(item.usos>=24) return false;
   item.usos++;CLARIA_CUPOS.set(ip,item);return true;
 }
 async function clariaConversar(data,env,permitido){
@@ -262,7 +262,7 @@ async function clariaConversar(data,env,permitido){
     return responder({error:'Revisá la consulta, quitá datos personales y autorizá el envío.'},400,permitido);
   if(/[\w.+-]+@[\w-]+\.[\w.-]+|\b(?:dni|documento|telefono|teléfono)\s*:?\s*\d{6,}/i.test(texto))
     return responder({error:'Quitá datos personales de la consulta antes de enviarla.'},400,permitido);
-  const historial=Array.isArray(data?.historial)?data.historial.slice(-6).filter(m=>
+  const historial=Array.isArray(data?.historial)?data.historial.slice(-12).filter(m=>
     ['usuario','modelo'].includes(m?.rol)&&typeof m?.texto==='string'&&m.texto.length<=700
   ):[];
   const fuentes=[
@@ -357,7 +357,7 @@ async function asesoriaDocente(data, env, permitido) {
         ? 'Escribí un recurso para aprender: QUÉ VAMOS A APRENDER, EXPLICACIÓN CON EJEMPLOS, VOCABULARIO y entre 2 y 4 ACTIVIDADES con consignas claras. Sin saludos.'
         : 'Escribí un material listo para revisión docente: TÍTULO, QUÉ ES EL TEMA, TEXTO ADAPTADO CON EJEMPLOS, VOCABULARIO, entre 3 y 5 ACTIVIDADES listas (unir, completar, ordenar, elegir o resolver, según corresponda) y APOYOS DUA. Evitá infantilizar sexto grado y secundaria; mencioná pictogramas ARASAAC o imágenes reales como sugerencias solo si sirven, sin fingir generarlos.',
       'No inventes citas ni normas. Separá apartados con saltos de línea. Respondé solamente JSON válido {"material":"texto final completo"}; sin Markdown externo. Extensión útil: 2500 a 6500 caracteres cuando el contenido lo permita.'
-    ].join('\\n');
+    ].join('\n');
     const body={systemInstruction:{parts:[{text:reglas}]},
       contents:[{role:'user',parts:[{text:JSON.stringify({conversacion,materialOriginal:textoFuente||undefined})}]}],
       generationConfig:configGeneracion(env,{responseMimeType:'application/json',temperature:0.3,maxOutputTokens:6500},true)};
