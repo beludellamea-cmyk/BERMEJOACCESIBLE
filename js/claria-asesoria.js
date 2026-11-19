@@ -275,8 +275,8 @@ document.addEventListener('DOMContentLoaded',function(){
     });
     cuerpo.append(grupo);
   }
-  function esSi(t){return /^(si|sí|claro|dale|por favor|si quiero|sí quiero|preparalo|prepará|ok|bueno)$/i.test(t.trim());}
-  function esNo(t){return /^(no|no gracias|por ahora no|prefiero seguir|seguimos|no quiero)$/i.test(t.trim());}
+  function esSi(t){return /^(si|sí|claro|dale|por favor|si quiero|sí quiero|preparalo|prepará|ok|bueno)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  function esNo(t){return /^(no|no gracias|por ahora no|prefiero seguir|seguimos|no quiero)$/i.test(t.trim().replace(/[.!?]+$/,''));}
   async function decidirMaterial(si){
     if(!ofertaPendiente)return;
     ofertaPendiente=false;
@@ -292,6 +292,7 @@ document.addEventListener('DOMContentLoaded',function(){
       plan.value=r.material.trim();uso.value='';prompt.value='';
       adaptacionLista=true;propuestaLista=true;numeroDeRevision++;
       entrega.hidden=false;
+      const etiquetaPlan=entrega.querySelector('label[for="asesoria-plan"]');if(etiquetaPlan)etiquetaPlan.childNodes[0].textContent='Material adaptado editable ';
       $('asesoria-entrega-titulo').textContent='Tu material adaptado';
       entrega.querySelector('.asesoria-entrega__encabezado p').textContent='Revisalo, editalo y descargalo. CLARIA no leerá la adaptación.';
       const panelImagen=entrega.querySelector('.asesoria-imagen-contenedor');
@@ -338,7 +339,7 @@ document.addEventListener('DOMContentLoaded',function(){
       const ofrecer=!ofertaHecha&&(r.ofrecerMaterial===true||
         /(adapt|material|fotocopia|actividades|ejercicios|ficha|secuencia didáctica)/i.test(pregunta));
       bubble('modelo',respuesta,!ofrecer);
-      if(ofrecer){preguntarMaterial();say(respuesta+' ¿Querés que te prepare el material adaptado?');}
+      if(ofrecer){preguntarMaterial();say((respuesta.length>280?'Ya te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');}
       status(ofrecer?'Podés responder Sí o No, incluso por voz.':'Podés seguir haciendo preguntas o pedir un material cuando quieras.');
       document.getElementById('asesoria-ejemplos').hidden=true;
       crear.textContent=propuestaLista?'Actualizar mi clase':'Crear clase y recurso visual';
@@ -433,6 +434,7 @@ document.addEventListener('DOMContentLoaded',function(){
     historial=[];propuestaLista=false;numeroDeRevision=0;fragmentoEnviado=false;
     ofertaPendiente=false;ofertaHecha=false;adaptacionLista=false;
     $('asesoria-entrega-titulo').textContent='Tu propuesta de clase';
+    const etiquetaPlan=entrega.querySelector('label[for="asesoria-plan"]');if(etiquetaPlan)etiquetaPlan.childNodes[0].textContent='Planificación y actividades ';
     const panelImagen=entrega.querySelector('.asesoria-imagen-contenedor');if(panelImagen)panelImagen.hidden=false;
     mensajes.replaceChildren();bubble('modelo',saludo);
     entrega.hidden=true;plan.value='';uso.value='';prompt.value='';
@@ -539,12 +541,11 @@ document.addEventListener('DOMContentLoaded',function(){
         pars.push(new D.Paragraph({text:titulo,heading:D.HeadingLevel.HEADING_2,spacing:{before:250,after:150}}));
         contenido.split(/\r?\n/).forEach(line=>pars.push(new D.Paragraph({text:line||' ',spacing:{after:115}})));
       };
-      agregar('CLARIA · Planificación y actividades',plan.value);
-      agregar('Uso pedagógico de la imagen',uso.value);
-      agregar('Prompt para imagen educativa',prompt.value);
+      agregar(adaptacionLista?'CLARIA · Material adaptado':'CLARIA · Planificación y actividades',plan.value);
+      if(!adaptacionLista){agregar('Uso pedagógico de la imagen',uso.value);agregar('Prompt para imagen educativa',prompt.value);}
       agregar('Sobre el material','Borrador para revisión docente. Verificar las representaciones, consignas, cantidades y fundamentos normativos antes de usar.');
       const documento=new D.Document({sections:[{children:pars}]});
-      bajar(await D.Packer.toBlob(documento),'CLARIA_Propuesta_e_Imagen_Pedagogica.docx');
+      bajar(await D.Packer.toBlob(documento),(adaptacionLista?'CLARIA_Material_Adaptado.docx':'CLARIA_Propuesta_e_Imagen_Pedagogica.docx'));
       status('Word editable descargado. Podés corregirlo desde tu computadora.');
     }catch(e){status('No se pudo generar el Word: '+e.message);}
   });
@@ -552,11 +553,11 @@ document.addEventListener('DOMContentLoaded',function(){
     if(!propuestaLista)return;
     const caja=$('asesoria-impresion');
     caja.replaceChildren();
-    [
+    (adaptacionLista?[['CLARIA · Material adaptado',plan.value]]:[
       ['CLARIA · Propuesta de clase',plan.value],
       ['Uso pedagógico de la imagen',uso.value],
       ['Prompt para generar la imagen didáctica',prompt.value]
-    ].forEach(function(par){
+    ]).forEach(function(par){
       const h=document.createElement('h2'),p=document.createElement('pre');
       h.textContent=par[0];p.textContent=par[1];
       caja.append(h,p);
