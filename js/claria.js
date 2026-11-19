@@ -214,6 +214,8 @@ document.addEventListener('DOMContentLoaded', function(){
   async function procesar(entrada){
     if(ocupada)return;
     var q=entrada.trim();if(!q)return;
+    if(ofertaPendiente&&(esSi(q)||esNo(q))){texto.value='';decidirMaterial(esSi(q));return;}
+    if(ofertaPendiente)ofertaPendiente=false;
     if(rol==='docente' && q.length<135 && /(?:planific|preparar|armar|organizar).*(?:clase|secuencia)|(?:clase|secuencia).*(?:planific|preparar|armar)/i.test(normalizar(q))){
       var conversacion=document.getElementById('claria-asesoria');
       if(conversacion){conversacion.scrollIntoView({block:'start',behavior:'smooth'});var campo=document.getElementById('asesoria-texto');if(campo){campo.value=q;campo.focus({preventScroll:true});}estado.textContent='Contale tu idea a CLARIA y conversen antes de crear la propuesta.';return;}
@@ -236,11 +238,20 @@ document.addEventListener('DOMContentLoaded', function(){
     ocupada=true;enviar.disabled=true;estado.textContent='Consultando la IA…';
     var contexto=historial.slice();
     try{
-      var respuesta=await solicitarIA(q);
+      var resultado=await solicitarIA(q),respuesta=resultado.texto;
       var links=rol==='docente' && /normativ|resolucion|ley|2481|311|ppi|obligac|derech/i.test(normalizar(q))?norm([0,1,2]):[];
       if(rol==='docente' && /dua|planific|clase/.test(normalizar(q)))links.push(normativas[3]);
-      deClaria({texto:respuesta,links:links});
+      var ofrecer=!ofertaHecha&&(resultado.ofrecerMaterial||/(adapt|material|fotocopia|actividad|ejercicio|ficha)/i.test(q));
+      deClaria({texto:respuesta,links:links},!ofrecer);
       historial=contexto.concat([{rol:'usuario',texto:q},{rol:'modelo',texto:respuesta}]).slice(-6);
+      if(ofrecer){
+        invitarMaterial();
+        if(voz&&'speechSynthesis' in window){
+          speechSynthesis.cancel();
+          var u=new SpeechSynthesisUtterance((respuesta.length>280?'Te respondí por escrito.':respuesta)+' ¿Querés que te prepare el material adaptado?');
+          u.lang='es-AR';u.rate=.93;speechSynthesis.speak(u);
+        }
+      }
       estado.textContent='Respuesta de IA. Revisá el contenido antes de usarlo.';
       etiqueta.textContent='Conversación con IA';
     }catch(err){
@@ -252,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   function elegirRol(nuevo){
     if(ocupada)return;
-    rol=nuevo;historial=[];plan=null;mensajes.replaceChildren();autorizar.checked=false;
+    rol=nuevo;historial=[];plan=null;ofertaPendiente=false;ofertaHecha=false;materialGenerando=false;panel.hidden=true;material.value='';mensajes.replaceChildren();autorizar.checked=false;
     etiqueta.textContent=rol==='docente'?'CLARIA · asistente docente':'Guía interactiva';
     document.querySelectorAll('.claria-rol').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.rol===rol));});
     botones();
