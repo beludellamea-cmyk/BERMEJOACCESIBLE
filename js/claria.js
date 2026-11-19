@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var ruta=String(window.BERMEJO_CHAT_ENDPOINT||'').replace(/\/$/,'');
   var rostro='https://raw.githubusercontent.com/beludellamea-cmyk/claria-/main/assets/claria-avatar.png';
   var rol='estudiante', historial=[], ocupada=false, voz=false, plan=null;
+   var ofertaPendiente=false,ofertaHecha=false,materialGenerando=false;
   var normativas=[
     {nombre:'Resolución 2481/24 · Formosa',url:'https://archivos.formosa.gob.ar/media/uploads/documentos/documento_1720711093.pdf'},
     {nombre:'Resolución CFE 311/16',url:'https://bnm.educacion.gob.ar/digital/normas/RCFE_311-16.pdf'},
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function normalizar(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
   function enlaceValido(x){return normativas.concat(entradas).find(function(y){return y.url===x.url&&y.nombre===x.nombre;})||null;}
   function completarLinks(items){return (items||[]).map(enlaceValido).filter(Boolean).slice(0,5);}
-  function burbuja(quien,contenido,links){
+  function burbuja(quien,contenido,links,hablar=true){
     var fila=document.createElement('div');fila.className='claria-mensaje claria-mensaje--'+(quien==='yo'?'yo':'claria');
     var avatar=document.createElement('span');avatar.className='claria-mensaje__avatar';avatar.setAttribute('aria-hidden','true');
     if(quien==='claria'){var img=document.createElement('img');img.src=rostro;img.alt='';img.loading='lazy';avatar.appendChild(img);}
@@ -48,12 +49,13 @@ document.addEventListener('DOMContentLoaded', function(){
       burb.appendChild(caja);
     }
     fila.append(avatar,burb);mensajes.appendChild(fila);mensajes.scrollTop=mensajes.scrollHeight;
-    if(quien==='claria'&&voz&&'speechSynthesis' in window){
-      speechSynthesis.cancel();var utter=new SpeechSynthesisUtterance(contenido.slice(0,1200));utter.lang='es-AR';utter.rate=.93;
+    if(quien==='claria'&&hablar&&voz&&'speechSynthesis' in window){
+      speechSynthesis.cancel();var utter=new SpeechSynthesisUtterance(contenido.slice(0,450));utter.lang='es-AR';utter.rate=.93;
       speechSynthesis.speak(utter);
     }
+    return burb;
   }
-  function deClaria(r){burbuja('claria',r.texto,r.links||[]);}
+  function deClaria(r,hablar=true){return burbuja('claria',r.texto,r.links||[],hablar);}
   function acceso(nombre){return entradas.find(function(x){return x.nombre===nombre;});}
   function norm(inds){return inds.map(function(i){return normativas[i];});}
   var opciones={
@@ -147,8 +149,67 @@ document.addEventListener('DOMContentLoaded', function(){
       var data=await r.json().catch(function(){return {};});
       if(!r.ok || !data || typeof data.respuesta!=='string' || !data.respuesta.trim())
         throw new Error(typeof data.error==='string'?data.error:'El asistente de IA todavía no está disponible.');
-      return data.respuesta.slice(0,3200);
+      return {texto:data.respuesta.slice(0,3200),ofrecerMaterial:data.ofrecerMaterial===true};
     }finally{clearTimeout(timer);}
+  }
+
+  // El material es un documento separado del diálogo: nunca se sintetiza en voz alta.
+  const panel=document.createElement('section');panel.hidden=true;panel.id='claria-material-estudiante';
+  panel.className='claria-material-panel';panel.setAttribute('aria-labelledby','claria-material-titulo');
+  panel.innerHTML='<h2 id="claria-material-titulo">Tu material adaptado</h2><p>Podés revisar, editar y descargar. CLARIA no va a leer el material en voz alta.</p><label for="claria-material-contenido">Material editable</label><textarea id="claria-material-contenido" rows="17"></textarea><div class="claria-material-acciones"><button type="button" id="claria-material-word">Descargar Word</button><button type="button" id="claria-material-txt">Descargar texto</button></div>';
+  document.getElementById('claria-conversacion').appendChild(panel);
+  const material=$('claria-material-contenido');
+  function descargar(blob,nombre){const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=nombre;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);}
+  $('claria-material-txt').addEventListener('click',()=>descargar(new Blob([material.value],{type:'text/plain;charset=utf-8'}),'CLARIA_Material_Adaptado.txt'));
+  $('claria-material-word').addEventListener('click',async()=>{
+    try{
+      if(!window.docx)await new Promise((ok,fail)=>{
+        const js=document.createElement('script');js.src='js/vendor/docx.umd.js';
+        js.onload=()=>window.docx?ok():fail(Error('No se pudo cargar Word.'));
+        js.onerror=()=>fail(Error('Falló la biblioteca de Word.'));document.head.appendChild(js);
+      });
+      const D=window.docx,pars=material.value.split(String.fromCharCode(10)).map(t=>new D.Paragraph({text:t||' ',spacing:{after:120}}));
+      const documento=new D.Document({sections:[{children:pars}]});
+      descargar(await D.Packer.toBlob(documento),'CLARIA_Material_Adaptado.docx');
+    }catch(e){estado.textContent='Word no disponible: '+e.message+'. Podés descargar el texto.';}
+  });
+  function invitarMaterial(){
+    if(ofertaPendiente||ofertaHecha)return;
+    ofertaPendiente=true;ofertaHecha=true;
+    const burb=deClaria({texto:'¿Querés que te prepare el material adaptado?'},false);
+    const grupo=document.createElement('div');grupo.className='claria-material-opciones';
+    grupo.setAttribute('role','group');grupo.setAttribute('aria-label','Elegí si querés material adaptado');
+    [[true,'Sí, preparar material'],[false,'No, seguir conversando']].forEach(([si,etiqueta])=>{
+      const boton=document.createElement('button');boton.type='button';boton.textContent=etiqueta;boton.className='boton';
+      boton.addEventListener('click',()=>{grupo.querySelectorAll('button').forEach(b=>b.disabled=true);decidirMaterial(si);});
+      grupo.append(boton);
+    });burb.append(grupo);
+  }
+  function esSi(t){return /^(si|sí|claro|dale|bueno|ok|sí quiero|si quiero|preparalo)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  function esNo(t){return /^(no|no gracias|por ahora no|no quiero|prefiero seguir)$/i.test(t.trim().replace(/[.!?]+$/,''));}
+  async function decidirMaterial(si){
+    if(!ofertaPendiente||materialGenerando)return;
+    ofertaPendiente=false;burbuja('yo',si?'Sí':'No');
+    if(!si){deClaria({texto:'Perfecto, seguimos conversando. ¿Qué más querés saber?'});return;}
+    if(!autorizar.checked){estado.textContent='Autorizá el envío a la IA antes de generar material.';autorizar.focus();return;}
+    materialGenerando=true;ocupada=true;enviar.disabled=true;estado.textContent='Preparando el material adaptado…';
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),60000);
+    try{
+      const r=await fetch(ruta+'/asesoria-docente',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({accion:'adaptacion',perfil:'estudiante',confirmacion:true,
+          historial:historial.slice(-8).map(x=>({rol:x.rol,texto:x.texto.slice(0,700)}))}),signal:controller.signal});
+      const data=await r.json().catch(()=>({}));
+      if(!r.ok)throw Object.assign(Error(data.error||'No se pudo generar.'),{status:r.status});
+      if(typeof data.material!=='string'||data.material.trim().length<180)throw Error('El material llegó incompleto.');
+      material.value=data.material.trim();panel.hidden=false;
+      deClaria({texto:'Listo, el material adaptado está debajo de la conversación. Podés editarlo y descargarlo. No voy a leerlo en voz alta.'});
+      estado.textContent='Material listo para revisar y descargar.';panel.scrollIntoView({block:'start',behavior:'auto'});
+    }catch(e){
+      const aviso=e.status===400||e.status===404?'Hay que publicar el nuevo servicio de CLARIA en Cloudflare para generar adaptaciones.':
+        'No pude preparar el material: '+(e.name==='AbortError'?'El servicio tardó demasiado.':e.message);
+      deClaria({texto:aviso},false);estado.textContent=aviso;ofertaHecha=false;
+    }finally{clearTimeout(timer);materialGenerando=false;ocupada=false;enviar.disabled=false;}
   }
   async function procesar(entrada){
     if(ocupada)return;
