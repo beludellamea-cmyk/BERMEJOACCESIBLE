@@ -11,12 +11,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/bermejo.css?v=dua-20261117">
-  <link rel="stylesheet" href="css/ciudad.css?v=1">
+  <link rel="stylesheet" href="css/ciudad.css?v=2">
   <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js?v=20261117-2"></script>
   <script src="js/asistente-global.js" defer></script>
-  <script src="js/ciudad.js?v=1" defer></script>
-  <link rel="stylesheet" href="css/armonico.css?v=2">
+  <script src="js/ciudad.js?v=2" defer></script>
+  <link rel="stylesheet" href="css/armonico.css?v=3">
 </head>
 <body class="visual-limpio">
   <a class="saltar" href="#contenido">Ir al contenido</a>
@@ -92,6 +92,12 @@
             <h2 id="ciudad-nombre" tabindex="-1"></h2>
           </header>
           <p class="ciudad-panel__fecha" id="ciudad-fecha"></p>
+          <section class="ciudad-comunicacion" aria-labelledby="ciudad-comunicacion-titulo">
+            <h3 id="ciudad-comunicacion-titulo">Elegí una frase para comunicarte</h3>
+            <p>Las frases y sus pictogramas ya aparecen juntos. Tocá <strong>🔊 Decir la frase</strong> si querés escucharla.</p>
+            <ul id="ciudad-frases" class="ciudad-frases"></ul>
+            <p class="ciudad-comunicacion__nota">Los pictogramas representan palabras clave. La frase completa está escrita arriba de cada grupo de imágenes.</p>
+          </section>
           <div class="ciudad-guia">
             <section class="ciudad-seccion" aria-labelledby="ciudad-servicios-titulo">
               <h3 id="ciudad-servicios-titulo">¿Qué puedo consultar?</h3>
@@ -102,11 +108,6 @@
               <ol id="ciudad-pasos"></ol>
             </section>
           </div>
-          <section class="ciudad-comunicacion" aria-labelledby="ciudad-comunicacion-titulo">
-            <h3 id="ciudad-comunicacion-titulo">Frases para pedir ayuda</h3>
-            <p>Podés hacer que CLARIA diga una frase en voz alta o verla con pictogramas para comunicarte.</p>
-            <ul id="ciudad-frases" class="ciudad-frases"></ul>
-          </section>
           <div id="ciudad-referencia" class="ciudad-referencia"></div>
           <p class="ciudad-advertencia" id="ciudad-advertencia"></p>
         </article>
